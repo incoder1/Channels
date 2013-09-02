@@ -1,0 +1,5 @@
+﻿ASCII     abcde xyz
+German    äöü ÄÖÜ ß
+Polish    ąęźżńł
+Russian   абвгдеж эюя
+CJK       你好
