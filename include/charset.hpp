@@ -10,7 +10,7 @@ class charset {
 private:
 	_CharsetT value_;
 public:
-	explicit charset(_CharsetT name):
+	explicit charset(_CharsetT name) BOOST_NOEXCEPT:
 		value_(name)
 	{}
 	inline _CharsetT id() const {

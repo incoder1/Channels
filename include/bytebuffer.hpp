@@ -1,20 +1,19 @@
 #ifndef BYTE_BUFFER_HPP_INCLUDED
 #define BYTE_BUFFER_HPP_INCLUDED
 
+#include <stdint.h>
 #include <vector>
+#include <boost/function.hpp>
+
 #include "buffers.hpp"
 
 namespace io {
-
-// FIXME: remove this declaration
-
-typedef unsigned char uint8_t;
 
 class byte_buffer_allocator;
 
 class byte_buffer:public basic_buffer<uint8_t> {
 private:
-	byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp):
+	byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp) BOOST_NOEXCEPT:
 		basic_buffer<uint8_t>(data,endp)
 	{}
 	friend class byte_buffer_allocator;
@@ -24,7 +23,7 @@ public:
 		return basic_buffer<uint8_t>::put(e);
 	}
 
-	inline size_t put(const uint8_t* arr, int size) {
+	inline size_t put(const uint8_t* arr, size_t size) {
 		return basic_buffer<uint8_t>::put(arr, size);
 	}
 
@@ -60,18 +59,18 @@ public:
 	/**
 	 * Type of functor to be used to allocate memory
 	 */
-	typedef boost::function<uint8_t* (size_t) throw(std::bad_alloc)> alloc_functor_t;
+	typedef boost::function<uint8_t* (size_t)> alloc_functor_t;
 	/**
 	 * Type of functor to be used to deallocate memory
 	 */
-	typedef boost::function<void (uint8_t*) throw()> free_functor_t;
+	typedef boost::function<void (uint8_t*)> free_functor_t;
 
 	/**
 	 * Constructing a new byte buffer allocator
 	 * \param alloc_functor functor for allocating memory
 	 * \param free_functor functor for free allocated memory
 	 */
-	byte_buffer_allocator(const alloc_functor_t& alloc_functor, free_functor_t free_functor) BOOST_NOEXCEPT:
+	byte_buffer_allocator(alloc_functor_t alloc_functor,free_functor_t free_functor) BOOST_NOEXCEPT:
 			alloc_functor_(alloc_functor),
 			free_functor_(free_functor)
 	{}
@@ -86,10 +85,11 @@ private:
 	free_functor_t free_functor_;
 };
 
+
 inline byte_buffer new_byte_byffer(size_t capacity) throw(std::bad_alloc)
 {
-	boost::function<uint8_t* (size_t) throw(std::bad_alloc)> alloc(new_alloc<uint8_t>);
-	boost::function<void (uint8_t*) throw()> free(delete_free<uint8_t>);
+	byte_buffer_allocator::alloc_functor_t alloc(new_alloc<uint8_t>);
+	byte_buffer_allocator::free_functor_t free(delete_free<uint8_t>);
 	byte_buffer_allocator all(alloc,free);
 	return all.allocate(capacity);
 }

@@ -2,20 +2,13 @@
 #define BUFFERS_HPP_INCLUDED
 
 #include <cstddef>
-#include <memory>
 #include <algorithm>
-#include <string>
-
-#include <cstdio>
 
 #include <boost/limits.hpp>
-#include <boost/noncopyable.hpp>
 #include <boost/utility.hpp>
 #include <boost/shared_array.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
-#include <boost/bind.hpp>
-
 
 namespace io {
 
@@ -111,7 +104,7 @@ private:
 	T* last_;
 	T* end_;
 protected:
-explicit basic_buffer(boost::shared_array<T> data, T* const end) BOOST_NOEXCEPT:
+	explicit basic_buffer(boost::shared_array<T> data, T* const end) BOOST_NOEXCEPT:
 	data_(data),
 	      position_(const_cast<T*>(data_.get())),
 	      last_(position_),
@@ -164,9 +157,10 @@ public:
 	}
 
 	/**
-	 * Returns how count of element possible to put into buffer
+	 * Returns remaing elements possible to put
+	 * \return remaining elements count
 	 */
-	size_t free() const {
+	size_t remaing() const {
 		return (end_-1) - last_;
 	}
 

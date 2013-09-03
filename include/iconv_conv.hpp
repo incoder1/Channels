@@ -91,15 +91,15 @@ public:
 	 * Constructs new converter
 	 * \param srcCs source char set
 	 * \param destCs destination char set
-	 * \throw runtime_error if conversation is not possible
+	 * \throw charset_exception if conversation is not possible
 	 */
-	conveter(const charset_t& srcCs, const charset_t& destCs) throw(std::runtime_error):
+	conveter(const charset_t& srcCs, const charset_t& destCs) throw(charset_exception):
 		conv_(NULL)
 	{
 		::iconv_allocation_t* descrpt = new iconv_allocation_t;
 		int result = ::iconv_open_into( destCs.id(), srcCs.id(), descrpt);
 		if(result == -1) {
-			throw std::runtime_error("Can't build iconv converter");
+			throw charset_exception("Can't build iconv converter");
 		}
 		conv_ =  (::iconv_t)descrpt;
 	}

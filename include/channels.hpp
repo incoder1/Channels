@@ -4,8 +4,8 @@
 #include <stdexcept>
 #include <boost/shared_ptr.hpp>
 
-#include "channels_config.h"
-#include "bytebuffer.hpp"
+#include <channels_config.h>
+#include <bytebuffer.hpp>
 
 namespace io {
 
@@ -37,7 +37,7 @@ typedef boost::shared_ptr<WriteChannel> PWriteChannel;
 class CHANNEL_PUBLIC ReadWriteChannel:public ReadChannel,public WriteChannel
 {
 public:
-	ReadWriteChannel():
+	ReadWriteChannel() BOOST_NOEXCEPT:
 		ReadChannel(),
 		WriteChannel()
 	{}

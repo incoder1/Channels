@@ -4,6 +4,7 @@
 #include "channels_config.h"
 #include "channels.hpp"
 
+
 namespace io  {
 
 /**
@@ -19,7 +20,7 @@ public:
 	 * \param path path to file (file name) Path is operating system specific
 	 * \note ANSI/ASCII 8-bytes peer character paths (file name) only supported in this version
 	 */
-	explicit File(const char* path);
+	explicit File(const char* path) BOOST_NOEXCEPT;
 	/**
 	 * Creates a new file
 	 * \return whether successful
@@ -54,6 +55,7 @@ public:
 
 
 #ifdef PLATFROM_WINDOWS
+#include <Windows.h>
 /**
  * \brief Windows depended blocking file Channel implementation.
  */
@@ -68,6 +70,12 @@ public:
 };
 #endif
 
+
+#ifdef ANY_UNIX
+#endif
+
+
 } // namespace io
+
 
 #endif // FILE_HPP_INCLUDED

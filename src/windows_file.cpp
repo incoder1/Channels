@@ -6,7 +6,7 @@
 
 namespace io {
 
-File::File(const char* path):
+File::File(const char* path) BOOST_NOEXCEPT:
 	path_(path)
 {}
 
@@ -20,9 +20,6 @@ bool File::create()
 	return result;
 }
 
-/**
- * Deletes file
- */
 bool File::errace()
 {
 	bool result = exist();
@@ -78,11 +75,11 @@ FileChannel::FileChannel(HANDLE id):
 
 size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 {
-	size_t result = 0;
+	DWORD result;
 	if(!::ReadFile(id_,
 	               reinterpret_cast<void*>(buffer.last().ptr()),
 	               buffer.capacity(),
-	               reinterpret_cast<PDWORD>(&result),
+	              &result,
 	               NULL)) {
 		throw io_exception("Read file error");
 	}
@@ -92,11 +89,11 @@ size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 
 size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 {
-	size_t result;
+	DWORD result;
 	if(!::WriteFile(id_,
 	                reinterpret_cast<void*>(buffer.begin().ptr()),
 	                buffer.length(),
-	                reinterpret_cast<PDWORD>(&result),
+	                &result,
 	                NULL)
 	  ) {
 		throw io_exception("Write file error");

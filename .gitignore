@@ -1,4 +1,6 @@
 /obj
 /bin
+/Demo/bin
+/Demo/obj
 **.save
 Result.txt
