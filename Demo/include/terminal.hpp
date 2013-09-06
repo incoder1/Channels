@@ -8,16 +8,12 @@
 
 namespace gui {
 
-class CHANNEL_PUBLIC Terminal {
+class Terminal {
 private:
 	uint16_t width_;
 	uint16_t heigth_;
 	size_t charSize_;
-	std::vector<uint8_t> screenBuff_;
-	void updateBuffSize();
 protected:
-	typedef std::vector<uint8_t> ScreenBuff;
-	inline ScreenBuff getBuff();
 public:
 	Terminal(uint16_t width, uint16_t height, size_t charSize) BOOST_NOEXCEPT;
 	inline size_t getCharSize() const {
@@ -28,16 +24,13 @@ public:
 	}
 	inline void setWidth(uint16_t width) {
 		width_ = width;
-		updateBuffSize();
 	}
 	inline uint16_t getHeigth() const {
 		return heigth_;
 	}
 	inline void setHeigth(uint16_t heigth) {
 		heigth_ = heigth;
-		updateBuffSize();
 	}
-	void put(const io::byte_buffer& buff);
 	virtual ~Terminal();
 };
 

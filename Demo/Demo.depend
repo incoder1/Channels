@@ -1321,9 +1321,9 @@
 
 1355254521 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\operator_bool.hpp
 
-1378201702 d:\cpp\channel\include\channels_config.h
+1378233156 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
-	<Windows.h>
+	<windows.h>
 
 1378212504 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
@@ -1928,4 +1928,100 @@
 
 1346260084 d:\cpp\libtcod-1.5.1\include\txtfield.hpp
 	"color.hpp"
+
+1378466690 source:d:\cpp\channel\demo\src\main.cpp
+	<windows.h>
+	<terminal.hpp>
+	<windows_terminal.hpp>
+
+1378228555 d:\cpp\channel\include\terminal.hpp
+	<vector>
+	"channels_config.h"
+	"bytebuffer.hpp"
+
+1378463784 d:\cpp\channel\include\windows_terminal.hpp
+	<Windows.h>
+	<gdiplus.h>
+	"terminal.hpp"
+
+1378483970 d:\cpp\channel\demo\include\terminal.hpp
+	<vector>
+	"channels_config.h"
+	"bytebuffer.hpp"
+
+1378485483 d:\cpp\channel\demo\include\windows_terminal.hpp
+	<Windows.h>
+	<gdiplus.h>
+	<boost/bind.hpp>
+	"terminal.hpp"
+	"windows_console_control.hpp"
+
+1378484330 source:d:\cpp\channel\demo\src\terminal.cpp
+	"terminal.hpp"
+
+1378489502 source:d:\cpp\channel\demo\src\windows_terminal.cpp
+	"windows_terminal.hpp"
+
+1236014140 d:\cpp\boost_1_54_0\boost\bind.hpp
+	<boost/bind/bind.hpp>
+
+1322679218 d:\cpp\boost_1_54_0\boost\bind\bind.hpp
+	<boost/config.hpp>
+	<boost/ref.hpp>
+	<boost/mem_fn.hpp>
+	<boost/type.hpp>
+	<boost/is_placeholder.hpp>
+	<boost/bind/arg.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/visit_each.hpp>
+	<boost/bind/storage.hpp>
+	<boost/bind/bind_template.hpp>
+	<boost/bind/bind_template.hpp>
+	<boost/bind/bind_template.hpp>
+	<boost/bind/bind_cc.hpp>
+	<boost/bind/bind_cc.hpp>
+	<boost/bind/bind_cc.hpp>
+	<boost/bind/bind_cc.hpp>
+	<boost/bind/bind_mf_cc.hpp>
+	<boost/bind/bind_mf2_cc.hpp>
+	<boost/bind/bind_mf_cc.hpp>
+	<boost/bind/bind_mf2_cc.hpp>
+	<boost/bind/bind_mf_cc.hpp>
+	<boost/bind/bind_mf2_cc.hpp>
+	<boost/bind/bind_mf_cc.hpp>
+	<boost/bind/bind_mf2_cc.hpp>
+	<boost/bind/placeholders.hpp>
+
+1196017639 d:\cpp\boost_1_54_0\boost\is_placeholder.hpp
+
+1196017639 d:\cpp\boost_1_54_0\boost\bind\arg.hpp
+	<boost/config.hpp>
+	<boost/is_placeholder.hpp>
+
+1090722569 d:\cpp\boost_1_54_0\boost\visit_each.hpp
+	<boost/config.hpp>
+
+1141224389 d:\cpp\boost_1_54_0\boost\bind\storage.hpp
+	<boost/config.hpp>
+	<boost/bind/arg.hpp>
+
+1196017639 d:\cpp\boost_1_54_0\boost\bind\bind_template.hpp
+
+1090801932 d:\cpp\boost_1_54_0\boost\bind\bind_cc.hpp
+
+1090801932 d:\cpp\boost_1_54_0\boost\bind\bind_mf_cc.hpp
+
+1222614317 d:\cpp\boost_1_54_0\boost\bind\bind_mf2_cc.hpp
+
+1278797185 d:\cpp\boost_1_54_0\boost\bind\placeholders.hpp
+	<boost/bind/arg.hpp>
+	<boost/config.hpp>
+
+1378489684 source:d:\cpp\channel\demo\src\windows_console_control.cpp
+	"windows_console_control.hpp"
+
+1378489341 d:\cpp\channel\demo\include\windows_console_control.hpp
+	<iostream>
+	<Windows.h>
+	<Richedit.h>
 

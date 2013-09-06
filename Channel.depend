@@ -1895,3 +1895,10 @@
 	"channels_config.h"
 	"bytebuffer.hpp"
 
+1378312262 source:d:\cpp\channel\src\windows_terminal.cpp
+	"windows_terminal.hpp"
+
+1378312390 d:\cpp\channel\include\windows_terminal.hpp
+	<Windows.h>
+	"terminal.hpp"
+

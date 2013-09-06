@@ -18,19 +18,15 @@
 					<Add option="-g" />
 					<Add option="-fexceptions" />
 					<Add option="-DUNICODE" />
-					<Add directory="../../include" />
-					<Add directory="../../../boost_1_54_0" />
-					<Add directory="../../../libtcod-1.5.1/include" />
+					<Add directory="../include" />
+					<Add directory="../../boost_1_54_0" />
 				</Compiler>
 				<Linker>
 					<Add library="Channel" />
 					<Add library="kernel32" />
 					<Add library="user32" />
-					<Add library="tcod-gui-mingw-debug" />
-					<Add library="tcod-mingw-debug" />
-					<Add directory="../../../boost_1_54_0/stage/gcc/lib" />
-					<Add directory="../../../libtcod-1.5.1/lib" />
-					<Add directory="../../bin/DebugMinWG32" />
+					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
+					<Add directory="../bin/DebugMinWG32" />
 				</Linker>
 			</Target>
 			<Target title="ReleaseMinGW32">
@@ -45,9 +41,8 @@
 					<Add option="-std=c++11" />
 					<Add option="-fexceptions" />
 					<Add option="-DUNICODE" />
-					<Add directory="../../include" />
-					<Add directory="../../../boost_1_54_0" />
-					<Add directory="../../../libtcod-1.5.1/include" />
+					<Add directory="../include" />
+					<Add directory="../../boost_1_54_0" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -60,7 +55,11 @@
 			<Add option="-Wall" />
 			<Add directory="include" />
 		</Compiler>
+		<Unit filename="include/terminal.hpp" />
+		<Unit filename="include/windows_terminal.hpp" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/terminal.cpp" />
+		<Unit filename="src/windows_terminal.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

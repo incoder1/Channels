@@ -88,15 +88,11 @@
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/file.hpp" />
 		<Unit filename="include/iconv_conv.hpp" />
-		<Unit filename="include/terminal.hpp" />
-		<Unit filename="include/windows_terminal.hpp" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/terminal.cpp" />
 		<Unit filename="src/unix_file.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="src/windows_file.cpp" />
-		<Unit filename="src/windows_terminal.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
