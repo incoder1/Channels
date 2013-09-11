@@ -6,7 +6,7 @@
 	<vector>
 	<libtcod.hpp>
 
-1378219671 d:\cpp\channel\include\channels.hpp
+1378809289 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
@@ -1929,10 +1929,13 @@
 1346260084 d:\cpp\libtcod-1.5.1\include\txtfield.hpp
 	"color.hpp"
 
-1378466690 source:d:\cpp\channel\demo\src\main.cpp
+1378905949 source:d:\cpp\channel\demo\src\main.cpp
 	<windows.h>
 	<terminal.hpp>
 	<windows_terminal.hpp>
+	<file.hpp>
+	<cstdio>
+	<cstring>
 
 1378228555 d:\cpp\channel\include\terminal.hpp
 	<vector>
@@ -1944,22 +1947,24 @@
 	<gdiplus.h>
 	"terminal.hpp"
 
-1378483970 d:\cpp\channel\demo\include\terminal.hpp
-	<vector>
+1378896332 d:\cpp\channel\demo\include\terminal.hpp
+	<list>
 	"channels_config.h"
 	"bytebuffer.hpp"
 
-1378485483 d:\cpp\channel\demo\include\windows_terminal.hpp
+1378907292 d:\cpp\channel\demo\include\windows_terminal.hpp
+	<string>
 	<Windows.h>
-	<gdiplus.h>
-	<boost/bind.hpp>
+	<Winuser.h>
+	<GdiPlus.h>
+	<boost/shared_ptr.hpp>
 	"terminal.hpp"
 	"windows_console_control.hpp"
 
-1378484330 source:d:\cpp\channel\demo\src\terminal.cpp
+1378891659 source:d:\cpp\channel\demo\src\terminal.cpp
 	"terminal.hpp"
 
-1378489502 source:d:\cpp\channel\demo\src\windows_terminal.cpp
+1378908015 source:d:\cpp\channel\demo\src\windows_terminal.cpp
 	"windows_terminal.hpp"
 
 1236014140 d:\cpp\boost_1_54_0\boost\bind.hpp
@@ -2017,11 +2022,31 @@
 	<boost/bind/arg.hpp>
 	<boost/config.hpp>
 
-1378489684 source:d:\cpp\channel\demo\src\windows_console_control.cpp
+1378832183 source:d:\cpp\channel\demo\src\windows_console_control.cpp
 	"windows_console_control.hpp"
 
-1378489341 d:\cpp\channel\demo\include\windows_console_control.hpp
+1378828801 d:\cpp\channel\demo\include\windows_console_control.hpp
 	<iostream>
 	<Windows.h>
 	<Richedit.h>
+
+1378812248 d:\cpp\channel\include\file.hpp
+	"channels_config.h"
+	"channels.hpp"
+	<Windows.h>
+	<unistd.h>
+	<sys/types.h>
+	<sys/stat.h>
+
+1236014536 d:\cpp\boost_1_54_0\boost\scoped_ptr.hpp
+	<boost/smart_ptr/scoped_ptr.hpp>
+
+1357778491 d:\cpp\boost_1_54_0\boost\smart_ptr\scoped_ptr.hpp
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/checked_delete.hpp>
+	<boost/smart_ptr/detail/sp_nullptr_t.hpp>
+	<boost/detail/workaround.hpp>
+	<memory>
+	<boost/smart_ptr/detail/operator_bool.hpp>
 

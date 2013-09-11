@@ -9,15 +9,17 @@
 #define MSFTEDIT_CLASS L"RICHEDIT50W"
 #endif
 
+
 namespace gui {
+
 
 class WindowsConsoleControl
 {
 	public:
 		WindowsConsoleControl();
 		void inject(HWND parent) const;
-		void redirectStdOut() const;
 		void resize(DWORD width, DWORD heigth) const;
+		void setText(const uint8_t* begin, const uint8_t* end) const;
 		~WindowsConsoleControl();
 	private:
 		mutable HWND richEdit_;

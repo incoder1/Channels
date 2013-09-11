@@ -4,6 +4,14 @@
 #include "channels_config.h"
 #include "channels.hpp"
 
+#ifdef PLATFROM_WINDOWS
+#	include <Windows.h>
+#else
+# 	include <unistd.h>
+#	include <sys/types.h>
+#	include <sys/stat.h>
+#endif
+
 
 namespace io  {
 
@@ -55,7 +63,6 @@ public:
 
 
 #ifdef PLATFROM_WINDOWS
-#include <Windows.h>
 /**
  * \brief Windows depended blocking file Channel implementation.
  */
@@ -72,6 +79,14 @@ public:
 
 
 #ifdef ANY_UNIX
+class FileChannel:public ReadWriteChannel { {
+private:
+	::FILE *file_;
+public:
+	explicit FileChannel(::FILE* file) BOOST_NOEXCEPT;
+	virtual size_t read(byte_buffer& buffer) throw(io_exception);
+	virtual size_t write(const byte_buffer& buffer) throw(io_exception);
+};
 #endif
 
 

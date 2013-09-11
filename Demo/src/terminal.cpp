@@ -9,7 +9,6 @@ Terminal::Terminal(uint16_t width, uint16_t heigth, size_t charSize) BOOST_NOEXC
 {
 }
 
-
 Terminal::~Terminal()
 {
 }

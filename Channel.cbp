@@ -20,6 +20,7 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-fexceptions" />
+					<Add option="-fno-rtti" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add directory="../boost_1_54_0" />
 					<Add directory="C:/MinGW/msys/1.0/local/include" />
@@ -41,6 +42,7 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-fexceptions" />
+					<Add option="-fno-rtti" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add directory="../boost_1_54_0" />
 					<Add directory="C:/MinGW/msys/1.0/local/include" />

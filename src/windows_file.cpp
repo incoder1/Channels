@@ -91,7 +91,7 @@ size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 {
 	DWORD result;
 	if(!::WriteFile(id_,
-	                reinterpret_cast<void*>(buffer.begin().ptr()),
+	                reinterpret_cast<void*>(buffer.position().ptr()),
 	                buffer.length(),
 	                &result,
 	                NULL)

@@ -1,7 +1,7 @@
 #ifndef TERMINAL_HPP_INCLUDED
 #define TERMINAL_HPP_INCLUDED
 
-#include <vector>
+#include <list>
 
 #include "channels_config.h"
 #include "bytebuffer.hpp"
@@ -14,6 +14,9 @@ private:
 	uint16_t heigth_;
 	size_t charSize_;
 protected:
+	inline size_t maxSize() {
+		return width_*heigth_*charSize_;
+	}
 public:
 	Terminal(uint16_t width, uint16_t height, size_t charSize) BOOST_NOEXCEPT;
 	inline size_t getCharSize() const {
@@ -31,7 +34,7 @@ public:
 	inline void setHeigth(uint16_t heigth) {
 		heigth_ = heigth;
 	}
-	virtual ~Terminal();
+	virtual ~Terminal() = 0;
 };
 
 } // namespace gui

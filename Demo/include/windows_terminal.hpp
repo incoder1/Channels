@@ -1,14 +1,28 @@
 #ifndef WINDOWS_TERMINAL_HPP_INCLUDED
 #define WINDOWS_TERMINAL_HPP_INCLUDED
 
+#include <string>
+
 #include <Windows.h>
-#include <gdiplus.h>
-#include <boost/bind.hpp>
+#include <Winuser.h>
+#include <GdiPlus.h>
+#include <boost/shared_ptr.hpp>
 
 #include "terminal.hpp"
 #include "windows_console_control.hpp"
 
 namespace gui {
+
+class GDIPlusContext {
+private:
+	ULONG_PTR gdiplusToken_;
+public:
+	GDIPlusContext();
+	~GDIPlusContext();
+	inline boost::shared_ptr<Gdiplus::Graphics> getGraphics(HDC dc) const {
+		return boost::shared_ptr<Gdiplus::Graphics>(new Gdiplus::Graphics(dc));
+	}
+};
 
 class WindowsTerminal:public Terminal {
 private:
@@ -31,24 +45,30 @@ private:
 		wcex.cbClsExtra     = 0;
 		wcex.cbWndExtra     = 0;
 		wcex.hInstance      = hInstance;
-		wcex.hIcon          = LoadIconW(hInstance, MAKEINTRESOURCEW(32512));
-		wcex.hCursor        = LoadCursorW(NULL, MAKEINTRESOURCEW(32512));
-		wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
+		wcex.hIcon          = LoadIconW(hInstance, IDI_APPLICATION);
+		wcex.hCursor        = LoadCursorW(NULL, IDC_IBEAM);
+		wcex.hbrBackground = ::CreateSolidBrush(RGB(0,0,0));
 		wcex.lpszMenuName   = NULL;
 		wcex.lpszClassName  = TERM_WINDOW_CLASS_NAME;
-		wcex.hIconSm        = LoadIconW(wcex.hInstance, MAKEINTRESOURCEW(32512));
+		wcex.hIconSm        = LoadIconW(wcex.hInstance, IDI_APPLICATION);
+		wcex.hIconSm = NULL;
 		return RegisterClassExW(&wcex);
 	}
-	LRESULT CALLBACK MessageRoute(HWND hWnd, UINT msg,WPARAM wParam, LPARAM lParam) const;
+	LRESULT CALLBACK MessageRoute(HWND hWnd, UINT msg,WPARAM wParam, LPARAM lParam);
 	void centerWindow();
 	void onResize() const;
+	void onPaint();
 private:
 	HWND hwnd_;
-	WindowsConsoleControl console_;
+	GDIPlusContext gContext_;
+	typedef std::wstring ScreenBuff;
+	ScreenBuff scrBuff_;
 public:
 	WindowsTerminal(uint16_t width, uint16_t heigth) BOOST_NOEXCEPT;
+	void put(const std::wstring& data);
 	void show();
 };
+
 
 } // namespace gui
 
