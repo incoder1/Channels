@@ -68,11 +68,11 @@ public:
 	/**
 	 * Type of functor to be used to allocate memory
 	 */
-	typedef boost::function<_CharT* (size_t) throw(std::bad_alloc)> alloc_functor_t;
+	typedef boost::function<_CharT* (size_t)> alloc_functor_t;
 	/**
 	 * Type of functor to be used to deallocate memory
 	 */
-	typedef boost::function<void (_CharT*) throw()> free_functor_t;
+	typedef boost::function<void (_CharT*)> free_functor_t;
 	/**
 	 * Type of resulting character buffer
 	 */

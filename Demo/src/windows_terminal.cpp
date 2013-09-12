@@ -1,13 +1,5 @@
 #include "windows_terminal.hpp"
 
-//Trick for MinGW
-#ifndef LWA_ALPHA
-	#define LWA_ALPHA 0x00000002
-	#define LWA_COLORKEY 0x00000001
-	extern "C" {
-		BOOL WINAPI SetLayeredWindowAttributes(HWND,COLORREF,BYTE,DWORD);
-	}
-#endif // LWA_ALPHA
 
 namespace gui {
 
@@ -118,7 +110,7 @@ void WindowsTerminal::show()
 {
 	bool windowClassRegistered = registerWindowClass();
 	if(!windowClassRegistered) {
-		MessageBoxW(NULL,L"Call to RegisterClassEx failed!", L"Terminal", NULL);
+		MessageBoxW(NULL,L"Call to RegisterClassEx failed!", L"Terminal", 0);
 		return;
 	}
 
@@ -140,7 +132,8 @@ void WindowsTerminal::show()
 
 	::SetLayeredWindowAttributes(hwnd_, 0, (255 * 70) / 100, LWA_ALPHA);
 
-	::SetWindowLongPtr(hwnd_, GWL_USERDATA, (LONG_PTR)this);
+
+	::SetWindowLongPtr(hwnd_, -21, (LONG_PTR)this);
 
 	::RedrawWindow(hwnd_, NULL, NULL, RDW_ERASE | RDW_INVALIDATE | RDW_FRAME |
         RDW_ALLCHILDREN);

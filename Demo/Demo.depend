@@ -1321,7 +1321,8 @@
 
 1355254521 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\operator_bool.hpp
 
-1378233156 d:\cpp\channel\include\channels_config.h
+1379005779 d:\cpp\channel\include\channels_config.h
+	<windows.h>
 	<unistd.h>
 	<windows.h>
 
@@ -1929,13 +1930,8 @@
 1346260084 d:\cpp\libtcod-1.5.1\include\txtfield.hpp
 	"color.hpp"
 
-1378905949 source:d:\cpp\channel\demo\src\main.cpp
-	<windows.h>
-	<terminal.hpp>
-	<windows_terminal.hpp>
-	<file.hpp>
-	<cstdio>
-	<cstring>
+1379008045 source:d:\cpp\channel\demo\src\main.cpp
+	<Console.hpp>
 
 1378228555 d:\cpp\channel\include\terminal.hpp
 	<vector>
@@ -1947,12 +1943,13 @@
 	<gdiplus.h>
 	"terminal.hpp"
 
-1378896332 d:\cpp\channel\demo\include\terminal.hpp
+1379002997 d:\cpp\channel\demo\include\terminal.hpp
 	<list>
 	"channels_config.h"
 	"bytebuffer.hpp"
 
-1378907292 d:\cpp\channel\demo\include\windows_terminal.hpp
+1379004684 d:\cpp\channel\demo\include\windows_terminal.hpp
+	"winver.h"
 	<string>
 	<Windows.h>
 	<Winuser.h>
@@ -1964,7 +1961,7 @@
 1378891659 source:d:\cpp\channel\demo\src\terminal.cpp
 	"terminal.hpp"
 
-1378908015 source:d:\cpp\channel\demo\src\windows_terminal.cpp
+1379004916 source:d:\cpp\channel\demo\src\windows_terminal.cpp
 	"windows_terminal.hpp"
 
 1236014140 d:\cpp\boost_1_54_0\boost\bind.hpp
@@ -2030,10 +2027,9 @@
 	<Windows.h>
 	<Richedit.h>
 
-1378812248 d:\cpp\channel\include\file.hpp
+1379007049 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"channels.hpp"
-	<Windows.h>
 	<unistd.h>
 	<sys/types.h>
 	<sys/stat.h>
@@ -2049,4 +2045,11 @@
 	<boost/detail/workaround.hpp>
 	<memory>
 	<boost/smart_ptr/detail/operator_bool.hpp>
+
+1379004752 d:\cpp\channel\demo\include\winver.h
+
+1379007468 d:\cpp\channel\include\console.hpp
+	"channels_config.h"
+	"file.hpp"
+	<boost/noncopyable.hpp>
 

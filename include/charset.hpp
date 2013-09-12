@@ -5,6 +5,11 @@
 
 namespace io {
 
+/**
+ * ! \brief Template for representing character set (code page) identifier.
+ * Different code-page converter engines uses different char-set identifier types.
+ * For instance Win32 API uses unsigned integer and libiconv uses string.
+ */
 template<typename _CharsetT>
 class charset {
 private:
@@ -18,10 +23,12 @@ public:
 	}
 };
 
-
+/**
+ * ! \brief Exception of this type trowing when character set conversation fails.
+ */
 class charset_exception:virtual std::runtime_error {
 public:
-	charset_exception(const char* message):
+	charset_exception(const std::string& message):
 		std::runtime_error(message)
 	{}
 };

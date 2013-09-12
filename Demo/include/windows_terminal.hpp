@@ -1,6 +1,8 @@
 #ifndef WINDOWS_TERMINAL_HPP_INCLUDED
 #define WINDOWS_TERMINAL_HPP_INCLUDED
 
+#include "winver.h"
+
 #include <string>
 
 #include <Windows.h>

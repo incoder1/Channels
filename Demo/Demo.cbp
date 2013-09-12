@@ -11,13 +11,15 @@
 				<Option output="bin/DebugMinGW32/Demo" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin/DebugMinGW32" />
 				<Option object_output="obj/DebugMinGW32/" />
-				<Option type="0" />
+				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectIncludeDirsRelation="1" />
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-fexceptions" />
 					<Add option="-DUNICODE" />
+					<Add directory="include" />
 					<Add directory="../include" />
 					<Add directory="../../boost_1_54_0" />
 				</Compiler>
@@ -25,6 +27,8 @@
 					<Add library="Channel" />
 					<Add library="kernel32" />
 					<Add library="user32" />
+					<Add library="gdi32" />
+					<Add library="gdiplus" />
 					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
 					<Add directory="../bin/DebugMinWG32" />
 				</Linker>
@@ -41,22 +45,56 @@
 					<Add option="-std=c++11" />
 					<Add option="-fexceptions" />
 					<Add option="-DUNICODE" />
+					<Add directory="include" />
 					<Add directory="../include" />
 					<Add directory="../../boost_1_54_0" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add directory="../../../boost_1_54_0/stage/gcc/lib" />
-					<Add directory="../../../libtcod-1.5.1/lib" />
+					<Add library="gdiplus" />
+					<Add library="Channel" />
+					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
+					<Add directory="../bin/ReleaseMinGW32" />
+				</Linker>
+			</Target>
+			<Target title="ReleaseMSVC64">
+				<Option platforms="Windows;" />
+				<Option output="bin/ReleaseMSVC64/Demo" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="bin/ReleaseMSVC64" />
+				<Option object_output="obj/ReleaseMSVC64/" />
+				<Option type="1" />
+				<Option compiler="msvc10" />
+				<Option projectCompilerOptionsRelation="1" />
+				<Option projectLinkerOptionsRelation="1" />
+				<Option projectIncludeDirsRelation="1" />
+				<Compiler>
+					<Add option="/MDd" />
+					<Add option="/arch:SSE2" />
+					<Add option="/GL" />
+					<Add option="/EHa" />
+					<Add option="/O2" />
+					<Add option="/DUNICODE" />
+					<Add directory="include" />
+					<Add directory="../include" />
+					<Add directory="../../boost_1_54_0" />
+				</Compiler>
+				<Linker>
+					<Add library="Channel" />
+					<Add library="kernel32" />
+					<Add library="user32" />
+					<Add library="gdi32" />
+					<Add library="GdiPlus" />
+					<Add directory="../../boost_1_54_0/stage/msvc/lib" />
+					<Add directory="../bin/ReleaseMSVC10" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="include" />
 		</Compiler>
 		<Unit filename="include/terminal.hpp" />
 		<Unit filename="include/windows_terminal.hpp" />
+		<Unit filename="include/winver.h" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/terminal.cpp" />
 		<Unit filename="src/windows_terminal.cpp" />

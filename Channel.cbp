@@ -3,7 +3,6 @@
 	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="Channel" />
-		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="DebugMinGW32">
@@ -12,8 +11,6 @@
 				<Option object_output="obj/DebugMinGW32/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
-				<Option host_application="/u" />
-				<Option run_host_application_in_terminal="1" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
@@ -87,6 +84,7 @@
 		<Unit filename="include/channels_config.h" />
 		<Unit filename="include/charbuffers.hpp" />
 		<Unit filename="include/charset.hpp" />
+		<Unit filename="include/console.hpp" />
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/file.hpp" />
 		<Unit filename="include/iconv_conv.hpp" />

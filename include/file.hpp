@@ -4,9 +4,7 @@
 #include "channels_config.h"
 #include "channels.hpp"
 
-#ifdef PLATFROM_WINDOWS
-#	include <Windows.h>
-#else
+#ifndef PLATFROM_WINDOWS
 # 	include <unistd.h>
 #	include <sys/types.h>
 #	include <sys/stat.h>
@@ -64,7 +62,7 @@ public:
 
 #ifdef PLATFROM_WINDOWS
 /**
- * \brief Windows depended blocking file Channel implementation.
+ * ! \brief Windows depended blocking file Channel implementation.
  */
 class CHANNEL_PUBLIC FileChannel:public ReadWriteChannel {
 private:
@@ -79,7 +77,10 @@ public:
 
 
 #ifdef ANY_UNIX
-class FileChannel:public ReadWriteChannel { {
+/**
+ * ! \brief Unix depended file channel implementation
+ */
+class FileChannel:public ReadWriteChannel {
 private:
 	::FILE *file_;
 public:

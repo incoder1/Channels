@@ -5,17 +5,12 @@
 #	ifndef PLATFROM_WINDOWS
 #		define PLATFROM_WINDOWS 1
 #	endif
+#	include <windows.h>
 #endif
 
 #ifdef __linux__
 #	ifndef PLATFROM_LINUX
 #		define PLATFROM_LINUX 1
-#	endif
-#endif
-
-#if defined(__unix__) && !defined(PLATFROM_LINUX)
-#	ifndef PLATFROM_UNIX
-#		define PLATFROM_UNIX
 #	endif
 #endif
 
