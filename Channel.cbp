@@ -88,6 +88,7 @@
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/file.hpp" />
 		<Unit filename="include/iconv_conv.hpp" />
+		<Unit filename="include/xmlparser.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/unix_file.cpp">
 			<Option target="&lt;{~None~}&gt;" />

@@ -15,6 +15,7 @@
 //#include <cstring>
 
 #include <Console.hpp>
+#include <xmlparser.hpp>
 
 class RunLoop {
 private:
@@ -44,21 +45,22 @@ int main(int atgc, const WCHAR** argv)
 //	RunLoop loop;
 //	loop.start();
 
-	io::PWriteChannel out = io::Console::outChanell();
-	std::wstring msg = L"ASCII     abcde xyz \
-					   German    äöü ÄÖÜ ß \
-					   Polish    ąęźżńł \
-					   Russian   абвгдеж эюя CJK       你好";
-
-	::SetConsoleOutputCP(CP_WINUNICODE);
-
-	DWORD output;
-	::WriteConsoleW(::GetStdHandle(STD_OUTPUT_HANDLE),(LPVOID)msg.data(),msg.length(),&output,NULL);
-
 //	io::byte_buffer buff = io::new_byte_byffer(msg.length()*sizeof(wchar_t));
 //	buff.put(reinterpret_cast<const uint8_t*>(msg.data()),msg.length()*sizeof(wchar_t));
 //	buff.flip();
 //	out->write(buff);
+
+	io::File file("text.xml");
+	if(!file.exist()) {
+		file.create();
+	}
+
+	typedef xml::StreamWriter<char, xml::AlphabetUTF8> UTF8StreamWriter;
+	typedef UTF8StreamWriter::Node Node;
+
+	UTF8StreamWriter writer(file.openForWrite());
+	Node node("configuration", "", "");
+	writer.write(&node);
 
 	return EXIT_SUCCESS;
 }

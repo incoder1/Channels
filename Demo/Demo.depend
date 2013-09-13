@@ -6,7 +6,7 @@
 	<vector>
 	<libtcod.hpp>
 
-1378809289 d:\cpp\channel\include\channels.hpp
+1379062581 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
@@ -1326,7 +1326,7 @@
 	<unistd.h>
 	<windows.h>
 
-1378212504 d:\cpp\channel\include\bytebuffer.hpp
+1379078988 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1617,7 +1617,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1378212885 d:\cpp\channel\include\buffers.hpp
+1379079038 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1930,8 +1930,9 @@
 1346260084 d:\cpp\libtcod-1.5.1\include\txtfield.hpp
 	"color.hpp"
 
-1379008045 source:d:\cpp\channel\demo\src\main.cpp
+1379077132 source:d:\cpp\channel\demo\src\main.cpp
 	<Console.hpp>
+	<xmlparser.hpp>
 
 1378228555 d:\cpp\channel\include\terminal.hpp
 	<vector>
@@ -2052,4 +2053,29 @@
 	"channels_config.h"
 	"file.hpp"
 	<boost/noncopyable.hpp>
+
+1379078232 d:\cpp\channel\include\xmlparser.hpp
+	<string>
+	<algorithm>
+	<list>
+	"channels.hpp"
+	"charbuffers.hpp"
+	"convert.hpp"
+
+1378135190 d:\cpp\channel\include\convert.hpp
+	"iconv_conv.hpp"
+	"ibm_icu_conv.hpp"
+
+1379006489 d:\cpp\channel\include\iconv_conv.hpp
+	<string>
+	<iconv.h>
+	"bytebuffer.hpp"
+	"charbuffers.hpp"
+	"charset.hpp"
+
+1379006593 d:\cpp\channel\include\charbuffers.hpp
+	"buffers.hpp"
+
+1379062495 d:\cpp\channel\include\charset.hpp
+	<stdexcept>
 

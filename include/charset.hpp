@@ -23,6 +23,14 @@ public:
 	}
 };
 
+typedef uint32_t bom_t;
+
+const bom_t UTF8_BOM = 0xEFBBBF;
+const bom_t UTF16_BE = 0xFEFF;
+const bom_t UTF16_LE = 0xFFFE;
+const bom_t UTF32_BE = 0x0000FEFF;
+const bom_t UTF32_LE = 0xFFFE0000;
+
 /**
  * ! \brief Exception of this type trowing when character set conversation fails.
  */

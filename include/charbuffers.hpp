@@ -24,6 +24,10 @@ public:
 	typedef typename stl_str_t::const_iterator stl_str_c_it_t;
 	typedef std::char_traits<T> char_traits_t;
 
+	void put(const T& t) {
+		basic_buffer<T>::put(t);
+	}
+
 	/**
 	 * Puts STL string into this buffer
 	 * \param str STL string to put

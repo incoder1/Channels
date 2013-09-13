@@ -40,8 +40,8 @@ public:
 
 	template<class CharBuff>
 	inline size_t put(const CharBuff& charBuff) {
-		uint8_t *b = reinterpret_cast<uint8_t*>(charBuff.begin().ptr());
-		uint8_t *e = reinterpret_cast<uint8_t*>(charBuff.last().ptr());
+		uint8_t *b = reinterpret_cast<uint8_t*>((charBuff.position()).ptr());
+		uint8_t *e = reinterpret_cast<uint8_t*>((charBuff.last()).ptr());
 		return basic_buffer<uint8_t>::put(b,e);
 	}
 
