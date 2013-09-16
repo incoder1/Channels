@@ -6,13 +6,9 @@
 #define _UNICODE
 #endif
 
-//#include <windows.h>
-//#include <terminal.hpp>
-//#include <windows_terminal.hpp>
-//
-//#include <file.hpp>
-//#include <cstdio>
-//#include <cstring>
+#include <windows.h>
+#include <terminal.hpp>
+#include <windows_terminal.hpp>
 
 #include <Console.hpp>
 #include <xmlparser.hpp>
@@ -35,32 +31,25 @@ public:
 };
 
 
-//int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR _lpCmdLine, int nCmdShow)
-int main(int atgc, const WCHAR** argv)
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR _lpCmdLine, int nCmdShow)
 {
-//	gui::WindowsTerminal term(80,25);
-//	term.show();
-//
-//	term.put(msg);
-//	RunLoop loop;
-//	loop.start();
+	gui::WindowsTerminal term(80,100);
+	term.show();
+
+	std::wstring msg;
+	const wchar_t * str = L"Привет! Hello! 嗨, やあ, Szia Привет! Hello! 嗨, やあ, Szia Привет! Hello! 嗨, やあ, Szia \n";
+	for(int i=0; i<25; i++) {
+		msg.append(str);
+	}
+
+	term.put(msg);
+	RunLoop loop;
+	loop.start();
 
 //	io::byte_buffer buff = io::new_byte_byffer(msg.length()*sizeof(wchar_t));
 //	buff.put(reinterpret_cast<const uint8_t*>(msg.data()),msg.length()*sizeof(wchar_t));
 //	buff.flip();
 //	out->write(buff);
-
-	io::File file("text.xml");
-	if(!file.exist()) {
-		file.create();
-	}
-
-	typedef xml::StreamWriter<char, xml::AlphabetUTF8> UTF8StreamWriter;
-	typedef UTF8StreamWriter::Node Node;
-
-	UTF8StreamWriter writer(file.openForWrite());
-	Node node("configuration", "", "");
-	writer.write(&node);
 
 	return EXIT_SUCCESS;
 }
