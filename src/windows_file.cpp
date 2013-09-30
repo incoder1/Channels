@@ -101,6 +101,15 @@ size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 	return result;
 }
 
+
+void FileChannel::seek(size_t offset, ReadWriteChannel::MoveMethod method) throw(io_exception)
+{
+	if(INVALID_SET_FILE_POINTER == ::SetFilePointer(id_,offset,NULL,method)) {
+		throw io_exception("Can not move file pointer");
+	}
+}
+
+
 FileChannel::~FileChannel()
 {
 	CloseHandle(id_);

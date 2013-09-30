@@ -4,7 +4,7 @@
 #include "channels_config.h"
 #include "channels.hpp"
 
-#ifndef PLATFROM_WINDOWS
+#ifdef PLATFORM_UNIX
 # 	include <unistd.h>
 #	include <sys/types.h>
 #	include <sys/stat.h>
@@ -72,11 +72,12 @@ public:
 	virtual ~FileChannel();
 	virtual size_t read(byte_buffer& buffer) throw(io_exception);
 	virtual size_t write(const byte_buffer& buffer) throw(io_exception);
+	virtual void seek(size_t offset, ReadWriteChannel::MoveMethod method) throw(io_exception);
 };
 #endif
 
 
-#ifdef ANY_UNIX
+#ifdef PLATFORM_UNIX
 /**
  * ! \brief Unix depended file channel implementation
  */

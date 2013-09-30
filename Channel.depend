@@ -3,7 +3,7 @@
 	<channels_config.h>
 	<Windows.h>
 
-1378212885 d:\cpp\channel\include\buffers.hpp
+1380203559 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1834,7 +1834,7 @@
 	<iostream>
 	<Windows.h>
 
-1378212504 d:\cpp\channel\include\bytebuffer.hpp
+1380562887 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1859,20 +1859,20 @@
 	<time.h>
 	<wchar.h>
 
-1379062581 d:\cpp\channel\include\channels.hpp
+1380565683 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
 	<bytebuffer.hpp>
 
-1379007049 d:\cpp\channel\include\file.hpp
+1380565601 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"channels.hpp"
 	<unistd.h>
 	<sys/types.h>
 	<sys/stat.h>
 
-1378809147 source:d:\cpp\channel\src\windows_file.cpp
+1380565614 source:d:\cpp\channel\src\windows_file.cpp
 	"file.hpp"
 
 1378127642 source:d:\cpp\channel\src\iconv_conv.cpp
@@ -1885,7 +1885,7 @@
 	"charbuffers.hpp"
 	"charset.hpp"
 
-1379005779 d:\cpp\channel\include\channels_config.h
+1380558961 d:\cpp\channel\include\channels_config.h
 	<windows.h>
 	<unistd.h>
 	<windows.h>

@@ -11,7 +11,6 @@
 #include <windows_terminal.hpp>
 
 #include <Console.hpp>
-#include <xmlparser.hpp>
 
 class RunLoop {
 private:
@@ -46,8 +45,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR _lpCmdLin
 	RunLoop loop;
 	loop.start();
 
+//	io::PWriteChannel out = io::Console::outChanell();
 //	io::byte_buffer buff = io::new_byte_byffer(msg.length()*sizeof(wchar_t));
-//	buff.put(reinterpret_cast<const uint8_t*>(msg.data()),msg.length()*sizeof(wchar_t));
+//	buff.put((uint8_t*)msg.data(), msg.length()*sizeof(wchar_t));
 //	buff.flip();
 //	out->write(buff);
 

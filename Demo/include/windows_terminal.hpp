@@ -63,8 +63,6 @@ private:
 private:
 	HWND hwnd_;
 	GDIPlusContext gContext_;
-	typedef std::wstring ScreenBuff;
-	ScreenBuff scrBuff_;
 public:
 	WindowsTerminal(uint16_t width, uint16_t heigth) BOOST_NOEXCEPT;
 	void put(const std::wstring& data);

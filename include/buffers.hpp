@@ -280,6 +280,11 @@ public:
 		return (end_-1) - data_.get();
 	}
 
+	inline const uint8_t* getBytes(size_t &size) const {
+		size = length() * sizeof(T);
+		return reinterpret_cast<const uint8_t*>(data_.get());
+	}
+
 	/**
 	 * Deallocates buffer array
 	 */

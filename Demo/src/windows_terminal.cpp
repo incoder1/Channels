@@ -24,8 +24,7 @@ const wchar_t* WindowsTerminal::TERM_WINDOW_CLASS_NAME = L"__CHANNEL_TERMINAL_WI
 
 WindowsTerminal::WindowsTerminal(uint16_t width, uint16_t heigth) BOOST_NOEXCEPT:
 Terminal( width, heigth, sizeof(wchar_t) ),
-          hwnd_(NULL),
-          scrBuff_()
+          hwnd_(NULL)
 {}
 
 LRESULT CALLBACK WindowsTerminal::MessageRoute(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -50,12 +49,6 @@ void onKeyPressed(LPARAM lParam, WPARAM wParam) {
 
 void WindowsTerminal::put(const std::wstring& str)
 {
-	if(scrBuff_.length() + str.length() >= maxSize()) {
-		ScreenBuff::iterator last = scrBuff_.begin() +  (maxSize() / 2);
-		scrBuff_.erase(scrBuff_.begin(), last);
-	}
-	scrBuff_.append(str);
-	::UpdateWindow(hwnd_);
 }
 
 void WindowsTerminal::onResize() const
@@ -83,14 +76,6 @@ void WindowsTerminal::onPaint()
     RectF bounds(0, 0, float(cr.right), getHeigth()*fontHeigth);
 
     SolidBrush brush(Color::Green);
-
-	g->DrawString(
-				(const WCHAR*)scrBuff_.data(),
-				(int)scrBuff_.length(),
-				&font,
-				bounds,
-				&format,
-				&brush);
 
 	::EndPaint(hwnd_, const_cast<LPPAINTSTRUCT>(&paintStruct));
 }

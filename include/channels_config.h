@@ -8,14 +8,8 @@
 #	include <windows.h>
 #endif
 
-#ifdef __linux__
-#	ifndef PLATFROM_LINUX
-#		define PLATFROM_LINUX 1
-#	endif
-#endif
-
 #if defined(__unix__)
-#	define ANY_UNIX
+#	define PLATFORM_UNIX
 #	include <unistd.h>
 #endif
 

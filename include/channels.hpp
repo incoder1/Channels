@@ -19,17 +19,29 @@ public:
 };
 
 class CHANNEL_PUBLIC ReadChannel {
+private:
+	ReadChannel(const ReadChannel&);
+protected:
+	ReadChannel()
+	{}
 public:
 	virtual size_t read(byte_buffer& buffer) throw(io_exception) = 0;
-	virtual ~ReadChannel() {}
+	virtual ~ReadChannel()
+	{}
 };
 
 typedef boost::shared_ptr<ReadChannel> PReadChannel;
 
 class CHANNEL_PUBLIC WriteChannel {
+private:
+	WriteChannel(const WriteChannel&);
+protected:
+	WriteChannel()
+	{}
 public:
 	virtual size_t write(const byte_buffer& buffer) throw(io_exception) = 0;
-	virtual ~WriteChannel() {}
+	virtual ~WriteChannel()
+	{}
 };
 
 typedef boost::shared_ptr<WriteChannel> PWriteChannel;
@@ -37,11 +49,23 @@ typedef boost::shared_ptr<WriteChannel> PWriteChannel;
 class CHANNEL_PUBLIC ReadWriteChannel:public ReadChannel,public WriteChannel
 {
 public:
+	enum MoveMethod {FROM_BEGIN = 0 , FROM_CURRENT_POSITION = 1, FROM_END = 2};
+private:
+	ReadWriteChannel(const ReadWriteChannel&);
+protected:
 	ReadWriteChannel() BOOST_NOEXCEPT:
 		ReadChannel(),
 		WriteChannel()
 	{}
-	//virtual void seek(size_t count) throw(io_exception) = 0;
+public:
+	/**
+	 * Moves read/write pointer
+	 * \param offset offset in bytes
+	 * \param method for moving
+	 */
+	virtual void seek(size_t offset, MoveMethod method) throw(io_exception) = 0;
+	virtual ~ReadWriteChannel()
+	{}
 };
 
 typedef  boost::shared_ptr<ReadWriteChannel> PReadWriteChannel;

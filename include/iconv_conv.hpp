@@ -74,7 +74,7 @@ const charset_t MAC_HEBREW("Mac-Hebrew");
 const charset_t MAC_ARABIC("Mac-Arabic");
 
 /**
- * ! \ Converts string representing in byte sequence from one code page (charset)
+ * ! \brief Converts string representing in byte sequence from one code page (charset)
  *  to the another.
  * <p>
  *  This implementation uses libconv POSIX standard library (commonly GNU iconv) for char-set conversation.
