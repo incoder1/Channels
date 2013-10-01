@@ -6,11 +6,11 @@
 
 namespace io {
 
-File::File(const char* path) BOOST_NOEXCEPT:
+File::File(const char* path) BOOST_NOEXCEPT_OR_NOTHROW:
 	path_(path)
 {}
 
-bool File::create()
+bool File::create() const
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_WRITE, 0, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, 0);
 	bool result = INVALID_HANDLE_VALUE != hFile;
@@ -20,7 +20,7 @@ bool File::create()
 	return result;
 }
 
-bool File::errace()
+bool File::errace() const
 {
 	bool result = exist();
 	if(result) {
@@ -32,7 +32,7 @@ bool File::errace()
 bool File::exist() const
 {
 	WIN32_FIND_DATA findFileData;
-	HANDLE handle = FindFirstFile(path_, &findFileData) ;
+	HANDLE handle = ::FindFirstFile(path_, &findFileData) ;
 	bool result = handle != INVALID_HANDLE_VALUE;
 	if(result) {
 		FindClose(handle);

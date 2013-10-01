@@ -8,7 +8,7 @@
 # 	include <unistd.h>
 #	include <sys/types.h>
 #	include <sys/stat.h>
-#endif
+#endif // PLATFORM_UNIX
 
 
 namespace io  {
@@ -26,17 +26,17 @@ public:
 	 * \param path path to file (file name) Path is operating system specific
 	 * \note ANSI/ASCII 8-bytes peer character paths (file name) only supported in this version
 	 */
-	explicit File(const char* path) BOOST_NOEXCEPT;
+	explicit File(const char* path) BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
 	 * Creates a new file
 	 * \return whether successful
 	 */
-	bool create();
+	bool create() const;
 	/**
 	 * Deletes file from dist
 	 * \return whether successful
 	 */
-	bool errace();
+	bool errace() const;
 	/**
 	 * Returns file exist sate
 	 * \return whether file with this path exist
@@ -89,7 +89,7 @@ public:
 	virtual size_t read(byte_buffer& buffer) throw(io_exception);
 	virtual size_t write(const byte_buffer& buffer) throw(io_exception);
 };
-#endif
+#endif // PLATFORM_UNIX
 
 
 } // namespace io

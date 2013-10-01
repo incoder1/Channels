@@ -3,11 +3,11 @@
 namespace io {
 
 // File
-File::File(const char* path) BOOST_NOEXCEPT:
+File::File(const char* path) BOOST_NOEXCEPT_OR_NOTHROW:
 	path_(path)
 {}
 
-bool File::create()
+bool File::create() const
 {
 	::FILE *fd = ::open(path_, O_CREAT);
 	bool result = NULL == fd;
@@ -17,7 +17,7 @@ bool File::create()
 	return result;
 }
 
-bool File::errace()
+bool File::errace() const
 {
 	bool result = exist();
 	if(result) {

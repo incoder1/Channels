@@ -54,7 +54,7 @@ public:
 	}
 
 	/**
-	 * Copy this buffer data starting from buffer begin anding with the last element
+	 * Deep copy this buffer characters starting from buffer begin ending with the last element
 	 * into STL string
 	 * \return STL string with this buffer data appended
 	 */

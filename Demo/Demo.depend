@@ -1326,7 +1326,7 @@
 	<unistd.h>
 	<windows.h>
 
-1380562887 d:\cpp\channel\include\bytebuffer.hpp
+1380633332 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1930,7 +1930,7 @@
 1346260084 d:\cpp\libtcod-1.5.1\include\txtfield.hpp
 	"color.hpp"
 
-1380563140 source:d:\cpp\channel\demo\src\main.cpp
+1380646577 source:d:\cpp\channel\demo\src\main.cpp
 	<windows.h>
 	<terminal.hpp>
 	<windows_terminal.hpp>
@@ -2030,7 +2030,7 @@
 	<Windows.h>
 	<Richedit.h>
 
-1380565601 d:\cpp\channel\include\file.hpp
+1380637698 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"channels.hpp"
 	<unistd.h>

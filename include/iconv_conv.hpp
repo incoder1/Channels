@@ -114,7 +114,7 @@ public:
 	/**
 	 * Converting character sequence from source character set into destination charter set
 	 * \param src source characters in their bytes sequence representation
-	 * \param dest destination character buffer
+	 * \param dest destination characters in their character type representation
 	 */
 	void convert(const byte_buffer& src,char_buffer<ChartType>& dest) throw(charset_exception) {
 		byte_buffer::iterator it = src.position();
