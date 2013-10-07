@@ -9,13 +9,13 @@
 #include <boost/shared_array.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/function.hpp>
+#include <boost/array.hpp>
 
 namespace io {
 
 /**
  * ! \brief The buffer iterator template,
  * Random access iterator, STL compatible
- * The ++ and -- operators are cyclic
  */
 template<typename T>
 class buffer_iterator {
@@ -119,7 +119,7 @@ public:
 	 * Constant iterator to the before first buffer element
 	 * \return constant begin iterator
 	 */
-	inline const_iterator begin() const {
+	const_iterator begin() const {
 		return const_iterator(NULL, NULL, data_.get());
 	}
 
@@ -127,7 +127,7 @@ public:
 	 * Constant iterator to the after last buffer element
 	 * \return constant end iterator
 	 */
-	inline const_iterator end() const {
+	const_iterator end() const {
 		return const_iterator(NULL, NULL, end_);
 	}
 
@@ -135,7 +135,7 @@ public:
 	 * Iterator to the before first buffer element
 	 * \return begin iterator
 	 */
-	inline iterator begin() {
+	iterator begin() {
 		return iterator(NULL, NULL, data_.get());
 	}
 
@@ -168,7 +168,7 @@ public:
 	 * Iterator to the after last buffer element
 	 * \return begin iterator
 	 */
-	inline iterator end() {
+	iterator end() {
 		return iterator(NULL, NULL , end_);
 	}
 
@@ -176,7 +176,7 @@ public:
 	 * Iterator to the current buffer position
 	 * \return iterator to the current buffer position
 	 */
-	inline iterator position() {
+	iterator position() {
 		return iterator(data_.get()-1, end_, position_);
 	}
 
@@ -184,7 +184,7 @@ public:
 	 * Constant iterator to the current buffer position
 	 * \return iterator to the current buffer position
 	 */
-	inline const_iterator position() const {
+	const_iterator position() const {
 		return iterator(data_.get()-1, end_, position_);
 	}
 
@@ -192,7 +192,7 @@ public:
 	 * Iterator to the last buffer element
 	 * \return constant iterator to the last buffer element
 	 */
-	inline iterator last() {
+	iterator last() {
 		return const_iterator(data_.get()-1, end_, last_);
 	}
 
@@ -201,7 +201,7 @@ public:
 	 * Constant iterator to the last buffer element
 	 * \return constant iterator to the last buffer element
 	 */
-	inline const_iterator last() const {
+	const_iterator last() const {
 		return const_iterator(NULL, end_, last_);
 	}
 
@@ -210,7 +210,7 @@ public:
 	 * This method incrementing buffers length
 	 * \param t element to be inserted into current buffer position
 	 */
-	inline size_t put(T& e)  {
+	size_t put(T& e)  {
 		if(position_ + 1 != end_) {
 			*position_ = e;
 			if( (last_ == position_) || (position_+ 1 > last_) ) {
@@ -237,7 +237,7 @@ public:
 		return offset;
 	}
 
-	inline size_t put(const T* arr, size_t size) {
+	size_t put(const T* arr, size_t size) {
 		size_t avaliable = capacity() - length();
 		size_t offset = (size > avaliable) ? avaliable : size;
 		std::copy(arr, arr+offset, position_);
@@ -252,14 +252,14 @@ public:
 	 * Sets current buffer position into array begin,
 	 * Use this method when you need read data from the buffer
 	 */
-	inline void flip() {
+	void flip() {
 		position_ = data_.get();
 	}
 
 	/**
 	 * Set buffer position into array begin then nullify buffers length
 	 */
-	inline void clear() {
+	void clear() {
 		flip();
 		last_ = data_.get();
 	}
@@ -268,7 +268,7 @@ public:
 	 * This buffer length
 	 * \return buffer length
 	 */
-	inline size_t length() const {
+	size_t length() const {
 		return last_ - data_.get();
 	}
 
@@ -276,11 +276,11 @@ public:
 	 * This buffer capacity
 	 * \return buffer capacity
 	 */
-	inline size_t capacity() const {
+	size_t capacity() const {
 		return (end_-1) - data_.get();
 	}
 
-	inline const uint8_t* getBytes(size_t &size) const {
+	const uint8_t* getBytes(size_t &size) const {
 		size = length() * sizeof(T);
 		return reinterpret_cast<const uint8_t*>(data_.get());
 	}

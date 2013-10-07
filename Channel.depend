@@ -3,7 +3,7 @@
 	<channels_config.h>
 	<Windows.h>
 
-1380203559 d:\cpp\channel\include\buffers.hpp
+1381166941 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -11,6 +11,7 @@
 	<boost/shared_array.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/function.hpp>
+	<boost/array.hpp>
 
 1236014536 d:\cpp\boost_1_54_0\boost\shared_ptr.hpp
 	<boost/smart_ptr/shared_ptr.hpp>
@@ -1823,7 +1824,7 @@
 	<functional>
 	<new>
 
-1378124090 d:\cpp\channel\include\charbuffers.hpp
+1380633196 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
 1374162328 d:\cpp\channel\include\charsetconverter.hpp
@@ -1834,13 +1835,13 @@
 	<iostream>
 	<Windows.h>
 
-1380562887 d:\cpp\channel\include\bytebuffer.hpp
+1381167052 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
 	"buffers.hpp"
 
-1378128333 d:\cpp\channel\include\charset.hpp
+1381166641 d:\cpp\channel\include\charset.hpp
 	<stdexcept>
 
 1378126156 d:\cpp\channel\include\inconv_conv.hpp
@@ -1859,34 +1860,35 @@
 	<time.h>
 	<wchar.h>
 
-1380565683 d:\cpp\channel\include\channels.hpp
+1381167384 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
 	<bytebuffer.hpp>
 
-1380565601 d:\cpp\channel\include\file.hpp
+1380637698 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"channels.hpp"
 	<unistd.h>
 	<sys/types.h>
 	<sys/stat.h>
 
-1380565614 source:d:\cpp\channel\src\windows_file.cpp
+1380623120 source:d:\cpp\channel\src\windows_file.cpp
 	"file.hpp"
 
 1378127642 source:d:\cpp\channel\src\iconv_conv.cpp
 	"iconv_conv.hpp"
 
-1378136553 d:\cpp\channel\include\iconv_conv.hpp
-	<string>
+1381166854 d:\cpp\channel\include\iconv_conv.hpp
+	<cstring>
+	<cerrno>
+	<cstdio>
 	<iconv.h>
 	"bytebuffer.hpp"
 	"charbuffers.hpp"
 	"charset.hpp"
 
-1380558961 d:\cpp\channel\include\channels_config.h
-	<windows.h>
+1381166611 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
 	<windows.h>
 
@@ -1904,4 +1906,133 @@
 1378312390 d:\cpp\channel\include\windows_terminal.hpp
 	<Windows.h>
 	"terminal.hpp"
+
+1362873305 d:\cpp\boost_1_54_0\boost\array.hpp
+	<boost/detail/workaround.hpp>
+	<cstddef>
+	<stdexcept>
+	<boost/assert.hpp>
+	<boost/swap.hpp>
+	<boost/detail/iterator.hpp>
+	<boost/throw_exception.hpp>
+	<boost/functional/hash_fwd.hpp>
+	<algorithm>
+	<boost/config.hpp>
+
+1226715084 d:\cpp\boost_1_54_0\boost\swap.hpp
+	"boost/utility/swap.hpp"
+
+1226715084 d:\cpp\boost_1_54_0\boost\utility\swap.hpp
+	<algorithm>
+	<cstddef>
+
+1094226068 d:\cpp\boost_1_54_0\boost\detail\iterator.hpp
+	<boost/config.hpp>
+	<iterator>
+	<boost/type_traits/remove_const.hpp>
+	<boost/type_traits/detail/yes_no_type.hpp>
+	<boost/type_traits/is_pointer.hpp>
+	<boost/type_traits/is_same.hpp>
+	<boost/type_traits/remove_pointer.hpp>
+	<boost/type_traits/is_base_and_derived.hpp>
+	<boost/mpl/if.hpp>
+	<boost/mpl/has_xxx.hpp>
+	<cstddef>
+	"boost/type_traits/detail/bool_trait_def.hpp"
+
+1355166699 d:\cpp\boost_1_54_0\boost\type_traits\remove_const.hpp
+	<boost/type_traits/is_volatile.hpp>
+	<boost/type_traits/broken_compiler_spec.hpp>
+	<boost/type_traits/detail/cv_traits_impl.hpp>
+	<boost/config.hpp>
+	<boost/detail/workaround.hpp>
+	<cstddef>
+	<boost/type_traits/msvc/remove_const.hpp>
+	<boost/type_traits/detail/type_trait_def.hpp>
+	<boost/type_traits/detail/type_trait_undef.hpp>
+
+1278584878 d:\cpp\boost_1_54_0\boost\type_traits\msvc\remove_const.hpp
+	<boost/type_traits/msvc/typeof.hpp>
+	<boost/type_traits/is_volatile.hpp>
+	<boost/type_traits/is_const.hpp>
+	<boost/type_traits/is_pointer.hpp>
+	<boost/type_traits/is_array.hpp>
+
+1303734408 d:\cpp\boost_1_54_0\boost\type_traits\remove_pointer.hpp
+	<boost/config.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/type_traits/broken_compiler_spec.hpp>
+	<boost/type_traits/msvc/remove_pointer.hpp>
+	<boost/type_traits/remove_cv.hpp>
+	<boost/type_traits/is_pointer.hpp>
+	<boost/type_traits/detail/type_trait_def.hpp>
+	<boost/type_traits/detail/type_trait_undef.hpp>
+
+1278584878 d:\cpp\boost_1_54_0\boost\type_traits\msvc\remove_pointer.hpp
+	<boost/type_traits/msvc/typeof.hpp>
+	<boost/type_traits/is_pointer.hpp>
+
+1255104962 d:\cpp\boost_1_54_0\boost\type_traits\is_base_and_derived.hpp
+	<boost/type_traits/intrinsics.hpp>
+	<boost/type_traits/is_class.hpp>
+	<boost/type_traits/is_same.hpp>
+	<boost/type_traits/is_convertible.hpp>
+	<boost/type_traits/detail/ice_and.hpp>
+	<boost/config.hpp>
+	<boost/static_assert.hpp>
+	<boost/type_traits/remove_cv.hpp>
+	<boost/type_traits/detail/bool_trait_def.hpp>
+	<boost/type_traits/detail/bool_trait_undef.hpp>
+
+1279500391 d:\cpp\boost_1_54_0\boost\mpl\has_xxx.hpp
+	<boost/mpl/bool.hpp>
+	<boost/mpl/aux_/na_spec.hpp>
+	<boost/mpl/aux_/type_wrapper.hpp>
+	<boost/mpl/aux_/yes_no.hpp>
+	<boost/mpl/aux_/config/gcc.hpp>
+	<boost/mpl/aux_/config/has_xxx.hpp>
+	<boost/mpl/aux_/config/msvc_typename.hpp>
+	<boost/mpl/aux_/config/msvc.hpp>
+	<boost/mpl/aux_/config/static_constant.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+	<boost/preprocessor/array/elem.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/control/if.hpp>
+	<boost/preprocessor/repetition/enum_params.hpp>
+	<boost/preprocessor/repetition/enum_trailing_params.hpp>
+	<boost/type_traits/is_class.hpp>
+	<boost/mpl/if.hpp>
+	<boost/mpl/bool.hpp>
+
+1223705942 d:\cpp\boost_1_54_0\boost\mpl\aux_\type_wrapper.hpp
+	<boost/mpl/aux_/config/ctps.hpp>
+
+1278059523 d:\cpp\boost_1_54_0\boost\mpl\aux_\config\has_xxx.hpp
+	<boost/mpl/aux_/config/overload_resolution.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1223705942 d:\cpp\boost_1_54_0\boost\mpl\aux_\config\msvc_typename.hpp
+	<boost/mpl/aux_/config/msvc.hpp>
+	<boost/mpl/aux_/config/workaround.hpp>
+
+1090899814 d:\cpp\boost_1_54_0\boost\preprocessor\repetition\enum_trailing_params.hpp
+	<boost/preprocessor/config/config.hpp>
+	<boost/preprocessor/repetition/repeat.hpp>
+
+1236815469 d:\cpp\boost_1_54_0\boost\functional\hash_fwd.hpp
+	<boost/functional/hash/hash_fwd.hpp>
+
+1236815469 d:\cpp\boost_1_54_0\boost\functional\hash\hash_fwd.hpp
+	<boost/config.hpp>
+	<cstddef>
+	<boost/detail/workaround.hpp>
+
+1381166516 d:\cpp\channel\include\convert.hpp
+	"iconv_conv.hpp"
+	"ibm_icu_conv.hpp"
+
+1380645393 d:\cpp\channel\include\ibm_icu_conv.hpp
+	"bytebuffer.hpp"
+	"charbuffers.hpp"
+	"charset.hpp"
 

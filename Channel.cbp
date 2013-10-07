@@ -75,6 +75,7 @@
 		<Compiler>
 			<Add option="-O2" />
 			<Add option="-Wall" />
+			<Add option="-DCONV_ENGINE_ICONV" />
 			<Add directory="include" />
 			<Add directory="../boost_1_54_0" />
 		</Compiler>
@@ -87,7 +88,9 @@
 		<Unit filename="include/console.hpp" />
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/file.hpp" />
+		<Unit filename="include/ibm_icu_conv.hpp" />
 		<Unit filename="include/iconv_conv.hpp" />
+		<Unit filename="include/reader.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/unix_file.cpp">
 			<Option target="&lt;{~None~}&gt;" />

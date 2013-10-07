@@ -3,7 +3,9 @@
 
 #ifdef CONV_ENGINE_ICONV
 	#include "iconv_conv.hpp"
-#elif CONV_ENGINE_IBM_ICU
+#endif
+
+#ifdef CONV_ENGINE_IBM_ICU
 	#include "ibm_icu_conv.hpp"
 #endif
 

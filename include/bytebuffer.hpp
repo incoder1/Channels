@@ -86,13 +86,14 @@ private:
 };
 
 
-inline byte_buffer new_byte_byffer(size_t capacity) throw(std::bad_alloc)
+inline byte_buffer new_byte_byffer(const size_t capacity) throw(std::bad_alloc)
 {
 	byte_buffer_allocator::alloc_functor_t alloc(new_alloc<uint8_t>);
 	byte_buffer_allocator::free_functor_t free(delete_free<uint8_t>);
 	byte_buffer_allocator all(alloc,free);
 	return all.allocate(capacity);
 }
+
 
 } // namespace io
 

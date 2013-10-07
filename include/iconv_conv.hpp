@@ -1,7 +1,11 @@
 #ifndef __INCONV_CONV_HPP_INCLUDED
 #define __INCONV_CONV_HPP_INCLUDED
 
+#include <cstring>
 #include <string>
+#include <cerrno>
+#include <cstdio>
+
 #include <iconv.h>
 
 #include "bytebuffer.hpp"
@@ -10,7 +14,17 @@
 
 namespace io {
 
-typedef charset<const char*> charset_t;
+class str_equal {
+public:
+	bool operator()(const char* a, const char* b) {
+		std::string astr(a);
+		std::string bstr(b);
+		return astr == bstr;
+	}
+};
+
+typedef charset<const char*, str_equal> charset_t;
+
 
 // List of character sets supported by libconv
 
@@ -96,6 +110,9 @@ public:
 	conveter(const charset_t& srcCs, const charset_t& destCs) throw(charset_exception):
 		conv_(NULL)
 	{
+		if(srcCs == destCs) {
+			throw charset_exception("Source character set is equal destination, no conversation needed");
+		}
 		::iconv_allocation_t* descrpt = new iconv_allocation_t;
 		int result = ::iconv_open_into( destCs.id(), srcCs.id(), descrpt);
 		if(result == -1) {

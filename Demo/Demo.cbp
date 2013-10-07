@@ -92,9 +92,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/cstax.hpp" />
 		<Unit filename="include/terminal.hpp" />
 		<Unit filename="include/windows_terminal.hpp" />
 		<Unit filename="include/winver.h" />
+		<Unit filename="src/cstax.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/terminal.cpp" />
 		<Unit filename="src/windows_terminal.cpp" />

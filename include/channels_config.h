@@ -1,11 +1,10 @@
 #ifndef CHANNELS_CONFIG_H_INCLUDED
 #define CHANNELS_CONFIG_H_INCLUDED
 
-#ifdef _WIN32
+#if defined(_WIN32) || defined(_WIN64)
 #	ifndef PLATFROM_WINDOWS
 #		define PLATFROM_WINDOWS 1
 #	endif
-#	include <windows.h>
 #endif
 
 #if defined(__unix__)
