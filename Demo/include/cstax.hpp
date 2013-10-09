@@ -2,7 +2,9 @@
 #define CSTAX_HPP_INCLUDED
 
 #include <charbuffers.hpp>
-#include <reader.hpp>
+#include <readwrite.hpp>
+
+#include <stack>
 
 #include <boost/unordered_set.hpp>
 #include <boost/shared_ptr.hpp>
@@ -61,6 +63,8 @@ public:
 	}
 	virtual ~XMLEvent() = 0;
 };
+
+typedef boost::shared_ptr<XMLEvent> PXMLEvent;
 
 class ElementEvent {
 private:
@@ -134,15 +138,17 @@ public:
 class XMLSource {
 public:
 	typedef io::char_buffer<wchar_t> ubuff;
-	typedef io::Reader<ubuff, io::conveter<wchar_t> > UTFReader;
+	typedef io::Reader< io::conveter<wchar_t> > UTFReader;
 private:
 	UTFReader src_;
 	XMLSource(UTFReader& source) NOEXCEPT:
 		src_(source)
 	{}
 public:
-	static XMLSource fromChannel(io::PReadChannel channel, io::charset_t charset, size_t buff) throw(io::io_exception) {
-		UTFReader reader = io::create_reader(channel, io::conveter<wchar_t>(charset,io::UCS_2), (size_t)1024);
+	static XMLSource fromChannel(io::PReadChannel channel, io::charset_t charset, size_t buffSize) throw(io::io_exception) {
+		io::byte_buffer byteBuff = io::new_byte_byffer(buffSize*sizeof(wchar_t));
+		io::conveter<wchar_t> conv(charset,io::UCS_2);
+		UTFReader reader(channel, byteBuff, conv);
 		return XMLSource(reader);
 	}
 	inline size_t read(ubuff& buff) throw(xml_stream_exception) {
@@ -156,13 +162,13 @@ public:
 
 class StreamReader {
 private:
+	typedef XMLSource::ubuff ubuff;
 	XMLSource src_;
+	const size_t buffSize_;
 	XMLSyntax syntax_;
 public:
 	typedef boost::shared_ptr<XMLEvent> PXMLEvent;
-	StreamReader(XMLSource source) NOEXCEPT:
-		src_(source)
-	{}
+	StreamReader(const XMLSource& source,size_t buffSize) NOEXCEPT;
 	PXMLEvent next() throw(xml_stream_exception);
 	PXMLEvent nextTag() throw(xml_stream_exception);
 	bool hasNext() throw(xml_stream_exception);

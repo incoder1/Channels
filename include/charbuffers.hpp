@@ -13,17 +13,18 @@ class char_buffer_allocator;
  */
 template<typename T>
 class char_buffer:public basic_buffer<T> {
+public:
+	typedef T char_t;
+	typedef std::basic_string<T> stl_str_t;
+	typedef std::char_traits<T> char_traits_t;
 private:
+	typedef typename stl_str_t::const_iterator stl_str_c_it_t;
+
 	char_buffer(boost::shared_array<T> data, T* const endp):
 		basic_buffer<T>(data, endp)
 	{}
 	friend class char_buffer_allocator<T>;
 public:
-	typedef T char_t;
-	typedef std::basic_string<T> stl_str_t;
-	typedef typename stl_str_t::const_iterator stl_str_c_it_t;
-	typedef std::char_traits<T> char_traits_t;
-
 	void put(const T& t) {
 		basic_buffer<T>::put(t);
 	}
@@ -143,7 +144,7 @@ private:
  * \param str C like zero ending string
  */
 template<typename _CharT>
-inline char_buffer<_CharT> wrap_cstr_to_char_buffer(const _CharT* str) throw(std::bad_alloc)
+inline char_buffer<_CharT> wrap_cstr(const _CharT* str) throw(std::bad_alloc)
 {
 	boost::function<_CharT* (size_t) throw(std::bad_alloc)> alloc(new_alloc<_CharT>);
 	boost::function<void (_CharT*) throw()> free(delete_free<_CharT>);
@@ -157,7 +158,7 @@ inline char_buffer<_CharT> wrap_cstr_to_char_buffer(const _CharT* str) throw(std
  * \param str C like zero ending string
  */
 template<typename _CharT>
-inline char_buffer<_CharT> wrap_stl_str_to_char_buffer(const std::basic_string<_CharT>& str) throw(std::bad_alloc)
+inline char_buffer<_CharT> wrap_stl_str(const std::basic_string<_CharT>& str) throw(std::bad_alloc)
 {
 	boost::function<_CharT* (size_t) throw(std::bad_alloc)> alloc(new_alloc<_CharT>);
 	boost::function<void (_CharT*) throw()> free(delete_free<_CharT>);

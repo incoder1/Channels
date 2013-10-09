@@ -10,7 +10,8 @@
 #include <terminal.hpp>
 #include <windows_terminal.hpp>
 
-#include <Console.hpp>
+#include <iostream>
+
 
 class RunLoop {
 private:
@@ -32,18 +33,19 @@ public:
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR _lpCmdLine, int nCmdShow)
 {
-	gui::WindowsTerminal term(80,100);
-	term.show();
 
-	std::wstring msg;
-	const wchar_t * str = L"Привет! Hello! 嗨, やあ, Szia Привет! Hello! 嗨, やあ, Szia Привет! Hello! 嗨, やあ, Szia \n";
-	for(int i=0; i<25; i++) {
-		msg.append(str);
-	}
-
-	term.put(msg);
-	RunLoop loop;
-	loop.start();
+//	gui::WindowsTerminal term(80,100);
+//	term.show();
+//
+//	std::wstring msg;
+//	const wchar_t * str = L"Привет! Hello! 嗨, やあ, Szia Привет! Hello! 嗨, やあ, Szia Привет! Hello! 嗨, やあ, Szia \n";
+//	for(int i=0; i<25; i++) {
+//		msg.append(str);
+//	}
+//
+//	term.put(msg);
+//	RunLoop loop;
+//	loop.start();
 
 //	io::PWriteChannel out = io::Console::outChanell();
 //	io::byte_buffer buff = io::new_byte_byffer(msg.length()*sizeof(wchar_t));

@@ -84,7 +84,7 @@ explicit buffer_iterator(T* begin, T* const end, T* const position) BOOST_NOEXCE
 		return position_;
 	}
 
-	inline pointer const ptr() const {
+	inline pointer const operator&() const {
 		return position_;
 	}
 };
@@ -177,7 +177,7 @@ public:
 	 * \return iterator to the current buffer position
 	 */
 	iterator position() {
-		return iterator(data_.get()-1, end_, position_);
+		return iterator(data_.get(), end_, position_);
 	}
 
 	/**
@@ -185,7 +185,7 @@ public:
 	 * \return iterator to the current buffer position
 	 */
 	const_iterator position() const {
-		return iterator(data_.get()-1, end_, position_);
+		return iterator(data_.get(), end_, position_);
 	}
 
 	/**
@@ -193,7 +193,7 @@ public:
 	 * \return constant iterator to the last buffer element
 	 */
 	iterator last() {
-		return const_iterator(data_.get()-1, end_, last_);
+		return const_iterator(NULL, end_, last_);
 	}
 
 
@@ -280,21 +280,13 @@ public:
 		return (end_-1) - data_.get();
 	}
 
-	const uint8_t* getBytes(size_t &size) const {
-		size = length() * sizeof(T);
-		return reinterpret_cast<const uint8_t*>(data_.get());
-	}
-
 	/**
 	 * Deallocates buffer array
 	 */
-	virtual ~basic_buffer() = 0;
+	virtual ~basic_buffer()
+	{}
 };
 
-template<typename T>
-basic_buffer<T>::~basic_buffer()
-{
-}
 
 template<typename T>
 inline T* new_alloc(const size_t count) throw(std::bad_alloc)

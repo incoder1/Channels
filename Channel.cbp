@@ -90,7 +90,7 @@
 		<Unit filename="include/file.hpp" />
 		<Unit filename="include/ibm_icu_conv.hpp" />
 		<Unit filename="include/iconv_conv.hpp" />
-		<Unit filename="include/reader.hpp" />
+		<Unit filename="include/readwrite.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/unix_file.cpp">
 			<Option target="&lt;{~None~}&gt;" />

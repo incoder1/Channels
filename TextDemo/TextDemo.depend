@@ -1,17 +1,32 @@
 # depslib dependency file v1.0
-1378232962 source:d:\cpp\channel\main.cpp
-	<channels_config.h>
-	<Windows.h>
+1381347833 source:d:\cpp\channel\textdemo\main.cpp
+	<iostream>
+	<boost/make_shared.hpp>
+	<console.hpp>
+	<iconv_conv.hpp>
+	<readwrite.hpp>
 
-1381335500 d:\cpp\channel\include\buffers.hpp
-	<cstddef>
-	<algorithm>
-	<boost/limits.hpp>
-	<boost/utility.hpp>
-	<boost/shared_array.hpp>
+1380558992 d:\cpp\channel\include\console.hpp
+	"channels_config.h"
+	"file.hpp"
+	<boost/noncopyable.hpp>
+
+1381166611 d:\cpp\channel\include\channels_config.h
+	<unistd.h>
+	<windows.h>
+
+1380637698 d:\cpp\channel\include\file.hpp
+	"channels_config.h"
+	"channels.hpp"
+	<unistd.h>
+	<sys/types.h>
+	<sys/stat.h>
+
+1381167384 d:\cpp\channel\include\channels.hpp
+	<stdexcept>
 	<boost/shared_ptr.hpp>
-	<boost/function.hpp>
-	<boost/array.hpp>
+	<channels_config.h>
+	<bytebuffer.hpp>
 
 1236014536 d:\cpp\boost_1_54_0\boost\shared_ptr.hpp
 	<boost/smart_ptr/shared_ptr.hpp>
@@ -1322,11 +1337,11 @@
 
 1355254521 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\operator_bool.hpp
 
-1083926663 d:\cpp\boost_1_54_0\boost\detail\no_exceptions_support.hpp
-	<boost/config.hpp>
-	<boost/detail/workaround.hpp>
-
-1372338207 d:\cpp\boost_1_54_0\boost\atomic
+1381336809 d:\cpp\channel\include\bytebuffer.hpp
+	<stdint.h>
+	<vector>
+	<boost/function.hpp>
+	"buffers.hpp"
 
 1300746758 d:\cpp\boost_1_54_0\boost\function.hpp
 	<functional>
@@ -1579,6 +1594,10 @@
 	<boost/function/detail/prologue.hpp>
 	<boost/detail/no_exceptions_support.hpp>
 
+1083926663 d:\cpp\boost_1_54_0\boost\detail\no_exceptions_support.hpp
+	<boost/config.hpp>
+	<boost/detail/workaround.hpp>
+
 1090722569 d:\cpp\boost_1_54_0\boost\function\function1.hpp
 	<boost/function/detail/maybe_include.hpp>
 
@@ -1609,63 +1628,15 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1236014140 d:\cpp\boost_1_54_0\boost\bind.hpp
-	<boost/bind/bind.hpp>
-
-1322679218 d:\cpp\boost_1_54_0\boost\bind\bind.hpp
-	<boost/config.hpp>
-	<boost/ref.hpp>
-	<boost/mem_fn.hpp>
-	<boost/type.hpp>
-	<boost/is_placeholder.hpp>
-	<boost/bind/arg.hpp>
-	<boost/detail/workaround.hpp>
-	<boost/visit_each.hpp>
-	<boost/bind/storage.hpp>
-	<boost/bind/bind_template.hpp>
-	<boost/bind/bind_template.hpp>
-	<boost/bind/bind_template.hpp>
-	<boost/bind/bind_cc.hpp>
-	<boost/bind/bind_cc.hpp>
-	<boost/bind/bind_cc.hpp>
-	<boost/bind/bind_cc.hpp>
-	<boost/bind/bind_mf_cc.hpp>
-	<boost/bind/bind_mf2_cc.hpp>
-	<boost/bind/bind_mf_cc.hpp>
-	<boost/bind/bind_mf2_cc.hpp>
-	<boost/bind/bind_mf_cc.hpp>
-	<boost/bind/bind_mf2_cc.hpp>
-	<boost/bind/bind_mf_cc.hpp>
-	<boost/bind/bind_mf2_cc.hpp>
-	<boost/bind/placeholders.hpp>
-
-1196017639 d:\cpp\boost_1_54_0\boost\is_placeholder.hpp
-
-1196017639 d:\cpp\boost_1_54_0\boost\bind\arg.hpp
-	<boost/config.hpp>
-	<boost/is_placeholder.hpp>
-
-1090722569 d:\cpp\boost_1_54_0\boost\visit_each.hpp
-	<boost/config.hpp>
-
-1141224389 d:\cpp\boost_1_54_0\boost\bind\storage.hpp
-	<boost/config.hpp>
-	<boost/bind/arg.hpp>
-
-1196017639 d:\cpp\boost_1_54_0\boost\bind\bind_template.hpp
-
-1090801932 d:\cpp\boost_1_54_0\boost\bind\bind_cc.hpp
-
-1090801932 d:\cpp\boost_1_54_0\boost\bind\bind_mf_cc.hpp
-
-1222614317 d:\cpp\boost_1_54_0\boost\bind\bind_mf2_cc.hpp
-
-1278797185 d:\cpp\boost_1_54_0\boost\bind\placeholders.hpp
-	<boost/bind/arg.hpp>
-	<boost/config.hpp>
-
-1365860992 d:\cpp\boost_1_54_0\boost\noncopyable.hpp
-	<boost/config.hpp>
+1381335500 d:\cpp\channel\include\buffers.hpp
+	<cstddef>
+	<algorithm>
+	<boost/limits.hpp>
+	<boost/utility.hpp>
+	<boost/shared_array.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/function.hpp>
+	<boost/array.hpp>
 
 1338067023 d:\cpp\boost_1_54_0\boost\utility.hpp
 	<boost/utility/addressof.hpp>
@@ -1796,6 +1767,9 @@
 1092564829 d:\cpp\boost_1_54_0\boost\next_prior.hpp
 	<iterator>
 
+1365860992 d:\cpp\boost_1_54_0\boost\noncopyable.hpp
+	<boost/config.hpp>
+
 1236014536 d:\cpp\boost_1_54_0\boost\shared_array.hpp
 	<boost/smart_ptr/shared_array.hpp>
 
@@ -1823,89 +1797,6 @@
 	<algorithm>
 	<functional>
 	<new>
-
-1381335777 d:\cpp\channel\include\charbuffers.hpp
-	"buffers.hpp"
-
-1374162328 d:\cpp\channel\include\charsetconverter.hpp
-	<charbuffers.hpp>
-	<bytebuffer.hpp>
-	<boost/noncopyable.hpp>
-	"charset.hpp"
-	<iostream>
-	<Windows.h>
-
-1381336809 d:\cpp\channel\include\bytebuffer.hpp
-	<stdint.h>
-	<vector>
-	<boost/function.hpp>
-	"buffers.hpp"
-
-1381171457 d:\cpp\channel\include\charset.hpp
-	<stdexcept>
-
-1378126156 d:\cpp\channel\include\inconv_conv.hpp
-	<string>
-	<iconv.h>
-	"bytebuffer.hpp"
-	"charbuffers.hpp"
-	"charset.hpp"
-
-1372792865 c:\mingw\msys\1.0\local\include\iconv.h
-	"iconv.h"
-	<stddef.h>
-	<errno.h>
-	<stddef.h>
-	<stdio.h>
-	<time.h>
-	<wchar.h>
-
-1381167384 d:\cpp\channel\include\channels.hpp
-	<stdexcept>
-	<boost/shared_ptr.hpp>
-	<channels_config.h>
-	<bytebuffer.hpp>
-
-1380637698 d:\cpp\channel\include\file.hpp
-	"channels_config.h"
-	"channels.hpp"
-	<unistd.h>
-	<sys/types.h>
-	<sys/stat.h>
-
-1381337585 source:d:\cpp\channel\src\windows_file.cpp
-	"file.hpp"
-
-1381347606 source:d:\cpp\channel\src\iconv_conv.cpp
-	"iconv_conv.hpp"
-
-1381347883 d:\cpp\channel\include\iconv_conv.hpp
-	<cstring>
-	<string>
-	<cerrno>
-	<cstdio>
-	<convert.hpp>
-	<iconv.h>
-	<boost/unordered_map.hpp>
-
-1381166611 d:\cpp\channel\include\channels_config.h
-	<unistd.h>
-	<windows.h>
-
-1378228495 source:d:\cpp\channel\src\terminal.cpp
-	"terminal.hpp"
-
-1378228555 d:\cpp\channel\include\terminal.hpp
-	<vector>
-	"channels_config.h"
-	"bytebuffer.hpp"
-
-1378312262 source:d:\cpp\channel\src\windows_terminal.cpp
-	"windows_terminal.hpp"
-
-1378312390 d:\cpp\channel\include\windows_terminal.hpp
-	<Windows.h>
-	"terminal.hpp"
 
 1362873305 d:\cpp\boost_1_54_0\boost\array.hpp
 	<boost/detail/workaround.hpp>
@@ -2027,6 +1918,15 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
+1381340678 d:\cpp\channel\include\readwrite.hpp
+	<stdexcept>
+	<charbuffers.hpp>
+	<convert.hpp>
+	<channels.hpp>
+
+1381335777 d:\cpp\channel\include\charbuffers.hpp
+	"buffers.hpp"
+
 1381347567 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
@@ -2034,13 +1934,96 @@
 	<bytebuffer.hpp>
 	<stdexcept>
 
+1381347883 d:\cpp\channel\include\iconv_conv.hpp
+	<cstring>
+	<string>
+	<cerrno>
+	<cstdio>
+	<convert.hpp>
+	<iconv.h>
+	<boost/unordered_map.hpp>
+
+1372792865 c:\mingw\msys\1.0\local\include\iconv.h
+	"iconv.h"
+	<stddef.h>
+	<errno.h>
+	<stddef.h>
+	<stdio.h>
+	<time.h>
+	<wchar.h>
+
+1381171457 d:\cpp\channel\include\charset.hpp
+	<stdexcept>
+
 1380645393 d:\cpp\channel\include\ibm_icu_conv.hpp
 	"bytebuffer.hpp"
 	"charbuffers.hpp"
 	"charset.hpp"
 
-1381347586 source:d:\cpp\channel\src\convert.cpp
-	"convert.hpp"
+1236014536 d:\cpp\boost_1_54_0\boost\make_shared.hpp
+	<boost/smart_ptr/make_shared.hpp>
+
+1352904731 d:\cpp\boost_1_54_0\boost\smart_ptr\make_shared.hpp
+	<boost/smart_ptr/make_shared_object.hpp>
+	<boost/smart_ptr/make_shared_array.hpp>
+	<boost/smart_ptr/allocate_shared_array.hpp>
+
+1362647928 d:\cpp\boost_1_54_0\boost\smart_ptr\make_shared_object.hpp
+	<boost/config.hpp>
+	<boost/smart_ptr/shared_ptr.hpp>
+	<boost/smart_ptr/detail/sp_forward.hpp>
+	<boost/type_traits/type_with_alignment.hpp>
+	<boost/type_traits/alignment_of.hpp>
+	<cstddef>
+	<new>
+
+1355606420 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\sp_forward.hpp
+	<boost/config.hpp>
+
+1355513703 d:\cpp\boost_1_54_0\boost\smart_ptr\make_shared_array.hpp
+	<boost/smart_ptr/shared_ptr.hpp>
+	<boost/smart_ptr/detail/array_deleter.hpp>
+	<boost/smart_ptr/detail/array_traits.hpp>
+	<boost/smart_ptr/detail/make_array_helper.hpp>
+	<boost/smart_ptr/detail/sp_if_array.hpp>
+	<initializer_list>
+
+1361214288 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\array_deleter.hpp
+	<boost/smart_ptr/detail/array_utility.hpp>
+	<boost/smart_ptr/detail/sp_forward.hpp>
+
+1357840234 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\array_utility.hpp
+	<boost/config.hpp>
+	<boost/type_traits/has_trivial_constructor.hpp>
+	<boost/type_traits/has_trivial_destructor.hpp>
+
+1303734408 d:\cpp\boost_1_54_0\boost\type_traits\has_trivial_constructor.hpp
+	<boost/type_traits/config.hpp>
+	<boost/type_traits/intrinsics.hpp>
+	<boost/type_traits/is_pod.hpp>
+	<boost/type_traits/detail/ice_or.hpp>
+	<boost/type_traits/detail/bool_trait_def.hpp>
+	<boost/type_traits/detail/bool_trait_undef.hpp>
+
+1354685300 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\array_traits.hpp
+	<boost/type_traits/remove_cv.hpp>
+
+1361214288 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\make_array_helper.hpp
+	<boost/type_traits/alignment_of.hpp>
+
+1354685300 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\sp_if_array.hpp
+	<boost/smart_ptr/shared_ptr.hpp>
+
+1355513703 d:\cpp\boost_1_54_0\boost\smart_ptr\allocate_shared_array.hpp
+	<boost/smart_ptr/shared_ptr.hpp>
+	<boost/smart_ptr/detail/allocate_array_helper.hpp>
+	<boost/smart_ptr/detail/array_deleter.hpp>
+	<boost/smart_ptr/detail/array_traits.hpp>
+	<boost/smart_ptr/detail/sp_if_array.hpp>
+	<initializer_list>
+
+1361214288 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\allocate_array_helper.hpp
+	<boost/type_traits/alignment_of.hpp>
 
 1221737459 d:\cpp\boost_1_54_0\boost\unordered_map.hpp
 	<boost/unordered/unordered_map.hpp>
@@ -3993,14 +3976,6 @@
 
 1303734408 d:\cpp\boost_1_54_0\boost\type_traits\has_nothrow_constructor.hpp
 	<boost/type_traits/has_trivial_constructor.hpp>
-	<boost/type_traits/detail/bool_trait_def.hpp>
-	<boost/type_traits/detail/bool_trait_undef.hpp>
-
-1303734408 d:\cpp\boost_1_54_0\boost\type_traits\has_trivial_constructor.hpp
-	<boost/type_traits/config.hpp>
-	<boost/type_traits/intrinsics.hpp>
-	<boost/type_traits/is_pod.hpp>
-	<boost/type_traits/detail/ice_or.hpp>
 	<boost/type_traits/detail/bool_trait_def.hpp>
 	<boost/type_traits/detail/bool_trait_undef.hpp>
 

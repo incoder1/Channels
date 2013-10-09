@@ -38,13 +38,6 @@ public:
 		return basic_buffer<uint8_t>::put(b,e);
 	}
 
-	template<class CharBuff>
-	inline size_t put(const CharBuff& charBuff) {
-		uint8_t *b = reinterpret_cast<uint8_t*>((charBuff.position()).ptr());
-		uint8_t *e = reinterpret_cast<uint8_t*>((charBuff.last()).ptr());
-		return basic_buffer<uint8_t>::put(b,e);
-	}
-
 };
 
 /**
@@ -80,7 +73,21 @@ public:
 		boost::shared_array<uint8_t> array(data,free_functor_);
 		return byte_buffer(array, endp);
 	}
+
+	template<typename T>
+	static byte_buffer wrap_buffer(const basic_buffer<T>& buff) {
+		buff.flip();
+		boost::shared_array<T> data = buff.ref();
+		alloc_functor_t noDel(&byte_buffer_allocator::no_delete_free);
+		uint8_t *start = reinterpret_cast<uint8_t*>((buff.position()).ptr());
+		uint8_t *end = reinterpret_cast<uint8_t*>((buff.last()).ptr());
+		boost::shared_array<uint8_t> array(start, noDel);
+		return byte_buffer(array, end);
+	}
+
 private:
+	static void no_delete_free(uint8_t* data)
+	{}
 	alloc_functor_t alloc_functor_;
 	free_functor_t free_functor_;
 };

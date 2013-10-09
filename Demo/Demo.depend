@@ -1325,7 +1325,7 @@
 	<unistd.h>
 	<windows.h>
 
-1381167052 d:\cpp\channel\include\bytebuffer.hpp
+1381258168 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1616,7 +1616,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1381166941 d:\cpp\channel\include\buffers.hpp
+1381258042 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1930,11 +1930,13 @@
 1346260084 d:\cpp\libtcod-1.5.1\include\txtfield.hpp
 	"color.hpp"
 
-1381161424 source:d:\cpp\channel\demo\src\main.cpp
+1381259667 source:d:\cpp\channel\demo\src\main.cpp
 	<windows.h>
 	<terminal.hpp>
 	<windows_terminal.hpp>
-	<Console.hpp>
+	<console.hpp>
+	<readwrite.hpp>
+	<iostream>
 
 1378228555 d:\cpp\channel\include\terminal.hpp
 	<vector>
@@ -2068,7 +2070,7 @@
 	"iconv_conv.hpp"
 	"ibm_icu_conv.hpp"
 
-1381171098 d:\cpp\channel\include\iconv_conv.hpp
+1381259889 d:\cpp\channel\include\iconv_conv.hpp
 	<cstring>
 	<string>
 	<cerrno>
@@ -2078,18 +2080,19 @@
 	"charbuffers.hpp"
 	"charset.hpp"
 
-1380633196 d:\cpp\channel\include\charbuffers.hpp
+1381257238 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
 1381171457 d:\cpp\channel\include\charset.hpp
 	<stdexcept>
 
-1381162893 source:d:\cpp\channel\demo\src\cstax.cpp
+1381253909 source:d:\cpp\channel\demo\src\cstax.cpp
 	"cstax.hpp"
 
-1381171690 d:\cpp\channel\demo\include\cstax.hpp
+1381255496 d:\cpp\channel\demo\include\cstax.hpp
 	<charbuffers.hpp>
-	<reader.hpp>
+	<readwrite.hpp>
+	<stack>
 	<boost/unordered_set.hpp>
 	<boost/shared_ptr.hpp>
 
@@ -4826,4 +4829,19 @@
 	"bytebuffer.hpp"
 	"charbuffers.hpp"
 	"charset.hpp"
+
+1372792865 c:\mingw\msys\1.0\local\include\iconv.h
+	"iconv.h"
+	<stddef.h>
+	<errno.h>
+	<stddef.h>
+	<stdio.h>
+	<time.h>
+	<wchar.h>
+
+1381259321 d:\cpp\channel\include\readwrite.hpp
+	<stdexcept>
+	<charbuffers.hpp>
+	<convert.hpp>
+	<channels.hpp>
 

@@ -3,8 +3,7 @@
 namespace cstax {
 
 // XMLSyntax
-XMLSyntax::XMLSyntax() NOEXCEPT
-{
+XMLSyntax::XMLSyntax() NOEXCEPT {
 	uint8_t i;
 	for(i=0; i < 26; i++) {
 		whitespaces_.insert(WHITESPACES[i]);
@@ -33,5 +32,39 @@ XMLEvent::~XMLEvent()
 
 ElementEvent::~ElementEvent()
 {}
+
+//StreamReader
+
+StreamReader::StreamReader(const XMLSource& source,size_t buffSize) NOEXCEPT:
+src_(source),
+     buffSize_(buffSize)
+{}
+
+PXMLEvent StreamReader::next() throw(xml_stream_exception)
+{
+	ubuff buff = io::new_char_buff<wchar_t>(buffSize_);
+	while( src_.read(buff) > 0 ) {
+		buff.flip();
+		//std::stack<std::wstring> stack;
+		for(ubuff::iterator it = buff.begin(); it != buff.last(); ++it) {
+			// skip white spaces
+			if(*it != L'<') {
+				continue;
+			}
+		}
+	}
+}
+
+PXMLEvent StreamReader::nextTag() throw(xml_stream_exception)
+{
+}
+
+bool StreamReader::hasNext() throw(xml_stream_exception)
+{
+}
+
+std::wstring getElementText() throw(xml_stream_exception)
+{
+}
 
 } // namespace cstax

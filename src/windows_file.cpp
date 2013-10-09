@@ -77,7 +77,7 @@ size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 {
 	DWORD result;
 	if(!::ReadFile(id_,
-	               reinterpret_cast<void*>(buffer.last().ptr()),
+	               reinterpret_cast<void*>(&buffer.position()),
 	               buffer.capacity(),
 	              &result,
 	               NULL)) {
@@ -91,7 +91,7 @@ size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 {
 	DWORD result;
 	if(!::WriteFile(id_,
-	                reinterpret_cast<void*>(buffer.position().ptr()),
+	                reinterpret_cast<void*>(&buffer.position()),
 	                buffer.length(),
 	                &result,
 	                NULL)
@@ -112,7 +112,7 @@ void FileChannel::seek(size_t offset, ReadWriteChannel::MoveMethod method) throw
 
 FileChannel::~FileChannel()
 {
-	CloseHandle(id_);
+	::CloseHandle(id_);
 }
 
 } // namespace io

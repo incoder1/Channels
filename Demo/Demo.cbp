@@ -22,6 +22,7 @@
 					<Add directory="include" />
 					<Add directory="../include" />
 					<Add directory="../../boost_1_54_0" />
+					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>
 				<Linker>
 					<Add library="Channel" />
@@ -29,8 +30,10 @@
 					<Add library="user32" />
 					<Add library="gdi32" />
 					<Add library="gdiplus" />
+					<Add library="iconv.dll" />
 					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
 					<Add directory="../bin/DebugMinWG32" />
+					<Add directory="C:/MinGW/msys/1.0/local/lib" />
 				</Linker>
 			</Target>
 			<Target title="ReleaseMinGW32">
@@ -91,6 +94,7 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-DCONV_ENGINE_ICONV" />
 		</Compiler>
 		<Unit filename="include/cstax.hpp" />
 		<Unit filename="include/terminal.hpp" />
