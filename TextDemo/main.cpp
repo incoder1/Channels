@@ -1,25 +1,22 @@
+// Only to handle exception if any
 #include <iostream>
-
-#include <boost/make_shared.hpp>
 
 #include <console.hpp>
 #include <iconv_conv.hpp>
 #include <readwrite.hpp>
 
-
-int main()
+int main(int argc, const char** argv)
 {
-	typedef io::Writer<std::wstring> writer;
-	::SetConsoleCP(CP_ACP);
-	::SetConsoleOutputCP(CP_ACP);
+	typedef io::Writer<std::wstring> uwriter;
+	typedef io::Reader<std::wstring> ureader;
+	::SetConsoleCP(1251);
+	::SetConsoleOutputCP(1251);
 	try {
-		const io::IconvCharsetFactory* chFactory = io::IconvCharsetFactory::instance();
-		const io::Charset* uft16 = chFactory->forName("UTF-16LE");
-		const io::Charset* cp1251 = chFactory->forName("CP1251");
-		io::File file("test.txt");
-		file.create();
-		writer out(file.openForWrite(), io::PConverter(new io::IconvConverter(uft16, cp1251)));
-		out.write(L"Hello World. Привет мир");
+		uwriter out(io::Console::outChanell(), io::iconv_conv("UTF-16LE","CP1251"));
+		out.write(L"Hello World. Привет мир\n\r");
+		io::byte_buffer readBuff = io::new_byte_byffer(512);
+		ureader in(io::Console::inChanell(),readBuff,io::iconv_conv("CP1251","UTF-16LE"));
+		out.write(in.read());
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}

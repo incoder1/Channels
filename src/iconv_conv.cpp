@@ -3,7 +3,7 @@
 namespace io {
 
 // Unicode char sets
-static const Charset UTF8(0,"UTF-8",sizeof(char));
+static const Charset UTF8(0xFF,"UTF-8",sizeof(char));
 static const Charset UTF_16LE(1,"UTF-16LE",sizeof(char));
 static const Charset UCS_2(2,"UCS-2",sizeof(char));
 static const Charset UCS_2BE(3,"UCS-2BE",sizeof(wchar_t));
@@ -20,7 +20,7 @@ static const Charset UTF32_LE(13,"UTF-32LE",sizeof(uint32_t));
 static const Charset UTF7(14,"UTF-7",sizeof(char));
 
 // Single bytes char sets
-static const Charset ASCII(15,"ASCII", sizeof(char));
+static const Charset ASCII(0,"ASCII", sizeof(char));
 static const Charset ISO_8859_1(16,"ISO-8859-1",sizeof(char));
 static const Charset ISO_8859_2(17,"ISO-8859-2",sizeof(char));
 static const Charset ISO_8859_3(18,"ISO-8859-3",sizeof(char));
@@ -40,8 +40,8 @@ static const Charset ISO_8859_16(31,"ISO-8859-16",sizeof(char));
 static const Charset KOI8_R(32,"KOI8-R",sizeof(char));
 static const Charset KOI8_U(33,"KOI8-U",sizeof(char));
 static const Charset KOI8_RU(34,"KOI8-RU",sizeof(char));
-static const Charset CP_1250(35,"CP1250//IGNORE",sizeof(char));
-static const Charset CP_1251(36,"CP1251//IGNORE",sizeof(char));
+static const Charset CP_1250(1250,"CP1250//IGNORE",sizeof(char));
+static const Charset CP_1251(1251,"CP1251//IGNORE",sizeof(char));
 
 
 inline std::pair< std::string, const Charset*> make_pair(const std::string& n, const Charset* chs)
@@ -49,7 +49,8 @@ inline std::pair< std::string, const Charset*> make_pair(const std::string& n, c
 	return std::make_pair(n,chs);
 }
 
-IconvCharsetFactory::IconvCharsetFactory()
+IconvCharsetFactory::IconvCharsetFactory() BOOST_NOEXCEPT:
+	charSets_()
 {
 	charSets_.insert(make_pair("UTF-8",&UTF8));
 	charSets_.insert(make_pair("UTF-16LE",&UTF_16LE));
@@ -80,18 +81,34 @@ const Charset* IconvCharsetFactory::forName(const std::string& name) const
 }
 
 
+const IconvCharsetFactory* IconvConverter::chFactory()
+{
+	static IconvCharsetFactory factory;
+	return &factory;
+}
+
 // IconvConverter
-IconvConverter::IconvConverter(const Charset* srcCs, const Charset* destCs) throw(charset_exception):
+IconvConverter::IconvConverter(const std::string& src,const std::string& dst) throw(charset_exception):
 		  Converter(),
           conv_(NULL),
-          srcCs_(srcCs),
-          destCs_(destCs)
+          srcCs_(NULL),
+          destCs_(NULL)
 {
-	if(srcCs->equal(destCs)) {
+	if(src == dst) {
 		throw charset_exception("Source character set is equal destination, no conversation needed");
 	}
+
+	srcCs_ = IconvConverter::chFactory()->forName(src);
+	if(NULL == srcCs_) {
+		throw charset_exception(src+" is not provided by iconv converter");
+	}
+	destCs_ = IconvConverter::chFactory()->forName(dst);
+	if(NULL == srcCs_) {
+		throw charset_exception(dst+" is not provided by iconv converter");
+	}
+
 	::iconv_allocation_t* descrpt = new iconv_allocation_t;
-	int result = ::iconv_open_into( destCs->name().c_str(), srcCs->name().c_str(), descrpt);
+	int result = ::iconv_open_into( destCs_->name().c_str(), srcCs_->name().c_str(), descrpt);
 	if(result == -1) {
 		throw charset_exception("Can't build iconv converter");
 	}

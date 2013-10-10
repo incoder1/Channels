@@ -1,7 +1,6 @@
 # depslib dependency file v1.0
-1381347833 source:d:\cpp\channel\textdemo\main.cpp
+1381420203 source:d:\cpp\channel\textdemo\main.cpp
 	<iostream>
-	<boost/make_shared.hpp>
 	<console.hpp>
 	<iconv_conv.hpp>
 	<readwrite.hpp>
@@ -1918,7 +1917,7 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1381340678 d:\cpp\channel\include\readwrite.hpp
+1381420317 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<charbuffers.hpp>
 	<convert.hpp>
@@ -1934,7 +1933,7 @@
 	<bytebuffer.hpp>
 	<stdexcept>
 
-1381347883 d:\cpp\channel\include\iconv_conv.hpp
+1381419490 d:\cpp\channel\include\iconv_conv.hpp
 	<cstring>
 	<string>
 	<cerrno>

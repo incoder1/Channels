@@ -84,7 +84,6 @@
 		<Unit filename="include/channels.hpp" />
 		<Unit filename="include/channels_config.h" />
 		<Unit filename="include/charbuffers.hpp" />
-		<Unit filename="include/charset.hpp" />
 		<Unit filename="include/console.hpp" />
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/file.hpp" />
@@ -92,6 +91,11 @@
 		<Unit filename="include/iconv_conv.hpp" />
 		<Unit filename="include/readwrite.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/convert.cpp" />
+		<Unit filename="src/iconv_conv.cpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+		</Unit>
 		<Unit filename="src/unix_file.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>

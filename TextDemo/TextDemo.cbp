@@ -12,8 +12,19 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Winline" />
+					<Add option="-Wunreachable-code" />
+					<Add option="-pedantic-errors" />
+					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add option="-DCONV_ENGINE_ICONV" />
+					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>
+				<Linker>
+					<Add directory="../bin/DebugMinWG32" />
+					<Add directory="C:/MinGW/msys/1.0/local/lib" />
+					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
+				</Linker>
 			</Target>
 			<Target title="ReleaseMinGW32">
 				<Option output="bin/ReleaseMinGW32/TextDemo" prefix_auto="1" extension_auto="1" />
@@ -22,16 +33,28 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-DCONV_ENGINE_ICONV" />
+					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="libiconv.dll" />
+					<Add directory="../bin/ReleaseMinGW32" />
+					<Add directory="C:/MinGW/msys/1.0/local/lib" />
+					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="include" />
+			<Add directory="../include" />
+			<Add directory="../../boost_1_54_0" />
 		</Compiler>
+		<Linker>
+			<Add library="Channel" />
+		</Linker>
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

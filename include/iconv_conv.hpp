@@ -13,16 +13,13 @@
 
 namespace io {
 
-class CHANNEL_PUBLIC IconvCharsetFactory {
+// Not available from DLL, do not use it
+class IconvCharsetFactory {
 private:
 	typedef boost::unordered_map<std::string,const Charset*> hash_table_t;
 	hash_table_t charSets_;
-	IconvCharsetFactory();
 public:
-	static const IconvCharsetFactory* instance() {
-		static IconvCharsetFactory _instance;
-		return &_instance;
-	}
+	IconvCharsetFactory() BOOST_NOEXCEPT_OR_NOTHROW;
 	const Charset* forName(const std::string& name) const;
 };
 
@@ -36,6 +33,7 @@ private:
 	::iconv_t conv_;
 	const Charset* srcCs_;
 	const Charset* destCs_;
+	static const IconvCharsetFactory* chFactory();
 public:
 	/**
 	 * Constructs new converter
@@ -43,7 +41,7 @@ public:
 	 * \param destCs destination char set
 	 * \throw charset_exception if conversation is not possible
 	 */
-	IconvConverter(const Charset* srcCs, const Charset* destCs) throw(charset_exception);
+	IconvConverter(const std::string& sourceCharset,const std::string& destinationCharset) throw(charset_exception);
 
 	virtual const Charset* sourceCharset() const {
 		return srcCs_;
@@ -65,6 +63,11 @@ public:
 	 */
 	virtual void convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);
 };
+
+inline PConverter iconv_conv(const std::string& sourceCharset,const std::string& destinationCharset)
+{
+	return io::PConverter(new io::IconvConverter(sourceCharset, destinationCharset));
+}
 
 } // namespace io
 #endif // __INCONV_CONV_HPP_INCLUDED

@@ -13,19 +13,21 @@ class Reader {
 private:
 	typedef typename String::value_type _TChar;
 public:
-
 	Reader(PReadChannel src, const byte_buffer& buff,PConverter conv) BOOST_NOEXCEPT:
 		src_(src),
 		buff_(buff),
 		conv_(conv)
 	{}
-	inline String read() throw(io_exception) {
+	String read() throw(io_exception,charset_exception) {
 		buff_.clear();
 		size_t bytesRead = src_->read(buff_);
 		byte_buffer convBuff = new_byte_byffer(bytesRead*sizeof(_TChar));
 		buff_.flip();
 		conv_->convert(buff_,convBuff);
-		return String(convBuff.begin(),convBuff.last());
+		convBuff.flip();
+		String res;
+		res.append((const _TChar*)(&convBuff.position()), convBuff.length()/sizeof(_TChar));
+		return res;
 	}
 private:
 	PReadChannel src_;
@@ -42,10 +44,12 @@ public:
 		out_(out),
 		conv_(conv)
 	{}
-	inline void write(const String& str) throw(io_exception) {
-		byte_buffer srcBytes = new_byte_byffer(str.length()*sizeof(_TChar));
+	void write(const String& str) throw(io_exception,charset_exception) {
+		size_t sourceBytesSize = str.length()*sizeof(_TChar);
+		byte_buffer srcBytes = new_byte_byffer(sourceBytesSize);
 		const size_t destCharSize = conv_->destinationCharset()->charSize();
-		std::copy(str.begin(),str.end(), srcBytes.begin());
+		srcBytes.put((uint8_t*)(str.data()), sourceBytesSize);
+		srcBytes.flip();
 		byte_buffer convBytes = new_byte_byffer(str.length()*destCharSize);
 		conv_->convert(srcBytes, convBytes);
 		convBytes.flip();
