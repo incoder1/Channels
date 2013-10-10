@@ -6,6 +6,7 @@
 #include <charbuffers.hpp>
 #include <bytebuffer.hpp>
 
+#include <boost/unordered_map.hpp>
 #include <stdexcept>
 
 namespace io {
@@ -23,6 +24,16 @@ public:
 	bool equal(const Charset* oth) const;
 };
 
+// Not available from DLL, do not use it
+class CharsetFactory {
+private:
+	typedef boost::unordered_map<std::string,const Charset*> hash_table_t;
+	hash_table_t charSets_;
+public:
+	CharsetFactory() BOOST_NOEXCEPT_OR_NOTHROW;
+	const Charset* forName(const std::string& name) const;
+};
+
 /**
  * ! \brief Exception of this type trowing when character set conversation fails.
  */
@@ -35,8 +46,6 @@ public:
 };
 
 class CHANNEL_PUBLIC Converter {
-private:
-
 public:
 
 	virtual const Charset* sourceCharset() const = 0;

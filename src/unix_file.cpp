@@ -71,7 +71,7 @@ size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 {
 	size_t result = ::read(
 		file_
-		reinterpret_cast<void*>(buffer.position().ptr()),
+		reinterpret_cast<void*>(&buffer.position()),
 		buffer.capacity()
 		);
 	buffer.move(result);
@@ -82,7 +82,7 @@ size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 {
 	size_t result = ::write(
 		file_,
-		reinterpret_cast<void*>(buffer.position().ptr()),
+		reinterpret_cast<void*>(&buffer.position()),
 		buffer.length(),
 		);
 	return result;

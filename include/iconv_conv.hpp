@@ -1,27 +1,16 @@
 #ifndef __INCONV_CONV_HPP_INCLUDED
 #define __INCONV_CONV_HPP_INCLUDED
 
-#include <cstring>
 #include <string>
+#include <cstring>
 #include <cerrno>
 #include <cstdio>
+
 
 #include <convert.hpp>
 #include <iconv.h>
 
-#include <boost/unordered_map.hpp>
-
 namespace io {
-
-// Not available from DLL, do not use it
-class IconvCharsetFactory {
-private:
-	typedef boost::unordered_map<std::string,const Charset*> hash_table_t;
-	hash_table_t charSets_;
-public:
-	IconvCharsetFactory() BOOST_NOEXCEPT_OR_NOTHROW;
-	const Charset* forName(const std::string& name) const;
-};
 
 /**
  * ! \brief Converts string representing in byte sequence from one code page (charset)
@@ -33,7 +22,7 @@ private:
 	::iconv_t conv_;
 	const Charset* srcCs_;
 	const Charset* destCs_;
-	static const IconvCharsetFactory* chFactory();
+	static const CharsetFactory* chFactory();
 public:
 	/**
 	 * Constructs new converter

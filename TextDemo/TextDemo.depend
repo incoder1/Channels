@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1381420203 source:d:\cpp\channel\textdemo\main.cpp
+1381427816 source:d:\cpp\channel\textdemo\main.cpp
+	<tchar.h>
+	"winwer.h"
 	<iostream>
 	<console.hpp>
-	<iconv_conv.hpp>
 	<readwrite.hpp>
 
 1380558992 d:\cpp\channel\include\console.hpp
@@ -1917,16 +1918,18 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1381420317 d:\cpp\channel\include\readwrite.hpp
+1381427806 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<charbuffers.hpp>
 	<convert.hpp>
 	<channels.hpp>
+	<ibm_icu_conv.hpp>
+	<iconv_conv.hpp>
 
 1381335777 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1381347567 d:\cpp\channel\include\convert.hpp
+1381427053 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>

@@ -6,6 +6,12 @@
 #include <convert.hpp>
 #include <channels.hpp>
 
+#if defined(CONV_ENGINE_IBM_ICU)
+#	include <ibm_icu_conv.hpp>
+#elif defined(CONV_ENGINE_ICONV)
+#	include <iconv_conv.hpp>
+#endif // Con engine selection
+
 namespace io {
 
 template<class String>

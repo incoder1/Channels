@@ -1,11 +1,25 @@
+#ifndef UNICODE
+#	define UNICODE
+#endif
+#ifndef _UNICODE
+#	define _UNICODE
+#endif
+
+#if _MSC_VER
+#	include <tchar.h>
+#	include "winver.h"
+#endif
+
 // Only to handle exception if any
 #include <iostream>
-
 #include <console.hpp>
-#include <iconv_conv.hpp>
 #include <readwrite.hpp>
 
+#ifndef _MSC_VER
 int main(int argc, const char** argv)
+#else
+int _tmain(int argc, TCHAR *argv[])
+#endif
 {
 	typedef io::Writer<std::wstring> uwriter;
 	typedef io::Reader<std::wstring> ureader;
