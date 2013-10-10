@@ -19,6 +19,7 @@
 					<Add option="-fexceptions" />
 					<Add option="-fno-rtti" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
+					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add directory="../boost_1_54_0" />
 					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>
@@ -38,9 +39,11 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c++11" />
 					<Add option="-fexceptions" />
 					<Add option="-fno-rtti" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
+					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add directory="../boost_1_54_0" />
 					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>
@@ -65,17 +68,20 @@
 					<Add option="/EHsc" />
 					<Add option="/DCHANNEL_BUILD_DLL" />
 					<Add option="/DBOOST_ALL_NO_LIB" />
+					<Add option="/DCONV_ENGINE_IBM_ICU" />
 					<Add directory="../boost_1_54_0" />
+					<Add directory="../boost_1_54_0/icu/include" />
 				</Compiler>
 				<Linker>
 					<Add library="kernel32" />
+					<Add library="icuuc" />
+					<Add directory="../boost_1_54_0/icu/lib64" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-O2" />
 			<Add option="-Wall" />
-			<Add option="-DCONV_ENGINE_ICONV" />
 			<Add directory="include" />
 			<Add directory="../boost_1_54_0" />
 		</Compiler>
@@ -87,11 +93,19 @@
 		<Unit filename="include/console.hpp" />
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/file.hpp" />
-		<Unit filename="include/ibm_icu_conv.hpp" />
-		<Unit filename="include/iconv_conv.hpp" />
+		<Unit filename="include/ibm_icu_conv.hpp">
+			<Option target="ReleaseMSVC10" />
+		</Unit>
+		<Unit filename="include/iconv_conv.hpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+		</Unit>
 		<Unit filename="include/readwrite.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/convert.cpp" />
+		<Unit filename="src/ibm_icu_conv.cpp">
+			<Option target="ReleaseMSVC10" />
+		</Unit>
 		<Unit filename="src/iconv_conv.cpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
