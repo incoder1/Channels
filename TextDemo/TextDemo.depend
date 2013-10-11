@@ -1,15 +1,17 @@
 # depslib dependency file v1.0
-1381427816 source:d:\cpp\channel\textdemo\main.cpp
+1381514414 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
-	"winwer.h"
+	"winver.h"
 	<iostream>
 	<console.hpp>
 	<readwrite.hpp>
 
-1380558992 d:\cpp\channel\include\console.hpp
-	"channels_config.h"
-	"file.hpp"
+1381513938 d:\cpp\channel\include\console.hpp
 	<boost/noncopyable.hpp>
+	<boost/config.hpp>
+	<convert.hpp>
+	<channels_config.h>
+	<file.hpp>
 
 1381166611 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
@@ -1918,7 +1920,7 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1381427806 d:\cpp\channel\include\readwrite.hpp
+1381513832 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<charbuffers.hpp>
 	<convert.hpp>
@@ -1929,21 +1931,21 @@
 1381335777 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1381427053 d:\cpp\channel\include\convert.hpp
+1381512813 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
 	<bytebuffer.hpp>
+	<boost/unordered_map.hpp>
 	<stdexcept>
 
-1381419490 d:\cpp\channel\include\iconv_conv.hpp
-	<cstring>
+1381430056 d:\cpp\channel\include\iconv_conv.hpp
 	<string>
+	<cstring>
 	<cerrno>
 	<cstdio>
 	<convert.hpp>
 	<iconv.h>
-	<boost/unordered_map.hpp>
 
 1372792865 c:\mingw\msys\1.0\local\include\iconv.h
 	"iconv.h"
@@ -1957,10 +1959,15 @@
 1381171457 d:\cpp\channel\include\charset.hpp
 	<stdexcept>
 
-1380645393 d:\cpp\channel\include\ibm_icu_conv.hpp
-	"bytebuffer.hpp"
-	"charbuffers.hpp"
-	"charset.hpp"
+1381431611 d:\cpp\channel\include\ibm_icu_conv.hpp
+	<boost/unordered_map.hpp>
+	<convert.hpp>
+	<unicode/utypes.h>
+	<unicode/ucnv.h>
+	<unicode/ustring.h>
+	<unicode/uchar.h>
+	<unicode/uloc.h>
+	<unicode/unistr.h>
 
 1236014536 d:\cpp\boost_1_54_0\boost\make_shared.hpp
 	<boost/smart_ptr/make_shared.hpp>
@@ -4621,4 +4628,6 @@
 	<cstddef>
 	<deque>
 	<bitset>
+
+1379004752 d:\cpp\channel\textdemo\winver.h
 

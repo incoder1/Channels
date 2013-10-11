@@ -32,7 +32,9 @@ public:
 		conv_->convert(buff_,convBuff);
 		convBuff.flip();
 		String res;
-		res.append((const _TChar*)(&convBuff.position()), convBuff.length()/sizeof(_TChar));
+		const _TChar* start = (const _TChar*)(&convBuff.position());
+		const _TChar* end = (const _TChar*)(&convBuff.last());
+		res.append(start, end );
 		return res;
 	}
 private:

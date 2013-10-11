@@ -1,7 +1,6 @@
 # depslib dependency file v1.0
-1378232962 source:d:\cpp\channel\main.cpp
+1381510403 source:d:\cpp\channel\main.cpp
 	<channels_config.h>
-	<Windows.h>
 
 1381335500 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
@@ -1876,17 +1875,16 @@
 1381337585 source:d:\cpp\channel\src\windows_file.cpp
 	"file.hpp"
 
-1381419012 source:d:\cpp\channel\src\iconv_conv.cpp
+1381430428 source:d:\cpp\channel\src\iconv_conv.cpp
 	"iconv_conv.hpp"
 
-1381419490 d:\cpp\channel\include\iconv_conv.hpp
-	<cstring>
+1381430056 d:\cpp\channel\include\iconv_conv.hpp
 	<string>
+	<cstring>
 	<cerrno>
 	<cstdio>
 	<convert.hpp>
 	<iconv.h>
-	<boost/unordered_map.hpp>
 
 1381166611 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
@@ -2027,7 +2025,7 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1381430061 d:\cpp\channel\include\convert.hpp
+1381512813 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -2045,7 +2043,7 @@
 	<unicode/uloc.h>
 	<unicode/unistr.h>
 
-1381430019 source:d:\cpp\channel\src\convert.cpp
+1381510816 source:d:\cpp\channel\src\convert.cpp
 	"convert.hpp"
 
 1221737459 d:\cpp\boost_1_54_0\boost\unordered_map.hpp
@@ -4783,4 +4781,13 @@
 1369281714 d:\cpp\boost_1_54_0\icu\include\unicode\uloc.h
 	"unicode/utypes.h"
 	"unicode/uenum.h"
+
+1381516649 source:d:\cpp\channel\src\win32_conv.cpp
+	"win32_conv.hpp"
+
+1381516635 d:\cpp\channel\include\win32_conv.hpp
+	<boost/shared_ptr.hpp>
+	<boost/unordered_map.hpp>
+	<convert.hpp>
+	<Mlang.h>
 

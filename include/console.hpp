@@ -1,9 +1,12 @@
 #ifndef CONSOLE_HPP_INCLUDED
 #define CONSOLE_HPP_INCLUDED
 
-#include "channels_config.h"
-#include "file.hpp"
 #include <boost/noncopyable.hpp>
+#include <boost/config.hpp>
+#include <convert.hpp>
+
+#include <channels_config.h>
+#include <file.hpp>
 
 namespace io {
 
@@ -15,6 +18,10 @@ namespace io {
 class Console:private boost::noncopyable
 {
 	public:
+		static void setCharset(const Charset* charset) BOOST_NOEXCEPT {
+			::SetConsoleCP(charset->id());
+			::SetConsoleOutputCP(charset->id());
+		}
 		static PWriteChannel outChanell() throw(std::bad_alloc) {
 			return PWriteChannel(new FileChannel(::GetStdHandle(STD_OUTPUT_HANDLE)));
 		}
