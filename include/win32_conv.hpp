@@ -1,3 +1,7 @@
+#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#pragma once
+#endif
+
 #ifndef WIN32_CONV_HPP_INCLUDE
 #define WIN32_CONV_HPP_INCLUDE
 
@@ -5,6 +9,7 @@
 #include <boost/unordered_map.hpp>
 #include <convert.hpp>
 
+#include <Objbase.h>
 #include <Mlang.h>
 
 namespace io {
@@ -12,21 +17,15 @@ namespace io {
 class PMLang {
 private:
 	IMLangConvertCharset *ptr_;
+	inline void copyPtr(const PMLang& oth);
 public:
-	PMLang() BOOST_NOEXCEPT:
-		ptr_(NULL)
-	{}
-	void reset(IMLangConvertCharset *ptr) {
-		if(NULL == ptr_) {
-			ptr_ = ptr;
-		}
-	}
-	const IMLangConvertCharset* operator->() BOOST_NOEXCEPT {
-		return ptr_;
-	}
-	~PMLang() {
-		ptr_->Release();
-	}
+	PMLang() BOOST_NOEXCEPT;
+	PMLang(const PMLang& oth) BOOST_NOEXCEPT;
+	~PMLang();
+	const PMLang& operator=(const PMLang& oth) BOOST_NOEXCEPT;
+	inline void reset(IMLangConvertCharset *ptr) BOOST_NOEXCEPT;
+	inline IMLangConvertCharset* operator->() const BOOST_NOEXCEPT;
+	inline IMLangConvertCharset* operator&() const BOOST_NOEXCEPT;
 };
 
 /**
@@ -35,15 +34,20 @@ public:
 class CHANNEL_PUBLIC Win32Converter : public Converter
 {
 	public:
-		Win32Converter(const std::string& srcCt,const std::string& dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
+		Win32Converter(const Charset* srcCt,const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
 		~Win32Converter();
 		virtual const Charset* sourceCharset() const;
 		virtual const Charset* destinationCharset() const;
 		virtual void convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception);
 	private:
-		bool freeCom_;
+		HMODULE libMLang_;
+		bool freeCOM_;
+		const Charset* srcCt_;
+		const Charset* dstCt_;
 		PMLang mLang_;
 };
+
+PConverter CHANNEL_PUBLIC win32_converter(const std::string& src, const std::string& dst) throw(charset_exception);
 
 } // namespace io
 

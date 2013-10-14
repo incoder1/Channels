@@ -15,6 +15,7 @@
 #include <console.hpp>
 #include <readwrite.hpp>
 
+#include <win32_conv.hpp>
 
 #ifdef PLATFROM_WINDOWS
 const char* LOCALE_CH = "CP1251";
@@ -39,10 +40,10 @@ int _tmain(int argc, TCHAR *argv[])
 	typedef io::Writer<std::wstring> uwriter;
 	typedef io::Reader<std::wstring> ureader;
 	try {
-		uwriter out(io::Console::outChanell(), io::iconv_conv(UTF16,LOCALE_CH));
+		uwriter out(io::Console::outChanell(), io::win32_converter(UTF16,LOCALE_CH));
 		out.write(L"Hello World. Привет мир\n\r");
 		io::byte_buffer readBuff = io::new_byte_byffer(512);
-		ureader in(io::Console::inChanell(),readBuff,io::iconv_conv(LOCALE_CH,UTF16));
+		ureader in(io::Console::inChanell(),readBuff,io::win32_converter(LOCALE_CH,UTF16));
 		out.write(in.read());
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;

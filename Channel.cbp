@@ -25,6 +25,8 @@
 				</Compiler>
 				<Linker>
 					<Add library="iconv.dll" />
+					<Add library="kernel32" />
+					<Add library="Ole32" />
 					<Add directory="C:/MinGW/msys/1.0/local/lib" />
 					<Add directory="../boost_1_54_0/stage/gcc/lib" />
 				</Linker>
@@ -50,6 +52,7 @@
 				<Linker>
 					<Add option="-s" />
 					<Add library="iconv.dll" />
+					<Add library="Ole32" />
 					<Add directory="C:/MinGW/msys/1.0/local/lib" />
 					<Add directory="../boost_1_54_0/stage/gcc/lib" />
 				</Linker>
@@ -75,6 +78,7 @@
 				<Linker>
 					<Add library="kernel32" />
 					<Add library="icuuc" />
+					<Add library="Ole32" />
 					<Add directory="../boost_1_54_0/icu/lib64" />
 				</Linker>
 			</Target>
@@ -101,6 +105,7 @@
 			<Option target="ReleaseMinGW32" />
 		</Unit>
 		<Unit filename="include/readwrite.hpp" />
+		<Unit filename="include/win32_conv.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/convert.cpp" />
 		<Unit filename="src/ibm_icu_conv.cpp">
@@ -113,7 +118,9 @@
 		<Unit filename="src/unix_file.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="src/win32_conv.cpp" />
 		<Unit filename="src/windows_file.cpp" />
+		<Unit filename="test.txt" />
 		<Extensions>
 			<code_completion />
 			<envvars />

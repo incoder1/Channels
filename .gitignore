@@ -2,5 +2,7 @@
 /bin
 /Demo/bin
 /Demo/obj
+/TextDemo/bin
+/TextDemo/obj
 **.save
 Result.txt

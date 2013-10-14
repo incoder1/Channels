@@ -2033,7 +2033,7 @@
 	<boost/unordered_map.hpp>
 	<stdexcept>
 
-1381431101 d:\cpp\channel\include\ibm_icu_conv.hpp
+1381431611 d:\cpp\channel\include\ibm_icu_conv.hpp
 	<boost/unordered_map.hpp>
 	<convert.hpp>
 	<unicode/utypes.h>
@@ -4649,7 +4649,7 @@
 	<deque>
 	<bitset>
 
-1381431083 source:d:\cpp\channel\src\ibm_icu_conv.cpp
+1381431689 source:d:\cpp\channel\src\ibm_icu_conv.cpp
 	"ibm_icu_conv.hpp"
 
 1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\utypes.h
@@ -4782,12 +4782,31 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1381516649 source:d:\cpp\channel\src\win32_conv.cpp
+1381771278 source:d:\cpp\channel\src\win32_conv.cpp
 	"win32_conv.hpp"
 
-1381516635 d:\cpp\channel\include\win32_conv.hpp
+1381773052 d:\cpp\channel\include\win32_conv.hpp
 	<boost/shared_ptr.hpp>
 	<boost/unordered_map.hpp>
 	<convert.hpp>
+	<Objbase.h>
 	<Mlang.h>
+
+1381771429 source:d:\cpp\channel\src\mlang.cpp
+	<rpc.h>
+	<rpcndr.h>
+	<guiddef.h>
+	<guiddef.h>
+
+1381773045 d:\cpp\channel\include\mlang.h
+	<rpc.h>
+	<rpcndr.h>
+	<Specstrings.h>
+	"unknwn.h"
+
+1381773578 source:d:\cpp\channel\src\mlang_i.c
+	<rpc.h>
+	<rpcndr.h>
+	<guiddef.h>
+	<guiddef.h>
 
