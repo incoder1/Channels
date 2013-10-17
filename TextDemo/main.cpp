@@ -1,3 +1,5 @@
+// In case of Microsoft VC recode this file using UTF-16LE
+// to enable Unicode string literals in cl
 #ifndef UNICODE
 #	define UNICODE
 #endif
@@ -41,9 +43,10 @@ int _tmain(int argc, TCHAR *argv[])
 	typedef io::Reader<std::wstring> ureader;
 	try {
 		uwriter out(io::Console::outChanell(), io::win32_converter(UTF16,LOCALE_CH));
-		out.write(L"Hello World. Привет мир\n\r");
+		out.write(L"Hello world English version. Привет мир, русская верссия\n\r");
 		io::byte_buffer readBuff = io::new_byte_byffer(512);
 		ureader in(io::Console::inChanell(),readBuff,io::win32_converter(LOCALE_CH,UTF16));
+		out.write(L"Type something :> ");
 		out.write(in.read());
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;

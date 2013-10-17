@@ -6,8 +6,18 @@
 #include <convert.hpp>
 #include <channels.hpp>
 
+#if !defined(CONV_ENGINE_MLANG) && !defined(CONV_ENGINE_IBM_ICU) && !defined(CONV_ENGINE_ICONV)
+#	ifdef PLATFROM_WINDOWS
+#		define CONV_ENGINE_MLANG // use MS M Lang on Windows, comes with IE uses COM
+#	else
+#		define CONV_ENGINE_ICONV // Unix, use libiconv cause it is POSIX
+#	endif //
+#endif // default platform engine
+
 #if defined(CONV_ENGINE_IBM_ICU)
 #	include <ibm_icu_conv.hpp>
+#elif defined(CONV_ENGINE_MLANG)
+#	include <win32_conv.hpp>
 #elif defined(CONV_ENGINE_ICONV)
 #	include <iconv_conv.hpp>
 #endif // Con engine selection
@@ -55,9 +65,9 @@ public:
 	void write(const String& str) throw(io_exception,charset_exception) {
 		size_t sourceBytesSize = str.length()*sizeof(_TChar);
 		byte_buffer srcBytes = new_byte_byffer(sourceBytesSize);
-		const size_t destCharSize = conv_->destinationCharset()->charSize();
 		srcBytes.put((uint8_t*)(str.data()), sourceBytesSize);
 		srcBytes.flip();
+		const size_t destCharSize = conv_->destinationCharset()->charSize();
 		byte_buffer convBytes = new_byte_byffer(str.length()*destCharSize);
 		conv_->convert(srcBytes, convBytes);
 		convBytes.flip();

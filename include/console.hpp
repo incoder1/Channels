@@ -1,11 +1,11 @@
 #ifndef CONSOLE_HPP_INCLUDED
 #define CONSOLE_HPP_INCLUDED
 
+#include <channels_config.h>
+
 #include <boost/noncopyable.hpp>
 #include <boost/config.hpp>
 #include <convert.hpp>
-
-#include <channels_config.h>
 #include <file.hpp>
 
 namespace io {

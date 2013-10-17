@@ -18,7 +18,9 @@
 */
 /* @@MIDL_FILE_HEADING(  ) */
 
-#pragma warning( disable: 4049 )  /* more than 64k source lines */
+#if defined(_MSC_VER) && (_MSC_VER >= 1020)
+#	pragma warning( disable: 4049 )  /* more than 64k source lines */
+#endif // MS compiler
 
 
 #ifdef __cplusplus
@@ -32,11 +34,11 @@ extern "C"{
 #ifdef _MIDL_USE_GUIDDEF_
 
 #ifndef INITGUID
-#define INITGUID
-#include <guiddef.h>
-#undef INITGUID
+#	define INITGUID
+#	include <guiddef.h>
+#	undef INITGUID
 #else
-#include <guiddef.h>
+#	include <guiddef.h>
 #endif
 
 #define MIDL_DEFINE_GUID(type,name,l,w1,w2,b1,b2,b3,b4,b5,b6,b7,b8) \

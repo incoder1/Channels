@@ -1,37 +1,28 @@
 #include "convert.hpp"
+#include <iostream>
 
 namespace io {
 
-// charset_exception
-charset_exception::charset_exception(const std::string& message):
-	std::exception(),
-	msg_(message)
-{}
-
-const char* charset_exception::what() const BOOST_NOEXCEPT
-{
-	return msg_.c_str();
-}
 
 // Charset
 
-Charset::Charset(size_t id, const std::string& name, const size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW:
-id_(id),
+Charset::Charset(size_t id, const char* name, const size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW:
+	id_(id),
     name_(name),
     charSize_(charSize)
 {}
 
-const size_t Charset::id() const BOOST_NOEXCEPT_OR_NOTHROW
+const size_t Charset::id() const
 {
 	return id_;
 }
 
-const std::string Charset::name() const BOOST_NOEXCEPT_OR_NOTHROW
+const char* Charset::name() const
 {
 	return name_;
 }
 
-const size_t Charset::charSize() const BOOST_NOEXCEPT_OR_NOTHROW
+const size_t Charset::charSize() const
 {
 	return charSize_;
 }
@@ -95,7 +86,7 @@ inline std::pair< std::string, const Charset*> make_pair(const std::string& n, c
 	return std::make_pair(n,chs);
 }
 
-CharsetFactory::CharsetFactory() BOOST_NOEXCEPT:
+CharsetFactory::CharsetFactory() BOOST_NOEXCEPT_OR_NOTHROW:
 	charSets_()
 {
 	charSets_.insert(make_pair("ASCII",&ASCII));
@@ -145,14 +136,13 @@ CharsetFactory::CharsetFactory() BOOST_NOEXCEPT:
 	charSets_.insert(make_pair("KOI8-RU",&KOI8_RU));
 }
 
-const Charset* CharsetFactory::forName(const std::string& name) const
+const Charset* CharsetFactory::forName(const char* name) const
 {
-	Charset *result = NULL;
-	hash_table_t::const_iterator res = charSets_.find(name);
+	hash_table_t::const_iterator res = charSets_.find(std::string(name));
 	if(res != charSets_.end()) {
-		result = const_cast<Charset*>(res->second);
+		return res->second;
 	}
-	return result;
+	return NULL;
 }
 
 // Converter

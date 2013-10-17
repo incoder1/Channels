@@ -23,6 +23,8 @@
 					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>
 				<Linker>
+					<Add library="boost_system-mgw47-mt-d-1_54.dll" />
+					<Add library="boost_thread-mgw47-mt-d-1_54.dll" />
 					<Add directory="../bin/DebugMinWG32" />
 					<Add directory="C:/MinGW/msys/1.0/local/lib" />
 					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
@@ -56,13 +58,17 @@
 				<Compiler>
 					<Add option="/MDd" />
 					<Add option="/O2" />
+					<Add option="/W1" />
 					<Add option="/EHsc" />
 					<Add option="/DBOOST_ALL_NO_LIB" />
-					<Add option="/DCONV_ENGINE_IBM_ICU" />
-					<Add directory="../../boost_1_54_0/icu/include" />
 				</Compiler>
 				<Linker>
-					<Add directory="../../boost_1_54_0/icu/lib64" />
+					<Add library="ole32" />
+					<Add library="kernel32" />
+					<Add library="boost_system-vc100-mt-1_54" />
+					<Add library="boost_thread-vc100-mt-1_54" />
+					<Add directory="../bin/ReleaseMSVC10" />
+					<Add directory="../../boost_1_54_0/stage/msvc/lib" />
 				</Linker>
 			</Target>
 		</Build>

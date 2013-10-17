@@ -5,4 +5,6 @@
 /TextDemo/bin
 /TextDemo/obj
 **.save
+*.o
+*.obj
 Result.txt

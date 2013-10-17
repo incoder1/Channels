@@ -17,8 +17,14 @@ namespace io {
 class CHANNEL_PUBLIC Charset {
 private:
 	const size_t id_;
-	std::string name_;
+	const char* name_;
 	const size_t charSize_;
+private:
+	Charset(const Charset& c):id_(c.id_),name_(c.name_),charSize_(c.charSize_)
+	{}
+	const Charset& operator=(const Charset&) {
+		return *this;
+	}
 public:
 	/**
 	 * Constructs character set
@@ -29,22 +35,22 @@ public:
 	 *	\param charSize
 	 *		the size in bytes of single character in this character set
 	 */
-	explicit Charset(size_t id, const std::string& name, const size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW;
+	Charset(size_t id, const char* name, const size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
 	 * Returns code page identifier
 	 * \return code page identifier
 	 */
-	const size_t id() const BOOST_NOEXCEPT_OR_NOTHROW;
+	const size_t id() const;
 	/**
 	 * Returns unique name of character set
 	 * \return unique name of character set
 	 */
-	const std::string name() const BOOST_NOEXCEPT_OR_NOTHROW;
+	const char* name() const;
 	/**
 	 * Returns size in bytes of single character
 	 * \return size in bytes of single character
 	 */
-	const size_t charSize() const BOOST_NOEXCEPT_OR_NOTHROW;
+	const size_t charSize() const;
 	/**
 	 * Compare this charset with a pointer to the another.
 	 * \param oth
@@ -61,18 +67,26 @@ private:
 	hash_table_t charSets_;
 public:
 	CharsetFactory() BOOST_NOEXCEPT_OR_NOTHROW;
-	const Charset* forName(const std::string& name) const;
+	const Charset* forName(const char* name) const;
 };
 
 /**
  * ! \brief Exception of this type trowing when character set conversation fails.
  */
-class CHANNEL_PUBLIC charset_exception:public std::exception {
+class charset_exception:public std::exception {
 private:
 	const std::string msg_;
 public:
-	charset_exception(const std::string& message);
-	virtual const char* what() const BOOST_NOEXCEPT;
+	charset_exception(const std::string& message):
+		std::exception(),
+		msg_(message)
+	{}
+	~charset_exception() BOOST_NOEXCEPT_OR_NOTHROW
+	{}
+	virtual const char* what() const BOOST_NOEXCEPT_OR_NOTHROW
+	{
+		return msg_.c_str();
+	}
 };
 
 /**

@@ -6,7 +6,6 @@
 #include <cerrno>
 #include <cstdio>
 
-
 #include <convert.hpp>
 #include <iconv.h>
 
