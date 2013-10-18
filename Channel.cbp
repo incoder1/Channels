@@ -24,11 +24,7 @@
 					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>
 				<Linker>
-					<Add library="kernel32" />
-					<Add library="ole32" />
 					<Add library="iconv.dll" />
-					<Add library="boost_system-mgw47-mt-d-1_54.dll" />
-					<Add library="boost_thread-mgw47-mt-d-1_54.dll" />
 					<Add directory="C:/MinGW/msys/1.0/local/lib" />
 					<Add directory="../boost_1_54_0/stage/gcc/lib" />
 					<Add directory="mingw" />
@@ -44,19 +40,22 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=c++11" />
 					<Add option="-fexceptions" />
 					<Add option="-fno-rtti" />
+					<Add option="-msse" />
+					<Add option="-msse2" />
+					<Add option="-msse3" />
+					<Add option="-mssse3" />
+					<Add option="-mmmx" />
+					<Add option="-m3dnow" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add directory="../boost_1_54_0" />
 					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>
 				<Linker>
-					<Add library="kernel32" />
-					<Add library="ole32" />
 					<Add library="iconv.dll" />
-					<Add library="boost_system-mgw47-mt-1_54.dll" />
-					<Add library="boost_thread-mgw47-mt-1_54.dll" />
 					<Add directory="C:/MinGW/msys/1.0/local/lib" />
 					<Add directory="../boost_1_54_0/stage/gcc/lib" />
 				</Linker>
@@ -77,7 +76,7 @@
 					<Add option="/EHsc /Ob2 /Ox" />
 					<Add option="/DCHANNEL_BUILD_DLL" />
 					<Add option="/DBOOST_ALL_NO_LIB" />
-					<Add option="/DCONV_ENGINE_IBM_ICU" />
+					<Add option="/DCONV_ENGINE_MLANG" />
 					<Add directory="../boost_1_54_0" />
 					<Add directory="../boost_1_54_0/icu/include" />
 				</Compiler>
@@ -85,7 +84,6 @@
 					<Add library="kernel32" />
 					<Add library="ole32" />
 					<Add library="boost_system-vc100-mt-1_54" />
-					<Add library="boost_thread-vc100-mt-1_54" />
 					<Add directory="../boost_1_54_0/icu/lib64" />
 					<Add directory="../boost_1_54_0/stage/msvc/lib" />
 				</Linker>
@@ -105,27 +103,39 @@
 		<Unit filename="include/console.hpp" />
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/file.hpp" />
+		<Unit filename="include/ibm_icu_conv.hpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="include/iconv_conv.hpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
 		</Unit>
 		<Unit filename="include/readwrite.hpp" />
-		<Unit filename="include/win32_conv.hpp" />
+		<Unit filename="include/win32_conv.hpp">
+			<Option target="ReleaseMSVC10" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Unit filename="src/convert.cpp" />
 		<Unit filename="src/ibm_icu_conv.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="src/iconv_conv.cpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+		</Unit>
 		<Unit filename="src/mlang_i.c">
 			<Option compilerVar="CC" />
+			<Option target="ReleaseMSVC10" />
 		</Unit>
 		<Unit filename="src/unix_file.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="src/win32_conv.cpp" />
+		<Unit filename="src/win32_conv.cpp">
+			<Option target="ReleaseMSVC10" />
+		</Unit>
 		<Unit filename="src/windows_file.cpp" />
 		<Unit filename="test.txt">
-			<Option target="ReleaseMinGW32" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Extensions>
 			<code_completion />
