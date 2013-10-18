@@ -4,7 +4,7 @@ namespace io {
 
 // File
 File::File(const char* path) BOOST_NOEXCEPT_OR_NOTHROW:
-	path_(path)
+path_(path)
 {}
 
 bool File::create() const
@@ -63,17 +63,17 @@ PReadWriteChannel  File::openForReadWrite() throw(io_exception)
 
 // File Channel
 FileChannel::FileChannel(::FILE* file) BOOST_NOEXCEPT:
-	ReadWriteChannel(),
-	file_(file)
+ReadWriteChannel(),
+                 file_(file)
 {}
 
 size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 {
 	size_t result = ::read(
-		file_
-		reinterpret_cast<void*>(&buffer.position()),
-		buffer.capacity()
-		);
+	                    file_
+	                    reinterpret_cast<void*>(&buffer.position()),
+	                    buffer.capacity()
+	                );
 	buffer.move(result);
 	return result;
 }
@@ -81,10 +81,10 @@ size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 {
 	size_t result = ::write(
-		file_,
-		reinterpret_cast<void*>(&buffer.position()),
-		buffer.length(),
-		);
+	                    file_,
+	                    reinterpret_cast<void*>(&buffer.position()),
+	                    buffer.length(),
+	                );
 	return result;
 }
 

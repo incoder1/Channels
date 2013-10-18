@@ -7,7 +7,7 @@
 namespace io {
 
 File::File(const char* path) BOOST_NOEXCEPT_OR_NOTHROW:
-	path_(path)
+path_(path)
 {}
 
 bool File::create() const
@@ -69,8 +69,8 @@ PReadWriteChannel  File::openForReadWrite() throw(io_exception)
 
 // FileChannel
 FileChannel::FileChannel(HANDLE id):
-		ReadWriteChannel(),
-		id_(id)
+	ReadWriteChannel(),
+	id_(id)
 {}
 
 size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
@@ -79,7 +79,7 @@ size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 	if(!::ReadFile(id_,
 	               reinterpret_cast<void*>(&buffer.position()),
 	               buffer.capacity(),
-	              &result,
+	               &result,
 	               NULL)) {
 		throw io_exception("Read file error");
 	}

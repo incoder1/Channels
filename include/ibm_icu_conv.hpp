@@ -34,7 +34,7 @@ public:
 	 * \param destCs destination char set
 	 * \throw charset_exception if conversation is not possible
 	 */
-	ICUConverter(const std::string& sourceCharset,const std::string& destinationCharset) throw(charset_exception);
+	ICUConverter() BOOST_NOEXCEPT_OR_NOTHROW;
 
 	virtual const Charset* sourceCharset() const {
 		return srcCs_;

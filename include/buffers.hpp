@@ -104,7 +104,7 @@ private:
 	T* last_;
 	T* end_;
 protected:
-	explicit basic_buffer(boost::shared_array<T> data, T* const end) BOOST_NOEXCEPT_OR_NOTHROW:
+explicit basic_buffer(boost::shared_array<T> data, T* const end) BOOST_NOEXCEPT_OR_NOTHROW:
 	data_(data),
 	      position_(const_cast<T*>(data_.get())),
 	      last_(position_),

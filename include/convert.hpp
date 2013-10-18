@@ -37,7 +37,7 @@ public:
 	 */
 	Charset(size_t id, const char* name, const size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
-	 * Returns code page identifier
+	 * Returns code page identifier (the value is the same as Win32 API code page)
 	 * \return code page identifier
 	 */
 	const size_t id() const;
@@ -52,7 +52,7 @@ public:
 	 */
 	const size_t charSize() const;
 	/**
-	 * Compare this charset with a pointer to the another.
+	 * Compare this charset with a pointer to the another
 	 * \param oth
 	 *			constant pointer to the charset
 	 * \return whether charsets are equal. If {@code oth} is {@code nullptr} return false
@@ -83,28 +83,49 @@ public:
 	{}
 	~charset_exception() BOOST_NOEXCEPT_OR_NOTHROW
 	{}
-	virtual const char* what() const BOOST_NOEXCEPT_OR_NOTHROW
-	{
+	virtual const char* what() const BOOST_NOEXCEPT_OR_NOTHROW {
 		return msg_.c_str();
 	}
 };
+
+// Helper function used to throw char set error when expression
+inline void validate(bool expr, const std::string& msg) throw(charset_exception)
+{
+	if(expr) {
+		throw charset_exception(msg);
+	}
+}
 
 /**
  * ! \brief  Implementor of {@code Converter} should provide conversation from one character set into another
  */
 class CHANNEL_PUBLIC Converter {
+private:
+	const Charset* srcCt_;
+	const Charset* destCt_;
+protected:
+	Converter(const Charset* srcCt,const Charset* destCt) BOOST_NOEXCEPT_OR_NOTHROW:
+		srcCt_(srcCt),
+		destCt_(destCt)
+	{}
 public:
+
 	/**
 	 * Returns source character set
 	 * \return constant pointer to the source character set
 	 */
-	virtual const Charset* sourceCharset() const = 0;
+	const Charset* sourceCharset()
+	{
+		return srcCt_;
+	}
 
 	/**
 	 * Returns destination character set
 	 * \return constant pointer to the destination character set
 	 */
-	virtual const Charset* destinationCharset() const = 0;
+	const Charset* destinationCharset() {
+		return destCt_;
+	}
 
 	/**
 	 * Converting character sequence from source character set into destination charter set
@@ -128,6 +149,46 @@ public:
  * {@link Reader} or {@link Writer}.
  */
 typedef boost::shared_ptr<Converter> PConverter;
+
+
+/* should be done with configure
+#if !defined(CONV_ENGINE_MLANG) && !defined(CONV_ENGINE_IBM_ICU) && !defined(CONV_ENGINE_ICONV)
+#	ifdef PLATFROM_WINDOWS
+#		define CONV_ENGINE_MLANG // use MS M Lang on Windows, comes with IE uses COM
+#	else
+#		define CONV_ENGINE_ICONV // Unix, use libiconv cause it is POSIX
+#	endif //
+#endif // default platform engine
+*/
+
+// Detecting engine
+#ifdef CONV_ENGINE_ICONV
+	PConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(charset_exception);
+#elif defined(CONV_ENGINE_IBM_ICU)
+	PConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(charset_exception);
+#else
+	PConverter CHANNEL_PUBLIC win32_converter(const char* src, const char* dst) throw(charset_exception);
+#endif // conv engine selection
+
+/**
+ * Creates new char set converter with current character set (code page) converting engine
+ * \param src
+ *			name of source character set
+ * \param dst
+ *			name of destination character set
+ *	\return smart pointer to the converter
+ *	\throw  charset_exception
+ *				if conversation is not supported by engine, or engine can not be created
+ */
+inline PConverter new_converter(const char* src, const char* dst) throw(charset_exception) {
+#ifdef CONV_ENGINE_ICONV
+	return iconv_conv(src,dst);
+#elif defined(CONV_ENGINE_IBM_ICU)
+	return icu_conv(src,dst);
+#else
+	return win32_converter(src,dst);
+#endif // conv engine selection
+}
 
 } // namespace io
 

@@ -6,22 +6,6 @@
 #include <convert.hpp>
 #include <channels.hpp>
 
-#if !defined(CONV_ENGINE_MLANG) && !defined(CONV_ENGINE_IBM_ICU) && !defined(CONV_ENGINE_ICONV)
-#	ifdef PLATFROM_WINDOWS
-#		define CONV_ENGINE_MLANG // use MS M Lang on Windows, comes with IE uses COM
-#	else
-#		define CONV_ENGINE_ICONV // Unix, use libiconv cause it is POSIX
-#	endif //
-#endif // default platform engine
-
-#if defined(CONV_ENGINE_IBM_ICU)
-#	include <ibm_icu_conv.hpp>
-#elif defined(CONV_ENGINE_MLANG)
-#	include <win32_conv.hpp>
-#elif defined(CONV_ENGINE_ICONV)
-#	include <iconv_conv.hpp>
-#endif // Con engine selection
-
 namespace io {
 
 template<class String>
@@ -29,10 +13,10 @@ class Reader {
 private:
 	typedef typename String::value_type _TChar;
 public:
-	Reader(PReadChannel src, const byte_buffer& buff,PConverter conv) BOOST_NOEXCEPT:
-		src_(src),
-		buff_(buff),
-		conv_(conv)
+Reader(PReadChannel src, const byte_buffer& buff,PConverter conv) BOOST_NOEXCEPT:
+	src_(src),
+	     buff_(buff),
+	     conv_(conv)
 	{}
 	String read() throw(io_exception,charset_exception) {
 		buff_.clear();
@@ -58,9 +42,9 @@ class Writer {
 private:
 	typedef typename String::value_type _TChar;
 public:
-	Writer(PWriteChannel out,PConverter conv) BOOST_NOEXCEPT:
-		out_(out),
-		conv_(conv)
+Writer(PWriteChannel out,PConverter conv) BOOST_NOEXCEPT:
+	out_(out),
+	     conv_(conv)
 	{}
 	void write(const String& str) throw(io_exception,charset_exception) {
 		size_t sourceBytesSize = str.length()*sizeof(_TChar);

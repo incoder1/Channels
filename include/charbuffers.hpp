@@ -92,9 +92,9 @@ public:
 	 * \param alloc_functor functor for allocating memory
 	 * \param free_functor functor for free allocated memory
 	 */
-	char_buffer_allocator(const alloc_functor_t& alloc_functor, free_functor_t free_functor) BOOST_NOEXCEPT:
-		alloc_functor_(alloc_functor),
-		free_functor_(free_functor)
+char_buffer_allocator(const alloc_functor_t& alloc_functor, free_functor_t free_functor) BOOST_NOEXCEPT:
+	alloc_functor_(alloc_functor),
+	               free_functor_(free_functor)
 	{}
 	/**
 	 * Allocates new character buffer
@@ -167,9 +167,10 @@ inline char_buffer<_CharT> wrap_stl_str(const std::basic_string<_CharT>& str) th
 }
 
 template<typename _CharT>
-inline char_buffer<_CharT> new_char_buff(size_t capacity) throw(std::bad_alloc) {
-	boost::function<_CharT* (size_t) throw(std::bad_alloc)> alloc(new_alloc<_CharT>);
-	boost::function<void (_CharT*) throw()> free(delete_free<_CharT>);
+inline char_buffer<_CharT> new_char_buff(size_t capacity) throw(std::bad_alloc)
+{
+	boost::function<_CharT* (size_t)> alloc(new_alloc<_CharT>);
+	boost::function<void (_CharT*)> free(delete_free<_CharT>);
 	char_buffer_allocator<_CharT> all(alloc,free);
 	return all.allocate(capacity);
 }

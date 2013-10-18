@@ -13,8 +13,8 @@ class byte_buffer_allocator;
 
 class byte_buffer:public basic_buffer<uint8_t> {
 private:
-	byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp) BOOST_NOEXCEPT:
-		basic_buffer<uint8_t>(data,endp)
+byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp) BOOST_NOEXCEPT:
+	basic_buffer<uint8_t>(data,endp)
 	{}
 	friend class byte_buffer_allocator;
 public:
@@ -31,8 +31,7 @@ public:
 		return basic_buffer<uint8_t>::put(begin, end);
 	}
 
-	inline size_t put(const std::vector<uint8_t>& v)
-	{
+	inline size_t put(const std::vector<uint8_t>& v) {
 		std::vector<uint8_t>::const_iterator b = v.begin();
 		std::vector<uint8_t>::const_iterator e = v.end();
 		return basic_buffer<uint8_t>::put(b,e);
@@ -63,9 +62,9 @@ public:
 	 * \param alloc_functor functor for allocating memory
 	 * \param free_functor functor for free allocated memory
 	 */
-	byte_buffer_allocator(alloc_functor_t alloc_functor,free_functor_t free_functor) BOOST_NOEXCEPT:
-			alloc_functor_(alloc_functor),
-			free_functor_(free_functor)
+byte_buffer_allocator(alloc_functor_t alloc_functor,free_functor_t free_functor) BOOST_NOEXCEPT:
+	alloc_functor_(alloc_functor),
+	               free_functor_(free_functor)
 	{}
 	byte_buffer allocate(size_t capacity) const throw(std::bad_alloc) {
 		uint8_t* data = alloc_functor_(capacity);

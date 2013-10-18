@@ -7,7 +7,7 @@ namespace io {
 // Charset
 
 Charset::Charset(size_t id, const char* name, const size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW:
-	id_(id),
+id_(id),
     name_(name),
     charSize_(charSize)
 {}
@@ -87,46 +87,46 @@ inline std::pair< std::string, const Charset*> make_pair(const std::string& n, c
 }
 
 CharsetFactory::CharsetFactory() BOOST_NOEXCEPT_OR_NOTHROW:
-	charSets_()
+charSets_()
 {
 	charSets_.insert(make_pair("ASCII",&ASCII));
-    charSets_.insert(make_pair("UTF-8",&UTF_8));
-    charSets_.insert(make_pair("UTF-16LE",&UTF_16LE));
-    charSets_.insert(make_pair("UCS-2",&UTF_16LE));
-    charSets_.insert(make_pair("UCS-2BE",&UTF_16BE));
-    charSets_.insert(make_pair("UCS-2LE",&UTF_16LE));
-    charSets_.insert(make_pair("UCS-4",&UTF_32LE));
-    charSets_.insert(make_pair("UCS-4BE",&UTF_32BE));
-    charSets_.insert(make_pair("UCS-4LE",&UTF_32LE));
-    charSets_.insert(make_pair("UTF-16",&UTF_16LE));
-    charSets_.insert(make_pair("UTF-16BE",&UTF_16BE));
-    charSets_.insert(make_pair("UTF-16LE",&UTF_16LE));
-    charSets_.insert(make_pair("UTF-32",&UTF_32LE));
-    charSets_.insert(make_pair("UTF-32BE",&UTF_32BE));
-    charSets_.insert(make_pair("UTF32-LE",&UTF_32LE));
-    charSets_.insert(make_pair("UTF-7", &UTF_7));
-    charSets_.insert(make_pair("CP1250",&CP_1250));
-    charSets_.insert(make_pair("CP1251",&CP_1251));
-    charSets_.insert(make_pair("CP1252",&CP_1252));
-    charSets_.insert(make_pair("CP1253",&CP_1253));
-    charSets_.insert(make_pair("CP1254",&CP_1254));
-    charSets_.insert(make_pair("CP1255",&CP_1255));
-    charSets_.insert(make_pair("CP1256",&CP_1256));
-    charSets_.insert(make_pair("CP1257",&CP_1257));
-    charSets_.insert(make_pair("CP1258",&CP_1258));
+	charSets_.insert(make_pair("UTF-8",&UTF_8));
+	charSets_.insert(make_pair("UTF-16LE",&UTF_16LE));
+	charSets_.insert(make_pair("UCS-2",&UTF_16LE));
+	charSets_.insert(make_pair("UCS-2BE",&UTF_16BE));
+	charSets_.insert(make_pair("UCS-2LE",&UTF_16LE));
+	charSets_.insert(make_pair("UCS-4",&UTF_32LE));
+	charSets_.insert(make_pair("UCS-4BE",&UTF_32BE));
+	charSets_.insert(make_pair("UCS-4LE",&UTF_32LE));
+	charSets_.insert(make_pair("UTF-16",&UTF_16LE));
+	charSets_.insert(make_pair("UTF-16BE",&UTF_16BE));
+	charSets_.insert(make_pair("UTF-16LE",&UTF_16LE));
+	charSets_.insert(make_pair("UTF-32",&UTF_32LE));
+	charSets_.insert(make_pair("UTF-32BE",&UTF_32BE));
+	charSets_.insert(make_pair("UTF32-LE",&UTF_32LE));
+	charSets_.insert(make_pair("UTF-7", &UTF_7));
+	charSets_.insert(make_pair("CP1250",&CP_1250));
+	charSets_.insert(make_pair("CP1251",&CP_1251));
+	charSets_.insert(make_pair("CP1252",&CP_1252));
+	charSets_.insert(make_pair("CP1253",&CP_1253));
+	charSets_.insert(make_pair("CP1254",&CP_1254));
+	charSets_.insert(make_pair("CP1255",&CP_1255));
+	charSets_.insert(make_pair("CP1256",&CP_1256));
+	charSets_.insert(make_pair("CP1257",&CP_1257));
+	charSets_.insert(make_pair("CP1258",&CP_1258));
 
-    charSets_.insert(make_pair("ISO-8859-1", &ISO_8859_1));
-    charSets_.insert(make_pair("ISO-8859-2", &ISO_8859_2));
-    charSets_.insert(make_pair("ISO-8859-3", &ISO_8859_3));
-    charSets_.insert(make_pair("ISO-8859-4", &ISO_8859_4));
-    charSets_.insert(make_pair("ISO-8859-5", &ISO_8859_5));
-    charSets_.insert(make_pair("ISO-8859-6", &ISO_8859_6));
-    charSets_.insert(make_pair("ISO-8859-7", &ISO_8859_7));
-    charSets_.insert(make_pair("ISO-8859-8", &ISO_8859_8));
-    charSets_.insert(make_pair("ISO-8859-9", &ISO_8859_9));
-    charSets_.insert(make_pair("ISO-8859-10", &ISO_8859_10));
-    charSets_.insert(make_pair("ISO-8859-11", &ISO_8859_11));
-    charSets_.insert(make_pair("ISO-8859-12", &ISO_8859_12));
+	charSets_.insert(make_pair("ISO-8859-1", &ISO_8859_1));
+	charSets_.insert(make_pair("ISO-8859-2", &ISO_8859_2));
+	charSets_.insert(make_pair("ISO-8859-3", &ISO_8859_3));
+	charSets_.insert(make_pair("ISO-8859-4", &ISO_8859_4));
+	charSets_.insert(make_pair("ISO-8859-5", &ISO_8859_5));
+	charSets_.insert(make_pair("ISO-8859-6", &ISO_8859_6));
+	charSets_.insert(make_pair("ISO-8859-7", &ISO_8859_7));
+	charSets_.insert(make_pair("ISO-8859-8", &ISO_8859_8));
+	charSets_.insert(make_pair("ISO-8859-9", &ISO_8859_9));
+	charSets_.insert(make_pair("ISO-8859-10", &ISO_8859_10));
+	charSets_.insert(make_pair("ISO-8859-11", &ISO_8859_11));
+	charSets_.insert(make_pair("ISO-8859-12", &ISO_8859_12));
 	charSets_.insert(make_pair("ISO-8859-13", &ISO_8859_13));
 	charSets_.insert(make_pair("ISO-8859-14", &ISO_8859_14));
 	charSets_.insert(make_pair("ISO-8859-15", &ISO_8859_15));

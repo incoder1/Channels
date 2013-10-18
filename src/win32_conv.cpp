@@ -24,13 +24,8 @@ MLangEngine::~MLangEngine()
 	}
 }
 
-inline void validate(bool expr, const std::string& msg) throw(charset_exception) {
-	if(expr) {
-		throw charset_exception(msg);
-	}
-}
-
-inline void validate_charset(const Charset* ch, const std::string& name) throw(charset_exception) {
+inline void validate_charset(const Charset* ch, const std::string& name) throw(charset_exception)
+{
 	validate(NULL == ch, name + " is not provided by MLang converter");
 }
 
@@ -39,7 +34,8 @@ inline void validate_engine(HRESULT status) throw(charset_exception)
 	validate(FAILED(status),"Can not construct MLang Engine instance");
 }
 
-PMLang MLangEngine::createConveter(const Charset *src, const Charset *dst) const throw(charset_exception) {
+PMLang MLangEngine::createConveter(const Charset *src, const Charset *dst) const throw(charset_exception)
+{
 	::IMLangConvertCharset *cvt = NULL;
 	HRESULT status = ::CoCreateInstance(CLSID_CMLangConvertCharset, NULL, CLSCTX_INPROC_SERVER, IID_IMLangConvertCharset,(void**)(&cvt));
 	validate_engine(status);
@@ -49,7 +45,7 @@ PMLang MLangEngine::createConveter(const Charset *src, const Charset *dst) const
 }
 
 PMLang::PMLang(IMLangConvertCharset* cvt) BOOST_NOEXCEPT:
-	ptr_(cvt)
+ptr_(cvt)
 {}
 
 inline void PMLang::copyPtr(const PMLang& oth)
@@ -65,7 +61,8 @@ PMLang::PMLang(const PMLang& oth)
 	copyPtr(oth);
 }
 
-const PMLang& PMLang::operator=(const PMLang& oth) {
+const PMLang& PMLang::operator=(const PMLang& oth)
+{
 	copyPtr(oth);
 	return *this;
 }
@@ -93,9 +90,8 @@ PConverter win32_converter(const char* src, const char* dst) throw(charset_excep
 }
 
 Win32Converter::Win32Converter(PMLang engine,const Charset* srcCt,const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW:
-		 engine_(engine),
-         srcCt_(srcCt),
-         dstCt_(dstCt)
+		Converter(srcCt,dstCt),
+		engine_(engine)
 {}
 
 void Win32Converter::convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception)
@@ -109,16 +105,6 @@ void Win32Converter::convert(const byte_buffer& src, byte_buffer& dest) throw(ch
 	// calc size of char buffer, and move it
 	size_t offset = dest.capacity() - avail;
 	dest.move(0 != offset ? offset: dest.capacity() - 1);
-}
-
-const Charset* Win32Converter::sourceCharset() const
-{
-	return srcCt_;
-}
-
-const Charset* Win32Converter::destinationCharset() const
-{
-	return dstCt_;
 }
 
 Win32Converter::~Win32Converter()

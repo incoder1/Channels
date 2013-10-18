@@ -16,8 +16,7 @@ namespace io  {
 /**
  * ! \brief Abstraction for representing file. File system only, no sockets, devices etc.
 */
-class CHANNEL_PUBLIC File
-{
+class CHANNEL_PUBLIC File {
 private:
 	const char* path_;
 public:

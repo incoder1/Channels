@@ -2,7 +2,7 @@
 1381510403 source:d:\cpp\channel\main.cpp
 	<channels_config.h>
 
-1381335500 d:\cpp\channel\include\buffers.hpp
+1382114099 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1823,7 +1823,7 @@
 	<functional>
 	<new>
 
-1381335777 d:\cpp\channel\include\charbuffers.hpp
+1382119184 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
 1374162328 d:\cpp\channel\include\charsetconverter.hpp
@@ -1834,7 +1834,7 @@
 	<iostream>
 	<Windows.h>
 
-1381336809 d:\cpp\channel\include\bytebuffer.hpp
+1382114099 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1859,26 +1859,26 @@
 	<time.h>
 	<wchar.h>
 
-1381167384 d:\cpp\channel\include\channels.hpp
+1382114099 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
 	<bytebuffer.hpp>
 
-1380637698 d:\cpp\channel\include\file.hpp
+1382114099 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"channels.hpp"
 	<unistd.h>
 	<sys/types.h>
 	<sys/stat.h>
 
-1381337585 source:d:\cpp\channel\src\windows_file.cpp
+1382114099 source:d:\cpp\channel\src\windows_file.cpp
 	"file.hpp"
 
-1381430428 source:d:\cpp\channel\src\iconv_conv.cpp
+1382118455 source:d:\cpp\channel\src\iconv_conv.cpp
 	"iconv_conv.hpp"
 
-1381430056 d:\cpp\channel\include\iconv_conv.hpp
+1382118441 d:\cpp\channel\include\iconv_conv.hpp
 	<string>
 	<cstring>
 	<cerrno>
@@ -2025,7 +2025,7 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1382032951 d:\cpp\channel\include\convert.hpp
+1382118585 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -2043,7 +2043,7 @@
 	<unicode/uloc.h>
 	<unicode/unistr.h>
 
-1382034468 source:d:\cpp\channel\src\convert.cpp
+1382114099 source:d:\cpp\channel\src\convert.cpp
 	"convert.hpp"
 	<iostream>
 
@@ -4783,10 +4783,10 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1382034376 source:d:\cpp\channel\src\win32_conv.cpp
+1382118576 source:d:\cpp\channel\src\win32_conv.cpp
 	"win32_conv.hpp"
 
-1382034503 d:\cpp\channel\include\win32_conv.hpp
+1382118554 d:\cpp\channel\include\win32_conv.hpp
 	<convert.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/noncopyable.hpp>
@@ -4807,7 +4807,7 @@
 	<Specstrings.h>
 	"unknwn.h"
 
-1382020691 source:d:\cpp\channel\src\mlang_i.c
+1382114037 source:d:\cpp\channel\src\mlang_i.c
 	<rpc.h>
 	<rpcndr.h>
 	<guiddef.h>
@@ -5756,4 +5756,39 @@
 1355581441 d:\cpp\boost_1_54_0\boost\atomic\detail\type-classification.hpp
 	<boost/atomic/detail/config.hpp>
 	<boost/type_traits/is_integral.hpp>
+
+1382119283 source:d:\cpp\channel\src\cstax.cpp
+	"cstax.hpp"
+
+1382119223 d:\cpp\channel\include\cstax.hpp
+	<charbuffers.hpp>
+	<readwrite.hpp>
+	<stack>
+	<boost/unordered_set.hpp>
+	<boost/shared_ptr.hpp>
+
+1382116285 d:\cpp\channel\include\readwrite.hpp
+	<stdexcept>
+	<charbuffers.hpp>
+	<convert.hpp>
+	<channels.hpp>
+
+1221737459 d:\cpp\boost_1_54_0\boost\unordered_set.hpp
+	<boost/unordered/unordered_set.hpp>
+
+1368742542 d:\cpp\boost_1_54_0\boost\unordered\unordered_set.hpp
+	<boost/unordered/unordered_set_fwd.hpp>
+	<boost/unordered/detail/equivalent.hpp>
+	<boost/unordered/detail/unique.hpp>
+	<boost/unordered/detail/util.hpp>
+	<boost/functional/hash.hpp>
+	<boost/move/move.hpp>
+	<initializer_list>
+
+1336082721 d:\cpp\boost_1_54_0\boost\unordered\unordered_set_fwd.hpp
+	<boost/config.hpp>
+	<memory>
+	<functional>
+	<boost/functional/hash_fwd.hpp>
+	<boost/unordered/detail/fwd.hpp>
 

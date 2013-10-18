@@ -11,6 +11,35 @@
 
 namespace io {
 
+class IconvEngine {
+private:
+	mutable ::iconv_t conv_;
+	inline void swap(const IconvEngine& c) {
+		conv_ = c.conv_;
+		c.conv_ = NULL;
+	}
+public:
+	explicit IconvEngine(::iconv_t conv) BOOST_NOEXCEPT_OR_NOTHROW:
+		conv_(conv)
+	{}
+	~IconvEngine() {
+		if(NULL != conv_) {
+			::iconv_close(conv_);
+		}
+	}
+	IconvEngine(const IconvEngine& c) BOOST_NOEXCEPT_OR_NOTHROW {
+		swap(c);
+	}
+	const IconvEngine& operator=(const IconvEngine& c) BOOST_NOEXCEPT_OR_NOTHROW {
+		swap(c);
+		return *this;
+	}
+	inline size_t conv(char** src, size_t *srclen, char **dstptr, size_t *avail) const
+	{
+		return ::iconv(conv_, src, srclen, dstptr, avail);
+	}
+};
+
 /**
  * ! \brief Converts string representing in byte sequence from one code page (charset)
  *  to the another.
@@ -18,31 +47,9 @@ namespace io {
  */
 class CHANNEL_PUBLIC IconvConverter:public Converter {
 private:
-	::iconv_t conv_;
-	const Charset* srcCs_;
-	const Charset* destCs_;
-	static const CharsetFactory* chFactory();
+	IconvEngine engine_;
 public:
-	/**
-	 * Constructs new converter
-	 * \param srcCs source char set
-	 * \param destCs destination char set
-	 * \throw charset_exception if conversation is not possible
-	 */
-	IconvConverter(const std::string& sourceCharset,const std::string& destinationCharset) throw(charset_exception);
-
-	virtual const Charset* sourceCharset() const {
-		return srcCs_;
-	}
-
-	virtual const Charset* destinationCharset() const {
-		return destCs_;
-	}
-
-	/**
-	 * Frees resources allocated by converter
-	 */
-	virtual ~IconvConverter();
+	IconvConverter(const IconvEngine& engine, const Charset* srcCt, const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**
 	 * Converting character sequence from source character set into destination charter set
@@ -51,11 +58,6 @@ public:
 	 */
 	virtual void convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);
 };
-
-inline PConverter iconv_conv(const std::string& sourceCharset,const std::string& destinationCharset)
-{
-	return io::PConverter(new io::IconvConverter(sourceCharset, destinationCharset));
-}
 
 } // namespace io
 #endif // __INCONV_CONV_HPP_INCLUDED

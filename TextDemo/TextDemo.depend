@@ -1,13 +1,12 @@
 # depslib dependency file v1.0
-1382034320 source:d:\cpp\channel\textdemo\main.cpp
+1382120466 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
 	<console.hpp>
 	<readwrite.hpp>
-	<win32_conv.hpp>
 
-1382025963 d:\cpp\channel\include\console.hpp
+1382114099 d:\cpp\channel\include\console.hpp
 	<channels_config.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -18,14 +17,14 @@
 	<unistd.h>
 	<windows.h>
 
-1380637698 d:\cpp\channel\include\file.hpp
+1382114099 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"channels.hpp"
 	<unistd.h>
 	<sys/types.h>
 	<sys/stat.h>
 
-1381167384 d:\cpp\channel\include\channels.hpp
+1382114099 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
@@ -1340,7 +1339,7 @@
 
 1355254521 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\operator_bool.hpp
 
-1381336809 d:\cpp\channel\include\bytebuffer.hpp
+1382114099 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1631,7 +1630,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1381335500 d:\cpp\channel\include\buffers.hpp
+1382114099 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1921,19 +1920,16 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1382029994 d:\cpp\channel\include\readwrite.hpp
+1382116285 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<charbuffers.hpp>
 	<convert.hpp>
 	<channels.hpp>
-	<ibm_icu_conv.hpp>
-	<win32_conv.hpp>
-	<iconv_conv.hpp>
 
-1381335777 d:\cpp\channel\include\charbuffers.hpp
+1382119184 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1382032951 d:\cpp\channel\include\convert.hpp
+1382118585 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -4633,7 +4629,7 @@
 
 1379004752 d:\cpp\channel\textdemo\winver.h
 
-1382034503 d:\cpp\channel\include\win32_conv.hpp
+1382118554 d:\cpp\channel\include\win32_conv.hpp
 	<convert.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/noncopyable.hpp>

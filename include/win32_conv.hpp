@@ -30,8 +30,7 @@ public:
 };
 
 // Singleton for allocating COM and MLang DLL library (really have to be a singleton)
-class MLangEngine:private boost::noncopyable
-{
+class MLangEngine:private boost::noncopyable {
 private:
 	HMODULE libMLang_;
 	bool freeCOM_;
@@ -57,21 +56,17 @@ public:
 /**
  * ! \brief Microsoft MLang (Internet Explorer component) based converter
  */
-class CHANNEL_PUBLIC Win32Converter : public Converter
-{
-	public:
-		Win32Converter(PMLang engine,const Charset* srcCt,const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
-		~Win32Converter();
-		virtual const Charset* sourceCharset() const;
-		virtual const Charset* destinationCharset() const;
-		virtual void convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception);
-	private:
-		PMLang engine_;
-		const Charset* srcCt_;
-		const Charset* dstCt_;
+class CHANNEL_PUBLIC Win32Converter : public Converter {
+public:
+	Win32Converter(PMLang engine,const Charset* srcCt,const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
+	~Win32Converter();
+	virtual void convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception);
+private:
+	PMLang engine_;
+	const Charset* srcCt_;
+	const Charset* dstCt_;
 };
 
-PConverter CHANNEL_PUBLIC win32_converter(const char* src, const char* dst) throw(charset_exception);
 
 } // namespace io
 

@@ -9,17 +9,18 @@
 
 #if _MSC_VER
 #	include <tchar.h>
-#	include "winver.h"
 #endif
+
+#ifdef _WIN32
+#	include "winver.h"
+#endif // _WIN32
 
 // Only to handle exception if any
 #include <iostream>
 #include <console.hpp>
 #include <readwrite.hpp>
 
-#include <win32_conv.hpp>
-
-#ifdef PLATFROM_WINDOWS
+#ifdef _WIN32
 const char* LOCALE_CH = "CP1251";
 const char* UTF16 = "UTF-16LE";
 #else
@@ -42,10 +43,10 @@ int _tmain(int argc, TCHAR *argv[])
 	typedef io::Writer<std::wstring> uwriter;
 	typedef io::Reader<std::wstring> ureader;
 	try {
-		uwriter out(io::Console::outChanell(), io::win32_converter(UTF16,LOCALE_CH));
+		uwriter out(io::Console::outChanell(), io::new_converter(UTF16,LOCALE_CH));
 		out.write(L"Hello world English version. Привет мир, русская верссия\n\r");
 		io::byte_buffer readBuff = io::new_byte_byffer(512);
-		ureader in(io::Console::inChanell(),readBuff,io::win32_converter(LOCALE_CH,UTF16));
+		ureader in(io::Console::inChanell(),readBuff,io::new_converter(LOCALE_CH,UTF16));
 		out.write(L"Type something :> ");
 		out.write(in.read());
 	} catch(std::exception &e) {

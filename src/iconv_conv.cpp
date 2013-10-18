@@ -3,43 +3,32 @@
 namespace io {
 
 
-const CharsetFactory* IconvConverter::chFactory()
+inline void validate_charset(const Charset* ch, const std::string& name) throw(charset_exception)
 {
-	static CharsetFactory factory;
-	return &factory;
+	validate(NULL == ch, name + " is not provided by iconv converter");
 }
+
+PConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(charset_exception)
+{
+	static CharsetFactory chFactory;
+	const Charset* srcCt = chFactory.forName(src);
+	validate_charset(srcCt, src);
+	const Charset* destCt = chFactory.forName(dst);
+	validate_charset(destCt, dst);
+	validate(srcCt->equal(destCt),"Source character set is equal destination, no conversation needed");
+	::iconv_allocation_t* descrpt = new iconv_allocation_t;
+	int result = ::iconv_open_into(destCt->name(), srcCt->name(), descrpt);
+	validate(result == -1, "Can not construct iconv engine instance");
+	IconvEngine engine((::iconv_t)descrpt);
+	return PConverter(new IconvConverter(engine, srcCt, destCt) );
+}
+
 
 // IconvConverter
-IconvConverter::IconvConverter(const std::string& src,const std::string& dst) throw(charset_exception):
-		  Converter(),
-          conv_(NULL),
-          srcCs_(NULL),
-          destCs_(NULL)
-{
-	if(src == dst) {
-		throw charset_exception("Source character set is equal destination, no conversation needed");
-	}
-	srcCs_ = IconvConverter::chFactory()->forName(src);
-	if(NULL == srcCs_) {
-		throw charset_exception(src+" is not provided by iconv converter");
-	}
-	destCs_ = IconvConverter::chFactory()->forName(dst);
-	if(NULL == srcCs_) {
-		throw charset_exception(dst+" is not provided by iconv converter");
-	}
-
-	::iconv_allocation_t* descrpt = new iconv_allocation_t;
-	int result = ::iconv_open_into( destCs_->name().c_str(), srcCs_->name().c_str(), descrpt);
-	if(result == -1) {
-		throw charset_exception("Can't build iconv converter");
-	}
-	conv_ =  (::iconv_t)descrpt;
-}
-
-IconvConverter::~IconvConverter()
-{
-	::iconv_close(conv_);
-}
+IconvConverter::IconvConverter(const IconvEngine& engine, const Charset* srcCt, const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW:
+		  Converter(srcCt,dstCt),
+		  engine_(engine)
+{}
 
 void IconvConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception)
 {
@@ -47,7 +36,7 @@ void IconvConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(cha
 	char *dstptr = reinterpret_cast<char*>(&dest.position());
 	size_t srclen = src.length();
 	size_t avail = dest.capacity();
-	size_t iconvValue = ::iconv(conv_, &itptr, &srclen, &dstptr, &avail);
+	size_t iconvValue = engine_.conv(&itptr, &srclen, &dstptr, &avail);
 	if(iconvValue == ((size_t)-1)) {
 		switch (errno) {
 			/* See "man 3 iconv" for an explanation. */
@@ -63,7 +52,7 @@ void IconvConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(cha
 	}
 	// calc size of char buffer, and move it
 	size_t offset = dest.capacity() - avail;
-	dest.move(offset);
+	dest.move(0 != offset ? offset: dest.capacity() - 1);
 }
 
 } // namespace io

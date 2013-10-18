@@ -1,17 +1,12 @@
 #ifndef CSTAX_HPP_INCLUDED
 #define CSTAX_HPP_INCLUDED
 
-#include <charbuffers.hpp>
 #include <readwrite.hpp>
 
 #include <stack>
 
 #include <boost/unordered_set.hpp>
 #include <boost/shared_ptr.hpp>
-
-#ifndef NOEXCEPT
-#	define NOEXCEPT BOOST_NOEXCEPT_OR_NOTHROW
-#endif
 
 namespace cstax {
 
@@ -54,7 +49,7 @@ class XMLEvent {
 private:
 	XMLEvenType type_;
 protected:
-	XMLEvent(const XMLEvenType& type) NOEXCEPT:
+	XMLEvent(const XMLEvenType& type) BOOST_NOEXCEPT_OR_NOTHROW:
 		type_(type)
 	{}
 public:
@@ -71,7 +66,7 @@ private:
 	std::wstring uri_;
 	std::wstring localName_;
 protected:
-	ElementEvent(const std::wstring uri, const std::wstring& localName) NOEXCEPT:
+	ElementEvent(const std::wstring uri, const std::wstring& localName) BOOST_NOEXCEPT_OR_NOTHROW:
 		uri_(uri),
 		localName_(localName)
 	{}
@@ -87,7 +82,7 @@ public:
 
 class StartElementEvent:public virtual XMLEvent,public ElementEvent {
 public:
-	StartElementEvent(const std::wstring& uri, const std::wstring& localName) NOEXCEPT:
+	StartElementEvent(const std::wstring& uri, const std::wstring& localName) BOOST_NOEXCEPT_OR_NOTHROW:
 		XMLEvent(START_ELEMENT),
 		ElementEvent(uri, localName)
 	{}
@@ -95,7 +90,7 @@ public:
 
 class EndElementEvent:public virtual XMLEvent,public ElementEvent {
 public:
-	EndElementEvent(const std::wstring& uri, const std::wstring& localName) NOEXCEPT:
+	EndElementEvent(const std::wstring& uri, const std::wstring& localName) BOOST_NOEXCEPT_OR_NOTHROW:
 		XMLEvent(END_ELEMENT),
 		ElementEvent(uri, localName)
 	{}
@@ -105,7 +100,7 @@ class AttributeEvent:public XMLEvent {
 private:
 	Attribute attr_;
 public:
-	AttributeEvent(const Attribute& attr) NOEXCEPT:
+	AttributeEvent(const Attribute& attr) BOOST_NOEXCEPT_OR_NOTHROW:
 		XMLEvent(ATTRIBUTE),
 		attr_(attr)
 	{}
@@ -129,34 +124,28 @@ public:
 
 class xml_stream_exception:virtual std::runtime_error {
 public:
-	xml_stream_exception(const std::string& msg) NOEXCEPT:
+	xml_stream_exception(const std::string& msg) BOOST_NOEXCEPT_OR_NOTHROW:
 		std::runtime_error(msg)
-	{
-	}
+	{}
 };
 
 class XMLSource {
 public:
 	typedef io::char_buffer<wchar_t> ubuff;
-	typedef io::Reader< io::conveter<wchar_t> > UTFReader;
+	//typedef io::Reader< io::conveter<wchar_t> > UTFReader;
 private:
-	UTFReader src_;
-	XMLSource(UTFReader& source) NOEXCEPT:
-		src_(source)
-	{}
+//	UTFReader src_;
+//	XMLSource(UTFReader& source) BOOST_NOEXCEPT_OR_NOTHROW:
+//		src_(source)
+//	{}
 public:
-	static XMLSource fromChannel(io::PReadChannel channel, io::charset_t charset, size_t buffSize) throw(io::io_exception) {
-		io::byte_buffer byteBuff = io::new_byte_byffer(buffSize*sizeof(wchar_t));
-		io::conveter<wchar_t> conv(charset,io::UCS_2);
-		UTFReader reader(channel, byteBuff, conv);
-		return XMLSource(reader);
-	}
 	inline size_t read(ubuff& buff) throw(xml_stream_exception) {
-		try {
-			return src_.read(buff);
-		} catch(io::io_exception& e) {
-			throw xml_stream_exception("IO error");
-		}
+//		try {
+//			return src_.read(buff);
+//		} catch(io::io_exception& e) {
+//			throw xml_stream_exception("IO error");
+//		}
+	return 0;
 	}
 };
 
@@ -168,7 +157,7 @@ private:
 	XMLSyntax syntax_;
 public:
 	typedef boost::shared_ptr<XMLEvent> PXMLEvent;
-	StreamReader(const XMLSource& source,size_t buffSize) NOEXCEPT;
+	StreamReader(const XMLSource& source,size_t buffSize) BOOST_NOEXCEPT_OR_NOTHROW;
 	PXMLEvent next() throw(xml_stream_exception);
 	PXMLEvent nextTag() throw(xml_stream_exception);
 	bool hasNext() throw(xml_stream_exception);

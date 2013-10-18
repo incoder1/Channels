@@ -15,22 +15,21 @@ namespace io {
  * ! \brief Factory for obtaining channels for windows standard streams.
  *  Standard in, out and error stream supported.
  */
-class Console:private boost::noncopyable
-{
-	public:
-		static void setCharset(const Charset* charset) BOOST_NOEXCEPT {
-			::SetConsoleCP(charset->id());
-			::SetConsoleOutputCP(charset->id());
-		}
-		static PWriteChannel outChanell() throw(std::bad_alloc) {
-			return PWriteChannel(new FileChannel(::GetStdHandle(STD_OUTPUT_HANDLE)));
-		}
-		static PReadChannel inChanell() throw(std::bad_alloc) {
-			return PReadChannel(new FileChannel(::GetStdHandle(STD_INPUT_HANDLE)));
-		}
-		static PWriteChannel errChanell() throw(std::bad_alloc) {
-			return PWriteChannel(new FileChannel(::GetStdHandle(STD_ERROR_HANDLE)));
-		}
+class Console:private boost::noncopyable {
+public:
+	static void setCharset(const Charset* charset) BOOST_NOEXCEPT {
+		::SetConsoleCP(charset->id());
+		::SetConsoleOutputCP(charset->id());
+	}
+	static PWriteChannel outChanell() throw(std::bad_alloc) {
+		return PWriteChannel(new FileChannel(::GetStdHandle(STD_OUTPUT_HANDLE)));
+	}
+	static PReadChannel inChanell() throw(std::bad_alloc) {
+		return PReadChannel(new FileChannel(::GetStdHandle(STD_INPUT_HANDLE)));
+	}
+	static PWriteChannel errChanell() throw(std::bad_alloc) {
+		return PWriteChannel(new FileChannel(::GetStdHandle(STD_ERROR_HANDLE)));
+	}
 };
 #endif // PLATFROM_WINDOWS
 
@@ -39,18 +38,17 @@ class Console:private boost::noncopyable
  * ! \brief Factory for obtaining channels for UNIX standard streams.
  *  Standard in, out and error stream supported.
  */
-class Console:private boost::noncopyable
-{
-	public:
-		static PWriteChannel outChanell() throw(std::bad_alloc) {
-			return PWriteChannel(new FileChannel(stdout));
-		}
-		static PReadChannel inChanell() throw(std::bad_alloc) {
-			return PReadChannel(new FileChannel(stdin));
-		}
-		static PWriteChannel errChanell() throw(std::bad_alloc) {
-			return PWriteChannel(new FileChannel(stderr));
-		}
+class Console:private boost::noncopyable {
+public:
+	static PWriteChannel outChanell() throw(std::bad_alloc) {
+		return PWriteChannel(new FileChannel(stdout));
+	}
+	static PReadChannel inChanell() throw(std::bad_alloc) {
+		return PReadChannel(new FileChannel(stdin));
+	}
+	static PWriteChannel errChanell() throw(std::bad_alloc) {
+		return PWriteChannel(new FileChannel(stderr));
+	}
 };
 #endif // PLATFORM_UNIX
 

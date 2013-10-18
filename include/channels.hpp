@@ -14,7 +14,7 @@ private:
 	const char* what_;
 public:
 	explicit io_exception(const char* what):
-			std::runtime_error(what)
+		std::runtime_error(what)
 	{}
 };
 
@@ -46,16 +46,15 @@ public:
 
 typedef boost::shared_ptr<WriteChannel> PWriteChannel;
 
-class CHANNEL_PUBLIC ReadWriteChannel:public ReadChannel,public WriteChannel
-{
+class CHANNEL_PUBLIC ReadWriteChannel:public ReadChannel,public WriteChannel {
 public:
 	enum MoveMethod {FROM_BEGIN = 0 , FROM_CURRENT_POSITION = 1, FROM_END = 2};
 private:
 	ReadWriteChannel(const ReadWriteChannel&);
 protected:
-	ReadWriteChannel() BOOST_NOEXCEPT:
-		ReadChannel(),
-		WriteChannel()
+ReadWriteChannel() BOOST_NOEXCEPT:
+	ReadChannel(),
+	            WriteChannel()
 	{}
 public:
 	/**
