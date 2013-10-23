@@ -33,7 +33,7 @@
 #	ifdef CHANNEL_BUILD_DLL
 #		define WIN32_LEAN_AND_MEAN
 #	endif // WIN32_LEAN_AND_MEAN
-
+#	include <winsock2.h>
 #	include <windows.h>
 
 // MSVC and MinGW

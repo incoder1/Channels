@@ -54,7 +54,7 @@ private:
 protected:
 ReadWriteChannel() BOOST_NOEXCEPT:
 	ReadChannel(),
-	            WriteChannel()
+	WriteChannel()
 	{}
 public:
 	/**
