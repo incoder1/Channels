@@ -36,7 +36,6 @@ public:
 		std::vector<uint8_t>::const_iterator e = v.end();
 		return basic_buffer<uint8_t>::put(b,e);
 	}
-
 };
 
 /**
@@ -72,7 +71,12 @@ byte_buffer_allocator(alloc_functor_t alloc_functor,free_functor_t free_functor)
 		boost::shared_array<uint8_t> array(data,free_functor_);
 		return byte_buffer(array, endp);
 	}
-
+	/**
+	 * Wraps buffer of any type into byte buffer
+	 * \param buff
+	 *			 buffer of any type
+	 * \return byte buffer
+	 */
 	template<typename T>
 	static byte_buffer wrap_buffer(const basic_buffer<T>& buff) {
 		buff.flip();

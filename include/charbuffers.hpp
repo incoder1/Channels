@@ -160,8 +160,8 @@ inline char_buffer<_CharT> wrap_cstr(const _CharT* str) throw(std::bad_alloc)
 template<typename _CharT>
 inline char_buffer<_CharT> wrap_stl_str(const std::basic_string<_CharT>& str) throw(std::bad_alloc)
 {
-	boost::function<_CharT* (size_t) throw(std::bad_alloc)> alloc(new_alloc<_CharT>);
-	boost::function<void (_CharT*) throw()> free(delete_free<_CharT>);
+	boost::function<_CharT* (size_t)> alloc(new_alloc<_CharT>);
+	boost::function<void (_CharT*)> free(delete_free<_CharT>);
 	char_buffer_allocator<_CharT> all(alloc,free);
 	return all.wrap(str);
 }

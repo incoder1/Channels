@@ -78,14 +78,62 @@
 					<Add option="/DBOOST_ALL_NO_LIB" />
 					<Add option="/DCONV_ENGINE_MLANG" />
 					<Add directory="../boost_1_54_0" />
-					<Add directory="../boost_1_54_0/icu/include" />
 				</Compiler>
 				<Linker>
 					<Add library="kernel32" />
 					<Add library="ole32" />
 					<Add library="boost_system-vc100-mt-1_54" />
+					<Add directory="../boost_1_54_0/stage/msvc/lib" />
+				</Linker>
+			</Target>
+			<Target title="ReleaseMSVC10-ICU">
+				<Option platforms="Windows;" />
+				<Option output="bin/ReleaseMSVC10-ICU/Channel" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/ReleaseMSVC10-ICU" />
+				<Option type="3" />
+				<Option compiler="msvc10" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Option projectLibDirsRelation="1" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/W2" />
+					<Add option="/Zc:wchar_t" />
+					<Add option="/EHsc /Ob2 /Ox" />
+					<Add option="/DCHANNEL_BUILD_DLL" />
+					<Add option="/DBOOST_ALL_NO_LIB" />
+					<Add option="/DCONV_ENGINE_IBM_ICU" />
+					<Add directory="../boost_1_54_0" />
+					<Add directory="../boost_1_54_0/icu/include" />
+				</Compiler>
+				<Linker>
+					<Add library="icuuc" />
 					<Add directory="../boost_1_54_0/icu/lib64" />
 					<Add directory="../boost_1_54_0/stage/msvc/lib" />
+				</Linker>
+			</Target>
+			<Target title="DebugMinGW32-ICU">
+				<Option platforms="Windows;" />
+				<Option output="bin/DebugMinWG32-ICU/Channel" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/DebugMinGW32-ICU/" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-fexceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-DCHANNEL_BUILD_DLL" />
+					<Add option="-DCONV_ENGINE_IBM_ICU" />
+					<Add directory="../boost_1_54_0" />
+					<Add directory="C:/MinGW/msys/1.0/local/include" />
+				</Compiler>
+				<Linker>
+					<Add library="c:\MinGW\msys\1.0\local\lib\icuuc.dll.a" />
+					<Add library="C:\MinGW\msys\1.0\local\lib\icudt.dll.a" />
+					<Add directory="C:/MinGW/msys/1.0/local/lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -104,7 +152,8 @@
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/file.hpp" />
 		<Unit filename="include/ibm_icu_conv.hpp">
-			<Option target="&lt;{~None~}&gt;" />
+			<Option target="ReleaseMSVC10-ICU" />
+			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="include/iconv_conv.hpp">
 			<Option target="DebugMinGW32" />
@@ -117,7 +166,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/convert.cpp" />
 		<Unit filename="src/ibm_icu_conv.cpp">
-			<Option target="&lt;{~None~}&gt;" />
+			<Option target="ReleaseMSVC10-ICU" />
+			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/iconv_conv.cpp">
 			<Option target="DebugMinGW32" />

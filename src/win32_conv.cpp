@@ -75,7 +75,7 @@ PMLang::~PMLang()
 }
 
 
-PConverter win32_converter(const char* src, const char* dst) throw(charset_exception)
+PConverter CHANNEL_PUBLIC win32_converter(const char* src, const char* dst) throw(charset_exception)
 {
 	static CharsetFactory chFactory;
 	const Charset* srcCt = chFactory.forName(src);

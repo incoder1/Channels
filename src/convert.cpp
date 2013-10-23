@@ -6,13 +6,22 @@ namespace io {
 
 // Charset
 
-Charset::Charset(size_t id, const char* name, const size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW:
-id_(id),
+Charset::Charset(size_t id, const char* name, const size_t charSize, bool isUnicode) BOOST_NOEXCEPT_OR_NOTHROW:
+	id_(id),
     name_(name),
-    charSize_(charSize)
+    charSize_(charSize),
+    unicode_(isUnicode)
 {}
 
-const size_t Charset::id() const
+
+Charset::Charset(size_t id, const char* name, const size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW:
+	id_(id),
+    name_(name),
+    charSize_(charSize),
+    unicode_(false)
+{}
+
+size_t Charset::id() const
 {
 	return id_;
 }
@@ -22,9 +31,14 @@ const char* Charset::name() const
 	return name_;
 }
 
-const size_t Charset::charSize() const
+size_t Charset::charSize() const
 {
 	return charSize_;
+}
+
+bool Charset::isUnicode() const
+{
+	return unicode_;
 }
 
 bool Charset::equal(const Charset* oth) const
@@ -39,12 +53,12 @@ bool Charset::equal(const Charset* oth) const
 // Charset constants
 
 // Unicode representation char-sets (the code page is same)
-static const Charset UTF_8(65001,"UTF-8",sizeof(uint8_t));
-static const Charset UTF_16LE(1200,"UTF-16LE",sizeof(uint16_t));
-static const Charset UTF_16BE(1201,"UTF-16BE",sizeof(uint16_t));
-static const Charset UTF_32BE(12001,"UTF-32BE",sizeof(uint32_t));
-static const Charset UTF_32LE(12000,"UTF-32LE",sizeof(uint32_t));
-static const Charset UTF_7(65000,"UTF-7",sizeof(uint8_t));
+static const Charset UTF_8(65001,"UTF-8",sizeof(uint8_t),true);
+static const Charset UTF_16LE(1200,"UTF-16LE",sizeof(uint16_t),true);
+static const Charset UTF_16BE(1201,"UTF-16BE",sizeof(uint16_t),true);
+static const Charset UTF_32BE(12001,"UTF-32BE",sizeof(uint32_t),true);
+static const Charset UTF_32LE(12000,"UTF-32LE",sizeof(uint32_t),true);
+static const Charset UTF_7(65000,"UTF-7",sizeof(uint8_t),true);
 
 // Single bytes char sets
 static const Charset ASCII(20127,"ASCII", sizeof(char));

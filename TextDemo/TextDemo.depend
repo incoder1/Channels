@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1382120466 source:d:\cpp\channel\textdemo\main.cpp
+1382432305 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
 	<console.hpp>
 	<readwrite.hpp>
 
-1382114099 d:\cpp\channel\include\console.hpp
+1382360687 d:\cpp\channel\include\console.hpp
 	<channels_config.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -1339,7 +1339,7 @@
 
 1355254521 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\operator_bool.hpp
 
-1382114099 d:\cpp\channel\include\bytebuffer.hpp
+1382377839 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1630,7 +1630,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1382114099 d:\cpp\channel\include\buffers.hpp
+1382377995 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1920,16 +1920,16 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1382116285 d:\cpp\channel\include\readwrite.hpp
+1382376516 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<charbuffers.hpp>
 	<convert.hpp>
 	<channels.hpp>
 
-1382119184 d:\cpp\channel\include\charbuffers.hpp
+1382362488 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1382118585 d:\cpp\channel\include\convert.hpp
+1382377052 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -5766,4 +5766,134 @@
 1355581441 d:\cpp\boost_1_54_0\boost\atomic\detail\type-classification.hpp
 	<boost/atomic/detail/config.hpp>
 	<boost/type_traits/is_integral.hpp>
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utypes.h
+	"unicode/umachine.h"
+	"unicode/uversion.h"
+	"unicode/uconfig.h"
+	<float.h>
+	"unicode/utf.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\umachine.h
+	"unicode/ptypes.h"
+	<stddef.h>
+	"unicode/urename.h"
+
+1382376317 c:\mingw\msys\1.0\local\include\unicode\ptypes.h
+	<stddef.h>
+	"unicode/platform.h"
+	<stdint.h>
+	<features.h>
+	<inttypes.h>
+
+1382376317 c:\mingw\msys\1.0\local\include\unicode\platform.h
+	"unicode/uconfig.h"
+	"unicode/uvernum.h"
+	<android/api-level.h>
+	<TargetConditionals.h>
+	<sys/isa_defs.h>
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uconfig.h
+	"uconfig_local.h"
+
+1382376326 c:\mingw\msys\1.0\local\include\unicode\uvernum.h
+
+1382376323 c:\mingw\msys\1.0\local\include\unicode\urename.h
+	"unicode/uconfig.h"
+	"unicode/umachine.h"
+	"unicode/uvernum.h"
+
+1382376326 c:\mingw\msys\1.0\local\include\unicode\uversion.h
+	"unicode/umachine.h"
+	"unicode/uvernum.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf.h
+	"unicode/umachine.h"
+	"unicode/utf8.h"
+	"unicode/utf16.h"
+	"unicode/utf_old.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf8.h
+	"unicode/umachine.h"
+	"unicode/utf.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf16.h
+	"unicode/umachine.h"
+	"unicode/utf.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf_old.h
+	"unicode/utf.h"
+	"unicode/utf8.h"
+	"unicode/utf16.h"
+
+1382376320 c:\mingw\msys\1.0\local\include\unicode\ucnv.h
+	"unicode/ucnv_err.h"
+	"unicode/uenum.h"
+	"unicode/localpointer.h"
+
+1382376320 c:\mingw\msys\1.0\local\include\unicode\ucnv_err.h
+	"unicode/utypes.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uenum.h
+	"unicode/utypes.h"
+	"unicode/localpointer.h"
+	"unicode/strenum.h"
+
+1382376316 c:\mingw\msys\1.0\local\include\unicode\localpointer.h
+	"unicode/utypes.h"
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\strenum.h
+	"unicode/uobject.h"
+	"unicode/unistr.h"
+
+1382376323 c:\mingw\msys\1.0\local\include\unicode\uobject.h
+	"unicode/utypes.h"
+
+1382376322 c:\mingw\msys\1.0\local\include\unicode\unistr.h
+	"unicode/utypes.h"
+	"unicode/rep.h"
+	"unicode/std_string.h"
+	"unicode/stringpiece.h"
+	"unicode/bytestream.h"
+	"unicode/ucasemap.h"
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\rep.h
+	"unicode/uobject.h"
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\std_string.h
+	"unicode/utypes.h"
+	<string>
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\stringpiece.h
+	"unicode/utypes.h"
+	"unicode/uobject.h"
+	"unicode/std_string.h"
+
+1382376314 c:\mingw\msys\1.0\local\include\unicode\bytestream.h
+	"unicode/utypes.h"
+	"unicode/uobject.h"
+	"unicode/std_string.h"
+
+1382376319 c:\mingw\msys\1.0\local\include\unicode\ucasemap.h
+	"unicode/utypes.h"
+	"unicode/ustring.h"
+	"unicode/localpointer.h"
+
+1382376324 c:\mingw\msys\1.0\local\include\unicode\ustring.h
+	"unicode/utypes.h"
+	"unicode/putil.h"
+	"unicode/uiter.h"
+
+1382376317 c:\mingw\msys\1.0\local\include\unicode\putil.h
+	"unicode/utypes.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uiter.h
+	"unicode/utypes.h"
+
+1382376319 c:\mingw\msys\1.0\local\include\unicode\uchar.h
+	"unicode/utypes.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uloc.h
+	"unicode/utypes.h"
+	"unicode/uenum.h"
 

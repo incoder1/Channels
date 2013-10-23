@@ -13,10 +13,10 @@ class Reader {
 private:
 	typedef typename String::value_type _TChar;
 public:
-Reader(PReadChannel src, const byte_buffer& buff,PConverter conv) BOOST_NOEXCEPT:
-	src_(src),
-	     buff_(buff),
-	     conv_(conv)
+	Reader(PReadChannel src, const byte_buffer& buff,PConverter conv) BOOST_NOEXCEPT_OR_NOTHROW:
+		src_(src),
+		buff_(buff),
+		conv_(conv)
 	{}
 	String read() throw(io_exception,charset_exception) {
 		buff_.clear();
@@ -42,16 +42,16 @@ class Writer {
 private:
 	typedef typename String::value_type _TChar;
 public:
-Writer(PWriteChannel out,PConverter conv) BOOST_NOEXCEPT:
-	out_(out),
-	     conv_(conv)
+	Writer(PWriteChannel out,PConverter conv) BOOST_NOEXCEPT_OR_NOTHROW:
+		out_(out),
+		conv_(conv)
 	{}
 	void write(const String& str) throw(io_exception,charset_exception) {
 		size_t sourceBytesSize = str.length()*sizeof(_TChar);
 		byte_buffer srcBytes = new_byte_byffer(sourceBytesSize);
 		srcBytes.put((uint8_t*)(str.data()), sourceBytesSize);
 		srcBytes.flip();
-		const size_t destCharSize = conv_->destinationCharset()->charSize();
+		const size_t destCharSize = conv_->destCharset()->charSize();
 		byte_buffer convBytes = new_byte_byffer(str.length()*destCharSize);
 		conv_->convert(srcBytes, convBytes);
 		convBytes.flip();

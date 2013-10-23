@@ -31,8 +31,8 @@ public:
 	typedef T&  reference;
 	typedef T*  pointer;
 
-explicit buffer_iterator(T* begin, T* const end, T* const position) BOOST_NOEXCEPT:
-	begin_(begin),
+	buffer_iterator(T* begin, T* const end, T* const position) BOOST_NOEXCEPT:
+		   begin_(begin),
 	       end_(end),
 	       position_(position)
 	{}
@@ -90,11 +90,10 @@ explicit buffer_iterator(T* begin, T* const end, T* const position) BOOST_NOEXCE
 };
 
 /**
- * ! \brief basic buffer template. Buffers is a wrappers on top of array
+ * ! \brief Basic buffer template. Buffers is a wrappers on top of array
  * Unlike vectors  buffers have a fixed size i.e. they can't grow.
- * Buffers also works like shared arrays
  * There is no [] operator or get function. Iterators are used instead
- * Data array allocated by allocator provided by template parameter.
+ * Array data type allocated by allocator provided by template parameter.
  */
 template<typename T>
 class basic_buffer {
@@ -104,8 +103,8 @@ private:
 	T* last_;
 	T* end_;
 protected:
-explicit basic_buffer(boost::shared_array<T> data, T* const end) BOOST_NOEXCEPT_OR_NOTHROW:
-	data_(data),
+	basic_buffer(boost::shared_array<T> data, T* const end) BOOST_NOEXCEPT_OR_NOTHROW:
+		  data_(data),
 	      position_(const_cast<T*>(data_.get())),
 	      last_(position_),
 	      end_(end)
@@ -157,10 +156,10 @@ public:
 	}
 
 	/**
-	 * Returns remaing elements possible to put
+	 * Returns remain elements possible to put
 	 * \return remaining elements count
 	 */
-	size_t remaing() const {
+	size_t remain() const {
 		return (end_-1) - last_;
 	}
 

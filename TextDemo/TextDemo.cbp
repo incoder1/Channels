@@ -10,6 +10,7 @@
 				<Option platforms="Windows;" />
 				<Option output="bin/DebugMinGW32/TextDemo" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/DebugMinGW32/" />
+				<Option additional_output="../bin/ReleaseMSVC10-ICU/Channel.lib;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -74,6 +75,55 @@
 					<Add library="boost_system-vc100-mt-1_54" />
 					<Add directory="../bin/ReleaseMSVC10" />
 					<Add directory="../../boost_1_54_0/stage/msvc/lib" />
+				</Linker>
+			</Target>
+			<Target title="ReleaseMSVC64-ICU">
+				<Option platforms="Windows;" />
+				<Option output="bin/ReleaseMSVC64-ICU/TextDemo" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/ReleaseMSVC64-ICU/" />
+				<Option type="1" />
+				<Option compiler="msvc10" />
+				<Compiler>
+					<Add option="/MDd" />
+					<Add option="/O2" />
+					<Add option="/W1" />
+					<Add option="/EHsc" />
+					<Add option="/DBOOST_ALL_NO_LIB" />
+					<Add option="/DCONV_ENGINE_IBM_ICU" />
+				</Compiler>
+				<Linker>
+					<Add library="icuuc" />
+					<Add directory="../bin/ReleaseMSVC10-ICU" />
+					<Add directory="../../boost_1_54_0/icu/lib64" />
+				</Linker>
+			</Target>
+			<Target title="DebugMinGW32-ICU">
+				<Option platforms="Windows;" />
+				<Option output="bin/DebugMinGW32-ICU/TextDemo" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/DebugMinGW32-ICU/" />
+				<Option additional_output="../bin/ReleaseMSVC10-ICU/Channel.lib;" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Winline" />
+					<Add option="-Wunreachable-code" />
+					<Add option="-pedantic-errors" />
+					<Add option="-std=c++11" />
+					<Add option="-g" />
+					<Add option="-fexceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-msse" />
+					<Add option="-msse2" />
+					<Add option="-msse3" />
+					<Add option="-mmmx" />
+					<Add option="-m3dnow" />
+					<Add option="-DCONV_ENGINE_IBM_ICU" />
+					<Add directory="C:/MinGW/msys/1.0/local/include" />
+				</Compiler>
+				<Linker>
+					<Add library="C:\MinGW\msys\1.0\local\lib\icudt.dll.a" />
+					<Add library="C:\MinGW\msys\1.0\local\lib\icuuc.dll.a" />
+					<Add directory="../bin/DebugMinWG32-ICU" />
 				</Linker>
 			</Target>
 		</Build>

@@ -3,7 +3,8 @@
 
 #define DEBUG_TMI 0  /* define to 1 to enable Too Much Information */
 
-#include <boost/unordered_map.hpp>
+#include <cstdio>
+
 #include <convert.hpp>
 
 #include <unicode/utypes.h>   /* Basic ICU data types */
@@ -15,6 +16,40 @@
 
 namespace io {
 
+class ICUEngine {
+private:
+	mutable ::UConverter* intoUTF16_;
+	mutable ::UConverter* fromUTF16_;
+	void swapPtr(const ICUEngine& c) {
+		intoUTF16_ = c.intoUTF16_;
+		fromUTF16_ = c.fromUTF16_;
+		c.intoUTF16_ = NULL;
+		c.fromUTF16_ = NULL;
+	}
+public:
+	ICUEngine(::UConverter* into, ::UConverter* from) BOOST_NOEXCEPT_OR_NOTHROW:
+		intoUTF16_(into),
+		fromUTF16_(from)
+	{}
+	ICUEngine(const ICUEngine& c) {
+		swapPtr(c);
+	}
+	const ICUEngine& operator=(const ICUEngine& c) {
+		swapPtr(c);
+		return *this;
+	}
+	~ICUEngine() {
+		if(NULL != intoUTF16_) {
+			::ucnv_close(intoUTF16_);
+		}
+		if(NULL != fromUTF16_) {
+			::ucnv_close(fromUTF16_);
+		}
+	}
+	UErrorCode toUnicode(const char* src, size_t srcLen, UChar* dst, size_t& aval) const;
+	UErrorCode fromUnicode(UChar* src, size_t srcLen, char* dst, size_t& aval) const;
+};
+
 /**
  * ! \brief Converts string representing in byte sequence from one code page (charset)
  *  to the another.
@@ -22,27 +57,17 @@ namespace io {
  */
 class CHANNEL_PUBLIC ICUConverter:public Converter {
 private:
-	UConverter *conv_;
-	UConverter *utf16c_;
-	const Charset* srcCs_;
-	const Charset* destCs_;
-	static const CharsetFactory* chFactory();
+	ICUEngine engine_;
+	void fromUnicode(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);
+	void intoUnicode(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);
 public:
 	/**
 	 * Constructs new converter
-	 * \param srcCs source char set
-	 * \param destCs destination char set
+	 * \param srcCt source char set
+	 * \param destCt destination char set
 	 * \throw charset_exception if conversation is not possible
 	 */
-	ICUConverter() BOOST_NOEXCEPT_OR_NOTHROW;
-
-	virtual const Charset* sourceCharset() const {
-		return srcCs_;
-	}
-
-	virtual const Charset* destinationCharset() const {
-		return destCs_;
-	}
+	ICUConverter(ICUEngine engine, const Charset *srcCt, const Charset *dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**
 	 * Frees resources allocated by converter

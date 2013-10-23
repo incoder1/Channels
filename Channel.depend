@@ -2,7 +2,7 @@
 1381510403 source:d:\cpp\channel\main.cpp
 	<channels_config.h>
 
-1382114099 d:\cpp\channel\include\buffers.hpp
+1382377995 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1823,7 +1823,7 @@
 	<functional>
 	<new>
 
-1382119184 d:\cpp\channel\include\charbuffers.hpp
+1382362488 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
 1374162328 d:\cpp\channel\include\charsetconverter.hpp
@@ -1834,7 +1834,7 @@
 	<iostream>
 	<Windows.h>
 
-1382114099 d:\cpp\channel\include\bytebuffer.hpp
+1382377839 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -2025,7 +2025,7 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1382118585 d:\cpp\channel\include\convert.hpp
+1382377052 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -2033,8 +2033,8 @@
 	<boost/unordered_map.hpp>
 	<stdexcept>
 
-1381431611 d:\cpp\channel\include\ibm_icu_conv.hpp
-	<boost/unordered_map.hpp>
+1382545978 d:\cpp\channel\include\ibm_icu_conv.hpp
+	<cstdio>
 	<convert.hpp>
 	<unicode/utypes.h>
 	<unicode/ucnv.h>
@@ -2043,7 +2043,7 @@
 	<unicode/uloc.h>
 	<unicode/unistr.h>
 
-1382114099 source:d:\cpp\channel\src\convert.cpp
+1382377117 source:d:\cpp\channel\src\convert.cpp
 	"convert.hpp"
 	<iostream>
 
@@ -4650,7 +4650,7 @@
 	<deque>
 	<bitset>
 
-1381431689 source:d:\cpp\channel\src\ibm_icu_conv.cpp
+1382545341 source:d:\cpp\channel\src\ibm_icu_conv.cpp
 	"ibm_icu_conv.hpp"
 
 1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\utypes.h
@@ -5791,4 +5791,134 @@
 	<functional>
 	<boost/functional/hash_fwd.hpp>
 	<boost/unordered/detail/fwd.hpp>
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utypes.h
+	"unicode/umachine.h"
+	"unicode/uversion.h"
+	"unicode/uconfig.h"
+	<float.h>
+	"unicode/utf.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\umachine.h
+	"unicode/ptypes.h"
+	<stddef.h>
+	"unicode/urename.h"
+
+1382376317 c:\mingw\msys\1.0\local\include\unicode\ptypes.h
+	<stddef.h>
+	"unicode/platform.h"
+	<stdint.h>
+	<features.h>
+	<inttypes.h>
+
+1382376317 c:\mingw\msys\1.0\local\include\unicode\platform.h
+	"unicode/uconfig.h"
+	"unicode/uvernum.h"
+	<android/api-level.h>
+	<TargetConditionals.h>
+	<sys/isa_defs.h>
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uconfig.h
+	"uconfig_local.h"
+
+1382376326 c:\mingw\msys\1.0\local\include\unicode\uvernum.h
+
+1382376323 c:\mingw\msys\1.0\local\include\unicode\urename.h
+	"unicode/uconfig.h"
+	"unicode/umachine.h"
+	"unicode/uvernum.h"
+
+1382376326 c:\mingw\msys\1.0\local\include\unicode\uversion.h
+	"unicode/umachine.h"
+	"unicode/uvernum.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf.h
+	"unicode/umachine.h"
+	"unicode/utf8.h"
+	"unicode/utf16.h"
+	"unicode/utf_old.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf8.h
+	"unicode/umachine.h"
+	"unicode/utf.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf16.h
+	"unicode/umachine.h"
+	"unicode/utf.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf_old.h
+	"unicode/utf.h"
+	"unicode/utf8.h"
+	"unicode/utf16.h"
+
+1382376320 c:\mingw\msys\1.0\local\include\unicode\ucnv.h
+	"unicode/ucnv_err.h"
+	"unicode/uenum.h"
+	"unicode/localpointer.h"
+
+1382376320 c:\mingw\msys\1.0\local\include\unicode\ucnv_err.h
+	"unicode/utypes.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uenum.h
+	"unicode/utypes.h"
+	"unicode/localpointer.h"
+	"unicode/strenum.h"
+
+1382376316 c:\mingw\msys\1.0\local\include\unicode\localpointer.h
+	"unicode/utypes.h"
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\strenum.h
+	"unicode/uobject.h"
+	"unicode/unistr.h"
+
+1382376323 c:\mingw\msys\1.0\local\include\unicode\uobject.h
+	"unicode/utypes.h"
+
+1382376322 c:\mingw\msys\1.0\local\include\unicode\unistr.h
+	"unicode/utypes.h"
+	"unicode/rep.h"
+	"unicode/std_string.h"
+	"unicode/stringpiece.h"
+	"unicode/bytestream.h"
+	"unicode/ucasemap.h"
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\rep.h
+	"unicode/uobject.h"
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\std_string.h
+	"unicode/utypes.h"
+	<string>
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\stringpiece.h
+	"unicode/utypes.h"
+	"unicode/uobject.h"
+	"unicode/std_string.h"
+
+1382376314 c:\mingw\msys\1.0\local\include\unicode\bytestream.h
+	"unicode/utypes.h"
+	"unicode/uobject.h"
+	"unicode/std_string.h"
+
+1382376319 c:\mingw\msys\1.0\local\include\unicode\ucasemap.h
+	"unicode/utypes.h"
+	"unicode/ustring.h"
+	"unicode/localpointer.h"
+
+1382376324 c:\mingw\msys\1.0\local\include\unicode\ustring.h
+	"unicode/utypes.h"
+	"unicode/putil.h"
+	"unicode/uiter.h"
+
+1382376317 c:\mingw\msys\1.0\local\include\unicode\putil.h
+	"unicode/utypes.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uiter.h
+	"unicode/utypes.h"
+
+1382376319 c:\mingw\msys\1.0\local\include\unicode\uchar.h
+	"unicode/utypes.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uloc.h
+	"unicode/utypes.h"
+	"unicode/uenum.h"
 
