@@ -34,10 +34,10 @@ void IconvConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(cha
 {
 	char *itptr = reinterpret_cast<char*>(&src.position());
 	char *dstptr = reinterpret_cast<char*>(&dest.position());
-	size_t srclen = src.length();
-	size_t avail = dest.capacity();
-	size_t iconvValue = engine_.conv(&itptr, &srclen, &dstptr, &avail);
-	if(iconvValue == ((size_t)-1)) {
+	std::size_t srclen = src.length();
+	std::size_t avail = dest.capacity();
+	std::size_t iconvValue = engine_.conv(&itptr, &srclen, &dstptr, &avail);
+	if(iconvValue == ((std::size_t)-1)) {
 		switch (errno) {
 			/* See "man 3 iconv" for an explanation. */
 		case EILSEQ:
@@ -51,7 +51,7 @@ void IconvConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(cha
 		}
 	}
 	// calc size of char buffer, and move it
-	size_t offset = dest.capacity() - avail;
+	std::size_t offset = dest.capacity() - avail;
 	dest.move(0 != offset ? offset: dest.capacity() - 1);
 }
 

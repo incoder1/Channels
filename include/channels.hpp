@@ -25,7 +25,7 @@ protected:
 	ReadChannel()
 	{}
 public:
-	virtual size_t read(byte_buffer& buffer) throw(io_exception) = 0;
+	virtual std::size_t read(byte_buffer& buffer) throw(io_exception) = 0;
 	virtual ~ReadChannel()
 	{}
 };
@@ -39,7 +39,7 @@ protected:
 	WriteChannel()
 	{}
 public:
-	virtual size_t write(const byte_buffer& buffer) throw(io_exception) = 0;
+	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception) = 0;
 	virtual ~WriteChannel()
 	{}
 };
@@ -62,7 +62,7 @@ public:
 	 * \param offset offset in bytes
 	 * \param method for moving
 	 */
-	virtual void seek(size_t offset, MoveMethod method) throw(io_exception) = 0;
+	virtual void seek(std::size_t offset, MoveMethod method) throw(io_exception) = 0;
 	virtual ~ReadWriteChannel()
 	{}
 };

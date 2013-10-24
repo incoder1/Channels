@@ -46,8 +46,8 @@ public:
 			::ucnv_close(fromUTF16_);
 		}
 	}
-	UErrorCode toUnicode(const char* src, size_t srcLen, UChar* dst, size_t& aval) const;
-	UErrorCode fromUnicode(UChar* src, size_t srcLen, char* dst, size_t& aval) const;
+	UErrorCode toUnicode(const char* src, std::size_t srcLen, UChar* dst, std::size_t& aval) const;
+	UErrorCode fromUnicode(UChar* src, std::size_t srcLen, char* dst, std::size_t& aval) const;
 };
 
 /**

@@ -103,7 +103,7 @@ void Win32Converter::convert(const byte_buffer& src, byte_buffer& dest) throw(ch
 	HRESULT status = engine_->DoConversion(srcptr, &srclen, dstptr, &avail);
 	validate(status != S_OK , "MLang character conversation failed");
 	// calc size of char buffer, and move it
-	size_t offset = dest.capacity() - avail;
+	std::size_t offset = dest.capacity() - avail;
 	dest.move(0 != offset ? offset: dest.capacity() - 1);
 }
 

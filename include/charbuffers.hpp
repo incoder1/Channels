@@ -44,7 +44,7 @@ public:
 	 * \param str C string to put
 	 */
 	void put(const T* str) {
-		size_t length = char_traits_t::length(str);
+		std::size_t length = char_traits_t::length(str);
 		T* b = const_cast<T*>(str);
 		T* e = const_cast<T*>(str+length);
 		put(b,e);
@@ -73,7 +73,7 @@ public:
 	/**
 	 * Type of functor to be used to allocate memory
 	 */
-	typedef boost::function<_CharT* (size_t)> alloc_functor_t;
+	typedef boost::function<_CharT* (std::size_t)> alloc_functor_t;
 	/**
 	 * Type of functor to be used to deallocate memory
 	 */
@@ -101,7 +101,7 @@ char_buffer_allocator(const alloc_functor_t& alloc_functor, free_functor_t free_
 	 * \param capacity - the buffer capacity
 	 * \return newly-created character buffer
 	 */
-	char_buffer_t allocate(size_t capacity) const throw(std::bad_alloc) {
+	char_buffer_t allocate(std::size_t capacity) const throw(std::bad_alloc) {
 		_CharT* data = alloc_functor_(capacity);
 		_CharT* const endp = data+capacity+1;
 		boost::shared_array<_CharT> array(data,free_functor_);
@@ -128,7 +128,7 @@ char_buffer_allocator(const alloc_functor_t& alloc_functor, free_functor_t free_
 	 * \return newly-created character buffer
 	 */
 	char_buffer_t wrap(const _CharT * str) throw(std::bad_alloc) {
-		size_t length = char_buffer_t::char_traits_t::length(str);
+		std::size_t length = char_buffer_t::char_traits_t::length(str);
 		char_buffer_t result = allocate(length);
 		result.put(str);
 		return result;
@@ -146,7 +146,7 @@ private:
 template<typename _CharT>
 inline char_buffer<_CharT> wrap_cstr(const _CharT* str) throw(std::bad_alloc)
 {
-	boost::function<_CharT* (size_t) throw(std::bad_alloc)> alloc(new_alloc<_CharT>);
+	boost::function<_CharT* (std::size_t) throw(std::bad_alloc)> alloc(new_alloc<_CharT>);
 	boost::function<void (_CharT*) throw()> free(delete_free<_CharT>);
 	char_buffer_allocator<_CharT> all(alloc,free);
 	return all.wrap(str);
@@ -160,16 +160,16 @@ inline char_buffer<_CharT> wrap_cstr(const _CharT* str) throw(std::bad_alloc)
 template<typename _CharT>
 inline char_buffer<_CharT> wrap_stl_str(const std::basic_string<_CharT>& str) throw(std::bad_alloc)
 {
-	boost::function<_CharT* (size_t)> alloc(new_alloc<_CharT>);
+	boost::function<_CharT* (std::size_t)> alloc(new_alloc<_CharT>);
 	boost::function<void (_CharT*)> free(delete_free<_CharT>);
 	char_buffer_allocator<_CharT> all(alloc,free);
 	return all.wrap(str);
 }
 
 template<typename _CharT>
-inline char_buffer<_CharT> new_char_buff(size_t capacity) throw(std::bad_alloc)
+inline char_buffer<_CharT> new_char_buff(std::size_t capacity) throw(std::bad_alloc)
 {
-	boost::function<_CharT* (size_t)> alloc(new_alloc<_CharT>);
+	boost::function<_CharT* (std::size_t)> alloc(new_alloc<_CharT>);
 	boost::function<void (_CharT*)> free(delete_free<_CharT>);
 	char_buffer_allocator<_CharT> all(alloc,free);
 	return all.allocate(capacity);

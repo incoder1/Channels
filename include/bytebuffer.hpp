@@ -19,19 +19,19 @@ private:
 	friend class byte_buffer_allocator;
 public:
 
-	inline size_t put(uint8_t e) {
+	inline std::size_t put(uint8_t e) {
 		return basic_buffer<uint8_t>::put(e);
 	}
 
-	inline size_t put(const uint8_t* arr, size_t size) {
+	inline std::size_t put(const uint8_t* arr, std::size_t size) {
 		return basic_buffer<uint8_t>::put(arr, size);
 	}
 
-	inline size_t put(uint8_t* begin, uint8_t* end) {
+	inline std::size_t put(uint8_t* begin, uint8_t* end) {
 		return basic_buffer<uint8_t>::put(begin, end);
 	}
 
-	inline size_t put(const std::vector<uint8_t>& v) {
+	inline std::size_t put(const std::vector<uint8_t>& v) {
 		std::vector<uint8_t>::const_iterator b = v.begin();
 		std::vector<uint8_t>::const_iterator e = v.end();
 		return basic_buffer<uint8_t>::put(b,e);
@@ -50,7 +50,7 @@ public:
 	/**
 	 * Type of functor to be used to allocate memory
 	 */
-	typedef boost::function<uint8_t* (size_t)> alloc_functor_t;
+	typedef boost::function<uint8_t* (std::size_t)> alloc_functor_t;
 	/**
 	 * Type of functor to be used to deallocate memory
 	 */
@@ -65,7 +65,7 @@ byte_buffer_allocator(alloc_functor_t alloc_functor,free_functor_t free_functor)
 	alloc_functor_(alloc_functor),
 	               free_functor_(free_functor)
 	{}
-	byte_buffer allocate(size_t capacity) const throw(std::bad_alloc) {
+	byte_buffer allocate(std::size_t capacity) const throw(std::bad_alloc) {
 		uint8_t* data = alloc_functor_(capacity);
 		uint8_t* const endp = data+capacity+1;
 		boost::shared_array<uint8_t> array(data,free_functor_);

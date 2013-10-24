@@ -67,9 +67,9 @@ ReadWriteChannel(),
                  file_(file)
 {}
 
-size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
+std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 {
-	size_t result = ::read(
+	std::size_t result = ::read(
 	                    file_
 	                    reinterpret_cast<void*>(&buffer.position()),
 	                    buffer.capacity()
@@ -78,9 +78,9 @@ size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 	return result;
 }
 
-size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
+std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 {
-	size_t result = ::write(
+	std::size_t result = ::write(
 	                    file_,
 	                    reinterpret_cast<void*>(&buffer.position()),
 	                    buffer.length(),

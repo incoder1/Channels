@@ -27,7 +27,7 @@ public:
 
 	typedef std::random_access_iterator_tag iterator_category;
 	typedef T  value_type;
-	typedef size_t difference_type;
+	typedef std::size_t difference_type;
 	typedef T&  reference;
 	typedef T*  pointer;
 
@@ -143,7 +143,7 @@ public:
 	 * position pointer would be moved into the buffer last element.
 	 * \param offset the offset to move position pointer
 	 */
-	void move(size_t offset) {
+	void move(std::size_t offset) {
 		if( (position_+offset) >= end_ ) {
 			last_ = end_ - 1;
 			position_ = last_;
@@ -159,7 +159,7 @@ public:
 	 * Returns remain elements possible to put
 	 * \return remaining elements count
 	 */
-	size_t remain() const {
+	std::size_t remain() const {
 		return (end_-1) - last_;
 	}
 
@@ -209,7 +209,7 @@ public:
 	 * This method incrementing buffers length
 	 * \param t element to be inserted into current buffer position
 	 */
-	size_t put(T& e)  {
+	std::size_t put(T& e)  {
 		if(position_ + 1 != end_) {
 			*position_ = e;
 			if( (last_ == position_) || (position_+ 1 > last_) ) {
@@ -224,10 +224,10 @@ public:
 	}
 
 	template<class iterator_t>
-	size_t put(const iterator_t& b,iterator_t& e) {
-		size_t avaliable = capacity() - length();
-		size_t count = static_cast<size_t>(e - b);
-		size_t offset = (count > avaliable) ? avaliable : count;
+	std::size_t put(const iterator_t& b,iterator_t& e) {
+		std::size_t avaliable = capacity() - length();
+		std::size_t count = static_cast<std::size_t>(e - b);
+		std::size_t offset = (count > avaliable) ? avaliable : count;
 		std::copy(b,b+offset,position_);
 		if( (last_ == position_) ) {
 			last_ += offset;
@@ -236,9 +236,9 @@ public:
 		return offset;
 	}
 
-	size_t put(const T* arr, size_t size) {
-		size_t avaliable = capacity() - length();
-		size_t offset = (size > avaliable) ? avaliable : size;
+	std::size_t put(const T* arr, std::size_t size) {
+		std::size_t avaliable = capacity() - length();
+		std::size_t offset = (size > avaliable) ? avaliable : size;
 		std::copy(arr, arr+offset, position_);
 		if( (last_ == position_) ) {
 			last_ += offset;
@@ -267,7 +267,7 @@ public:
 	 * This buffer length
 	 * \return buffer length
 	 */
-	size_t length() const {
+	std::size_t length() const {
 		return last_ - data_.get();
 	}
 
@@ -275,7 +275,7 @@ public:
 	 * This buffer capacity
 	 * \return buffer capacity
 	 */
-	size_t capacity() const {
+	std::size_t capacity() const {
 		return (end_-1) - data_.get();
 	}
 
@@ -288,7 +288,7 @@ public:
 
 
 template<typename T>
-inline T* new_alloc(const size_t count) throw(std::bad_alloc)
+inline T* new_alloc(const std::size_t count) throw(std::bad_alloc)
 {
 	return new T[count];
 }

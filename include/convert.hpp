@@ -16,9 +16,9 @@ namespace io {
  */
 class CHANNEL_PUBLIC Charset {
 private:
-	const size_t id_;
+	const std::size_t id_;
 	const char* name_;
-	const size_t charSize_;
+	const std::size_t charSize_;
 	bool unicode_;
 private:
 	Charset(const Charset& c):id_(c.id_),name_(c.name_),charSize_(c.charSize_),unicode_(false)
@@ -38,7 +38,7 @@ public:
 	 *	\param isUnicode
 	 *		whether current char set is Unicode code-page representation
 	 */
-	Charset(size_t id, const char* name, const size_t charSize, bool isUnicode) BOOST_NOEXCEPT_OR_NOTHROW;
+	Charset(std::size_t id, const char* name, const std::size_t charSize, bool isUnicode) BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**
 	 * Constructs character set
@@ -49,13 +49,13 @@ public:
 	 *	\param charSize
 	 *		the size in bytes of single character in this character set
 	 */
-	Charset(size_t id, const char* name, const size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW;
+	Charset(std::size_t id, const char* name, const std::size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**
 	 * Returns code page identifier (the value is the same as Win32 API code page)
 	 * \return code page identifier
 	 */
-	size_t id() const;
+	std::size_t id() const;
 	/**
 	 * Returns unique name of character set
 	 * \return unique name of character set
@@ -65,7 +65,7 @@ public:
 	 * Returns size in bytes of single character
 	 * \return size in bytes of single character
 	 */
-	size_t  charSize() const;
+	std::size_t  charSize() const;
 
 	/**
 	 * Return whether current char set is Unicode code-page representation

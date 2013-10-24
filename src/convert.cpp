@@ -6,7 +6,7 @@ namespace io {
 
 // Charset
 
-Charset::Charset(size_t id, const char* name, const size_t charSize, bool isUnicode) BOOST_NOEXCEPT_OR_NOTHROW:
+Charset::Charset(std::size_t id, const char* name, const std::size_t charSize, bool isUnicode) BOOST_NOEXCEPT_OR_NOTHROW:
 	id_(id),
     name_(name),
     charSize_(charSize),
@@ -14,14 +14,14 @@ Charset::Charset(size_t id, const char* name, const size_t charSize, bool isUnic
 {}
 
 
-Charset::Charset(size_t id, const char* name, const size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW:
+Charset::Charset(std::size_t id, const char* name, const std::size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW:
 	id_(id),
     name_(name),
     charSize_(charSize),
     unicode_(false)
 {}
 
-size_t Charset::id() const
+std::size_t Charset::id() const
 {
 	return id_;
 }
@@ -31,7 +31,7 @@ const char* Charset::name() const
 	return name_;
 }
 
-size_t Charset::charSize() const
+std::size_t Charset::charSize() const
 {
 	return charSize_;
 }

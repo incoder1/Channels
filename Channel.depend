@@ -1886,8 +1886,9 @@
 	<convert.hpp>
 	<iconv.h>
 
-1382031348 d:\cpp\channel\include\channels_config.h
+1382620508 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
+	<winsock2.h>
 	<windows.h>
 
 1378228495 source:d:\cpp\channel\src\terminal.cpp

@@ -10,7 +10,7 @@ inline void validate_create_conv(const UErrorCode& errCode, const std::string& c
 	validate(U_FAILURE(errCode), "Can not build IBM ICU converter for converting "+chName);
 }
 
-static const size_t UTF16LE = 1200;
+static const std::size_t UTF16LE = 1200;
 
 inline bool notUTF16(const Charset* ch) {
 	return UTF16LE != ch->id();
@@ -54,13 +54,13 @@ PConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(chars
 }
 
 // ICUEngine
-UErrorCode ICUEngine::toUnicode(const char* src, size_t srcLen, UChar* dst, size_t& aval) const {
+UErrorCode ICUEngine::toUnicode(const char* src, std::size_t srcLen, UChar* dst, std::size_t& aval) const {
 		UErrorCode result = U_ZERO_ERROR;
 		aval = ::ucnv_toUChars(intoUTF16_, dst, aval, src, srcLen, &result);
 		return result;
 }
 
-UErrorCode ICUEngine::fromUnicode(UChar* src, size_t srcLen, char* dst, size_t& aval) const {
+UErrorCode ICUEngine::fromUnicode(UChar* src, std::size_t srcLen, char* dst, std::size_t& aval) const {
 		UErrorCode result = U_ZERO_ERROR;
 		aval = ::ucnv_fromUChars(fromUTF16_, dst, aval, src, srcLen, &result);
 		return result;
@@ -98,11 +98,11 @@ void ICUConverter::intoUnicode(const byte_buffer& source,byte_buffer& dest) thro
 {
 	char *src = reinterpret_cast<char*>(&source.position());
 	UChar *dst = reinterpret_cast<UChar*>(&dest.position());
-	size_t avail = dest.capacity() / sizeof(UChar);
-	size_t srclen = source.length();
+	std::size_t avail = dest.capacity() / sizeof(UChar);
+	std::size_t srclen = source.length();
 	UErrorCode errCode = engine_.toUnicode(src, srclen, dst, avail);
 	validate_into_conv(errCode, srcCharset());
-	size_t offset = dest.capacity() - (avail*sizeof(UChar));
+	std::size_t offset = dest.capacity() - (avail*sizeof(UChar));
 	dest.move(0 != offset ? offset: dest.capacity() - 1);
 }
 
@@ -110,11 +110,11 @@ void ICUConverter::fromUnicode(const byte_buffer& source,byte_buffer& dest) thro
 {
 	UChar *src = reinterpret_cast<UChar*>(&source.position());
 	char *dst = reinterpret_cast<char*>(&dest.position());
-	size_t srclen = source.length() / sizeof(UChar);
-	size_t avail = dest.capacity();
+	std::size_t srclen = source.length() / sizeof(UChar);
+	std::size_t avail = dest.capacity();
 	UErrorCode errCode = engine_.fromUnicode(src, srclen, dst, avail);
 	validate_from_conv(errCode, destCharset());
-	size_t offset = dest.capacity() - avail;
+	std::size_t offset = dest.capacity() - avail;
 	dest.move(0 != offset ? offset: dest.capacity() - 1);
 }
 

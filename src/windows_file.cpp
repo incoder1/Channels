@@ -73,7 +73,7 @@ FileChannel::FileChannel(HANDLE id):
 	id_(id)
 {}
 
-size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
+std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 {
 	DWORD result;
 	if(!::ReadFile(id_,
@@ -87,7 +87,7 @@ size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 	return result;
 }
 
-size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
+std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 {
 	DWORD result;
 	if(!::WriteFile(id_,
@@ -102,7 +102,7 @@ size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 }
 
 
-void FileChannel::seek(size_t offset, ReadWriteChannel::MoveMethod method) throw(io_exception)
+void FileChannel::seek(std::size_t offset, ReadWriteChannel::MoveMethod method) throw(io_exception)
 {
 	if(INVALID_SET_FILE_POINTER == ::SetFilePointer(id_,offset,NULL,method)) {
 		throw io_exception("Can not move file pointer");

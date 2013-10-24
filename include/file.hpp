@@ -69,9 +69,9 @@ private:
 public:
 	explicit FileChannel(HANDLE id);
 	virtual ~FileChannel();
-	virtual size_t read(byte_buffer& buffer) throw(io_exception);
-	virtual size_t write(const byte_buffer& buffer) throw(io_exception);
-	virtual void seek(size_t offset, ReadWriteChannel::MoveMethod method) throw(io_exception);
+	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
+	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
+	virtual void seek(std::size_t offset, ReadWriteChannel::MoveMethod method) throw(io_exception);
 };
 #endif
 
@@ -85,8 +85,8 @@ private:
 	::FILE *file_;
 public:
 	explicit FileChannel(::FILE* file) BOOST_NOEXCEPT;
-	virtual size_t read(byte_buffer& buffer) throw(io_exception);
-	virtual size_t write(const byte_buffer& buffer) throw(io_exception);
+	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
+	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
 };
 #endif // PLATFORM_UNIX
 

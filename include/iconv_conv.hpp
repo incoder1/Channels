@@ -34,7 +34,7 @@ public:
 		swap(c);
 		return *this;
 	}
-	inline size_t conv(char** src, size_t *srclen, char **dstptr, size_t *avail) const
+	inline std::size_t conv(char** src, std::size_t *srclen, char **dstptr, std::size_t *avail) const
 	{
 		return ::iconv(conv_, src, srclen, dstptr, avail);
 	}
