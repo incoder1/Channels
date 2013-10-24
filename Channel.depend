@@ -2,7 +2,7 @@
 1381510403 source:d:\cpp\channel\main.cpp
 	<channels_config.h>
 
-1382377995 d:\cpp\channel\include\buffers.hpp
+1382635950 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1823,7 +1823,7 @@
 	<functional>
 	<new>
 
-1382362488 d:\cpp\channel\include\charbuffers.hpp
+1382620558 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
 1374162328 d:\cpp\channel\include\charsetconverter.hpp
@@ -1834,11 +1834,11 @@
 	<iostream>
 	<Windows.h>
 
-1382377839 d:\cpp\channel\include\bytebuffer.hpp
+1382636307 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
-	"buffers.hpp"
+	<buffers.hpp>
 
 1381171457 d:\cpp\channel\include\charset.hpp
 	<stdexcept>
@@ -1859,26 +1859,26 @@
 	<time.h>
 	<wchar.h>
 
-1382114099 d:\cpp\channel\include\channels.hpp
+1382621309 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
 	<bytebuffer.hpp>
 
-1382114099 d:\cpp\channel\include\file.hpp
+1382620558 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"channels.hpp"
 	<unistd.h>
 	<sys/types.h>
 	<sys/stat.h>
 
-1382114099 source:d:\cpp\channel\src\windows_file.cpp
+1382620558 source:d:\cpp\channel\src\windows_file.cpp
 	"file.hpp"
 
-1382118455 source:d:\cpp\channel\src\iconv_conv.cpp
+1382620558 source:d:\cpp\channel\src\iconv_conv.cpp
 	"iconv_conv.hpp"
 
-1382118441 d:\cpp\channel\include\iconv_conv.hpp
+1382620558 d:\cpp\channel\include\iconv_conv.hpp
 	<string>
 	<cstring>
 	<cerrno>
@@ -2026,7 +2026,7 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1382377052 d:\cpp\channel\include\convert.hpp
+1382620558 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -2034,7 +2034,7 @@
 	<boost/unordered_map.hpp>
 	<stdexcept>
 
-1382545978 d:\cpp\channel\include\ibm_icu_conv.hpp
+1382620558 d:\cpp\channel\include\ibm_icu_conv.hpp
 	<cstdio>
 	<convert.hpp>
 	<unicode/utypes.h>
@@ -2044,7 +2044,7 @@
 	<unicode/uloc.h>
 	<unicode/unistr.h>
 
-1382377117 source:d:\cpp\channel\src\convert.cpp
+1382620558 source:d:\cpp\channel\src\convert.cpp
 	"convert.hpp"
 	<iostream>
 
@@ -4651,7 +4651,7 @@
 	<deque>
 	<bitset>
 
-1382545341 source:d:\cpp\channel\src\ibm_icu_conv.cpp
+1382620558 source:d:\cpp\channel\src\ibm_icu_conv.cpp
 	"ibm_icu_conv.hpp"
 
 1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\utypes.h

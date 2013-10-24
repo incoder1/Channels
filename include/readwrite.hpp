@@ -8,6 +8,14 @@
 
 namespace io {
 
+//template<class String>
+//class SimpleReader {
+//private:
+//	typedef typename String::value_type _TChar;
+//public:
+//
+//};
+
 template<class String>
 class Reader {
 private:
@@ -21,15 +29,11 @@ public:
 	String read() throw(io_exception,charset_exception) {
 		buff_.clear();
 		std::size_t bytesRead = src_->read(buff_);
-		byte_buffer convBuff = new_byte_byffer(bytesRead*sizeof(_TChar));
+		String result(bytesRead,0x1);
+		byte_buffer conv = wrap_string(result);
 		buff_.flip();
-		conv_->convert(buff_,convBuff);
-		convBuff.flip();
-		String res;
-		const _TChar* start = (const _TChar*)(&convBuff.position());
-		const _TChar* end = (const _TChar*)(&convBuff.last());
-		res.append(start, end );
-		return res;
+		conv_->convert(buff_,conv);
+		return result;
 	}
 private:
 	PReadChannel src_;
@@ -48,9 +52,7 @@ public:
 	{}
 	void write(const String& str) throw(io_exception,charset_exception) {
 		std::size_t sourceBytesSize = str.length()*sizeof(_TChar);
-		byte_buffer srcBytes = new_byte_byffer(sourceBytesSize);
-		srcBytes.put((uint8_t*)(str.data()), sourceBytesSize);
-		srcBytes.flip();
+		byte_buffer srcBytes = wrap_string(str);
 		const std::size_t destCharSize = conv_->destCharset()->charSize();
 		byte_buffer convBytes = new_byte_byffer(str.length()*destCharSize);
 		conv_->convert(srcBytes, convBytes);

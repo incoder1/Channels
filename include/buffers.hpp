@@ -229,10 +229,7 @@ public:
 		std::size_t count = static_cast<std::size_t>(e - b);
 		std::size_t offset = (count > avaliable) ? avaliable : count;
 		std::copy(b,b+offset,position_);
-		if( (last_ == position_) ) {
-			last_ += offset;
-		}
-		position_ += offset;
+		move(offset);
 		return offset;
 	}
 
@@ -259,8 +256,8 @@ public:
 	 * Set buffer position into array begin then nullify buffers length
 	 */
 	void clear() {
-		flip();
-		last_ = data_.get();
+		position_ = data_.get();
+		last_ = position_;
 	}
 
 	/**
@@ -286,7 +283,7 @@ public:
 	{}
 };
 
-
+// Really allocates dynamic memory
 template<typename T>
 inline T* new_alloc(const std::size_t count) throw(std::bad_alloc)
 {
@@ -298,6 +295,27 @@ inline void delete_free(T* ptr)
 {
 	delete [] ptr;
 }
+
+// Do not allocate dynamic memory, used for wrapping static arrays or STL containers
+template<typename T>
+class empty_alloc {
+private:
+	const T* array_;
+public:
+	empty_alloc(const T* array) BOOST_NOEXCEPT_OR_NOTHROW:
+		array_(array)
+	{}
+	inline T* operator()(std::size_t size) {
+		return const_cast<T*>(array_);
+	}
+};
+
+template<typename T>
+class empty_free {
+public:
+	inline void operator()(T*)
+	{}
+};
 
 } // namespace io
 

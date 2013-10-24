@@ -1,11 +1,10 @@
 # depslib dependency file v1.0
-1382553914 source:d:\cpp\channel\textdemo\main.cpp
+1382635729 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
 	<console.hpp>
 	<readwrite.hpp>
-	<network.hpp>
 
 1382360687 d:\cpp\channel\include\console.hpp
 	<channels_config.h>
@@ -14,19 +13,19 @@
 	<convert.hpp>
 	<file.hpp>
 
-1382550484 d:\cpp\channel\include\channels_config.h
+1382620508 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
 	<winsock2.h>
 	<windows.h>
 
-1382114099 d:\cpp\channel\include\file.hpp
+1382620558 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"channels.hpp"
 	<unistd.h>
 	<sys/types.h>
 	<sys/stat.h>
 
-1382549199 d:\cpp\channel\include\channels.hpp
+1382621309 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
@@ -1341,11 +1340,11 @@
 
 1355254521 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\operator_bool.hpp
 
-1382555112 d:\cpp\channel\include\bytebuffer.hpp
+1382636583 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
-	"buffers.hpp"
+	<buffers.hpp>
 
 1300746758 d:\cpp\boost_1_54_0\boost\function.hpp
 	<functional>
@@ -1632,7 +1631,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1382377995 d:\cpp\channel\include\buffers.hpp
+1382635950 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1922,16 +1921,16 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1382376516 d:\cpp\channel\include\readwrite.hpp
+1382637258 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<charbuffers.hpp>
 	<convert.hpp>
 	<channels.hpp>
 
-1382362488 d:\cpp\channel\include\charbuffers.hpp
+1382620558 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1382377052 d:\cpp\channel\include\convert.hpp
+1382620558 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>

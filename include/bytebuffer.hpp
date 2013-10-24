@@ -3,9 +3,9 @@
 
 #include <stdint.h>
 #include <vector>
-#include <boost/function.hpp>
 
-#include "buffers.hpp"
+#include <boost/function.hpp>
+#include <buffers.hpp>
 
 namespace io {
 
@@ -14,7 +14,7 @@ class byte_buffer_allocator;
 class byte_buffer:public basic_buffer<uint8_t> {
 private:
 	byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp) BOOST_NOEXCEPT_OR_NOTHROW:
-	basic_buffer<uint8_t>(data,endp)
+		basic_buffer<uint8_t>(data,endp)
 	{}
 	friend class byte_buffer_allocator;
 public:
@@ -61,9 +61,9 @@ public:
 	 * \param alloc_functor functor for allocating memory
 	 * \param free_functor functor for free allocated memory
 	 */
-byte_buffer_allocator(alloc_functor_t alloc_functor,free_functor_t free_functor) BOOST_NOEXCEPT:
-	alloc_functor_(alloc_functor),
-	               free_functor_(free_functor)
+	byte_buffer_allocator(alloc_functor_t alloc_functor,free_functor_t free_functor) BOOST_NOEXCEPT_OR_NOTHROW:
+		alloc_functor_(alloc_functor),
+		free_functor_(free_functor)
 	{}
 	byte_buffer allocate(std::size_t capacity) const throw(std::bad_alloc) {
 		uint8_t* data = alloc_functor_(capacity);
@@ -104,6 +104,27 @@ inline byte_buffer new_byte_byffer(const std::size_t capacity) throw(std::bad_al
 	return all.allocate(capacity);
 }
 
+
+inline byte_buffer wrap_array(const uint8_t* arr, std::size_t size) {
+	empty_alloc<uint8_t> fake_allocator(arr);
+	empty_free<uint8_t> fake_free;
+	byte_buffer_allocator::alloc_functor_t alloc(fake_allocator);
+	byte_buffer_allocator::free_functor_t free(fake_free);
+	byte_buffer_allocator all(alloc,free);
+	byte_buffer result = all.allocate(size);
+	result.move(size);
+	result.flip();
+	return result;
+}
+
+template<typename _CharT>
+inline byte_buffer wrap_string(const std::basic_string<_CharT>& str) {
+	std::size_t size = str.length()*sizeof(_CharT);
+	return wrap_array(
+		// we can covert any array to byte array
+		reinterpret_cast<const uint8_t*>(str.data()),
+		size);
+}
 
 } // namespace io
 

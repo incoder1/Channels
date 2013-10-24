@@ -1,44 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="DebugMinGW32-ICU" />
-	<File name="include\channels_config.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="315" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="include\charbuffers.hpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="5391" topLine="157" />
-		</Cursor>
-	</File>
-	<File name="include\console.hpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1234" topLine="34" />
-		</Cursor>
-	</File>
-	<File name="include\convert.hpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1916" topLine="53" />
-		</Cursor>
-	</File>
-	<File name="include\file.hpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2345" topLine="74" />
-		</Cursor>
-	</File>
-	<File name="include\ibm_icu_conv.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1347" topLine="35" />
-		</Cursor>
-	</File>
+	<ActiveTarget name="DebugMinGW32" />
 	<File name="include\iconv_conv.hpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="811" topLine="20" />
 		</Cursor>
 	</File>
-	<File name="include\readwrite.hpp" open="0" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\readwrite.hpp" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1453" topLine="39" />
+			<Cursor1 position="1581" topLine="55" />
 		</Cursor>
 	</File>
 	<File name="include\win32_conv.hpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -53,7 +23,22 @@
 	</File>
 	<File name="src\convert.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="606" topLine="19" />
+			<Cursor1 position="4693" topLine="111" />
+		</Cursor>
+	</File>
+	<File name="include\buffers.hpp" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7080" topLine="305" />
+		</Cursor>
+	</File>
+	<File name="include\bytebuffer.hpp" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3526" topLine="107" />
+		</Cursor>
+	</File>
+	<File name="include\channels.hpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="491" topLine="60" />
 		</Cursor>
 	</File>
 	<File name="src\ibm_icu_conv.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -86,19 +71,34 @@
 			<Cursor1 position="2538" topLine="90" />
 		</Cursor>
 	</File>
-	<File name="include\buffers.hpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\channels_config.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6653" topLine="276" />
+			<Cursor1 position="315" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="include\bytebuffer.hpp" open="0" top="0" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\charbuffers.hpp" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2872" topLine="3" />
+			<Cursor1 position="5391" topLine="157" />
 		</Cursor>
 	</File>
-	<File name="include\channels.hpp" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\console.hpp" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1276" topLine="59" />
+			<Cursor1 position="1234" topLine="34" />
+		</Cursor>
+	</File>
+	<File name="include\convert.hpp" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1916" topLine="53" />
+		</Cursor>
+	</File>
+	<File name="include\file.hpp" open="0" top="0" tabpos="14" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2345" topLine="74" />
+		</Cursor>
+	</File>
+	<File name="include\ibm_icu_conv.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1347" topLine="35" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

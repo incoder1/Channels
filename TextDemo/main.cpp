@@ -20,7 +20,7 @@
 #include <console.hpp>
 #include <readwrite.hpp>
 
-#include <network.hpp>
+//#include <network.hpp>
 
 #ifdef _WIN32
 const char* LOCALE_CH = "CP1251";
@@ -35,9 +35,6 @@ void change_console_charset()
 	io::CharsetFactory chf;
 	io::Console::setCharset(chf.forName(LOCALE_CH));
 }
-
-static void no_delete_free(io::network::TCPSocketChannel*)
-{}
 
 #ifndef _MSC_VER
 int main(int argc, const char** argv)
@@ -56,35 +53,35 @@ int _tmain(int argc, TCHAR *argv[])
 		out.write(L"Type something :> ");
 		out.write(in.read());
 
-		// OK lets try to use some network
-		// FIXME create dedicated demo for the network
-		using boost::asio::ip::tcp;
-
-		boost::asio::io_service io_service;
-
-		// Get a list of endpoints corresponding to the server name.
-		tcp::resolver resolver(io_service);
-		tcp::resolver::query query("google.com", "http");
-		tcp::resolver::iterator epIT = resolver.resolve(query);
-
-		// Try each endpoint until we successfully establish a connection.
-		boost::shared_ptr<tcp::socket> socket(new tcp::socket(io_service));
-		boost::asio::connect(*socket, epIT);
-
-		io::network::TCPSocketChannel *httpch = new io::network::TCPSocketChannel(socket);
-		io::PWriteChannel rqCh(httpch);
-		//io::PReadChannel rspCh(httpch, no_delete_free);
-
-		uwriter req(rqCh,io::new_converter(UTF16,"UTF-8"));
-		req.write(L"GET / HTTP/1.0\r\nHOST google.com\r\nAccept: */*\r\nConnection: close\r\n\r\n");
-
-		io::byte_buffer respBytes = io::new_byte_byffer(1 << 20);
-		httpch->read(respBytes);
-		respBytes.flip();
-		// write results into console
-		io::Console::outChanell()->write(respBytes);
-
-		//ureader resp();
+//		// OK lets try to use some network
+//		// FIXME create dedicated demo for the network
+//		using boost::asio::ip::tcp;
+//
+//		boost::asio::io_service io_service;
+//
+//		// Get a list of endpoints corresponding to the server name.
+//		tcp::resolver resolver(io_service);
+//		tcp::resolver::query query("google.com", "http");
+//		tcp::resolver::iterator epIT = resolver.resolve(query);
+//
+//		// Try each endpoint until we successfully establish a connection.
+//		boost::shared_ptr<tcp::socket> socket(new tcp::socket(io_service));
+//		boost::asio::connect(*socket, epIT);
+//
+//		io::network::TCPSocketChannel *httpch = new io::network::TCPSocketChannel(socket);
+//		io::PWriteChannel rqCh(httpch);
+//		//io::PReadChannel rspCh(httpch, no_delete_free);
+//
+//		uwriter req(rqCh,io::new_converter(UTF16,"UTF-8"));
+//		req.write(L"GET / HTTP/1.0\r\nHOST google.com\r\nAccept: */*\r\nConnection: close\r\n\r\n");
+//
+//		io::byte_buffer respBytes = io::new_byte_byffer(1 << 20);
+//		httpch->read(respBytes);
+//		respBytes.flip();
+//		// write results into console
+//		io::Console::outChanell()->write(respBytes);
+//
+//		//ureader resp();
 
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
