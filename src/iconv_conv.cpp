@@ -41,13 +41,13 @@ void IconvConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(cha
 		switch (errno) {
 			/* See "man 3 iconv" for an explanation. */
 		case EILSEQ:
-			throw charset_exception("Invalid multi-byte sequence");
+			boost::throw_exception(charset_exception("Invalid multi-byte sequence"));
 		case EINVAL:
-			throw charset_exception("Incomplete multi-byte sequence");
+			boost::throw_exception(charset_exception("Incomplete multi-byte sequence"));
 		case E2BIG:
-			throw charset_exception("No more room");
+			boost::throw_exception(charset_exception("No more room"));
 		default:
-			throw charset_exception(std::strerror(errno));
+			boost::throw_exception(charset_exception(std::strerror(errno)));
 		}
 	}
 	// calc size of char buffer, and move it

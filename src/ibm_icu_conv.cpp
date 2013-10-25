@@ -82,7 +82,7 @@ inline void validate_into_conv(UErrorCode errCode,const Charset* charset) {
 		std::string msg("Can not convert from ");
 		msg.append(charset->name());
 		msg.append(" into UTF-16LE");
-		throw charset_exception(msg);
+		boost::throw_exception(charset_exception(msg));
 	}
 }
 

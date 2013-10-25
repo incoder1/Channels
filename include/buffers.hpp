@@ -233,6 +233,10 @@ public:
 		return offset;
 	}
 
+	std::size_t put(const basic_buffer& other) {
+		return put<basic_buffer::const_iterator>(other.position(), other.last());
+	}
+
 	std::size_t put(const T* arr, std::size_t size) {
 		std::size_t avaliable = capacity() - length();
 		std::size_t offset = (size > avaliable) ? avaliable : size;

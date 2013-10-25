@@ -18,12 +18,14 @@
 					<Add option="-Wunreachable-code" />
 					<Add option="-pedantic-errors" />
 					<Add option="-std=c++11" />
+					<Add option="-pg" />
 					<Add option="-g" />
 					<Add option="-fexceptions" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>
 				<Linker>
+					<Add option="-pg -lgmon" />
 					<Add directory="../bin/DebugMinWG32" />
 					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
 					<Add directory="C:/MinGW/msys/1.0/local/lib" />

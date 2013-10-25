@@ -9,9 +9,7 @@
 
 namespace io {
 
-class io_exception: virtual std::runtime_error {
-private:
-	const char* what_;
+class io_exception: public std::runtime_error {
 public:
 	explicit io_exception(const char* what):
 		std::runtime_error(what)
@@ -20,11 +18,14 @@ public:
 
 class CHANNEL_PUBLIC ReadChannel {
 private:
-	ReadChannel(const ReadChannel&);
-protected:
+	ReadChannel(const ReadChannel&) BOOST_NOEXCEPT_OR_NOTHROW
+	{}
+	const ReadChannel& operator=(const ReadChannel&) {
+		return *this;
+	}
+public:
 	ReadChannel()
 	{}
-public:
 	virtual std::size_t read(byte_buffer& buffer) throw(io_exception) = 0;
 	virtual ~ReadChannel()
 	{}
@@ -34,7 +35,11 @@ typedef boost::shared_ptr<ReadChannel> PReadChannel;
 
 class CHANNEL_PUBLIC WriteChannel {
 private:
-	WriteChannel(const WriteChannel&);
+	WriteChannel(const WriteChannel&) BOOST_NOEXCEPT_OR_NOTHROW
+	{}
+	const WriteChannel& operator=(const WriteChannel&) {
+		return *this;
+	}
 protected:
 	WriteChannel()
 	{}
@@ -46,15 +51,19 @@ public:
 
 typedef boost::shared_ptr<WriteChannel> PWriteChannel;
 
-class CHANNEL_PUBLIC ReadWriteChannel:public ReadChannel,public WriteChannel {
+class CHANNEL_PUBLIC ReadWriteChannel:public virtual ReadChannel,public virtual WriteChannel {
 public:
 	enum MoveMethod {FROM_BEGIN = 0 , FROM_CURRENT_POSITION = 1, FROM_END = 2};
 private:
-	ReadWriteChannel(const ReadWriteChannel&);
+	ReadWriteChannel(const ReadWriteChannel&) {
+	}
+	const ReadWriteChannel& operator=(const ReadWriteChannel&) {
+		return *this;
+	}
 protected:
-ReadWriteChannel() BOOST_NOEXCEPT:
-	ReadChannel(),
-	WriteChannel()
+	ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW:
+		ReadChannel(),
+		WriteChannel()
 	{}
 public:
 	/**

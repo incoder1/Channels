@@ -19,6 +19,7 @@
 #include <iostream>
 #include <console.hpp>
 #include <readwrite.hpp>
+#include <datachannel.hpp>
 
 //#include <network.hpp>
 
@@ -53,39 +54,15 @@ int _tmain(int argc, TCHAR *argv[])
 		out.write(L"Type something :> ");
 		out.write(in.read());
 
-//		// OK lets try to use some network
-//		// FIXME create dedicated demo for the network
-//		using boost::asio::ip::tcp;
-//
-//		boost::asio::io_service io_service;
-//
-//		// Get a list of endpoints corresponding to the server name.
-//		tcp::resolver resolver(io_service);
-//		tcp::resolver::query query("google.com", "http");
-//		tcp::resolver::iterator epIT = resolver.resolve(query);
-//
-//		// Try each endpoint until we successfully establish a connection.
-//		boost::shared_ptr<tcp::socket> socket(new tcp::socket(io_service));
-//		boost::asio::connect(*socket, epIT);
-//
-//		io::network::TCPSocketChannel *httpch = new io::network::TCPSocketChannel(socket);
-//		io::PWriteChannel rqCh(httpch);
-//		//io::PReadChannel rspCh(httpch, no_delete_free);
-//
-//		uwriter req(rqCh,io::new_converter(UTF16,"UTF-8"));
-//		req.write(L"GET / HTTP/1.0\r\nHOST google.com\r\nAccept: */*\r\nConnection: close\r\n\r\n");
-//
-//		io::byte_buffer respBytes = io::new_byte_byffer(1 << 20);
-//		httpch->read(respBytes);
-//		respBytes.flip();
-//		// write results into console
-//		io::Console::outChanell()->write(respBytes);
-//
-//		//ureader resp();
+		char msg[14];
+		io::DataChannel dch((void*)msg, std::strlen(msg));
 
+
+		typedef io::Writer<std::string> awriter;
+		awriter aout(io::Console::outChanell(), io::char_empty_converter());
+		aout.write("Hello world\n");
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}
-
 	return 0;
 }

@@ -7,6 +7,7 @@
 #include <bytebuffer.hpp>
 
 #include <boost/unordered_map.hpp>
+#include <boost/exception/all.hpp>
 #include <stdexcept>
 
 namespace io {
@@ -114,7 +115,7 @@ public:
 inline void validate(bool expr, const std::string& msg) throw(charset_exception)
 {
 	if(expr) {
-		throw charset_exception(msg);
+		boost::throw_exception(charset_exception(msg));
 	}
 }
 
@@ -165,22 +166,13 @@ public:
 	virtual ~Converter() = 0;
 };
 
+
 /**
  * Smart pointer to the Coverter type, used by API witch need conversation like
  * {@link Reader} or {@link Writer}.
  */
 typedef boost::shared_ptr<Converter> PConverter;
 
-
-/* should be done with configure
-#if !defined(CONV_ENGINE_MLANG) && !defined(CONV_ENGINE_IBM_ICU) && !defined(CONV_ENGINE_ICONV)
-#	ifdef PLATFROM_WINDOWS
-#		define CONV_ENGINE_MLANG // use MS M Lang on Windows, comes with IE uses COM
-#	else
-#		define CONV_ENGINE_ICONV // Unix, use libiconv cause it is POSIX
-#	endif //
-#endif // default platform engine
-*/
 
 // Detecting engine
 #ifdef CONV_ENGINE_ICONV

@@ -31,6 +31,10 @@ public:
 		return basic_buffer<uint8_t>::put(begin, end);
 	}
 
+	inline std::size_t put(const byte_buffer& another) {
+		return basic_buffer<uint8_t>::put(another);
+	}
+
 	inline std::size_t put(const std::vector<uint8_t>& v) {
 		std::vector<uint8_t>::const_iterator b = v.begin();
 		std::vector<uint8_t>::const_iterator e = v.end();

@@ -150,6 +150,7 @@
 		<Unit filename="include/charbuffers.hpp" />
 		<Unit filename="include/console.hpp" />
 		<Unit filename="include/convert.hpp" />
+		<Unit filename="include/datachannel.hpp" />
 		<Unit filename="include/file.hpp" />
 		<Unit filename="include/ibm_icu_conv.hpp">
 			<Option target="ReleaseMSVC10-ICU" />
@@ -165,6 +166,7 @@
 		</Unit>
 		<Unit filename="main.cpp" />
 		<Unit filename="src/convert.cpp" />
+		<Unit filename="src/datachannel.cpp" />
 		<Unit filename="src/ibm_icu_conv.cpp">
 			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />

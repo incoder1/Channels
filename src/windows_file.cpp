@@ -68,7 +68,7 @@ PReadWriteChannel  File::openForReadWrite() throw(io_exception)
 }
 
 // FileChannel
-FileChannel::FileChannel(HANDLE id):
+FileChannel::FileChannel(HANDLE id) BOOST_NOEXCEPT_OR_NOTHROW:
 	ReadWriteChannel(),
 	id_(id)
 {}

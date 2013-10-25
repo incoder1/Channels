@@ -12,22 +12,22 @@ namespace cstax {
 
 class Attribute {
 private:
-	std::wstring name_;
+	const wchar_t* name_;
 	std::wstring value_;
 public:
-	Attribute(const std::wstring& name, std::wstring value) BOOST_NOEXCEPT_OR_NOTHROW:
+	Attribute(const wchar_t* name, const wchar_t* value) BOOST_NOEXCEPT_OR_NOTHROW:
 		name_(name),value_(value)
 	{}
-	inline std::wstring getName() const {
+	inline const wchar_t* getName() const {
 		return name_;
 	}
-	inline void setName(const std::wstring& name) {
+	inline void setName(const wchar_t* name) {
 		name_ = name;
 	}
-	inline std::wstring getValue() const {
+	inline const wchar_t* getValue() const {
 		return value_;
 	}
-	inline void setValue(const std::wstring& value) {
+	inline void setValue(const wchar_t* value) {
 		value_ = value;
 	}
 };
@@ -63,18 +63,18 @@ typedef boost::shared_ptr<XMLEvent> PXMLEvent;
 
 class ElementEvent {
 private:
-	std::wstring uri_;
-	std::wstring localName_;
+	const wchar_t *uri_;
+	const wchar_t *localName_;
 protected:
-	ElementEvent(const std::wstring uri, const std::wstring& localName) BOOST_NOEXCEPT_OR_NOTHROW:
+	ElementEvent(const wchar_t* uri, const wchar_t* localName) BOOST_NOEXCEPT_OR_NOTHROW:
 		uri_(uri),
 		localName_(localName)
 	{}
 public:
-	std::wstring uri() const {
+	inline const wchar_t* uri() const {
 		return uri_;
 	}
-	std::wstring localName() const {
+	inline const wchar_t* localName() const {
 		return localName_;
 	}
 	virtual ~ElementEvent() = 0;
@@ -82,7 +82,7 @@ public:
 
 class StartElementEvent:public virtual XMLEvent,public ElementEvent {
 public:
-	StartElementEvent(const std::wstring& uri, const std::wstring& localName) BOOST_NOEXCEPT_OR_NOTHROW:
+	StartElementEvent(const wchar_t* uri, const wchar_t* localName) BOOST_NOEXCEPT_OR_NOTHROW:
 		XMLEvent(START_ELEMENT),
 		ElementEvent(uri, localName)
 	{}
@@ -90,7 +90,7 @@ public:
 
 class EndElementEvent:public virtual XMLEvent,public ElementEvent {
 public:
-	EndElementEvent(const std::wstring& uri, const std::wstring& localName) BOOST_NOEXCEPT_OR_NOTHROW:
+	EndElementEvent(const wchar_t*, const wchar_t* localName) BOOST_NOEXCEPT_OR_NOTHROW:
 		XMLEvent(END_ELEMENT),
 		ElementEvent(uri, localName)
 	{}
@@ -107,11 +107,6 @@ public:
 };
 
 class XMLSyntax:private boost::noncopyable {
-private:
-	static const wchar_t WHITESPACES[26];
-	static const wchar_t SYNTAX[7];
-	boost::unordered_set<wchar_t> whitespaces_;
-	boost::unordered_set<wchar_t> syntax_;
 public:
 	XMLSyntax() BOOST_NOEXCEPT_OR_NOTHROW;
 	inline bool isWhiteSpace(const wchar_t charCode) {
@@ -161,7 +156,7 @@ public:
 	PXMLEvent next() throw(xml_stream_exception);
 	PXMLEvent nextTag() throw(xml_stream_exception);
 	bool hasNext() throw(xml_stream_exception);
-	std::wstring getElementText() throw(xml_stream_exception);
+	const wchar_t* getElementText() throw(xml_stream_exception);
 };
 
 } // namesapace cstax

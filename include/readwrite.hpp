@@ -8,13 +8,33 @@
 
 namespace io {
 
-//template<class String>
-//class SimpleReader {
-//private:
-//	typedef typename String::value_type _TChar;
-//public:
-//
-//};
+/// Used when not character set conversation is needed
+class EmptyConverter:public Converter {
+public:
+	EmptyConverter(const Charset* ch) BOOST_NOEXCEPT_OR_NOTHROW:
+		Converter(ch,ch)
+	{}
+	virtual ~EmptyConverter()
+	{}
+	virtual inline void convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception) {
+		dest = src;
+		dest.move(src.length());
+	}
+};
+
+inline PConverter char_empty_converter() {
+	static Charset emptyCharset(sizeof(char),"CHAR",sizeof(char),false);
+	static EmptyConverter converter(&emptyCharset);
+	static empty_free<EmptyConverter> noFree;
+	return PConverter(const_cast<EmptyConverter*>(&converter), noFree);
+}
+
+inline PConverter wchar_t_empty_converter() {
+	static Charset emptyCharset(sizeof(wchar_t),"WCHAR_T",sizeof(wchar_t),false);
+	static EmptyConverter converter(&emptyCharset);
+	static empty_free<EmptyConverter> noFree;
+	return PConverter(const_cast<EmptyConverter*>(&converter), noFree);
+}
 
 template<class String>
 class Reader {
