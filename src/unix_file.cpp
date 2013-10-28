@@ -63,8 +63,8 @@ PReadWriteChannel  File::openForReadWrite() throw(io_exception)
 
 // File Channel
 FileChannel::FileChannel(::FILE* file) BOOST_NOEXCEPT:
-ReadWriteChannel(),
-                 file_(file)
+	ReadWriteChannel(),
+	file_(file)
 {}
 
 std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)

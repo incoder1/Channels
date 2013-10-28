@@ -2,17 +2,6 @@
 
 namespace cstax {
 
-// XMLSyntax
-XMLSyntax::XMLSyntax() BOOST_NOEXCEPT_OR_NOTHROW {
-	uint8_t i;
-	for(i=0; i < 26; i++) {
-		whitespaces_.insert(WHITESPACES[i]);
-	}
-	for(i=0; i < 7; i++) {
-		syntax_.insert(SYNTAX[i]);
-	}
-}
-
 // XMLEvent
 XMLEvent::~XMLEvent()
 {}
@@ -29,12 +18,12 @@ StreamReader::StreamReader(const XMLSource& source,size_t buffSize) BOOST_NOEXCE
 
 PXMLEvent StreamReader::next() throw(xml_stream_exception)
 {
-	return PXMLEvent(NULL);
+	return PXMLEvent((XMLEvent*)NULL);
 }
 
 PXMLEvent StreamReader::nextTag() throw(xml_stream_exception)
 {
-	return PXMLEvent(NULL);
+	return PXMLEvent((XMLEvent*)NULL);
 }
 
 bool StreamReader::hasNext() throw(xml_stream_exception)

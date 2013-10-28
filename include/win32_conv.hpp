@@ -10,8 +10,6 @@
 #include <Objbase.h>
 #include <Mlang.h>
 
-#include <iostream>
-
 namespace io {
 
 // Smart reference upon IMLangConvertCharset COM object

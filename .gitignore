@@ -4,10 +4,11 @@
 /Demo/obj
 /TextDemo/bin
 /TextDemo/obj
+/tmp
 **.save
-*.o
-*.obj
-*.exe
-*.dll
-*.out
+**.o
+**.obj
+**.exe
+**.dll
+**.out
 Result.txt

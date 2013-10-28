@@ -13,7 +13,7 @@ namespace cstax {
 class Attribute {
 private:
 	const wchar_t* name_;
-	std::wstring value_;
+	const wchar_t* value_;
 public:
 	Attribute(const wchar_t* name, const wchar_t* value) BOOST_NOEXCEPT_OR_NOTHROW:
 		name_(name),value_(value)
@@ -80,7 +80,7 @@ public:
 	virtual ~ElementEvent() = 0;
 };
 
-class StartElementEvent:public virtual XMLEvent,public ElementEvent {
+class StartElementEvent:public virtual XMLEvent,public virtual ElementEvent {
 public:
 	StartElementEvent(const wchar_t* uri, const wchar_t* localName) BOOST_NOEXCEPT_OR_NOTHROW:
 		XMLEvent(START_ELEMENT),
@@ -88,9 +88,9 @@ public:
 	{}
 };
 
-class EndElementEvent:public virtual XMLEvent,public ElementEvent {
+class EndElementEvent:public virtual XMLEvent,public virtual ElementEvent {
 public:
-	EndElementEvent(const wchar_t*, const wchar_t* localName) BOOST_NOEXCEPT_OR_NOTHROW:
+	EndElementEvent(const wchar_t* uri, const wchar_t* localName) BOOST_NOEXCEPT_OR_NOTHROW:
 		XMLEvent(END_ELEMENT),
 		ElementEvent(uri, localName)
 	{}
@@ -106,18 +106,7 @@ public:
 	{}
 };
 
-class XMLSyntax:private boost::noncopyable {
-public:
-	XMLSyntax() BOOST_NOEXCEPT_OR_NOTHROW;
-	inline bool isWhiteSpace(const wchar_t charCode) {
-		return whitespaces_.end() != whitespaces_.find(charCode);
-	}
-	inline bool isSyntaxSymbol(const wchar_t charCode) {
-		return syntax_.end() != syntax_.find(charCode);
-	}
-};
-
-class xml_stream_exception:virtual std::runtime_error {
+class xml_stream_exception:public std::runtime_error {
 public:
 	xml_stream_exception(const std::string& msg) BOOST_NOEXCEPT_OR_NOTHROW:
 		std::runtime_error(msg)
@@ -126,32 +115,18 @@ public:
 
 class XMLSource {
 public:
-	typedef io::char_buffer<wchar_t> ubuff;
-	//typedef io::Reader< io::conveter<wchar_t> > UTFReader;
-private:
-//	UTFReader src_;
-//	XMLSource(UTFReader& source) BOOST_NOEXCEPT_OR_NOTHROW:
-//		src_(source)
-//	{}
-public:
-	inline size_t read(ubuff& buff) throw(xml_stream_exception) {
-//		try {
-//			return src_.read(buff);
-//		} catch(io::io_exception& e) {
-//			throw xml_stream_exception("IO error");
-//		}
-	return 0;
+	std::size_t read(const wchar_t* data, const std::size_t avaliable) throw(xml_stream_exception) {
+		return 0;
 	}
 };
 
+typedef boost::shared_ptr<XMLEvent> PXMLEvent;
+
 class StreamReader {
 private:
-	typedef XMLSource::ubuff ubuff;
 	XMLSource src_;
 	const size_t buffSize_;
-	XMLSyntax syntax_;
 public:
-	typedef boost::shared_ptr<XMLEvent> PXMLEvent;
 	StreamReader(const XMLSource& source,size_t buffSize) BOOST_NOEXCEPT_OR_NOTHROW;
 	PXMLEvent next() throw(xml_stream_exception);
 	PXMLEvent nextTag() throw(xml_stream_exception);
