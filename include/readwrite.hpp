@@ -8,13 +8,13 @@
 
 namespace io {
 
-/// Used when not character set conversation is needed
+/// Used when not character set conversation needed
 class EmptyConverter:public Converter {
 public:
 	EmptyConverter(const Charset* ch) BOOST_NOEXCEPT_OR_NOTHROW:
 		Converter(ch,ch)
 	{}
-	virtual ~EmptyConverter()
+	virtual ~EmptyConverter() BOOST_NOEXCEPT_OR_NOTHROW
 	{}
 	virtual inline void convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception) {
 		dest = src;
@@ -30,9 +30,17 @@ inline PConverter char_empty_converter() {
 }
 
 inline PConverter wchar_t_empty_converter() {
-	static Charset emptyCharset(sizeof(wchar_t),"WCHAR_T",sizeof(wchar_t),false);
+	static Charset emptyCharset(sizeof(wchar_t),"WCHAR_T",sizeof(wchar_t),true);
 	static EmptyConverter converter(&emptyCharset);
 	static empty_free<EmptyConverter> noFree;
+	return PConverter(const_cast<EmptyConverter*>(&converter), noFree);
+}
+
+template<typename CharacterType>
+inline PConverter empty_conveter(const char name,bool unicode) {
+	Charset emptyCharset(sizeof(CharacterType), name, sizeof(CharacterType), unicode);
+	EmptyConverter converter(&emptyCharset);
+	empty_free<EmptyConverter> noFree;
 	return PConverter(const_cast<EmptyConverter*>(&converter), noFree);
 }
 
@@ -49,11 +57,12 @@ public:
 	String read() throw(io_exception,charset_exception) {
 		buff_.clear();
 		std::size_t bytesRead = src_->read(buff_);
-		String result(bytesRead,0x1);
-		byte_buffer conv = wrap_string(result);
+		const std::size_t maxChSize = conv_->destCharset()->charSize();
+		byte_buffer conv = new_byte_byffer(bytesRead*maxChSize);
 		buff_.flip();
 		conv_->convert(buff_,conv);
-		return result;
+		conv.flip();
+		return String(conv.begin(),conv.last());
 	}
 private:
 	PReadChannel src_;

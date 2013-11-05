@@ -15,6 +15,10 @@
 #	include "winver.h"
 #endif // _WIN32
 
+#if __cplusplus >= 201103L
+#	define HAS_CPP11
+#endif // __cplusplus
+
 // Only to handle exception if any
 #include <iostream>
 #include <console.hpp>
@@ -23,13 +27,33 @@
 
 //#include <network.hpp>
 
-#ifdef _WIN32
-const char* LOCALE_CH = "CP1251";
-const char* UTF16 = "UTF-16LE";
+#if	defined(PLATFROM_WINDOWS)
+	const char* LOCALE_CH = "CP1251";
+	inline io::PConverter to_console_conv() {
+		return io::new_converter("UTF-8",LOCALE_CH);
+	}
+	inline io::PConverter from_console_conv() {
+		return io::new_converter(LOCALE_CH,"UTF-8");
+	}
+#elif defined(PLATFROM_UNIX)
+	inline io::PConverter to_console_conv() {
+		return io::char_empty_converter();
+	}
+	inline io::PConverter from_console_conv() {
+		return io::char_empty_converter();
+	}
 #else
-const char* LOCALE_CH = "UFT-8";
-const char* UTF16 = "UTF-16LE";
+#	error "This operating system is not supported yet"
 #endif
+
+#ifdef HAS_CPP11
+#	define U8(str) u8##str
+#else
+#	define U8(str) str
+#endif // HAS_CPP11
+
+typedef std::string ustring;
+
 
 void change_console_charset()
 {
@@ -44,14 +68,14 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	change_console_charset();
-	typedef io::Writer<std::wstring> uwriter;
-	typedef io::Reader<std::wstring> ureader;
+	typedef io::Writer<ustring> uwriter;
+	typedef io::Reader<ustring> ureader;
 	try {
-		uwriter out(io::Console::outChanell(), io::new_converter(UTF16,LOCALE_CH));
-		out.write(L"Hello world English version. Привет мир, русская верссия\n\r");
+		uwriter out(io::Console::outChanell(), to_console_conv());
+		out.write(U8("Hello world English version. Привет мир, русская верссия\n\r"));
 		io::byte_buffer readBuff = io::new_byte_byffer(512);
-		ureader in(io::Console::inChanell(),readBuff,io::new_converter(LOCALE_CH,UTF16));
-		out.write(L"Type something :> ");
+		ureader in(io::Console::inChanell(),readBuff, from_console_conv());
+		out.write(U8("Type something :> "));
 		out.write(in.read());
 
 		char msg[14];

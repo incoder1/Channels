@@ -40,7 +40,7 @@ private:
 	}
 	MLangEngine();
 public:
-	~MLangEngine();
+	~MLangEngine() BOOST_NOEXCEPT_OR_NOTHROW;
 
 	PMLang createConveter(const Charset *src, const Charset *dst) const throw(charset_exception);
 
@@ -57,7 +57,7 @@ public:
 class CHANNEL_PUBLIC Win32Converter : public Converter {
 public:
 	Win32Converter(PMLang engine,const Charset* srcCt,const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
-	~Win32Converter();
+	~Win32Converter() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual void convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception);
 private:
 	PMLang engine_;

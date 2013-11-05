@@ -11,7 +11,7 @@ namespace io {
 
 class byte_buffer_allocator;
 
-class byte_buffer:public basic_buffer<uint8_t> {
+class CHANNEL_PUBLIC byte_buffer:public basic_buffer<uint8_t> {
 private:
 	byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp) BOOST_NOEXCEPT_OR_NOTHROW:
 		basic_buffer<uint8_t>(data,endp)

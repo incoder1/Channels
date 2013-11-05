@@ -56,23 +56,23 @@ public:
 	 * Returns code page identifier (the value is the same as Win32 API code page)
 	 * \return code page identifier
 	 */
-	std::size_t id() const;
+	std::size_t id() const BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
 	 * Returns unique name of character set
 	 * \return unique name of character set
 	 */
-	const char* name() const;
+	const char* name() const BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
-	 * Returns size in bytes of single character
+	 * Returns maximal size in bytes of single character
 	 * \return size in bytes of single character
 	 */
-	std::size_t  charSize() const;
+	std::size_t  charSize() const BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**
 	 * Return whether current char set is Unicode code-page representation
 	 * \return whether current char set is Unicode code-page representation
 	 */
-	bool isUnicode() const;
+	bool isUnicode() const BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**
 	 * Compare this charset with a pointer to the another
@@ -80,7 +80,7 @@ public:
 	 *			constant pointer to the charset
 	 * \return whether charsets are equal. If {@code oth} is {@code nullptr} return false
 	 */
-	bool equal(const Charset* oth) const;
+	bool equal(const Charset* oth) const BOOST_NOEXCEPT_OR_NOTHROW;
 };
 
 // Not available from DLL, do not use it
@@ -163,7 +163,7 @@ public:
 	/**
 	 * Frees resources allocated by converter
 	 */
-	virtual ~Converter() = 0;
+	virtual ~Converter() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
 
 
@@ -179,8 +179,10 @@ typedef boost::shared_ptr<Converter> PConverter;
 	PConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(charset_exception);
 #elif defined(CONV_ENGINE_IBM_ICU)
 	PConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(charset_exception);
-#else
+#elif defined(CONV_ENGINE_MLANG)
 	PConverter CHANNEL_PUBLIC win32_converter(const char* src, const char* dst) throw(charset_exception);
+#else
+#	error "No any conversation engine specified"
 #endif // conv engine selection
 
 /**
@@ -198,8 +200,10 @@ inline PConverter new_converter(const char* src, const char* dst) throw(charset_
 	return iconv_conv(src,dst);
 #elif defined(CONV_ENGINE_IBM_ICU)
 	return icu_conv(src,dst);
-#else
+#elif defined(CONV_ENGINE_MLANG)
 	return win32_converter(src,dst);
+#else
+#	error "No any conversation engine specified"
 #endif // conv engine selection
 }
 

@@ -16,10 +16,9 @@ PConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(cha
 	const Charset* destCt = chFactory.forName(dst);
 	validate_charset(destCt, dst);
 	validate(srcCt->equal(destCt),"Source character set is equal destination, no conversation needed");
-	::iconv_allocation_t* descrpt = new iconv_allocation_t;
-	int result = ::iconv_open_into(destCt->name(), srcCt->name(), descrpt);
-	validate(result == -1, "Can not construct iconv engine instance");
-	IconvEngine engine((::iconv_t)descrpt);
+	::iconv_t descrpt = ::iconv_open(destCt->name(), srcCt->name());
+	validate(descrpt == (::iconv_t)(-1), "Can not construct iconv engine instance");
+	IconvEngine engine(descrpt);
 	return PConverter(new IconvConverter(engine, srcCt, destCt) );
 }
 

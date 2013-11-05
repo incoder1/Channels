@@ -12,7 +12,9 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add option="-DCONV_ENGINE_ICONV" />
 				</Compiler>
 				<Linker>
 					<Add directory="../bin/DebugMinWG32" />
@@ -44,6 +46,8 @@
 		<Unit filename="include/cstax.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/cstax.cpp" />
+		<Unit filename="xmlsource.cpp" />
+		<Unit filename="xmlsource.hpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

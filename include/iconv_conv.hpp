@@ -22,7 +22,7 @@ public:
 	explicit IconvEngine(::iconv_t conv) BOOST_NOEXCEPT_OR_NOTHROW:
 		conv_(conv)
 	{}
-	~IconvEngine() {
+	~IconvEngine() BOOST_NOEXCEPT_OR_NOTHROW {
 		if(NULL != conv_) {
 			::iconv_close(conv_);
 		}

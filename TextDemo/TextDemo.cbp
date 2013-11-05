@@ -17,10 +17,10 @@
 					<Add option="-Winline" />
 					<Add option="-Wunreachable-code" />
 					<Add option="-pedantic-errors" />
-					<Add option="-std=c++11" />
 					<Add option="-pg" />
 					<Add option="-g" />
 					<Add option="-fexceptions" />
+					<Add option="-std=gnu++11" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>

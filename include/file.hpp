@@ -68,7 +68,7 @@ private:
 	HANDLE id_;
 public:
 	explicit FileChannel(HANDLE id) BOOST_NOEXCEPT_OR_NOTHROW;
-	virtual ~FileChannel();
+	virtual ~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
 	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
 	virtual void seek(std::size_t offset, ReadWriteChannel::MoveMethod method) throw(io_exception);
@@ -83,9 +83,10 @@ public:
  */
 class FileChannel:public ReadWriteChannel {
 private:
-	::FILE *file_;
+	boost::shared_ptr<::FILE> file_;
 public:
 	explicit FileChannel(::FILE* file) BOOST_NOEXCEPT_OR_NOTHROW;
+	~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
 	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
 };

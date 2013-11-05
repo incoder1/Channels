@@ -62,15 +62,19 @@ PReadWriteChannel  File::openForReadWrite() throw(io_exception)
 }
 
 // File Channel
-FileChannel::FileChannel(::FILE* file) BOOST_NOEXCEPT:
+FileChannel::FileChannel(::FILE* file) BOOST_NOEXCEPT_OR_NOTHROW:
 	ReadWriteChannel(),
-	file_(file)
+	file_(file, boost::bind(::close))
 {}
+
+~FileChannel::FileChannel BOOST_NOEXCEPT_OR_NOTHROW
+{
+}
 
 std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 {
 	std::size_t result = ::read(
-	                    file_
+	                    file_.get(),
 	                    reinterpret_cast<void*>(&buffer.position()),
 	                    buffer.capacity()
 	                );
@@ -81,7 +85,7 @@ std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 {
 	std::size_t result = ::write(
-	                    file_,
+	                    file_.get(),
 	                    reinterpret_cast<void*>(&buffer.position()),
 	                    buffer.length(),
 	                );

@@ -21,27 +21,27 @@ Charset::Charset(std::size_t id, const char* name, const std::size_t charSize) B
     unicode_(false)
 {}
 
-std::size_t Charset::id() const
+std::size_t Charset::id() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	return id_;
 }
 
-const char* Charset::name() const
+const char* Charset::name() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	return name_;
 }
 
-std::size_t Charset::charSize() const
+std::size_t Charset::charSize() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	return charSize_;
 }
 
-bool Charset::isUnicode() const
+bool Charset::isUnicode() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	return unicode_;
 }
 
-bool Charset::equal(const Charset* oth) const
+bool Charset::equal(const Charset* oth) const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	bool result = false;
 	if(NULL != oth) {
@@ -53,7 +53,7 @@ bool Charset::equal(const Charset* oth) const
 // Charset constants
 
 // Unicode representation char-sets (the code page is same)
-static const Charset UTF_8(65001,"UTF-8",sizeof(uint8_t),true);
+static const Charset UTF_8(65001,"UTF-8",6,true); // can store even 6 bytes characters
 static const Charset UTF_16LE(1200,"UTF-16LE",sizeof(uint16_t),true);
 static const Charset UTF_16BE(1201,"UTF-16BE",sizeof(uint16_t),true);
 static const Charset UTF_32BE(12001,"UTF-32BE",sizeof(uint32_t),true);
@@ -160,7 +160,7 @@ const Charset* CharsetFactory::forName(const char* name) const
 }
 
 // Converter
-Converter::~Converter()
+Converter::~Converter() BOOST_NOEXCEPT_OR_NOTHROW
 {
 }
 

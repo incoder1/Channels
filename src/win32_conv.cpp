@@ -6,7 +6,7 @@ boost::once_flag MLangEngine::_flag;
 MLangEngine* MLangEngine::_instance = NULL;
 
 //MLangEngine
-MLangEngine::MLangEngine():
+MLangEngine::MLangEngine() BOOST_NOEXCEPT_OR_NOTHROW:
 	libMLang_(NULL),
 	freeCOM_(false)
 {
@@ -107,7 +107,7 @@ void Win32Converter::convert(const byte_buffer& src, byte_buffer& dest) throw(ch
 	dest.move(0 != offset ? offset: dest.capacity() - 1);
 }
 
-Win32Converter::~Win32Converter()
+Win32Converter::~Win32Converter() BOOST_NOEXCEPT_OR_NOTHROW
 {
 }
 
