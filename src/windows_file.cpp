@@ -6,6 +6,25 @@
 
 namespace io {
 
+
+static std::string last_error_str()
+{
+	std::string result;
+	LPVOID lpMsgBuf;
+	DWORD bufLen = ::FormatMessage(
+	                   FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
+	                   NULL,::GetLastError(),
+	                   MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+	                   (LPTSTR) &lpMsgBuf, 0, NULL );
+	if (bufLen) {
+		LPCSTR lpMsgStr = (LPCSTR)lpMsgBuf;
+		result.append(lpMsgStr, lpMsgStr+bufLen);
+		::LocalFree(lpMsgBuf);
+	}
+	return result;
+}
+
+// File
 File::File(const char* path) BOOST_NOEXCEPT_OR_NOTHROW:
 path_(path)
 {}
@@ -69,22 +88,28 @@ PReadWriteChannel  File::openForReadWrite() throw(io_exception)
 
 // FileChannel
 FileChannel::FileChannel(HANDLE id) BOOST_NOEXCEPT_OR_NOTHROW:
-	ReadWriteChannel(),
-	id_(id)
+ReadWriteChannel(),
+                 id_(id)
 {}
 
 std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 {
 	DWORD result;
-	if(!::ReadFile(id_,
+	if(
+		!::ReadFile(id_,
 	               reinterpret_cast<void*>(&buffer.position()),
 	               buffer.capacity(),
-	               &result,
-	               NULL)) {
-		throw io_exception("Read file error");
+	               &result,NULL)
+	  ) {
+		if(!ERROR_IO_PENDING != ::GetLastError()) {
+			std::string errMsg("Read file error.");
+		}
+		errMsg.append(last_error_str());
+		boost::throw_exception(io_exception(errMsg));
 	}
-	buffer.move(result);
-	return result;
+}
+buffer.move(result);
+return result;
 }
 
 std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
@@ -96,7 +121,11 @@ std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 	                &result,
 	                NULL)
 	  ) {
-		throw io_exception("Write file error");
+		if(!ERROR_IO_PENDING != ::GetLastError()) {
+			std::string errMsg("Write file error");
+			errMsg.append(last_error_str());
+			boost::throw_exception(io_exception(errMsg));
+		}
 	}
 	return result;
 }
@@ -105,7 +134,7 @@ std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 void FileChannel::seek(std::size_t offset, ReadWriteChannel::MoveMethod method) throw(io_exception)
 {
 	if(INVALID_SET_FILE_POINTER == ::SetFilePointer(id_,offset,NULL,method)) {
-		throw io_exception("Can not move file pointer");
+		boost::throw_exception(io_exception("Can not move file pointer"));
 	}
 }
 

@@ -23,7 +23,7 @@
 #endif
 
 #if defined(__unix__)
-#	define PLATFORM_UNIX
+#	define PLATFORM_UNIX 1
 #	include <unistd.h>
 #endif
 

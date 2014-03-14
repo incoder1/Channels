@@ -26,6 +26,8 @@
 				</Compiler>
 				<Linker>
 					<Add option="-pg -lgmon" />
+					<Add library="boost_thread-mgw47-mt-d-1_54.dll" />
+					<Add library="boost_system-mgw47-mt-d-1_54.dll" />
 					<Add directory="../bin/DebugMinWG32" />
 					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
 					<Add directory="C:/MinGW/msys/1.0/local/lib" />

@@ -10,6 +10,7 @@ private:
 	byte_buffer data_;
 public:
 	DataChannel(void *data, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW;
+	DataChannel(const byte_buffer& buff) BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual ~DataChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
 	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);

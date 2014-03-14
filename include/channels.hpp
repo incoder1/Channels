@@ -11,7 +11,7 @@ namespace io {
 
 class io_exception: public std::runtime_error {
 public:
-	explicit io_exception(const char* what):
+	explicit io_exception(const std::string& what):
 		std::runtime_error(what)
 	{}
 };

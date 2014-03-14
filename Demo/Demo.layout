@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="DebugMinGW32" />
-	<File name="src\main.cpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\windows_terminal.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="168" topLine="4" />
+			<Cursor1 position="3128" topLine="108" />
 		</Cursor>
 	</File>
 	<File name="src\terminal.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -11,24 +11,14 @@
 			<Cursor1 position="209" topLine="1" />
 		</Cursor>
 	</File>
-	<File name="src\windows_terminal.cpp" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\main.cpp" open="1" top="1" tabpos="18" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3128" topLine="108" />
+			<Cursor1 position="674" topLine="41" />
 		</Cursor>
 	</File>
-	<File name="include\cstax.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\cstax.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3562" topLine="145" />
-		</Cursor>
-	</File>
-	<File name="include\terminal.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="364" topLine="26" />
-		</Cursor>
-	</File>
-	<File name="include\windows_terminal.hpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1892" topLine="0" />
+			<Cursor1 position="1220" topLine="41" />
 		</Cursor>
 	</File>
 	<File name="include\winver.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -36,9 +26,19 @@
 			<Cursor1 position="258" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\cstax.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="include\windows_terminal.hpp" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1220" topLine="41" />
+			<Cursor1 position="1892" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="include\terminal.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="364" topLine="26" />
+		</Cursor>
+	</File>
+	<File name="include\cstax.hpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3562" topLine="145" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

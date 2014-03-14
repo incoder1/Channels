@@ -6,6 +6,10 @@ namespace io {
 		data_(wrap_array(reinterpret_cast<uint8_t*>(data),size))
 	{}
 
+	DataChannel::DataChannel(const byte_buffer& buff) BOOST_NOEXCEPT_OR_NOTHROW:
+		data_(buff)
+	{}
+
 	DataChannel::~DataChannel() BOOST_NOEXCEPT_OR_NOTHROW
 	{}
 

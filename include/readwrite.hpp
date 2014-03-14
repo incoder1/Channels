@@ -8,7 +8,7 @@
 
 namespace io {
 
-/// Used when not character set conversation needed
+/// Used when no character set conversation needed
 class EmptyConverter:public Converter {
 public:
 	EmptyConverter(const Charset* ch) BOOST_NOEXCEPT_OR_NOTHROW:
@@ -43,12 +43,23 @@ inline PConverter empty_conveter(const char name,bool unicode) {
 	empty_free<EmptyConverter> noFree;
 	return PConverter(const_cast<EmptyConverter*>(&converter), noFree);
 }
-
+/**
+ * ! \brief Reader template, provides functionality for read STL strings from read channel,
+ *  with automatic character set conversation
+ * \param String a type of STL string i.e. std::basic_string<char8_t>, std::string, std::wstring etc.
+ */
 template<class String>
 class Reader {
 private:
 	typedef typename String::value_type _TChar;
 public:
+	/**
+	 * Constructs new reader with character set converting.
+	 * Note, use an empty converter in case when conversation is not needed
+	 * \param src source channel
+	 * \param buff internal read buffer
+	 * \param conv character set converter.
+	 */
 	Reader(PReadChannel src, const byte_buffer& buff,PConverter conv) BOOST_NOEXCEPT_OR_NOTHROW:
 		src_(src),
 		buff_(buff),
@@ -70,15 +81,30 @@ private:
 	PConverter conv_;
 };
 
+/**
+ * ! \brief Writer temple, provides functionality for writing strings into write channel.
+ * Strings can be converted from one character set into another
+ */
 template<class String>
 class Writer {
 private:
 	typedef typename String::value_type _TChar;
 public:
+	/**
+	 * Constructs new writer to write converted string.
+	 * Note, use an empty converter in case when conversation is not needed
+	 * \param out smart pointer to the write channel
+	 * \param conv smart pointer ti the character converter
+	 */
 	Writer(PWriteChannel out,PConverter conv) BOOST_NOEXCEPT_OR_NOTHROW:
 		out_(out),
 		conv_(conv)
 	{}
+
+
+	/**
+	 * Writes STL string into write channel
+	 */
 	void write(const String& str) throw(io_exception,charset_exception) {
 		std::size_t sourceBytesSize = str.length()*sizeof(_TChar);
 		byte_buffer srcBytes = wrap_string(str);

@@ -83,7 +83,7 @@ PConverter CHANNEL_PUBLIC win32_converter(const char* src, const char* dst) thro
 	const Charset* destCt = chFactory.forName(dst);
 	validate_charset(destCt, dst);
 	if(srcCt->equal(destCt) ) {
-		throw charset_exception("Source character set is equal destination, no conversation needed");
+		boost::throw_exception(charset_exception("Source character set is equal destination, no conversation needed"));
 	}
 	PMLang conv = MLangEngine::instance()->createConveter(srcCt, destCt);
 	return PConverter(new Win32Converter(conv, srcCt,destCt));
