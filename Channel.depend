@@ -1859,23 +1859,23 @@
 	<time.h>
 	<wchar.h>
 
-1394821848 d:\cpp\channel\include\channels.hpp
+1395254350 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
 	<bytebuffer.hpp>
 
-1383330675 d:\cpp\channel\include\file.hpp
+1395254361 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"channels.hpp"
 	<unistd.h>
 	<sys/types.h>
 	<sys/stat.h>
 
-1382693307 source:d:\cpp\channel\src\windows_file.cpp
+1395254361 source:d:\cpp\channel\src\windows_file.cpp
 	"file.hpp"
 
-1383677501 source:d:\cpp\channel\src\iconv_conv.cpp
+1395254460 source:d:\cpp\channel\src\iconv_conv.cpp
 	"iconv_conv.hpp"
 
 1383330155 d:\cpp\channel\include\iconv_conv.hpp
@@ -2026,7 +2026,7 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1383677244 d:\cpp\channel\include\convert.hpp
+1395254460 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -4785,7 +4785,7 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1383330234 source:d:\cpp\channel\src\win32_conv.cpp
+1395254460 source:d:\cpp\channel\src\win32_conv.cpp
 	"win32_conv.hpp"
 
 1383330241 d:\cpp\channel\include\win32_conv.hpp
@@ -6628,4 +6628,625 @@
 
 1381506803 source:d:\cpp\channel\src\main.cpp
 	<channels_config.h>
+
+1395256244 source:d:\cpp\channel\src\windowspipe.cpp
+	"pipe.hpp"
+
+1395256201 d:\cpp\channel\include\pipe.hpp
+	<boost/thread.hpp>
+	<boost/thread/condition_variable.hpp>
+	<channels.hpp>
+	<file.hpp>
+
+1362869705 d:\cpp\boost_1_54_0\boost\thread.hpp
+	<boost/thread/thread.hpp>
+	<boost/thread/condition_variable.hpp>
+	<boost/thread/exceptions.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/thread/once.hpp>
+	<boost/thread/recursive_mutex.hpp>
+	<boost/thread/tss.hpp>
+	<boost/thread/thread_time.hpp>
+	<boost/thread/locks.hpp>
+	<boost/thread/shared_mutex.hpp>
+	<boost/thread/barrier.hpp>
+	<boost/thread/future.hpp>
+
+1360693920 d:\cpp\boost_1_54_0\boost\thread\thread.hpp
+	<boost/thread/thread_only.hpp>
+	<boost/thread/detail/thread_group.hpp>
+
+1360693920 d:\cpp\boost_1_54_0\boost\thread\thread_only.hpp
+	<boost/thread/detail/platform.hpp>
+	<boost/thread/win32/thread_data.hpp>
+	<boost/thread/pthread/thread_data.hpp>
+	<boost/thread/detail/thread.hpp>
+	<boost/thread/detail/thread_interruption.hpp>
+	<boost/thread/v2/thread.hpp>
+
+1364003301 d:\cpp\boost_1_54_0\boost\thread\win32\thread_data.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/thread/thread_time.hpp>
+	<boost/thread/win32/thread_primitives.hpp>
+	<boost/thread/win32/thread_heap_alloc.hpp>
+	<boost/intrusive_ptr.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<map>
+	<vector>
+	<utility>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1354440153 d:\cpp\boost_1_54_0\boost\thread\win32\thread_heap_alloc.hpp
+	<new>
+	<boost/thread/detail/config.hpp>
+	<boost/thread/win32/thread_primitives.hpp>
+	<stdexcept>
+	<boost/assert.hpp>
+	<boost/throw_exception.hpp>
+	<boost/detail/no_exceptions_support.hpp>
+	<windows.h>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1236010936 d:\cpp\boost_1_54_0\boost\intrusive_ptr.hpp
+	<boost/smart_ptr/intrusive_ptr.hpp>
+
+1357774891 d:\cpp\boost_1_54_0\boost\smart_ptr\intrusive_ptr.hpp
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/smart_ptr/detail/sp_convertible.hpp>
+	<boost/smart_ptr/detail/sp_nullptr_t.hpp>
+	<boost/config/no_tr1/functional.hpp>
+	<iosfwd>
+	<ostream>
+	<boost/smart_ptr/detail/operator_bool.hpp>
+
+1367422832 d:\cpp\boost_1_54_0\boost\thread\pthread\thread_data.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/thread/exceptions.hpp>
+	<boost/thread/lock_guard.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/thread/pthread/condition_variable_fwd.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/enable_shared_from_this.hpp>
+	<boost/optional.hpp>
+	<boost/assert.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<map>
+	<vector>
+	<utility>
+	<asm/page.h>
+	<pthread.h>
+	<unistd.h>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1358281173 d:\cpp\boost_1_54_0\boost\thread\lock_guard.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/thread/detail/move.hpp>
+	<boost/thread/detail/lockable_wrapper.hpp>
+	<boost/thread/lock_options.hpp>
+	<boost/thread/is_locked_by_this_thread.hpp>
+	<boost/assert.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1357324849 d:\cpp\boost_1_54_0\boost\thread\detail\lockable_wrapper.hpp
+	<boost/thread/detail/config.hpp>
+	<initializer_list>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1358183870 d:\cpp\boost_1_54_0\boost\thread\pthread\condition_variable_fwd.hpp
+	<boost/assert.hpp>
+	<boost/throw_exception.hpp>
+	<pthread.h>
+	<boost/thread/cv_status.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/thread/thread_time.hpp>
+	<boost/thread/pthread/timespec.hpp>
+	<boost/thread/xtime.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/chrono/ceil.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/date_time/posix_time/posix_time_duration.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1337702595 d:\cpp\boost_1_54_0\boost\thread\cv_status.hpp
+	<boost/detail/scoped_enum_emulation.hpp>
+
+1362869705 d:\cpp\boost_1_54_0\boost\detail\scoped_enum_emulation.hpp
+	<boost/config.hpp>
+	<boost/detail/workaround.hpp>
+
+1236010936 d:\cpp\boost_1_54_0\boost\enable_shared_from_this.hpp
+	<boost/smart_ptr/enable_shared_from_this.hpp>
+
+1353512286 d:\cpp\boost_1_54_0\boost\smart_ptr\enable_shared_from_this.hpp
+	<boost/smart_ptr/weak_ptr.hpp>
+	<boost/smart_ptr/shared_ptr.hpp>
+	<boost/assert.hpp>
+	<boost/config.hpp>
+
+1355602820 d:\cpp\boost_1_54_0\boost\smart_ptr\weak_ptr.hpp
+	<memory>
+	<boost/smart_ptr/detail/shared_count.hpp>
+	<boost/smart_ptr/shared_ptr.hpp>
+
+1196014039 d:\cpp\boost_1_54_0\boost\optional.hpp
+	"boost/optional/optional.hpp"
+
+1350817297 d:\cpp\boost_1_54_0\boost\optional\optional.hpp
+	<new>
+	<algorithm>
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/type.hpp>
+	<boost/type_traits/alignment_of.hpp>
+	<boost/type_traits/has_nothrow_constructor.hpp>
+	<boost/type_traits/type_with_alignment.hpp>
+	<boost/type_traits/remove_reference.hpp>
+	<boost/type_traits/is_reference.hpp>
+	<boost/mpl/if.hpp>
+	<boost/mpl/bool.hpp>
+	<boost/mpl/not.hpp>
+	<boost/detail/reference_content.hpp>
+	<boost/none.hpp>
+	<boost/utility/swap.hpp>
+	<boost/utility/addressof.hpp>
+	<boost/utility/compare_pointees.hpp>
+	<boost/utility/in_place_factory.hpp>
+	<boost/optional/optional_fwd.hpp>
+
+1090798332 d:\cpp\boost_1_54_0\boost\detail\reference_content.hpp
+	"boost/config.hpp"
+	"boost/mpl/bool.hpp"
+	"boost/type_traits/has_nothrow_copy.hpp"
+	"boost/mpl/if.hpp"
+	"boost/type_traits/is_reference.hpp"
+	"boost/mpl/void.hpp"
+
+1301586468 d:\cpp\boost_1_54_0\boost\none.hpp
+	"boost/none_t.hpp"
+
+1196014039 d:\cpp\boost_1_54_0\boost\none_t.hpp
+
+1279225154 d:\cpp\boost_1_54_0\boost\utility\compare_pointees.hpp
+	<functional>
+
+1279225154 d:\cpp\boost_1_54_0\boost\utility\in_place_factory.hpp
+	<boost/utility/detail/in_place_factory_prefix.hpp>
+	<boost/utility/detail/in_place_factory_suffix.hpp>
+
+1279225154 d:\cpp\boost_1_54_0\boost\utility\detail\in_place_factory_prefix.hpp
+	<new>
+	<cstddef>
+	<boost/config.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/punctuation/paren.hpp>
+	<boost/preprocessor/iteration/iterate.hpp>
+	<boost/preprocessor/repetition/repeat.hpp>
+	<boost/preprocessor/repetition/enum.hpp>
+	<boost/preprocessor/repetition/enum_params.hpp>
+	<boost/preprocessor/repetition/enum_binary_params.hpp>
+	<boost/preprocessor/repetition/enum_trailing_params.hpp>
+
+1279225154 d:\cpp\boost_1_54_0\boost\utility\detail\in_place_factory_suffix.hpp
+
+1301597262 d:\cpp\boost_1_54_0\boost\optional\optional_fwd.hpp
+
+1364723803 d:\cpp\boost_1_54_0\boost\thread\detail\thread.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/thread/exceptions.hpp>
+	<ostream>
+	<boost/thread/detail/move.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/thread/xtime.hpp>
+	<boost/thread/detail/thread_heap_alloc.hpp>
+	<boost/thread/detail/make_tuple_indices.hpp>
+	<boost/thread/detail/invoke.hpp>
+	<boost/thread/detail/is_convertible.hpp>
+	<boost/assert.hpp>
+	<list>
+	<algorithm>
+	<boost/ref.hpp>
+	<boost/cstdint.hpp>
+	<boost/bind.hpp>
+	<stdlib.h>
+	<memory>
+	<boost/utility/enable_if.hpp>
+	<boost/type_traits/remove_reference.hpp>
+	<boost/io/ios_state.hpp>
+	<boost/type_traits/is_same.hpp>
+	<boost/type_traits/decay.hpp>
+	<boost/functional/hash.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/chrono/ceil.hpp>
+	<tuple>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1213790468 d:\cpp\boost_1_54_0\boost\thread\detail\thread_heap_alloc.hpp
+	<boost/thread/detail/platform.hpp>
+	<boost/thread/win32/thread_heap_alloc.hpp>
+	<boost/thread/pthread/thread_heap_alloc.hpp>
+
+1347112766 d:\cpp\boost_1_54_0\boost\thread\pthread\thread_heap_alloc.hpp
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1367422832 d:\cpp\boost_1_54_0\boost\thread\detail\make_tuple_indices.hpp
+	<boost/config.hpp>
+	<boost/static_assert.hpp>
+
+1357146586 d:\cpp\boost_1_54_0\boost\thread\detail\is_convertible.hpp
+	<boost/type_traits/is_convertible.hpp>
+	<boost/thread/detail/move.hpp>
+
+1262768123 d:\cpp\boost_1_54_0\boost\io\ios_state.hpp
+	<boost/io_fwd.hpp>
+	<boost/detail/workaround.hpp>
+	<ios>
+	<locale>
+	<ostream>
+	<streambuf>
+	<string>
+
+1092561229 d:\cpp\boost_1_54_0\boost\io_fwd.hpp
+	<iosfwd>
+
+1354440153 d:\cpp\boost_1_54_0\boost\thread\detail\thread_interruption.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/thread/detail/delete.hpp>
+
+1364003301 d:\cpp\boost_1_54_0\boost\thread\v2\thread.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/chrono/ceil.hpp>
+	<boost/thread/condition_variable.hpp>
+	<boost/thread/lock_types.hpp>
+
+1196014039 d:\cpp\boost_1_54_0\boost\thread\condition_variable.hpp
+	<boost/thread/detail/platform.hpp>
+	<boost/thread/win32/condition_variable.hpp>
+	<boost/thread/pthread/condition_variable.hpp>
+
+1357146586 d:\cpp\boost_1_54_0\boost\thread\win32\condition_variable.hpp
+	<boost/thread/win32/thread_primitives.hpp>
+	<boost/thread/win32/thread_data.hpp>
+	<boost/thread/win32/thread_data.hpp>
+	<boost/thread/win32/interlocked_read.hpp>
+	<boost/thread/cv_status.hpp>
+	<boost/thread/xtime.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/thread/thread_time.hpp>
+	<boost/thread/lock_guard.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/assert.hpp>
+	<boost/intrusive_ptr.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/chrono/ceil.hpp>
+	<limits.h>
+	<algorithm>
+	<vector>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1358183870 d:\cpp\boost_1_54_0\boost\thread\pthread\condition_variable.hpp
+	<boost/thread/pthread/timespec.hpp>
+	<boost/thread/pthread/pthread_mutex_scoped_lock.hpp>
+	<boost/thread/pthread/thread_data.hpp>
+	<boost/thread/pthread/condition_variable_fwd.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/chrono/ceil.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1354440153 d:\cpp\boost_1_54_0\boost\thread\detail\thread_group.hpp
+	<list>
+	<boost/thread/shared_mutex.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/thread/lock_guard.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1364003301 d:\cpp\boost_1_54_0\boost\thread\shared_mutex.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/thread/pthread/shared_mutex.hpp>
+	<boost/thread/win32/shared_mutex.hpp>
+	<boost/thread/pthread/shared_mutex.hpp>
+	<boost/thread/lockable_traits.hpp>
+
+1364723803 d:\cpp\boost_1_54_0\boost\thread\pthread\shared_mutex.hpp
+	<boost/assert.hpp>
+	<boost/static_assert.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/thread/condition_variable.hpp>
+	<boost/thread/detail/thread_interruption.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/chrono/ceil.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/assert.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1364003301 d:\cpp\boost_1_54_0\boost\thread\win32\shared_mutex.hpp
+	<boost/assert.hpp>
+	<boost/detail/interlocked.hpp>
+	<boost/thread/win32/thread_primitives.hpp>
+	<boost/static_assert.hpp>
+	<limits.h>
+	<boost/thread/thread_time.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/chrono/ceil.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1354440153 d:\cpp\boost_1_54_0\boost\thread\recursive_mutex.hpp
+	<boost/thread/detail/platform.hpp>
+	<boost/thread/win32/recursive_mutex.hpp>
+	<boost/thread/pthread/recursive_mutex.hpp>
+	<boost/thread/lockable_traits.hpp>
+
+1354440153 d:\cpp\boost_1_54_0\boost\thread\win32\recursive_mutex.hpp
+	<boost/thread/win32/basic_recursive_mutex.hpp>
+	<boost/thread/exceptions.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1354440153 d:\cpp\boost_1_54_0\boost\thread\win32\basic_recursive_mutex.hpp
+	<boost/thread/win32/thread_primitives.hpp>
+	<boost/thread/win32/basic_timed_mutex.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/chrono/ceil.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1366525855 d:\cpp\boost_1_54_0\boost\thread\pthread\recursive_mutex.hpp
+	<pthread.h>
+	<boost/throw_exception.hpp>
+	<boost/thread/exceptions.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/thread/thread_time.hpp>
+	<boost/assert.hpp>
+	<unistd.h>
+	<boost/date_time/posix_time/conversion.hpp>
+	<errno.h>
+	<boost/thread/pthread/timespec.hpp>
+	<boost/thread/pthread/pthread_mutex_scoped_lock.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/chrono/ceil.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1278699189 d:\cpp\boost_1_54_0\boost\thread\tss.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/thread/detail/thread_heap_alloc.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1354440153 d:\cpp\boost_1_54_0\boost\thread\locks.hpp
+	<boost/thread/lock_algorithms.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/thread/lock_guard.hpp>
+	<boost/thread/lockable_traits.hpp>
+	<boost/thread/lock_options.hpp>
+
+1354440153 d:\cpp\boost_1_54_0\boost\thread\lock_algorithms.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/thread/lockable_traits.hpp>
+	<algorithm>
+	<iterator>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1367422832 d:\cpp\boost_1_54_0\boost\thread\barrier.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/throw_exception.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/thread/condition_variable.hpp>
+	<string>
+	<stdexcept>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1370794695 d:\cpp\boost_1_54_0\boost\thread\future.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/detail/scoped_enum_emulation.hpp>
+	<stdexcept>
+	<boost/thread/detail/move.hpp>
+	<boost/thread/detail/async_func.hpp>
+	<boost/thread/thread_time.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/thread/condition_variable.hpp>
+	<boost/thread/lock_algorithms.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/exception_ptr.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/scoped_ptr.hpp>
+	<boost/type_traits/is_fundamental.hpp>
+	<boost/thread/detail/is_convertible.hpp>
+	<boost/type_traits/remove_reference.hpp>
+	<boost/type_traits/remove_cv.hpp>
+	<boost/mpl/if.hpp>
+	<boost/config.hpp>
+	<boost/throw_exception.hpp>
+	<algorithm>
+	<boost/function.hpp>
+	<boost/bind.hpp>
+	<boost/ref.hpp>
+	<boost/scoped_array.hpp>
+	<boost/enable_shared_from_this.hpp>
+	<boost/utility/enable_if.hpp>
+	<list>
+	<boost/next_prior.hpp>
+	<vector>
+	<boost/thread/future_error_code.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/thread/detail/memory.hpp>
+	<boost/utility/result_of.hpp>
+	<boost/thread/thread_only.hpp>
+	<boost/detail/atomic_undef_macros.hpp>
+	<boost/detail/atomic_redef_macros.hpp>
+	<boost/detail/atomic_undef_macros.hpp>
+	<boost/detail/atomic_redef_macros.hpp>
+
+1368071358 d:\cpp\boost_1_54_0\boost\thread\detail\async_func.hpp
+	<boost/config.hpp>
+	<boost/utility/result_of.hpp>
+	<boost/thread/detail/move.hpp>
+	<boost/thread/detail/invoke.hpp>
+	<boost/thread/detail/make_tuple_indices.hpp>
+	<tuple>
+	<boost/tuple/tuple.hpp>
+
+1362869705 d:\cpp\boost_1_54_0\boost\utility\result_of.hpp
+	<boost/config.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/iteration/iterate.hpp>
+	<boost/preprocessor/repetition/enum_params.hpp>
+	<boost/preprocessor/repetition/enum_trailing_params.hpp>
+	<boost/preprocessor/repetition/enum_binary_params.hpp>
+	<boost/preprocessor/repetition/enum_shifted_params.hpp>
+	<boost/preprocessor/facilities/intercept.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/mpl/has_xxx.hpp>
+	<boost/mpl/if.hpp>
+	<boost/mpl/eval_if.hpp>
+	<boost/mpl/bool.hpp>
+	<boost/mpl/identity.hpp>
+	<boost/mpl/or.hpp>
+	<boost/type_traits/is_class.hpp>
+	<boost/type_traits/is_pointer.hpp>
+	<boost/type_traits/is_member_function_pointer.hpp>
+	<boost/type_traits/remove_cv.hpp>
+	<boost/type_traits/remove_reference.hpp>
+	<boost/utility/declval.hpp>
+	<boost/utility/enable_if.hpp>
+
+1236010936 d:\cpp\boost_1_54_0\boost\scoped_ptr.hpp
+	<boost/smart_ptr/scoped_ptr.hpp>
+
+1357774891 d:\cpp\boost_1_54_0\boost\smart_ptr\scoped_ptr.hpp
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/checked_delete.hpp>
+	<boost/smart_ptr/detail/sp_nullptr_t.hpp>
+	<boost/detail/workaround.hpp>
+	<memory>
+	<boost/smart_ptr/detail/operator_bool.hpp>
+
+1236010936 d:\cpp\boost_1_54_0\boost\scoped_array.hpp
+	<boost/smart_ptr/scoped_array.hpp>
+
+1357774891 d:\cpp\boost_1_54_0\boost\smart_ptr\scoped_array.hpp
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/checked_delete.hpp>
+	<boost/smart_ptr/detail/sp_nullptr_t.hpp>
+	<boost/detail/workaround.hpp>
+	<cstddef>
+	<boost/smart_ptr/detail/operator_bool.hpp>
+
+1355684505 d:\cpp\boost_1_54_0\boost\thread\future_error_code.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/detail/scoped_enum_emulation.hpp>
+	<boost/system/error_code.hpp>
+	<boost/type_traits/integral_constant.hpp>
+
+1347559024 d:\cpp\boost_1_54_0\boost\thread\detail\memory.hpp
+	<boost/config.hpp>
+	<boost/container/allocator_traits.hpp>
+	<boost/container/scoped_allocator.hpp>
+	<boost/type_traits/remove_cv.hpp>
+	<boost/type_traits/is_convertible.hpp>
+	<boost/type_traits/is_scalar.hpp>
+	<boost/type_traits/is_pointer.hpp>
+	<boost/type_traits/is_same.hpp>
+	<boost/static_assert.hpp>
+
+1368907579 d:\cpp\boost_1_54_0\boost\container\scoped_allocator.hpp
+	<boost/container/detail/config_begin.hpp>
+	<boost/container/detail/workaround.hpp>
+	<boost/container/scoped_allocator_fwd.hpp>
+	<boost/type_traits/integral_constant.hpp>
+	<boost/container/allocator_traits.hpp>
+	<boost/container/detail/type_traits.hpp>
+	<boost/container/detail/utilities.hpp>
+	<utility>
+	<boost/container/detail/pair.hpp>
+	<boost/move/utility.hpp>
+	<boost/detail/no_exceptions_support.hpp>
+	<boost/container/detail/config_end.hpp>
+
+1354402907 d:\cpp\boost_1_54_0\boost\container\scoped_allocator_fwd.hpp
+	<boost/container/detail/config_begin.hpp>
+	<boost/container/detail/workaround.hpp>
+	<boost/container/detail/preprocessor.hpp>
+	<boost/container/detail/type_traits.hpp>
+	<boost/container/detail/config_end.hpp>
+
+1354402907 d:\cpp\boost_1_54_0\boost\container\detail\type_traits.hpp
+	"config_begin.hpp"
+	<boost/move/utility.hpp>
+	<boost/container/detail/config_end.hpp>
+
+1368870055 d:\cpp\boost_1_54_0\boost\container\detail\utilities.hpp
+	"config_begin.hpp"
+	<cstdio>
+	<cstring>
+	<boost/type_traits/is_fundamental.hpp>
+	<boost/type_traits/is_pointer.hpp>
+	<boost/type_traits/is_enum.hpp>
+	<boost/type_traits/is_member_pointer.hpp>
+	<boost/type_traits/is_class.hpp>
+	<boost/type_traits/has_trivial_destructor.hpp>
+	<boost/move/core.hpp>
+	<boost/move/utility.hpp>
+	<boost/move/iterator.hpp>
+	<boost/container/detail/mpl.hpp>
+	<boost/container/detail/type_traits.hpp>
+	<boost/container/allocator_traits.hpp>
+	<boost/detail/no_exceptions_support.hpp>
+	<boost/type_traits/has_trivial_copy.hpp>
+	<boost/type_traits/has_trivial_assign.hpp>
+	<boost/container/detail/memory_util.hpp>
+	<boost/aligned_storage.hpp>
+	<algorithm>
+	<iterator>
+	<utility>
+	<boost/container/detail/config_end.hpp>
+
+1356738823 d:\cpp\boost_1_54_0\boost\container\detail\pair.hpp
+	"config_begin.hpp"
+	<boost/container/detail/workaround.hpp>
+	<boost/container/detail/mpl.hpp>
+	<boost/container/detail/type_traits.hpp>
+	<boost/container/detail/mpl.hpp>
+	<boost/container/detail/type_traits.hpp>
+	<utility>
+	<algorithm>
+	<boost/move/utility.hpp>
+	<boost/type_traits/is_class.hpp>
+	<boost/container/detail/preprocessor.hpp>
+	<boost/container/detail/config_end.hpp>
+
+1365976218 d:\cpp\boost_1_54_0\boost\detail\atomic_undef_macros.hpp
+
+1365976218 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
 

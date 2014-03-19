@@ -22,26 +22,26 @@ public:
 	}
 };
 
-inline PConverter char_empty_converter() {
+inline SConverter char_empty_converter() {
 	static Charset emptyCharset(sizeof(char),"CHAR",sizeof(char),false);
 	static EmptyConverter converter(&emptyCharset);
 	static empty_free<EmptyConverter> noFree;
-	return PConverter(const_cast<EmptyConverter*>(&converter), noFree);
+	return SConverter(const_cast<EmptyConverter*>(&converter), noFree);
 }
 
-inline PConverter wchar_t_empty_converter() {
+inline SConverter wchar_t_empty_converter() {
 	static Charset emptyCharset(sizeof(wchar_t),"WCHAR_T",sizeof(wchar_t),true);
 	static EmptyConverter converter(&emptyCharset);
 	static empty_free<EmptyConverter> noFree;
-	return PConverter(const_cast<EmptyConverter*>(&converter), noFree);
+	return SConverter(const_cast<EmptyConverter*>(&converter), noFree);
 }
 
 template<typename CharacterType>
-inline PConverter empty_conveter(const char name,bool unicode) {
+inline SConverter empty_conveter(const char name,bool unicode) {
 	Charset emptyCharset(sizeof(CharacterType), name, sizeof(CharacterType), unicode);
 	EmptyConverter converter(&emptyCharset);
 	empty_free<EmptyConverter> noFree;
-	return PConverter(const_cast<EmptyConverter*>(&converter), noFree);
+	return SConverter(const_cast<EmptyConverter*>(&converter), noFree);
 }
 /**
  * ! \brief Reader template, provides functionality for read STL strings from read channel,
@@ -60,7 +60,7 @@ public:
 	 * \param buff internal read buffer
 	 * \param conv character set converter.
 	 */
-	Reader(PReadChannel src, const byte_buffer& buff,PConverter conv) BOOST_NOEXCEPT_OR_NOTHROW:
+	Reader(SReadChannel src, const byte_buffer& buff,SConverter conv) BOOST_NOEXCEPT_OR_NOTHROW:
 		src_(src),
 		buff_(buff),
 		conv_(conv)
@@ -76,9 +76,9 @@ public:
 		return String(conv.begin(),conv.last());
 	}
 private:
-	PReadChannel src_;
+	SReadChannel src_;
 	byte_buffer buff_;
-	PConverter conv_;
+	SConverter conv_;
 };
 
 /**
@@ -96,7 +96,7 @@ public:
 	 * \param out smart pointer to the write channel
 	 * \param conv smart pointer ti the character converter
 	 */
-	Writer(PWriteChannel out,PConverter conv) BOOST_NOEXCEPT_OR_NOTHROW:
+	Writer(SWriteChannel out,SConverter conv) BOOST_NOEXCEPT_OR_NOTHROW:
 		out_(out),
 		conv_(conv)
 	{}
@@ -106,7 +106,6 @@ public:
 	 * Writes STL string into write channel
 	 */
 	void write(const String& str) throw(io_exception,charset_exception) {
-		std::size_t sourceBytesSize = str.length()*sizeof(_TChar);
 		byte_buffer srcBytes = wrap_string(str);
 		const std::size_t destCharSize = conv_->destCharset()->charSize();
 		byte_buffer convBytes = new_byte_byffer(str.length()*destCharSize);
@@ -115,8 +114,8 @@ public:
 		out_->write(convBytes);
 	}
 private:
-	PWriteChannel out_;
-	PConverter conv_;
+	SWriteChannel out_;
+	SConverter conv_;
 };
 
 } // namespace io

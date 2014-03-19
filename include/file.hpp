@@ -30,27 +30,27 @@ public:
 	 * Creates a new file
 	 * \return whether successful
 	 */
-	bool create() const;
+	bool create() const BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
 	 * Deletes file from dist
 	 * \return whether successful
 	 */
-	bool errace() const;
+	bool errace() const BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
 	 * Returns file exist sate
 	 * \return whether file with this path exist
 	 */
-	bool exist() const;
+	bool exist() const BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
 	 * Open blocking read file channel
 	 * \return reference smart pointer on reading file channel
 	 */
-	PReadChannel openForRead() throw(io_exception);
+	SReadChannel openForRead() throw(io_exception);
 	/**
 	 * Open blocking write file channel
 	 * \return reference smart pointer on writing file channel
 	 */
-	PWriteChannel openForWrite() throw(io_exception);
+	SWriteChannel openForWrite() throw(io_exception);
 	/**
 	 * Open blocking read-write file channel
 	 * \return reference smart pointer on read-write file channel

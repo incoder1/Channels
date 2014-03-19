@@ -171,16 +171,16 @@ public:
  * Smart pointer to the Coverter type, used by API witch need conversation like
  * {@link Reader} or {@link Writer}.
  */
-typedef boost::shared_ptr<Converter> PConverter;
+typedef boost::shared_ptr<Converter> SConverter;
 
 
 // Detecting engine
 #ifdef CONV_ENGINE_ICONV
-	PConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(charset_exception);
+	SConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(charset_exception);
 #elif defined(CONV_ENGINE_IBM_ICU)
-	PConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(charset_exception);
+	SConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(charset_exception);
 #elif defined(CONV_ENGINE_MLANG)
-	PConverter CHANNEL_PUBLIC win32_converter(const char* src, const char* dst) throw(charset_exception);
+	SConverter CHANNEL_PUBLIC win32_converter(const char* src, const char* dst) throw(charset_exception);
 #else
 #	error "No any conversation engine specified"
 #endif // conv engine selection
@@ -195,7 +195,7 @@ typedef boost::shared_ptr<Converter> PConverter;
  *	\throw  charset_exception
  *				if conversation is not supported by engine, or engine can not be created
  */
-inline PConverter new_converter(const char* src, const char* dst) throw(charset_exception) {
+inline SConverter new_converter(const char* src, const char* dst) throw(charset_exception) {
 #ifdef CONV_ENGINE_ICONV
 	return iconv_conv(src,dst);
 #elif defined(CONV_ENGINE_IBM_ICU)

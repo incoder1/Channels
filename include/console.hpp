@@ -21,14 +21,14 @@ public:
 		::SetConsoleCP(charset->id());
 		::SetConsoleOutputCP(charset->id());
 	}
-	static PWriteChannel outChanell() throw(std::bad_alloc) {
-		return PWriteChannel(new FileChannel(::GetStdHandle(STD_OUTPUT_HANDLE)));
+	static SWriteChannel outChanell() throw(std::bad_alloc) {
+		return SWriteChannel(new FileChannel(::GetStdHandle(STD_OUTPUT_HANDLE)));
 	}
-	static PReadChannel inChanell() throw(std::bad_alloc) {
-		return PReadChannel(new FileChannel(::GetStdHandle(STD_INPUT_HANDLE)));
+	static SReadChannel inChanell() throw(std::bad_alloc) {
+		return SReadChannel(new FileChannel(::GetStdHandle(STD_INPUT_HANDLE)));
 	}
-	static PWriteChannel errChanell() throw(std::bad_alloc) {
-		return PWriteChannel(new FileChannel(::GetStdHandle(STD_ERROR_HANDLE)));
+	static SWriteChannel errChanell() throw(std::bad_alloc) {
+		return SWriteChannel(new FileChannel(::GetStdHandle(STD_ERROR_HANDLE)));
 	}
 };
 #endif // PLATFROM_WINDOWS
@@ -40,14 +40,14 @@ public:
  */
 class Console:private boost::noncopyable {
 public:
-	static PWriteChannel outChanell() throw(std::bad_alloc) {
-		return PWriteChannel(new FileChannel(stdout));
+	static SWriteChannel outChanell() throw(std::bad_alloc) {
+		return SWriteChannel(new FileChannel(stdout));
 	}
-	static PReadChannel inChanell() throw(std::bad_alloc) {
-		return PReadChannel(new FileChannel(stdin));
+	static SReadChannel inChanell() throw(std::bad_alloc) {
+		return SReadChannel(new FileChannel(stdin));
 	}
-	static PWriteChannel errChanell() throw(std::bad_alloc) {
-		return PWriteChannel(new FileChannel(stderr));
+	static SWriteChannel errChanell() throw(std::bad_alloc) {
+		return SWriteChannel(new FileChannel(stderr));
 	}
 };
 #endif // PLATFORM_UNIX

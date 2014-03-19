@@ -6,14 +6,17 @@
 
 namespace io {
 
+// helpers
+inline void* vpos(const byte_buffer& buff) {
+	return static_cast<void*>(&buff.position());
+}
 
-static std::string last_error_str()
+static std::string last_error_str(DWORD lastError)
 {
 	std::string result;
 	LPVOID lpMsgBuf;
-	DWORD bufLen = ::FormatMessage(
-	                   FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS,
-	                   NULL,::GetLastError(),
+	static DWORD flags = FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS;
+	DWORD bufLen = ::FormatMessage(flags,NULL,lastError,
 	                   MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
 	                   (LPTSTR) &lpMsgBuf, 0, NULL );
 	if (bufLen) {
@@ -24,12 +27,24 @@ static std::string last_error_str()
 	return result;
 }
 
+inline void validate_io(BOOL ioResult, const char* message) throw(io_exception) {
+	if(!ioResult) {
+		DWORD lastError = ::GetLastError();
+		if(ERROR_IO_PENDING != lastError) {
+			std::string errMsg(message);
+			errMsg.append(" ");
+			errMsg.append(last_error_str(lastError));
+			boost::throw_exception(io_exception(errMsg));
+		}
+	}
+}
+
 // File
 File::File(const char* path) BOOST_NOEXCEPT_OR_NOTHROW:
 path_(path)
 {}
 
-bool File::create() const
+bool File::create() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_WRITE, 0, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, 0);
 	bool result = INVALID_HANDLE_VALUE != hFile;
@@ -39,7 +54,7 @@ bool File::create() const
 	return result;
 }
 
-bool File::errace() const
+bool File::errace() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	bool result = exist();
 	if(result) {
@@ -48,7 +63,7 @@ bool File::errace() const
 	return result;
 }
 
-bool File::exist() const
+bool File::exist() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	WIN32_FIND_DATA findFileData;
 	HANDLE handle = ::FindFirstFile(path_, &findFileData) ;
@@ -59,74 +74,60 @@ bool File::exist() const
 	return result;
 }
 
-PReadChannel File::openForRead() throw(io_exception)
+SReadChannel File::openForRead() throw(io_exception)
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	if(INVALID_HANDLE_VALUE == hFile) {
-		throw io_exception("Can not open file");
+		boost::throw_exception(io_exception("Can not open file"));
 	}
-	return PReadChannel(new FileChannel(hFile));
+	return SReadChannel(new FileChannel(hFile));
 }
 
-PWriteChannel  File::openForWrite() throw(io_exception)
+SWriteChannel  File::openForWrite() throw(io_exception)
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	if(INVALID_HANDLE_VALUE == hFile) {
-		throw io_exception("Can not open file");
+		boost::throw_exception(io_exception("Can not open file"));
 	}
-	return PWriteChannel(new FileChannel(hFile));
+	return SWriteChannel(new FileChannel(hFile));
 }
 
 PReadWriteChannel  File::openForReadWrite() throw(io_exception)
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_READ | GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	if(INVALID_HANDLE_VALUE == hFile) {
-		throw io_exception("Can not open file");
+		boost::throw_exception(io_exception("Can not open file"));
 	}
 	return PReadWriteChannel(new FileChannel(hFile));
 }
 
 // FileChannel
 FileChannel::FileChannel(HANDLE id) BOOST_NOEXCEPT_OR_NOTHROW:
-ReadWriteChannel(),
-                 id_(id)
+	ReadWriteChannel(),
+	id_(id)
 {}
 
 std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 {
 	DWORD result;
-	if(
-		!::ReadFile(id_,
-	               reinterpret_cast<void*>(&buffer.position()),
-	               buffer.capacity(),
-	               &result,NULL)
-	  ) {
-		if(!ERROR_IO_PENDING != ::GetLastError()) {
-			std::string errMsg("Read file error.");
-		}
-		errMsg.append(last_error_str());
-		boost::throw_exception(io_exception(errMsg));
-	}
-}
-buffer.move(result);
-return result;
+	BOOL succeeded = ::ReadFile(id_,
+	                          vpos(buffer),
+	                          buffer.capacity(),
+	                          &result,NULL);
+	validate_io(succeeded,"Read file error.");
+	buffer.move(result);
+	return result;
 }
 
 std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 {
 	DWORD result;
-	if(!::WriteFile(id_,
-	                reinterpret_cast<void*>(&buffer.position()),
+	BOOL succeeded = ::WriteFile(id_,
+	                vpos(buffer),
 	                buffer.length(),
 	                &result,
-	                NULL)
-	  ) {
-		if(!ERROR_IO_PENDING != ::GetLastError()) {
-			std::string errMsg("Write file error");
-			errMsg.append(last_error_str());
-			boost::throw_exception(io_exception(errMsg));
-		}
-	}
+	                NULL);
+	validate_io(succeeded,"Write file error.");
 	return result;
 }
 

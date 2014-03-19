@@ -1,15 +1,14 @@
 # depslib dependency file v1.0
-1394820478 source:d:\cpp\channel\textdemo\main.cpp
+1395254460 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
 	<console.hpp>
 	<readwrite.hpp>
 	<datachannel.hpp>
-	<boost/thread.hpp>
-	<boost/thread/condition_variable.hpp>
+	<pipe.hpp>
 
-1382357087 d:\cpp\channel\include\console.hpp
+1395254361 d:\cpp\channel\include\console.hpp
 	<channels_config.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -21,14 +20,14 @@
 	<winsock2.h>
 	<windows.h>
 
-1383330675 d:\cpp\channel\include\file.hpp
+1395254361 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"channels.hpp"
 	<unistd.h>
 	<sys/types.h>
 	<sys/stat.h>
 
-1394821848 d:\cpp\channel\include\channels.hpp
+1395254350 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
@@ -1924,7 +1923,7 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1394815684 d:\cpp\channel\include\readwrite.hpp
+1395254460 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<charbuffers.hpp>
 	<convert.hpp>
@@ -1933,7 +1932,7 @@
 1382616958 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1383677244 d:\cpp\channel\include\convert.hpp
+1395254460 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -10631,4 +10630,10 @@
 1365976218 d:\cpp\boost_1_54_0\boost\detail\atomic_undef_macros.hpp
 
 1365976218 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
+
+1395256201 d:\cpp\channel\include\pipe.hpp
+	<boost/thread.hpp>
+	<boost/thread/condition_variable.hpp>
+	<channels.hpp>
+	<file.hpp>
 

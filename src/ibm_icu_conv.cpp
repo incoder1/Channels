@@ -39,7 +39,7 @@ UConverter* openConverter(const io::Charset* ch) throw(io::charset_exception) {
 	return result;
 }
 
-PConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(charset_exception)
+SConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(charset_exception)
 {
 	static CharsetFactory chFactory;
 	const Charset* srcCt = chFactory.forName(src);
@@ -50,7 +50,7 @@ PConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(chars
 	UConverter* intoUnc = openConverter(srcCt);
 	UConverter* fromUnc = openConverter(destCt);
 	ICUEngine engine(intoUnc, fromUnc);
-	return PConverter(new ICUConverter(engine, srcCt, destCt));
+	return SConverter(new ICUConverter(engine, srcCt, destCt));
 }
 
 // ICUEngine

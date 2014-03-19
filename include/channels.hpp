@@ -31,7 +31,7 @@ public:
 	{}
 };
 
-typedef boost::shared_ptr<ReadChannel> PReadChannel;
+typedef boost::shared_ptr<ReadChannel> SReadChannel;
 
 class CHANNEL_PUBLIC WriteChannel {
 private:
@@ -49,7 +49,7 @@ public:
 	{}
 };
 
-typedef boost::shared_ptr<WriteChannel> PWriteChannel;
+typedef boost::shared_ptr<WriteChannel> SWriteChannel;
 
 class CHANNEL_PUBLIC ReadWriteChannel:public virtual ReadChannel,public virtual WriteChannel {
 public:

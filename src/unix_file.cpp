@@ -34,29 +34,29 @@ bool File::exist() const
 	return buff.st_ino != NULL;
 }
 
-PReadChannel File::openForRead() throw(io_exception)
+SReadChannel File::openForRead() throw(io_exception)
 {
 	::FILE *fp = ::open(path_, O_RDONLY);
 	if(NULL == *fp) {
-		throw io_exception("Can not open file");
+		boost::throw_exception(io_exception("Can not open file"));
 	}
-	return PReadChannel(new FileChannel(fp));
+	return SReadChannel(new FileChannel(fp));
 }
 
-PWriteChannel  File::openForWrite() throw(io_exception)
+SWriteChannel  File::openForWrite() throw(io_exception)
 {
 	::FILE *fp = ::open(path_, O_WONLY | O_APPEND);
 	if(NULL == *fp) {
-		throw io_exception("Can not open file");
+		boost::throw_exception(io_exception("Can not open file"));
 	}
-	return PWriteChannel(new FileChannel(hFile));
+	return SWriteChannel(new FileChannel(hFile));
 }
 
 PReadWriteChannel  File::openForReadWrite() throw(io_exception)
 {
 	::FILE *fp = ::open(path_, O_RDWR | O_APPEND);
 	if(NULL == *fp) {
-		throw io_exception("Can not open file");
+		boost::throw_exception(io_exception("Can not open file"));
 	}
 	return PReadWriteChannel(new FileChannel(hFile));
 }

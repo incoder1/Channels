@@ -8,7 +8,7 @@ inline void validate_charset(const Charset* ch, const std::string& name) throw(c
 	validate(NULL == ch, name + " is not provided by iconv converter");
 }
 
-PConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(charset_exception)
+SConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(charset_exception)
 {
 	static CharsetFactory chFactory;
 	const Charset* srcCt = chFactory.forName(src);
@@ -19,7 +19,7 @@ PConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(cha
 	::iconv_t descrpt = ::iconv_open(destCt->name(), srcCt->name());
 	validate(descrpt == (::iconv_t)(-1), "Can not construct iconv engine instance");
 	IconvEngine engine(descrpt);
-	return PConverter(new IconvConverter(engine, srcCt, destCt) );
+	return SConverter(new IconvConverter(engine, srcCt, destCt) );
 }
 
 

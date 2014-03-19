@@ -75,7 +75,7 @@ PMLang::~PMLang()
 }
 
 
-PConverter CHANNEL_PUBLIC win32_converter(const char* src, const char* dst) throw(charset_exception)
+SConverter CHANNEL_PUBLIC win32_converter(const char* src, const char* dst) throw(charset_exception)
 {
 	static CharsetFactory chFactory;
 	const Charset* srcCt = chFactory.forName(src);
@@ -86,7 +86,7 @@ PConverter CHANNEL_PUBLIC win32_converter(const char* src, const char* dst) thro
 		boost::throw_exception(charset_exception("Source character set is equal destination, no conversation needed"));
 	}
 	PMLang conv = MLangEngine::instance()->createConveter(srcCt, destCt);
-	return PConverter(new Win32Converter(conv, srcCt,destCt));
+	return SConverter(new Win32Converter(conv, srcCt,destCt));
 }
 
 Win32Converter::Win32Converter(PMLang engine,const Charset* srcCt,const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW:
