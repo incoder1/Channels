@@ -4,7 +4,7 @@
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #	define MSVCCMP
 /*	Disable warnings:
-  4251 - class need DLL-interface will be used foe each class
+  4251 - class need DLL-interface will be used for each public API class
   4710 - function not inlined
   4711 - function selected for automatic inline expansion
 */

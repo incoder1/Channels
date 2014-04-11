@@ -9,6 +9,7 @@
 #include <boost/unordered_map.hpp>
 #include <boost/exception/all.hpp>
 #include <stdexcept>
+#include <cstring>
 
 namespace io {
 
@@ -84,13 +85,27 @@ public:
 };
 
 // Not available from DLL, do not use it
-class CHANNEL_PUBLIC CharsetFactory {
+class CHANNEL_PUBLIC Charsets:private boost::noncopyable {
 private:
-	typedef boost::unordered_map<std::string,const Charset*> hash_table_t;
-	hash_table_t charSets_;
+	typedef boost::unordered_map<std::string,const Charset*> ctmap_t;
+	Charsets() BOOST_NOEXCEPT_OR_NOTHROW;
+	const Charset* find(const char* name) const BOOST_NOEXCEPT_OR_NOTHROW;
+	static const Charsets* instance() BOOST_NOEXCEPT_OR_NOTHROW {
+		// tread safety not needed, and will be auto-provided in case of C++ 11
+		static Charsets factory;
+		return &factory;
+	}
+	inline void insert(const std::string& name, const Charset* ptr) {
+		nameMap_.insert(std::make_pair(name,ptr));
+	}
 public:
-	CharsetFactory() BOOST_NOEXCEPT_OR_NOTHROW;
-	const Charset* forName(const char* name) const;
+	static const Charset* forName(const char* name) BOOST_NOEXCEPT_OR_NOTHROW {
+		return instance()->find(name);
+	}
+	//inline std::vector<std::string> allNames() const {
+	//}
+private:
+	ctmap_t nameMap_;
 };
 
 /**

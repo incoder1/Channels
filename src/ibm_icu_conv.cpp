@@ -20,20 +20,20 @@ inline bool isWindowsChName(const Charset* ch) {
 	return (ch->id() >= 1250) && (ch->id() <= 1258);
 }
 
+// factory for converter
 UConverter* openConverter(const io::Charset* ch) throw(io::charset_exception) {
 	UConverter *result = NULL;
 	if(notUTF16(ch)) {
-		const char* chName;
+		std::string chName;
 		if(isWindowsChName(ch)) {
-			char winName[13];
-			winName[12] = 0;
-			std::sprintf(winName,"windows-%i",ch->id());
-			chName = winName;
+			static const char* WIN_CP_FORMAT = "windows-%1%";
+			boost::format format(WIN_CP_FORMAT);
+			chName.append((format % ch->id()).str());
 		} else {
-			chName = ch->name();
+			chName.append(ch->name());
 		}
 		UErrorCode errCode = U_ZERO_ERROR;
-		result = ::ucnv_open(chName , &errCode);
+		result = ::ucnv_open(chName.c_str(), &errCode);
 		validate_create_conv(errCode, ch->name());
 	}
 	return result;
@@ -41,10 +41,9 @@ UConverter* openConverter(const io::Charset* ch) throw(io::charset_exception) {
 
 SConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(charset_exception)
 {
-	static CharsetFactory chFactory;
-	const Charset* srcCt = chFactory.forName(src);
+	const Charset* srcCt = Charsets::forName(src);
 	validate_charset(srcCt, src);
-	const Charset* destCt = chFactory.forName(dst);
+	const Charset* destCt = Charsets::forName(dst);
 	validate_charset(destCt, dst);
 	validate(srcCt->equal(destCt),"Source character set is equal destination, no conversation needed");
 	UConverter* intoUnc = openConverter(srcCt);
@@ -54,15 +53,20 @@ SConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(chars
 }
 
 // ICUEngine
+ICUEngine::ICUEngine(::UConverter* into, ::UConverter* from) BOOST_NOEXCEPT_OR_NOTHROW:
+	intoUTF16_(into,::ucnv_close),
+	fromUTF16_(from,::ucnv_close)
+{}
+
 UErrorCode ICUEngine::toUnicode(const char* src, std::size_t srcLen, UChar* dst, std::size_t& aval) const {
 		UErrorCode result = U_ZERO_ERROR;
-		aval = ::ucnv_toUChars(intoUTF16_, dst, aval, src, srcLen, &result);
+		aval = ::ucnv_toUChars(intoUTF16_.get(), dst, aval, src, srcLen, &result);
 		return result;
 }
 
 UErrorCode ICUEngine::fromUnicode(UChar* src, std::size_t srcLen, char* dst, std::size_t& aval) const {
 		UErrorCode result = U_ZERO_ERROR;
-		aval = ::ucnv_fromUChars(fromUTF16_, dst, aval, src, srcLen, &result);
+		aval = ::ucnv_fromUChars(fromUTF16_.get(), dst, aval, src, srcLen, &result);
 		return result;
 }
 

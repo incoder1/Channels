@@ -30,7 +30,7 @@ protected:
 	/// Only for implementor
 	explicit Pipe() BOOST_NOEXCEPT_OR_NOTHROW;
 public:
-	virtual ~Pipe() BOOST_NOEXCEPT_OR_NOTHROW = 0;
+	virtual ~Pipe() BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
 	 * Opens the sink writable channel
 	 * \return smart pointer to the sink channel

@@ -16,13 +16,8 @@ public:
 	{}
 };
 
-class CHANNEL_PUBLIC ReadChannel {
-private:
-	ReadChannel(const ReadChannel&) BOOST_NOEXCEPT_OR_NOTHROW
-	{}
-	const ReadChannel& operator=(const ReadChannel&) {
-		return *this;
-	}
+
+class CHANNEL_PUBLIC ReadChannel:private boost::noncopyable {
 public:
 	ReadChannel()
 	{}
@@ -76,7 +71,8 @@ public:
 	{}
 };
 
-typedef  boost::shared_ptr<ReadWriteChannel> PReadWriteChannel;
+typedef  boost::shared_ptr<ReadWriteChannel> SReadWriteChannel;
+
 
 } // namespace io
 

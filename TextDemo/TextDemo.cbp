@@ -55,6 +55,8 @@
 					<Add option="-s" />
 					<Add option="-Wl,-s" />
 					<Add option="-flto" />
+					<Add library="boost_system-mgw47-mt-1_54.dll" />
+					<Add library="boost_thread-mgw47-mt-1_54.dll" />
 					<Add directory="../bin/ReleaseMinGW32" />
 					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
 					<Add directory="C:/MinGW/msys/1.0/local/lib" />
@@ -70,13 +72,15 @@
 					<Add option="/MDd" />
 					<Add option="/O2" />
 					<Add option="/W1" />
-					<Add option="/EHsc" />
+					<Add option="/EHsc /D_SCL_SECURE_NO_WARNINGS /Ox" />
 					<Add option="/DBOOST_ALL_NO_LIB" />
+					<Add option="/DCONV_ENGINE_MLANG" />
 				</Compiler>
 				<Linker>
 					<Add library="ole32" />
 					<Add library="kernel32" />
 					<Add library="boost_system-vc100-mt-1_54" />
+					<Add library="boost_thread-vc100-mt-1_54" />
 					<Add directory="../bin/ReleaseMSVC10" />
 					<Add directory="../../boost_1_54_0/stage/msvc/lib" />
 				</Linker>
@@ -97,6 +101,8 @@
 				</Compiler>
 				<Linker>
 					<Add library="icuuc" />
+					<Add library="boost_system-vc100-mt-1_54" />
+					<Add library="boost_thread-vc100-mt-1_54" />
 					<Add directory="../bin/ReleaseMSVC10-ICU" />
 					<Add directory="../../boost_1_54_0/icu/lib64" />
 				</Linker>
@@ -127,7 +133,10 @@
 				<Linker>
 					<Add library="C:\MinGW\msys\1.0\local\lib\icudt.dll.a" />
 					<Add library="C:\MinGW\msys\1.0\local\lib\icuuc.dll.a" />
+					<Add library="boost_system-mgw47-mt-d-1_54.dll" />
+					<Add library="boost_thread-mgw47-mt-d-1_54.dll" />
 					<Add directory="../bin/DebugMinWG32-ICU" />
+					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
 				</Linker>
 			</Target>
 		</Build>

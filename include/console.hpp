@@ -16,19 +16,23 @@ namespace io {
  *  Standard in, out and error stream supported.
  */
 class Console:private boost::noncopyable {
+private:
+	static inline FileChannel* consCl(DWORD id) {
+		return new FileChannel(::GetStdHandle(id),false);
+	}
 public:
 	static void setCharset(const Charset* charset) BOOST_NOEXCEPT {
 		::SetConsoleCP(charset->id());
 		::SetConsoleOutputCP(charset->id());
 	}
 	static SWriteChannel outChanell() throw(std::bad_alloc) {
-		return SWriteChannel(new FileChannel(::GetStdHandle(STD_OUTPUT_HANDLE)));
+		return	SWriteChannel(consCl(STD_OUTPUT_HANDLE));
 	}
 	static SReadChannel inChanell() throw(std::bad_alloc) {
-		return SReadChannel(new FileChannel(::GetStdHandle(STD_INPUT_HANDLE)));
+		return SReadChannel(consCl(STD_INPUT_HANDLE));
 	}
 	static SWriteChannel errChanell() throw(std::bad_alloc) {
-		return SWriteChannel(new FileChannel(::GetStdHandle(STD_ERROR_HANDLE)));
+		return SWriteChannel(consCl(STD_ERROR_HANDLE));
 	}
 };
 #endif // PLATFROM_WINDOWS

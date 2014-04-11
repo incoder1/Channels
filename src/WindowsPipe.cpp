@@ -36,7 +36,7 @@ WindowsPipe::~WindowsPipe() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
 SWriteChannel WindowsPipe::sink() BOOST_NOEXCEPT_OR_NOTHROW {
-	SWriteChannel result(new FileChannel(sink_));
+	SWriteChannel result(new FileChannel(sink_, true));
 	canRead_ = true;
 	lock_t lock(mutex_);
 	condition_.notify_all();
@@ -48,7 +48,7 @@ SReadChannel WindowsPipe::source() BOOST_NOEXCEPT_OR_NOTHROW {
 		lock_t lock(mutex_);
 		condition_.wait(lock);
 	}
-	return SReadChannel(new FileChannel(source_));
+	return SReadChannel(new FileChannel(source_, true));
 }
 
 } // namespace io

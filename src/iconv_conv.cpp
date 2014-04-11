@@ -10,10 +10,9 @@ inline void validate_charset(const Charset* ch, const std::string& name) throw(c
 
 SConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(charset_exception)
 {
-	static CharsetFactory chFactory;
-	const Charset* srcCt = chFactory.forName(src);
+	const Charset* srcCt = Charsets::forName(src);
 	validate_charset(srcCt, src);
-	const Charset* destCt = chFactory.forName(dst);
+	const Charset* destCt = Charsets::forName(dst);
 	validate_charset(destCt, dst);
 	validate(srcCt->equal(destCt),"Source character set is equal destination, no conversation needed");
 	::iconv_t descrpt = ::iconv_open(destCt->name(), srcCt->name());

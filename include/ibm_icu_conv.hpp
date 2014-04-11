@@ -3,7 +3,8 @@
 
 #define DEBUG_TMI 0  /* define to 1 to enable Too Much Information */
 
-#include <cstdio>
+#include <boost/format.hpp>
+#include <boost/shared_ptr.hpp>
 
 #include <convert.hpp>
 
@@ -18,34 +19,10 @@ namespace io {
 
 class ICUEngine {
 private:
-	mutable ::UConverter* intoUTF16_;
-	mutable ::UConverter* fromUTF16_;
-	void swapPtr(const ICUEngine& c) {
-		intoUTF16_ = c.intoUTF16_;
-		fromUTF16_ = c.fromUTF16_;
-		c.intoUTF16_ = NULL;
-		c.fromUTF16_ = NULL;
-	}
+	boost::shared_ptr<::UConverter> intoUTF16_;
+	boost::shared_ptr<::UConverter> fromUTF16_;
 public:
-	ICUEngine(::UConverter* into, ::UConverter* from) BOOST_NOEXCEPT_OR_NOTHROW:
-		intoUTF16_(into),
-		fromUTF16_(from)
-	{}
-	ICUEngine(const ICUEngine& c) {
-		swapPtr(c);
-	}
-	const ICUEngine& operator=(const ICUEngine& c) {
-		swapPtr(c);
-		return *this;
-	}
-	~ICUEngine() {
-		if(NULL != intoUTF16_) {
-			::ucnv_close(intoUTF16_);
-		}
-		if(NULL != fromUTF16_) {
-			::ucnv_close(fromUTF16_);
-		}
-	}
+	ICUEngine(::UConverter* into, ::UConverter* from) BOOST_NOEXCEPT_OR_NOTHROW;
 	UErrorCode toUnicode(const char* src, std::size_t srcLen, UChar* dst, std::size_t& aval) const;
 	UErrorCode fromUnicode(UChar* src, std::size_t srcLen, char* dst, std::size_t& aval) const;
 };

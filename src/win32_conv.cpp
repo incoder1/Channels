@@ -77,10 +77,9 @@ PMLang::~PMLang()
 
 SConverter CHANNEL_PUBLIC win32_converter(const char* src, const char* dst) throw(charset_exception)
 {
-	static CharsetFactory chFactory;
-	const Charset* srcCt = chFactory.forName(src);
+	const Charset* srcCt = Charsets::forName(src);
 	validate_charset(srcCt, src);
-	const Charset* destCt = chFactory.forName(dst);
+	const Charset* destCt = Charsets::forName(dst);
 	validate_charset(destCt, dst);
 	if(srcCt->equal(destCt) ) {
 		boost::throw_exception(charset_exception("Source character set is equal destination, no conversation needed"));

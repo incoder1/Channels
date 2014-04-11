@@ -80,7 +80,7 @@ SReadChannel File::openForRead() throw(io_exception)
 	if(INVALID_HANDLE_VALUE == hFile) {
 		boost::throw_exception(io_exception("Can not open file"));
 	}
-	return SReadChannel(new FileChannel(hFile));
+	return SReadChannel(new FileChannel(hFile, true));
 }
 
 SWriteChannel  File::openForWrite() throw(io_exception)
@@ -89,23 +89,25 @@ SWriteChannel  File::openForWrite() throw(io_exception)
 	if(INVALID_HANDLE_VALUE == hFile) {
 		boost::throw_exception(io_exception("Can not open file"));
 	}
-	return SWriteChannel(new FileChannel(hFile));
+	return SWriteChannel(new FileChannel(hFile, true));
 }
 
-PReadWriteChannel  File::openForReadWrite() throw(io_exception)
+SReadWriteChannel  File::openForReadWrite() throw(io_exception)
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_READ | GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	if(INVALID_HANDLE_VALUE == hFile) {
 		boost::throw_exception(io_exception("Can not open file"));
 	}
-	return PReadWriteChannel(new FileChannel(hFile));
+	return SReadWriteChannel(new FileChannel(hFile, true));
 }
 
 // FileChannel
-FileChannel::FileChannel(HANDLE id) BOOST_NOEXCEPT_OR_NOTHROW:
+FileChannel::FileChannel(HANDLE id, bool close) BOOST_NOEXCEPT_OR_NOTHROW:
 	ReadWriteChannel(),
-	id_(id)
-{}
+	id_(id),
+	close_(close)
+{
+}
 
 std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 {
@@ -142,7 +144,9 @@ void FileChannel::seek(std::size_t offset, ReadWriteChannel::MoveMethod method) 
 
 FileChannel::~FileChannel()
 {
-	::CloseHandle(id_);
+	if(close_) {
+		::CloseHandle(id_);
+	}
 }
 
 } // namespace io

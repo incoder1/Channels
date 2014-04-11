@@ -87,6 +87,14 @@ public:
 	inline pointer const operator&() const {
 		return position_;
 	}
+
+	bool operator<(const buffer_iterator& rhs) {
+		return position_ < rhs.position_;
+	}
+
+	bool operator>(const buffer_iterator& rhs) {
+		return position_ > rhs.position_;
+	}
 };
 
 /**
@@ -287,13 +295,16 @@ public:
 	{}
 };
 
-// Really allocates dynamic memory
+/// Really allocates dynamic memory
+// TODO: See whether can be replaces with the OS call for memory allocation
+// instead of stdlib based new operator
 template<typename T>
 inline T* new_alloc(const std::size_t count) throw(std::bad_alloc)
 {
 	return new T[count];
 }
 
+/// Deallocates block of dynamically allocated memory
 template<typename T>
 inline void delete_free(T* ptr)
 {
@@ -317,6 +328,7 @@ public:
 template<typename T>
 class empty_free {
 public:
+	// should be removed by the compiler optimization
 	inline void operator()(T*)
 	{}
 };

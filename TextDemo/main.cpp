@@ -29,20 +29,24 @@
 //#include <network.hpp>
 
 #if	defined(PLATFROM_WINDOWS)
-	const char* LOCALE_CH = "CP1251";
-	inline io::SConverter to_console_conv() {
-		return io::new_converter("UTF-8",LOCALE_CH);
-	}
-	inline io::SConverter from_console_conv() {
-		return io::new_converter(LOCALE_CH,"UTF-8");
-	}
+const char* LOCALE_CH = "CP1251";
+inline io::SConverter to_console_conv()
+{
+	return io::new_converter("UTF-8",LOCALE_CH);
+}
+inline io::SConverter from_console_conv()
+{
+	return io::new_converter(LOCALE_CH,"UTF-8");
+}
 #elif defined(PLATFROM_UNIX)
-	inline io::SConverter to_console_conv() {
-		return io::char_empty_converter();
-	}
-	inline io::SConverter from_console_conv() {
-		return io::char_empty_converter();
-	}
+inline io::SConverter to_console_conv()
+{
+	return io::char_empty_converter();
+}
+inline io::SConverter from_console_conv()
+{
+	return io::char_empty_converter();
+}
 #else
 #	error "This operating system is not supported yet"
 #endif
@@ -54,15 +58,17 @@
 #endif // HAS_CPP11
 
 typedef std::string ustring;
-
+typedef io::Writer<std::string> awriter;
+typedef io::Writer<ustring> uwriter;
+typedef io::Reader<ustring> ureader;
 
 void change_console_charset()
 {
-	io::CharsetFactory chf;
-	io::Console::setCharset(chf.forName(LOCALE_CH));
+	io::Console::setCharset(io::Charsets::forName(LOCALE_CH));
 }
 
-void pipe_write_routine(io::SPipe pipe) {
+void pipe_write_routine(io::SPipe pipe) throw(io::io_exception)
+{
 	typedef io::Writer<std::string> awriter;
 	try {
 		awriter out(pipe->sink(),io::char_empty_converter());
@@ -72,38 +78,51 @@ void pipe_write_routine(io::SPipe pipe) {
 	}
 }
 
+inline void charset_console_sample() throw(io::io_exception)
+{
+	// char set conversation sample
+	uwriter out(io::Console::outChanell(), to_console_conv());
+	out.write(U8("Hello world English version. Привет мир, русская верссия\n\r"));
+	io::byte_buffer readBuff = io::new_byte_byffer(512);
+	ureader in(io::Console::inChanell(),readBuff, from_console_conv());
+	out.write(U8("Type something :> "));
+	out.write(in.read());
+}
+
+inline void data_channel_sample() throw(io::io_exception)
+{
+	// data channel sample
+	char msg[14];
+	io::DataChannel dch((void*)msg, std::strlen(msg));
+	typedef io::Writer<std::string> awriter;
+	awriter aout(io::Console::outChanell(), io::char_empty_converter());
+	aout.write("Hello from data channel\n");
+}
+
+inline void pipe_sample() throw(io::io_exception)
+{
+	// pipe sample
+	io::SPipe pipe = io::open_pipe();
+	boost::thread writeThread(boost::bind(pipe_write_routine,pipe));
+	writeThread.start_thread();
+	io::Reader<std::string> reader(pipe->source(), io::new_byte_byffer(100), io::char_empty_converter());
+	std::string str = reader.read();
+	awriter aout(io::Console::outChanell(), io::char_empty_converter());
+	aout.write(str);
+}
+
+
 #ifndef _MSC_VER
 int main(int argc, const char** argv)
 #else
 int _tmain(int argc, TCHAR *argv[])
 #endif
 {
-	change_console_charset();
-	typedef io::Writer<ustring> uwriter;
-	typedef io::Reader<ustring> ureader;
 	try {
-		// char set conversation sample
-		uwriter out(io::Console::outChanell(), to_console_conv());
-		out.write(U8("Hello world English version. Привет мир, русская верссия\n\r"));
-		io::byte_buffer readBuff = io::new_byte_byffer(512);
-		ureader in(io::Console::inChanell(),readBuff, from_console_conv());
-		out.write(U8("Type something :> "));
-		out.write(in.read());
-
-		// data channel sample
-		char msg[14];
-		io::DataChannel dch((void*)msg, std::strlen(msg));
-		typedef io::Writer<std::string> awriter;
-		awriter aout(io::Console::outChanell(), io::char_empty_converter());
-		aout.write("Hello from data channel\n");
-
-		// pipe sample
-		io::SPipe pipe = io::open_pipe();
-		boost::thread writeThread(boost::bind(pipe_write_routine,pipe));
-		writeThread.start_thread();
-		io::Reader<std::string> reader(pipe->source(), readBuff, io::char_empty_converter());
-		std::string str = reader.read();
-		aout.write(str);
+		change_console_charset();
+		charset_console_sample();
+		data_channel_sample();
+		pipe_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}

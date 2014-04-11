@@ -52,13 +52,13 @@ SWriteChannel  File::openForWrite() throw(io_exception)
 	return SWriteChannel(new FileChannel(hFile));
 }
 
-PReadWriteChannel  File::openForReadWrite() throw(io_exception)
+SReadWriteChannel  File::openForReadWrite() throw(io_exception)
 {
 	::FILE *fp = ::open(path_, O_RDWR | O_APPEND);
 	if(NULL == *fp) {
 		boost::throw_exception(io_exception("Can not open file"));
 	}
-	return PReadWriteChannel(new FileChannel(hFile));
+	return SReadWriteChannel(new FileChannel(hFile));
 }
 
 // File Channel

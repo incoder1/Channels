@@ -5,7 +5,7 @@
 #include "channels.hpp"
 
 #ifdef PLATFORM_UNIX
-# 	include <unistd.h>
+#	include <unistd.h>
 #	include <sys/types.h>
 #	include <sys/stat.h>
 #endif // PLATFORM_UNIX
@@ -55,23 +55,25 @@ public:
 	 * Open blocking read-write file channel
 	 * \return reference smart pointer on read-write file channel
 	 */
-	PReadWriteChannel openForReadWrite() throw(io_exception);
+	SReadWriteChannel openForReadWrite() throw(io_exception);
 };
 
 
 #ifdef PLATFROM_WINDOWS
+
 /**
  * ! \brief Windows depended blocking file Channel implementation.
  */
 class CHANNEL_PUBLIC FileChannel:public ReadWriteChannel {
-private:
-	HANDLE id_;
 public:
-	explicit FileChannel(HANDLE id) BOOST_NOEXCEPT_OR_NOTHROW;
+	FileChannel(HANDLE id, bool close) BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual ~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
 	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
 	virtual void seek(std::size_t offset, ReadWriteChannel::MoveMethod method) throw(io_exception);
+private:
+	HANDLE id_;
+	const bool close_;
 };
 
 #endif
