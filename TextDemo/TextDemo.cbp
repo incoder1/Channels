@@ -105,6 +105,7 @@
 					<Add library="boost_thread-vc100-mt-1_54" />
 					<Add directory="../bin/ReleaseMSVC10-ICU" />
 					<Add directory="../../boost_1_54_0/icu/lib64" />
+					<Add directory="../../boost_1_54_0/stage/msvc/lib" />
 				</Linker>
 			</Target>
 			<Target title="DebugMinGW32-ICU">

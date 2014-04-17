@@ -18,9 +18,10 @@ public:
 
 
 class CHANNEL_PUBLIC ReadChannel:private boost::noncopyable {
-public:
+protected:
 	ReadChannel()
 	{}
+public:
 	virtual std::size_t read(byte_buffer& buffer) throw(io_exception) = 0;
 	virtual ~ReadChannel()
 	{}
@@ -28,13 +29,7 @@ public:
 
 typedef boost::shared_ptr<ReadChannel> SReadChannel;
 
-class CHANNEL_PUBLIC WriteChannel {
-private:
-	WriteChannel(const WriteChannel&) BOOST_NOEXCEPT_OR_NOTHROW
-	{}
-	const WriteChannel& operator=(const WriteChannel&) {
-		return *this;
-	}
+class CHANNEL_PUBLIC WriteChannel:private boost::noncopyable {
 protected:
 	WriteChannel()
 	{}

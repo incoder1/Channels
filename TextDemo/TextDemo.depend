@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1397240206 source:d:\cpp\channel\textdemo\main.cpp
+1397734359 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -8,16 +8,16 @@
 	<datachannel.hpp>
 	<pipe.hpp>
 
-1397235792 d:\cpp\channel\include\console.hpp
+1397734330 d:\cpp\channel\include\console.hpp
 	<channels_config.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<convert.hpp>
 	<file.hpp>
+	<WindowsConsole.hpp>
 
-1397136617 d:\cpp\channel\include\channels_config.h
+1397734587 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
-	<winsock2.h>
 	<windows.h>
 
 1396038931 d:\cpp\channel\include\file.hpp
@@ -27,7 +27,7 @@
 	<sys/types.h>
 	<sys/stat.h>
 
-1397239912 d:\cpp\channel\include\channels.hpp
+1397662190 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
@@ -10637,4 +10637,9 @@
 	<boost/thread/condition_variable.hpp>
 	<channels.hpp>
 	<file.hpp>
+
+1397737276 d:\cpp\channel\include\windowsconsole.hpp
+	<boost/function.hpp>
+	<boost/bind.hpp>
+	<channels.hpp>
 

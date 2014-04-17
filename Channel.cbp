@@ -153,6 +153,7 @@
 			<Add directory="include" />
 			<Add directory="../boost_1_54_0" />
 		</Compiler>
+		<Unit filename="include/WindowsConsole.hpp" />
 		<Unit filename="include/buffers.hpp" />
 		<Unit filename="include/bytebuffer.hpp" />
 		<Unit filename="include/channels.hpp" />
@@ -175,6 +176,7 @@
 		<Unit filename="include/win32_conv.hpp">
 			<Option target="ReleaseMSVC10" />
 		</Unit>
+		<Unit filename="src/WindowsConsole.cpp" />
 		<Unit filename="src/WindowsPipe.cpp" />
 		<Unit filename="src/convert.cpp" />
 		<Unit filename="src/datachannel.cpp" />

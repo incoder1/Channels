@@ -15,7 +15,6 @@
 #endif
 
 
-
 #if defined(_WIN32) || defined(_WIN64)
 #	ifndef PLATFROM_WINDOWS
 #		define PLATFROM_WINDOWS 1
@@ -30,11 +29,11 @@
 // Shared lib / DLL special keywords if any
 #ifdef PLATFROM_WINDOWS
 
+#	include <windows.h>
+
 #	ifdef CHANNEL_BUILD_DLL
 #		define WIN32_LEAN_AND_MEAN
 #	endif // WIN32_LEAN_AND_MEAN
-#	include <winsock2.h>
-#	include <windows.h>
 
 // MSVC and MinGW
 #	ifdef CHANNEL_BUILD_DLL
@@ -47,5 +46,7 @@
 // unixes does not need anything special
 #	define CHANNEL_PUBLIC
 #endif
+
+// C++ 11 detection
 
 #endif // CHANNELS_CONFIG_H_INCLUDED
