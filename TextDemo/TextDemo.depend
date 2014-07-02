@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1397734359 source:d:\cpp\channel\textdemo\main.cpp
+1404306192 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -8,7 +8,7 @@
 	<datachannel.hpp>
 	<pipe.hpp>
 
-1397734330 d:\cpp\channel\include\console.hpp
+1398265129 d:\cpp\channel\include\console.hpp
 	<channels_config.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -16,18 +16,16 @@
 	<file.hpp>
 	<WindowsConsole.hpp>
 
-1397734587 d:\cpp\channel\include\channels_config.h
+1402680414 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
 	<windows.h>
 
-1396038931 d:\cpp\channel\include\file.hpp
+1402680866 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
-	"channels.hpp"
-	<unistd.h>
-	<sys/types.h>
-	<sys/stat.h>
+	"WindowsFile.hpp"
+	"unixfile.hpp"
 
-1397662190 d:\cpp\channel\include\channels.hpp
+1403724138 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
@@ -1342,7 +1340,7 @@
 
 1355254521 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\operator_bool.hpp
 
-1385123166 d:\cpp\channel\include\bytebuffer.hpp
+1402601804 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1633,7 +1631,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1397128733 d:\cpp\channel\include\buffers.hpp
+1402688090 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1923,7 +1921,7 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1395258060 d:\cpp\channel\include\readwrite.hpp
+1403720661 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<charbuffers.hpp>
 	<convert.hpp>
@@ -1932,7 +1930,7 @@
 1382620558 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1397240874 d:\cpp\channel\include\convert.hpp
+1402600823 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -10638,8 +10636,20 @@
 	<channels.hpp>
 	<file.hpp>
 
-1397737276 d:\cpp\channel\include\windowsconsole.hpp
+1401472652 d:\cpp\channel\include\windowsconsole.hpp
 	<boost/function.hpp>
 	<boost/bind.hpp>
 	<channels.hpp>
+
+1404306127 d:\cpp\channel\include\windowsfile.hpp
+	"abstractfile.hpp"
+
+1404303583 d:\cpp\channel\include\abstractfile.hpp
+	"channels.hpp"
+
+1403182980 d:\cpp\channel\include\unixfile.hpp
+	"abstractfile.hpp"
+	<unistd.h>
+	<sys/types.h>
+	<sys/stat.h>
 

@@ -2,7 +2,7 @@
 #define CHANNELS_CONFIG_H_INCLUDED4
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
-#	define MSVCCMP
+#	define MSVC_CL
 /*	Disable warnings:
   4251 - class need DLL-interface will be used for each public API class
   4710 - function not inlined
@@ -43,10 +43,9 @@
 #	endif
 
 #else
-// unixes does not need anything special
+// UNIX(ELF32/64) not need anything special
 #	define CHANNEL_PUBLIC
 #endif
 
-// C++ 11 detection
 
 #endif // CHANNELS_CONFIG_H_INCLUDED

@@ -95,8 +95,8 @@ Win32Converter::Win32Converter(PMLang engine,const Charset* srcCt,const Charset*
 
 void Win32Converter::convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception)
 {
-	BYTE *srcptr = const_cast<BYTE*>(&src.position());
-	BYTE *dstptr = const_cast<BYTE*>(&dest.position());
+	BYTE *srcptr = const_cast<BYTE*>(src.position().ptr());
+	BYTE *dstptr = const_cast<BYTE*>(dest.position().ptr());
 	UINT srclen = src.length();
 	UINT avail = dest.capacity();
 	HRESULT status = engine_->DoConversion(srcptr, &srclen, dstptr, &avail);

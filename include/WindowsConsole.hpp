@@ -20,7 +20,7 @@ typedef struct _CONSOLE_READCONSOLE_CONTROL {
 	ULONG dwCtrlWakeupMask;
 	ULONG dwControlKeyState;
 } CONSOLE_READCONSOLE_CONTROL, *PCONSOLE_READCONSOLE_CONTROL;
-#endif
+#endif /* __GNUC__ */
 
 namespace io {
 

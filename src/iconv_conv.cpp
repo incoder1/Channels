@@ -30,8 +30,8 @@ IconvConverter::IconvConverter(const IconvEngine& engine, const Charset* srcCt, 
 
 void IconvConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception)
 {
-	char *itptr = reinterpret_cast<char*>(&src.position());
-	char *dstptr = reinterpret_cast<char*>(&dest.position());
+	char *itptr = reinterpret_cast<char*>(src.position().ptr());
+	char *dstptr = reinterpret_cast<char*>(dest.position().ptr());
 	std::size_t srclen = src.length();
 	std::size_t avail = dest.capacity();
 	std::size_t iconvValue = engine_.conv(&itptr, &srclen, &dstptr, &avail);

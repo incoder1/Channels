@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1397240962 source:d:\cpp\channel\src\convert.cpp
+1402600836 source:d:\cpp\channel\src\convert.cpp
 	"convert.hpp"
 
-1397240874 d:\cpp\channel\include\convert.hpp
+1402600823 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -12,11 +12,11 @@
 	<stdexcept>
 	<cstring>
 
-1397734587 d:\cpp\channel\include\channels_config.h
+1402680414 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
 	<windows.h>
 
-1385123166 d:\cpp\channel\include\bytebuffer.hpp
+1402601804 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1349,7 +1349,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1397128733 d:\cpp\channel\include\buffers.hpp
+1402688090 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -5209,13 +5209,13 @@
 
 1310276757 d:\cpp\boost_1_54_0\boost\exception\detail\clone_current_exception.hpp
 
-1385124520 source:d:\cpp\channel\src\datachannel.cpp
+1401736697 source:d:\cpp\channel\src\datachannel.cpp
 	"datachannel.hpp"
 
 1385124524 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1397662190 d:\cpp\channel\include\channels.hpp
+1403724138 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
@@ -5537,20 +5537,19 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1381510403 source:d:\cpp\channel\src\main.cpp
+1403274125 source:d:\cpp\channel\src\main.cpp
 	<channels_config.h>
+	"WindowsFile.hpp"
 
-1396039129 source:d:\cpp\channel\src\windows_file.cpp
+1401736735 source:d:\cpp\channel\src\windows_file.cpp
 	"file.hpp"
 
-1396038931 d:\cpp\channel\include\file.hpp
+1402680866 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
-	"channels.hpp"
-	<unistd.h>
-	<sys/types.h>
-	<sys/stat.h>
+	"WindowsFile.hpp"
+	"unixfile.hpp"
 
-1397133990 source:d:\cpp\channel\src\windowspipe.cpp
+1402601955 source:d:\cpp\channel\src\windowspipe.cpp
 	"pipe.hpp"
 
 1396039300 d:\cpp\channel\include\pipe.hpp
@@ -7108,10 +7107,10 @@
 
 1365979818 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
 
-1397240342 source:d:\cpp\channel\src\iconv_conv.cpp
+1401736720 source:d:\cpp\channel\src\iconv_conv.cpp
 	"iconv_conv.hpp"
 
-1383333755 d:\cpp\channel\include\iconv_conv.hpp
+1402600841 d:\cpp\channel\include\iconv_conv.hpp
 	<string>
 	<cstring>
 	<cerrno>
@@ -7128,10 +7127,10 @@
 	<time.h>
 	<wchar.h>
 
-1397733702 source:d:\cpp\channel\src\windowsconsole.cpp
+1401736748 source:d:\cpp\channel\src\windowsconsole.cpp
 	"WindowsConsole.hpp"
 
-1397733603 d:\cpp\channel\include\windowsconsole.hpp
+1401472652 d:\cpp\channel\include\windowsconsole.hpp
 	<boost/function.hpp>
 	<boost/bind.hpp>
 	<channels.hpp>
@@ -7142,7 +7141,7 @@
 	<guiddef.h>
 	<guiddef.h>
 
-1397240364 source:d:\cpp\channel\src\win32_conv.cpp
+1402598348 source:d:\cpp\channel\src\win32_conv.cpp
 	"win32_conv.hpp"
 
 1383333841 d:\cpp\channel\include\win32_conv.hpp
@@ -7152,4 +7151,201 @@
 	<boost/thread/once.hpp>
 	<Objbase.h>
 	<Mlang.h>
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\utypes.h
+	"unicode/umachine.h"
+	"unicode/uversion.h"
+	"unicode/uconfig.h"
+	<float.h>
+	"unicode/utf.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\umachine.h
+	"unicode/ptypes.h"
+	<stddef.h>
+	"unicode/urename.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\ptypes.h
+	<stddef.h>
+	"unicode/platform.h"
+	<stdint.h>
+	<features.h>
+	<inttypes.h>
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\platform.h
+	"unicode/uconfig.h"
+	"unicode/uvernum.h"
+	<android/api-level.h>
+	<sys/isa_defs.h>
+	<TargetConditionals.h>
+
+1369281714 d:\cpp\boost_1_54_0\icu\include\unicode\uconfig.h
+	"uconfig_local.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\uvernum.h
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\urename.h
+	"unicode/uconfig.h"
+	"unicode/umachine.h"
+	"unicode/uvernum.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\uversion.h
+	"unicode/umachine.h"
+	"unicode/uvernum.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\utf.h
+	"unicode/umachine.h"
+	"unicode/utf8.h"
+	"unicode/utf16.h"
+	"unicode/utf_old.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\utf8.h
+	"unicode/umachine.h"
+	"unicode/utf.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\utf16.h
+	"unicode/umachine.h"
+	"unicode/utf.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\utf_old.h
+	"unicode/utf.h"
+	"unicode/utf8.h"
+	"unicode/utf16.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\ucnv.h
+	"unicode/ucnv_err.h"
+	"unicode/uenum.h"
+	"unicode/localpointer.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\ucnv_err.h
+	"unicode/utypes.h"
+
+1369281714 d:\cpp\boost_1_54_0\icu\include\unicode\uenum.h
+	"unicode/utypes.h"
+	"unicode/localpointer.h"
+	"unicode/strenum.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\localpointer.h
+	"unicode/utypes.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\strenum.h
+	"unicode/uobject.h"
+	"unicode/unistr.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\uobject.h
+	"unicode/utypes.h"
+
+1369281718 d:\cpp\boost_1_54_0\icu\include\unicode\unistr.h
+	"unicode/utypes.h"
+	"unicode/rep.h"
+	"unicode/std_string.h"
+	"unicode/stringpiece.h"
+	"unicode/bytestream.h"
+	"unicode/ucasemap.h"
+
+1369281718 d:\cpp\boost_1_54_0\icu\include\unicode\rep.h
+	"unicode/uobject.h"
+
+1369281714 d:\cpp\boost_1_54_0\icu\include\unicode\std_string.h
+	"unicode/utypes.h"
+	<string>
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\stringpiece.h
+	"unicode/utypes.h"
+	"unicode/uobject.h"
+	"unicode/std_string.h"
+
+1369281714 d:\cpp\boost_1_54_0\icu\include\unicode\bytestream.h
+	"unicode/utypes.h"
+	"unicode/uobject.h"
+	"unicode/std_string.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\ucasemap.h
+	"unicode/utypes.h"
+	"unicode/ustring.h"
+	"unicode/localpointer.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\ustring.h
+	"unicode/utypes.h"
+	"unicode/putil.h"
+	"unicode/uiter.h"
+
+1369281714 d:\cpp\boost_1_54_0\icu\include\unicode\putil.h
+	"unicode/utypes.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\uiter.h
+	"unicode/utypes.h"
+
+1369281716 d:\cpp\boost_1_54_0\icu\include\unicode\uchar.h
+	"unicode/utypes.h"
+
+1369281714 d:\cpp\boost_1_54_0\icu\include\unicode\uloc.h
+	"unicode/utypes.h"
+	"unicode/uenum.h"
+
+1403712939 source:d:\cpp\channel\src\channels.cpp
+	<channels.hpp>
+
+1404306127 d:\cpp\channel\include\windowsfile.hpp
+	"abstractfile.hpp"
+
+1404303583 d:\cpp\channel\include\abstractfile.hpp
+	"channels.hpp"
+
+1403182980 d:\cpp\channel\include\unixfile.hpp
+	"abstractfile.hpp"
+	<unistd.h>
+	<sys/types.h>
+	<sys/stat.h>
+
+1404306037 source:d:\cpp\channel\src\windowsfile.cpp
+	"file.hpp"
+	<boost/pool/object_pool.hpp>
+	<boost/thread/once.hpp>
+	<cassert>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\object_pool.hpp
+	<boost/pool/poolfwd.hpp>
+	<boost/pool/pool.hpp>
+	<boost/pool/detail/pool_construct.ipp>
+	<boost/pool/detail/pool_construct_simple.ipp>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\poolfwd.hpp
+	<boost/config.hpp>
+	<cstddef>
+	<boost/pool/detail/mutex.hpp>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\detail\mutex.hpp
+	<boost/config.hpp>
+	<boost/thread/mutex.hpp>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\pool.hpp
+	<boost/config.hpp>
+	<functional>
+	<new>
+	<cstddef>
+	<cstdlib>
+	<exception>
+	<algorithm>
+	<boost/pool/poolfwd.hpp>
+	<boost/math/common_factor_ct.hpp>
+	<boost/pool/simple_segregated_storage.hpp>
+	<boost/type_traits/alignment_of.hpp>
+	<boost/assert.hpp>
+	<iostream>
+	<iomanip>
+	<set>
+	<valgrind/memcheck.h>
+
+1277998801 d:\cpp\boost_1_54_0\boost\math\common_factor_ct.hpp
+	<boost/math_fwd.hpp>
+	<boost/config.hpp>
+	<boost/mpl/integral_c.hpp>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\simple_segregated_storage.hpp
+	<functional>
+	<boost/pool/poolfwd.hpp>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\detail\pool_construct.ipp
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\detail\pool_construct_simple.ipp
 

@@ -16,7 +16,7 @@ public:
 	{}
 	virtual ~EmptyConverter() BOOST_NOEXCEPT_OR_NOTHROW
 	{}
-	virtual inline void convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception) {
+	virtual void convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception) {
 		dest = src;
 		dest.move(src.length());
 	}
@@ -106,10 +106,12 @@ public:
 	 * Writes STL string into write channel
 	 */
 	void write(const String& str) throw(io_exception,charset_exception) {
-		byte_buffer srcBytes = wrap_string(str);
+		write(wrap_string(str));
+	}
+	void write(const byte_buffer& buff) throw(io_exception, charset_exception) {
 		const std::size_t destCharSize = conv_->destCharset()->charSize();
-		byte_buffer convBytes = new_byte_byffer(str.length()*destCharSize);
-		conv_->convert(srcBytes, convBytes);
+		byte_buffer convBytes = new_byte_byffer(buff.length()*destCharSize);
+		conv_->convert(buff, convBytes);
 		convBytes.flip();
 		out_->write(convBytes);
 	}

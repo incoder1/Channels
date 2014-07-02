@@ -3,6 +3,10 @@
 
 #include <channels.hpp>
 
+#ifdef _WIN32
+#	include "winver.h"
+#endif // _WIN32
+
 #ifdef __MINGW32__
 extern "C" BOOL WINAPI UnregisterWaitEx(HANDLE,HANDLE);
 #endif // Mingw32
@@ -15,6 +19,14 @@ namespace io {
 
 	class NetworkChannel:public virtual ReadChannel, public virtual WriteChannel
 	{
+	#ifdef BOOST_NO_DELETED_FUNCTIONS
+	private:  // emphasize the following members are private
+		ReadWriteChannel( const ReadChannel&);
+		ReadWriteChannel& operator=( const ReadChannel& );
+	#else
+		ReadWriteChannel( const ReadWriteChannel& ) = delete;
+		ReadWriteChannel& operator=( const ReadWriteChannel& ) = delete;
+	#endif
 	public:
 		NetworkChannel();
 		virtual ~NetworkChannel() = 0;
@@ -39,7 +51,7 @@ namespace io {
 			boost::system::error_code error;
 			size_t result = socket_->read_some(asio_buffer(buffer), error);
 			if( (error != boost::asio::error::eof) && error ) {
-				throw io_exception("Network exception");
+				boost::throw_exception(io_exception(std::string("Read socket exception")+error.message()));
 			}
 			buffer.move(result);
 			return result;

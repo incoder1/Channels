@@ -15,13 +15,9 @@ namespace io {
 
 	std::size_t DataChannel::read(byte_buffer& buffer) throw(io_exception)
 	{
-		std::size_t offset = buffer.capacity();
-		if(&data_.position() + offset >= &data_.end()) {
-			offset = &data_.last() - &data_.position();
-		}
-		buffer.put(&data_.position(), offset);
-		data_.move(offset);
-		return offset;
+		std::size_t result = buffer.put(data_.position(), data_.position()+buffer.capacity());
+		data_.move(result);
+		return result;
 	}
 
 	std::size_t DataChannel::write(const byte_buffer& buffer) throw(io_exception)

@@ -139,7 +139,7 @@ const Charset* Charsets::find(const char* name) const BOOST_NOEXCEPT_OR_NOTHROW
 }
 
 // Converter
-Converter::~Converter() BOOST_NOEXCEPT_OR_NOTHROW {
-}
+Converter::~Converter() BOOST_NOEXCEPT_OR_NOTHROW
+{}
 
 } // namespace io

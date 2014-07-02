@@ -91,19 +91,17 @@ private:
 	Charsets() BOOST_NOEXCEPT_OR_NOTHROW;
 	const Charset* find(const char* name) const BOOST_NOEXCEPT_OR_NOTHROW;
 	static const Charsets* instance() BOOST_NOEXCEPT_OR_NOTHROW {
-		// tread safety not needed, and will be auto-provided in case of C++ 11
+		// tread safety is not needed, and will be auto-provided in case of C++ 11
 		static Charsets factory;
 		return &factory;
 	}
+public:
 	inline void insert(const std::string& name, const Charset* ptr) {
 		nameMap_.insert(std::make_pair(name,ptr));
 	}
-public:
 	static const Charset* forName(const char* name) BOOST_NOEXCEPT_OR_NOTHROW {
 		return instance()->find(name);
 	}
-	//inline std::vector<std::string> allNames() const {
-	//}
 private:
 	ctmap_t nameMap_;
 };
@@ -178,7 +176,7 @@ public:
 	/**
 	 * Frees resources allocated by converter
 	 */
-	virtual ~Converter() BOOST_NOEXCEPT_OR_NOTHROW = 0;
+	virtual ~Converter() BOOST_NOEXCEPT_OR_NOTHROW;
 };
 
 

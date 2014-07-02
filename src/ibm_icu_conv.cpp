@@ -100,8 +100,8 @@ inline void validate_from_conv(UErrorCode errCode,const Charset* charset) {
 
 void ICUConverter::intoUnicode(const byte_buffer& source,byte_buffer& dest) throw(charset_exception)
 {
-	char *src = reinterpret_cast<char*>(&source.position());
-	UChar *dst = reinterpret_cast<UChar*>(&dest.position());
+	char *src = reinterpret_cast<char*>(source.position().ptr());
+	UChar *dst = reinterpret_cast<UChar*>(dest.position().ptr());
 	std::size_t avail = dest.capacity() / sizeof(UChar);
 	std::size_t srclen = source.length();
 	UErrorCode errCode = engine_.toUnicode(src, srclen, dst, avail);
@@ -112,8 +112,8 @@ void ICUConverter::intoUnicode(const byte_buffer& source,byte_buffer& dest) thro
 
 void ICUConverter::fromUnicode(const byte_buffer& source,byte_buffer& dest) throw(charset_exception)
 {
-	UChar *src = reinterpret_cast<UChar*>(&source.position());
-	char *dst = reinterpret_cast<char*>(&dest.position());
+	UChar *src = reinterpret_cast<UChar*>(source.position().ptr());
+	char *dst = reinterpret_cast<char*>(dest.position().ptr());
 	std::size_t srclen = source.length() / sizeof(UChar);
 	std::size_t avail = dest.capacity();
 	UErrorCode errCode = engine_.fromUnicode(src, srclen, dst, avail);
@@ -125,11 +125,10 @@ void ICUConverter::fromUnicode(const byte_buffer& source,byte_buffer& dest) thro
 void ICUConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception)
 {
 	if(notUTF16(srcCharset())) {
-		intoUnicode( src, dest);
-	}
-	if(notUTF16(destCharset())) {
+		intoUnicode(src, dest);
+	} else if(notUTF16(destCharset())) {
 		fromUnicode(src, dest);
-	}
+	} else
 	// Conversation over Unicode, will not be invoked in most cases
 	if(notUTF16(srcCharset()) && notUTF16(destCharset())) {
 		byte_buffer unicodeBuff = new_byte_byffer(src.length()*sizeof(UChar));

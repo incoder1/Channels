@@ -154,6 +154,8 @@
 			<Add directory="../boost_1_54_0" />
 		</Compiler>
 		<Unit filename="include/WindowsConsole.hpp" />
+		<Unit filename="include/WindowsFile.hpp" />
+		<Unit filename="include/abstractfile.hpp" />
 		<Unit filename="include/buffers.hpp" />
 		<Unit filename="include/bytebuffer.hpp" />
 		<Unit filename="include/channels.hpp" />
@@ -173,11 +175,16 @@
 		</Unit>
 		<Unit filename="include/pipe.hpp" />
 		<Unit filename="include/readwrite.hpp" />
+		<Unit filename="include/unixfile.hpp">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="include/win32_conv.hpp">
 			<Option target="ReleaseMSVC10" />
 		</Unit>
 		<Unit filename="src/WindowsConsole.cpp" />
+		<Unit filename="src/WindowsFile.cpp" />
 		<Unit filename="src/WindowsPipe.cpp" />
+		<Unit filename="src/channels.cpp" />
 		<Unit filename="src/convert.cpp" />
 		<Unit filename="src/datachannel.cpp" />
 		<Unit filename="src/ibm_icu_conv.cpp">
@@ -193,13 +200,12 @@
 			<Option compilerVar="CC" />
 			<Option target="ReleaseMSVC10" />
 		</Unit>
-		<Unit filename="src/unix_file.cpp">
+		<Unit filename="src/unixfile.cpp">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="src/win32_conv.cpp">
 			<Option target="ReleaseMSVC10" />
 		</Unit>
-		<Unit filename="src/windows_file.cpp" />
 		<Unit filename="test.txt">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>

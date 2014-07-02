@@ -16,29 +16,24 @@ namespace io {
 
 #ifdef PLATFROM_WINDOWS
 
-#ifdef UNICODE
-#	define UNICODE_CONS true
-#else
-#	define UNICODE_CONS false
+#if !defined(UNICODE_CONSOLE) && defined(UNICODE)
+#	define UNICODE_CONSOLE true
+#elif !defined(UNICODE_CONSOLE) && !defined(UNICODE)
+#	define UNICODE_CONSOLE false
 #endif
 
 template<class ShannelType>
 inline boost::shared_ptr<ShannelType> consChannel(DWORD handleId) {
 	HANDLE hCons = ::GetStdHandle(handleId);
-	ShannelType *ptr = new ShannelType(hCons,UNICODE_CONS);
+	ShannelType *ptr = new ShannelType(hCons,UNICODE_CONSOLE);
 	return boost::shared_ptr<ShannelType>(ptr);
 }
 
 /**
  * ! \brief Factory for obtaining channels for windows standard streams.
- *  Standard in, out and error stream supported.
+ *  Standard in, out and error streams supported.
  */
 class Console:private boost::noncopyable {
-private:
-
-	static inline FileChannel* consCl(DWORD id) {
-		return new FileChannel(::GetStdHandle(id),false);
-	}
 public:
 	static void setCharset(const Charset* charset) BOOST_NOEXCEPT {
 		::SetConsoleCP(charset->id());
@@ -59,7 +54,7 @@ public:
 #ifdef PLATFORM_UNIX
 /**
  * ! \brief Factory for obtaining channels for UNIX standard streams.
- *  Standard in, out and error stream supported.
+ *  Standard in, out and error streams supported.
  */
 class Console:private boost::noncopyable {
 public:

@@ -4,9 +4,8 @@
 namespace io {
 
 // helpers
-inline void* vpos(const byte_buffer& buff)
-{
-	return static_cast<void*>(&buff.position());
+inline void* vpos(const byte_buffer& buff) {
+	return static_cast<void*>(buff.position().ptr());
 }
 
 static std::string last_error_str(DWORD lastError)

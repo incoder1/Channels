@@ -18,24 +18,66 @@ namespace io {
  * Random access iterator, STL compatible
  */
 template<typename T>
-class buffer_iterator {
+class buffer_iterator: public std::iterator<std::bidirectional_iterator_tag,uint64_t> {
 private:
 	T* const begin_;
 	T* const end_;
 	mutable T* position_;
 public:
 
-	typedef std::random_access_iterator_tag iterator_category;
+	typedef std::bidirectional_iterator_tag iterator_category;
 	typedef T  value_type;
-	typedef std::size_t difference_type;
 	typedef T&  reference;
 	typedef T*  pointer;
 
-	buffer_iterator(T* begin, T* const end, T* const position) BOOST_NOEXCEPT:
+	buffer_iterator(T* begin, T* const end, T* const position) BOOST_NOEXCEPT_OR_NOTHROW:
 		   begin_(begin),
 	       end_(end),
 	       position_(position)
 	{}
+
+	buffer_iterator(const buffer_iterator& c) BOOST_NOEXCEPT_OR_NOTHROW:
+		begin_(c.begin_),
+		end_(c.end_),
+		position_(c.position_)
+	{}
+
+	buffer_iterator& operator=(const buffer_iterator& c) BOOST_NOEXCEPT_OR_NOTHROW
+	{
+		buffer_iterator cp(c);
+		std::swap(*this,cp);
+		return *this;
+	}
+
+	inline buffer_iterator operator++() const {
+		position_ = (end_ ==  position_) ? end_: position_ + 1;
+		return *this;
+	}
+
+	inline const buffer_iterator& operator--() const {
+		position_ = (begin_ == position_) ? begin_ : position_ - 1;
+		return *this;
+	}
+
+	reference operator*() const {
+		return *position_;
+	}
+
+	pointer operator->() const {
+		return position_;
+	}
+
+	inline pointer const ptr() const {
+		return position_;
+	}
+
+	const buffer_iterator operator+(const difference_type& offset) const {
+		return buffer_iterator(begin_, end_, position_+offset);
+	}
+
+	const buffer_iterator operator-(const difference_type& offset) const {
+		return buffer_iterator(begin_, end_, position_-offset);
+	}
 
 	inline bool operator==(const buffer_iterator& it) const {
 		return position_ == it.position_;
@@ -45,55 +87,20 @@ public:
 		return position_ != it.position_;
 	}
 
-	inline difference_type operator-(const buffer_iterator& it) const {
-		return position_ - it.position_;
-	}
-
-	inline buffer_iterator operator++() const {
-		if(end_ == (position_ + 1) ) {
-			return buffer_iterator(begin_, end_, end_);
-		} else {
-			++position_;
-		}
-		return *this;
-	}
-
-	inline const buffer_iterator& operator+(difference_type step) const {
-		if((position_ + step) >= end_) {
-			position_ = end_;
-		} else {
-			position_ += step;
-		}
-		return *this;
-	}
-
-	inline const buffer_iterator& operator--() const {
-		if(begin_ == (position_ - 1) ) {
-			position_ = end_-1;
-		} else {
-			--position_;
-		}
-		return *this;
-	}
-
-	inline reference operator*() const {
-		return *position_;
-	}
-
-	inline pointer operator->() const {
-		return position_;
-	}
-
-	inline pointer const operator&() const {
-		return position_;
-	}
-
-	bool operator<(const buffer_iterator& rhs) {
+	bool operator<(const buffer_iterator& rhs) const {
 		return position_ < rhs.position_;
 	}
 
-	bool operator>(const buffer_iterator& rhs) {
+	bool operator>(const buffer_iterator& rhs) const {
 		return position_ > rhs.position_;
+	}
+
+	bool operator>=(const buffer_iterator& rhs) const {
+		return position_ >= rhs.position_;
+	}
+
+	bool operator<=(const buffer_iterator& rhs) const {
+		return position_ <= rhs.position_;
 	}
 };
 
@@ -105,11 +112,6 @@ public:
  */
 template<typename T>
 class basic_buffer {
-private:
-	boost::shared_array<T> data_;
-	T* position_;
-	T* last_;
-	T* end_;
 protected:
 	basic_buffer(boost::shared_array<T> data, T* const end) BOOST_NOEXCEPT_OR_NOTHROW:
 		  data_(data),
@@ -231,18 +233,21 @@ public:
 		return 0;
 	}
 
-	template<class iterator_t>
-	std::size_t put(const iterator_t& b,iterator_t& e) {
-		std::size_t avaliable = capacity() - length();
-		std::size_t count = static_cast<std::size_t>(e - b);
-		std::size_t offset = (count > avaliable) ? avaliable : count;
-		std::copy(b,b+offset,position_);
-		move(offset);
-		return offset;
+	std::size_t put(iterator& first, iterator& last) {
+		std::size_t result = 0;
+		for(iterator it = first; (it < last) && it <= end(); ++it) {
+			put(*it);
+			++result;
+		}
+		return result;
+	}
+
+	std::size_t put(const_iterator& first,const_iterator& last) {
+		return put(const_cast<iterator&>(first), const_cast<iterator&>(last));
 	}
 
 	std::size_t put(const basic_buffer& other) {
-		return put<basic_buffer::const_iterator>(other.position(), other.last());
+		return put(other.position(), other.last());
 	}
 
 	std::size_t put(const T* arr, std::size_t size) {
@@ -288,16 +293,35 @@ public:
 		return (end_-1) - data_.get();
 	}
 
+	basic_buffer(const basic_buffer& c) BOOST_NOEXCEPT_OR_NOTHROW:
+		data_(c.data_),
+		position_(c.position_),
+		last_(c.last_),
+		end_(c.end_)
+	{}
+
+	basic_buffer& operator=(const basic_buffer& rhs) BOOST_NOEXCEPT_OR_NOTHROW
+	{
+		basic_buffer cp(rhs);
+		std::swap(*this,cp);
+		return *this;
+	}
+
 	/**
 	 * Deallocates buffer array
 	 */
 	virtual ~basic_buffer()
 	{}
+private:
+	boost::shared_array<T> data_;
+	T* position_;
+	T* last_;
+	T* end_;
 };
 
 /// Really allocates dynamic memory
 // TODO: See whether can be replaces with the OS call for memory allocation
-// instead of stdlib based new operator
+// instead of c++ stdlib based new operator
 template<typename T>
 inline T* new_alloc(const std::size_t count) throw(std::bad_alloc)
 {
@@ -329,7 +353,7 @@ template<typename T>
 class empty_free {
 public:
 	// should be removed by the compiler optimization
-	inline void operator()(T*)
+	inline void operator()(T*) BOOST_NOEXCEPT_OR_NOTHROW
 	{}
 };
 

@@ -36,9 +36,9 @@ WindowsPipe::~WindowsPipe() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
 SWriteChannel WindowsPipe::sink() BOOST_NOEXCEPT_OR_NOTHROW {
+	lock_t lock(mutex_);
 	SWriteChannel result(new FileChannel(sink_, true));
 	canRead_ = true;
-	lock_t lock(mutex_);
 	condition_.notify_all();
 	return result;
 }

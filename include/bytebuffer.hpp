@@ -11,6 +11,9 @@ namespace io {
 
 class byte_buffer_allocator;
 
+/**
+ * ! \brief  buffer implementation which operating bytes (uint8_t or unsigned char)
+ */
 class CHANNEL_PUBLIC byte_buffer:public basic_buffer<uint8_t> {
 private:
 	byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp) BOOST_NOEXCEPT_OR_NOTHROW:
@@ -18,27 +21,37 @@ private:
 	{}
 	friend class byte_buffer_allocator;
 public:
+	typedef basic_buffer<uint8_t>::iterator iterator;
+	typedef basic_buffer<uint8_t>::const_iterator const_iterator;
+
+	byte_buffer(const byte_buffer& c) BOOST_NOEXCEPT_OR_NOTHROW:
+		basic_buffer<uint8_t>( static_cast<basic_buffer<uint8_t> >(c))
+	{}
 
 	inline std::size_t put(uint8_t e) {
 		return basic_buffer<uint8_t>::put(e);
 	}
 
-	inline std::size_t put(const uint8_t* arr, std::size_t size) {
-		return basic_buffer<uint8_t>::put(arr, size);
+	std::size_t put(uint8_t* begin, uint8_t* end) {
+		std::size_t result = (end - begin) > 0 ?  end - begin : 0;
+		if(result) {
+			for(uint8_t* i = begin; i < end; i++) {
+				basic_buffer<uint8_t>::put(*i);
+			}
+		}
+		return result;
 	}
 
-	inline std::size_t put(uint8_t* begin, uint8_t* end) {
-		return basic_buffer<uint8_t>::put(begin, end);
+	std::size_t put(iterator& first, iterator& last) {
+		return basic_buffer<uint8_t>::put(first, last);
+	}
+
+	std::size_t put(const_iterator& first,const_iterator& last) {
+		return  basic_buffer<uint8_t>::put(first, last);
 	}
 
 	inline std::size_t put(const byte_buffer& another) {
 		return basic_buffer<uint8_t>::put(another);
-	}
-
-	inline std::size_t put(const std::vector<uint8_t>& v) {
-		std::vector<uint8_t>::const_iterator b = v.begin();
-		std::vector<uint8_t>::const_iterator e = v.end();
-		return basic_buffer<uint8_t>::put(b,e);
 	}
 };
 
@@ -121,6 +134,12 @@ inline byte_buffer wrap_array(const uint8_t* arr, std::size_t size) {
 	return result;
 }
 
+inline byte_buffer copy_array(const uint8_t* arr, std::size_t size) {
+	byte_buffer result = new_byte_byffer(size);
+	std::copy(arr,arr+size,result.begin());
+	return result;
+}
+
 template<typename _CharT>
 inline byte_buffer wrap_string(const std::basic_string<_CharT>& str) {
 	std::size_t size = str.length()*sizeof(_CharT);
@@ -128,6 +147,15 @@ inline byte_buffer wrap_string(const std::basic_string<_CharT>& str) {
 		// we can covert any array to byte array
 		reinterpret_cast<const uint8_t*>(str.data()),
 		size);
+}
+
+template<typename _CharT>
+inline byte_buffer copy_string(const std::basic_string<_CharT>& str) {
+	std::size_t size = str.length()*sizeof(_CharT);
+	return copy_array(
+					reinterpret_cast<const uint8_t>(str.data()),
+					size
+					);
 }
 
 } // namespace io
