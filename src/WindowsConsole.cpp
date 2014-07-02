@@ -39,11 +39,11 @@ inline void validate_io(BOOL ioResult, const char* message) throw(io_exception)
 
 
 //ConsoleReadChannel
-ConsoleReadChannel::ConsoleReadChannel(HANDLE hCons, bool unicode) BOOST_NOEXCEPT_OR_NOTHROW:
+ConsoleReadChannel::ConsoleReadChannel(HANDLE hCons, bool wide) BOOST_NOEXCEPT_OR_NOTHROW:
 	ReadChannel(),
 	hCons_(hCons),
-	peer_(unicode? readf_t(ReadConsoleW) : readf_t(ReadConsoleA) ),
-	charSize_(unicode? sizeof(WCHAR) : sizeof(CHAR) )
+	peer_(wide? readf_t(ReadConsoleW) : readf_t(ReadConsoleA) ),
+	charSize_(wide? sizeof(WCHAR) : sizeof(CHAR) )
 {}
 
 std::size_t ConsoleReadChannel::read(byte_buffer& buff) throw(io_exception)

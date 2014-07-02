@@ -7112,7 +7112,8 @@
 
 1365979818 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
 
-1404308741 source:d:\cpp\channel\src\iconv_conv.cpp
+1404315682 source:d:\cpp\channel\src\iconv_conv.cpp
+	"prchdrs.h"
 	"iconv_conv.hpp"
 
 1402600841 d:\cpp\channel\include\iconv_conv.hpp
@@ -7132,13 +7133,17 @@
 	<time.h>
 	<wchar.h>
 
-1404315700 source:d:\cpp\channel\src\windowsconsole.cpp
+1404328107 source:d:\cpp\channel\src\windowsconsole.cpp
 	"prchdrs.h"
 	"WindowsConsole.hpp"
 
-1404310127 d:\cpp\channel\include\windowsconsole.hpp
+1404329286 d:\cpp\channel\include\windowsconsole.hpp
+	<boost/noncopyable.hpp>
+	<boost/config.hpp>
 	<boost/function.hpp>
 	<boost/bind.hpp>
+	<convert.hpp>
+	<file.hpp>
 	<channels.hpp>
 
 1404312343 source:d:\cpp\channel\src\mlang_i.c
@@ -7299,7 +7304,7 @@
 1404308576 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1404310797 d:\cpp\channel\include\unixfile.hpp
+1404319508 d:\cpp\channel\include\unixfile.hpp
 	"abstractfile.hpp"
 
 1404315706 source:d:\cpp\channel\src\windowsfile.cpp

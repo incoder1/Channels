@@ -39,13 +39,13 @@
 	typedef char char8_t;
 #endif
 
-// UTF8 string
+// wide string string
 typedef std::basic_string<TCHAR> wstring;
-// UTF16 string
+// UTF8 string
 typedef std::string ustring;
 
 #if	defined(PLATFROM_WINDOWS)
-// Windows NT Unicode locale - UTF16-LE representation
+// Windows NT Unicode console - UTF-16LE
 const char* LOCALE_CH = "UTF-16LE";
 
 inline io::SConverter to_console_conv() {
@@ -76,11 +76,6 @@ typedef io::Reader<ustring> reader_u8;
 typedef io::Writer<wstring> writer_u16le;
 typedef io::Reader<wstring> reader_u16le;
 
-void change_console_charset()
-{
-	io::Console::setCharset(io::Charsets::forName(LOCALE_CH));
-}
-
 void pipe_write_routine(io::SPipe pipe) throw(io::io_exception)
 {
 	try {
@@ -93,11 +88,14 @@ void pipe_write_routine(io::SPipe pipe) throw(io::io_exception)
 
 void charset_console_sample() throw(io::io_exception)
 {
+	const io::Charset* utf16 = io::Charsets::forName(LOCALE_CH);
+	io::Console con(true);
+	con.setCharset(utf16);
 	// char set conversation sample
-	writer_u8 out(io::Console::outChanell(), to_console_conv());
+	writer_u8 out(con.outChanell(), to_console_conv());
 	out.write(U8("Hello world English version. Привет мир, русская верссия\n\r"));
 	io::byte_buffer readBuff = io::new_byte_byffer(512);
-	reader_u8 in(io::Console::inChanell(),readBuff, from_console_conv());
+	reader_u8 in(con.inChanell(),readBuff, from_console_conv());
 	out.write(U8("Type something :> "));
 	out.write(in.read());
 }
@@ -110,10 +108,14 @@ void pipe_sample() throw(io::io_exception)
 	writeThread.start_thread();
 	reader_u16le reader(pipe->source(), io::new_byte_byffer(100), to_console_conv());
 	wstring str = reader.read();
-	writer_u16le out(io::Console::outChanell(), io::char_empty_converter());
+	io::Console con;
+	writer_u16le out(con.outChanell(), io::char_empty_converter());
 	out.write(str);
 }
 
+/**
+ * Writes wchar_t string into UTF-8 file
+ */
 void file_sample() {
 	using namespace io;
 	File file("sample.txt");
@@ -127,34 +129,6 @@ void file_sample() {
 	out.write(L"ASCII     abcde xyz\nGerman  äöü ÄÖÜ ß\nPolish  ąęźżńł\nRussian  абвгдеж эюя\nCJK  你好");
 }
 
-class MyAsynchReadCH: public io::AsynchronousCompletionHandler {
-public:
-	MyAsynchReadCH():
-		AsynchronousCompletionHandler(),
-		mutex_(),
-		condition_()
-	{}
-	void success(const io::byte_buffer& buff,std::size_t size) {
-		std::cout<<"hello"<<std::endl;
-		writer_u8 out(io::Console::outChanell(), to_console_conv());
-		out.write(buff);
-		boost::unique_lock<boost::mutex> lock(mutex_);
-		condition_.notify_all();
-	}
-	void failed(const char* errorMessage) {
-	}
-	void await() {
-		boost::unique_lock<boost::mutex> lock(mutex_);
-		condition_.wait(lock);
-	}
-private:
-	boost::mutex mutex_;
-	boost::condition_variable_any condition_;
-};
-
-void asynch_read_routine(io::SAsynchReadChannel ch,const io::byte_buffer& buff, io::SAsynchCompletionHandler handler) {
-}
-
 #ifndef _MSC_VER
 int main(int argc, const char** argv)
 #else
@@ -162,7 +136,6 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	try {
-		change_console_charset();
 		charset_console_sample();
 		//pipe_sample();
 		file_sample();
