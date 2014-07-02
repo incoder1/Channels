@@ -1,3 +1,4 @@
+#include "prchdrs.h"
 /* this ALWAYS GENERATED file contains the IIDs and CLSIDs */
 
 /* link this file in with the server and any clients */
@@ -109,6 +110,3 @@ MIDL_DEFINE_GUID(CLSID, CLSID_CMultiLanguage,0x275c23e2,0x3747,0x11d0,0x9f,0xea,
 #ifdef __cplusplus
 }
 #endif
-
-
-

@@ -1,8 +1,8 @@
 /**
  * Windows implementation of file and file channel
  */
-
-#include "file.hpp"
+#include "prchdrs.h"
+#include "WindowsFile.hpp"
 #include <boost/pool/object_pool.hpp>
 #include <boost/thread/once.hpp>
 #include <cassert>

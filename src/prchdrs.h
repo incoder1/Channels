@@ -1,0 +1,9 @@
+// pre-compiled headers
+#ifndef __PRCHDRS_HPP_INCLUDED__
+#define __PRCHDRS_HPP_INCLUDED__
+
+#include <channels_config.h>
+#include <bytebuffer.hpp>
+#include <channels.hpp>
+
+#endif // __PRCHDRS_HPP_INCLUDED__

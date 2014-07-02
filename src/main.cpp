@@ -1,3 +1,4 @@
+#include "prchdrs.h"
 #include <channels_config.h>
 
 #ifdef PLATFROM_WINDOWS
