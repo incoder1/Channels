@@ -6,4 +6,6 @@
 #include <bytebuffer.hpp>
 #include <channels.hpp>
 
+#include "helpers.hpp"
+
 #endif // __PRCHDRS_HPP_INCLUDED__

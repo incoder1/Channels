@@ -2,6 +2,7 @@
  * Windows implementation of file and file channel
  */
 #include "prchdrs.h"
+
 #include "WindowsFile.hpp"
 #include <boost/pool/object_pool.hpp>
 #include <boost/thread/once.hpp>
@@ -9,39 +10,6 @@
 #include <cstdlib>
 
 namespace io {
-
-// helpers
-inline void* vpos(const byte_buffer& buff) {
-	return static_cast<void*>(buff.position().ptr());
-}
-
-static std::string last_error_str(DWORD lastError)
-{
-	std::string result;
-	LPVOID lpMsgBuf;
-	static DWORD flags = FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS;
-	DWORD bufLen = ::FormatMessage(flags,NULL,lastError,
-	                   MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-	                   (LPTSTR) &lpMsgBuf, 0, NULL );
-	if (bufLen) {
-		LPCSTR lpMsgStr = (LPCSTR)lpMsgBuf;
-		result.append(lpMsgStr, lpMsgStr+bufLen);
-		::LocalFree(lpMsgBuf);
-	}
-	return result;
-}
-
-inline void validate_io(BOOL ioResult, const char* message) throw(io_exception) {
-	if(!ioResult) {
-		DWORD lastError = ::GetLastError();
-		if(ERROR_IO_PENDING != lastError) {
-			std::string errMsg(message);
-			errMsg.append(" ");
-			errMsg.append(last_error_str(lastError));
-			boost::throw_exception(io_exception(errMsg));
-		}
-	}
-}
 
 inline void validate_file_handle(HANDLE hFile) {
 	validate_io(INVALID_HANDLE_VALUE != hFile, "Can not open file. Reason:");
@@ -166,30 +134,6 @@ std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 	buffer.move(result);
 	return result;
 }
-
-
-struct OVERLAPPEDEX:public ::OVERLAPPED {
-public:
-	OVERLAPPEDEX(const byte_buffer& buff, SAsynchCompletionHandler handler) BOOST_NOEXCEPT_OR_NOTHROW:
-		::OVERLAPPED(),
-		handler_(handler),
-		buffer_(buff)
-	{
-		Internal = InternalHigh = 0,
-		Offset = OffsetHigh = 0;
-		Pointer = NULL;
-		hEvent = NULL;
-	}
-	inline SAsynchCompletionHandler handler() BOOST_NOEXCEPT_OR_NOTHROW {
-		return handler_;
-	}
-	inline byte_buffer buffer() BOOST_NOEXCEPT_OR_NOTHROW {
-		return buffer_;
-	}
-private:
-	SAsynchCompletionHandler handler_;
-	byte_buffer buffer_;
-};
 
 std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 {

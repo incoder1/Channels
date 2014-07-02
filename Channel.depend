@@ -7304,8 +7304,11 @@
 1404308576 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1404319508 d:\cpp\channel\include\unixfile.hpp
+1404331949 d:\cpp\channel\include\unixfile.hpp
 	"abstractfile.hpp"
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
 
 1404315706 source:d:\cpp\channel\src\windowsfile.cpp
 	"prchdrs.h"
@@ -7374,13 +7377,18 @@
 1404315693 source:d:\cpp\channel\src\prchdrs.cpp
 	"prchdrs.h"
 
-1404311103 d:\cpp\channel\src\prchdrs.h
+1404332310 d:\cpp\channel\src\prchdrs.h
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<channels.hpp>
+	"helpers.hpp"
 
-1404311103 source:d:\cpp\channel\src\prchdrs.h
+1404332310 source:d:\cpp\channel\src\prchdrs.h
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<channels.hpp>
+	"helpers.hpp"
+
+1404332652 d:\cpp\channel\src\helpers.hpp
+	<channels_config.h>
 
