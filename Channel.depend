@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1402600836 source:d:\cpp\channel\src\convert.cpp
+1404308741 source:d:\cpp\channel\src\convert.cpp
 	"convert.hpp"
 
-1402600823 d:\cpp\channel\include\convert.hpp
+1404308741 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -12,11 +12,11 @@
 	<stdexcept>
 	<cstring>
 
-1402680414 d:\cpp\channel\include\channels_config.h
+1404308741 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
 	<windows.h>
 
-1402601804 d:\cpp\channel\include\bytebuffer.hpp
+1404308741 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1349,7 +1349,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1402688090 d:\cpp\channel\include\buffers.hpp
+1404308741 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -5209,13 +5209,13 @@
 
 1310276757 d:\cpp\boost_1_54_0\boost\exception\detail\clone_current_exception.hpp
 
-1401736697 source:d:\cpp\channel\src\datachannel.cpp
+1404308741 source:d:\cpp\channel\src\datachannel.cpp
 	"datachannel.hpp"
 
 1385124524 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1403724138 d:\cpp\channel\include\channels.hpp
+1404309763 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
@@ -5537,19 +5537,19 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1403274125 source:d:\cpp\channel\src\main.cpp
+1404308741 source:d:\cpp\channel\src\main.cpp
 	<channels_config.h>
 	"WindowsFile.hpp"
 
 1401736735 source:d:\cpp\channel\src\windows_file.cpp
 	"file.hpp"
 
-1402680866 d:\cpp\channel\include\file.hpp
+1404308741 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1402601955 source:d:\cpp\channel\src\windowspipe.cpp
+1404308741 source:d:\cpp\channel\src\windowspipe.cpp
 	"pipe.hpp"
 
 1396039300 d:\cpp\channel\include\pipe.hpp
@@ -7107,7 +7107,7 @@
 
 1365979818 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
 
-1401736720 source:d:\cpp\channel\src\iconv_conv.cpp
+1404308741 source:d:\cpp\channel\src\iconv_conv.cpp
 	"iconv_conv.hpp"
 
 1402600841 d:\cpp\channel\include\iconv_conv.hpp
@@ -7127,10 +7127,10 @@
 	<time.h>
 	<wchar.h>
 
-1401736748 source:d:\cpp\channel\src\windowsconsole.cpp
+1404308741 source:d:\cpp\channel\src\windowsconsole.cpp
 	"WindowsConsole.hpp"
 
-1401472652 d:\cpp\channel\include\windowsconsole.hpp
+1404308741 d:\cpp\channel\include\windowsconsole.hpp
 	<boost/function.hpp>
 	<boost/bind.hpp>
 	<channels.hpp>
@@ -7285,10 +7285,10 @@
 1403712939 source:d:\cpp\channel\src\channels.cpp
 	<channels.hpp>
 
-1404306127 d:\cpp\channel\include\windowsfile.hpp
+1404308576 d:\cpp\channel\include\windowsfile.hpp
 	"abstractfile.hpp"
 
-1404303583 d:\cpp\channel\include\abstractfile.hpp
+1404308576 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1403182980 d:\cpp\channel\include\unixfile.hpp
@@ -7297,11 +7297,12 @@
 	<sys/types.h>
 	<sys/stat.h>
 
-1404306037 source:d:\cpp\channel\src\windowsfile.cpp
+1404308576 source:d:\cpp\channel\src\windowsfile.cpp
 	"file.hpp"
 	<boost/pool/object_pool.hpp>
 	<boost/thread/once.hpp>
 	<cassert>
+	<cstdlib>
 
 1312304647 d:\cpp\boost_1_54_0\boost\pool\object_pool.hpp
 	<boost/pool/poolfwd.hpp>

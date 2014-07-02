@@ -109,7 +109,7 @@ private:
 protected:
 	AsynchronousReadChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 public:
-	virtual ~AsynchronousReadChannel() BOOST_NOEXCEPT_OR_NOTHROW;
+	virtual ~AsynchronousReadChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 	virtual void read(const byte_buffer& buffer, SAsynchCompletionHandler handler) throw(io_exception) = 0;
 };
 
