@@ -7133,11 +7133,11 @@
 	<time.h>
 	<wchar.h>
 
-1404328107 source:d:\cpp\channel\src\windowsconsole.cpp
+1404406501 source:d:\cpp\channel\src\windowsconsole.cpp
 	"prchdrs.h"
 	"WindowsConsole.hpp"
 
-1404329286 d:\cpp\channel\include\windowsconsole.hpp
+1404406667 d:\cpp\channel\include\windowsconsole.hpp
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<boost/function.hpp>
@@ -7152,8 +7152,8 @@
 	<guiddef.h>
 	<guiddef.h>
 
-1404311508 source:d:\cpp\channel\src\win32_conv.cpp
-	"prchdrs.hpp"
+1404315697 source:d:\cpp\channel\src\win32_conv.cpp
+	"prchdrs.h"
 	"win32_conv.hpp"
 
 1383333841 d:\cpp\channel\include\win32_conv.hpp
@@ -7298,25 +7298,22 @@
 	"prchdrs.h"
 	<channels.hpp>
 
-1404308576 d:\cpp\channel\include\windowsfile.hpp
+1404406253 d:\cpp\channel\include\windowsfile.hpp
 	"abstractfile.hpp"
+	"smallobjectpool.hpp"
 
 1404308576 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1404331949 d:\cpp\channel\include\unixfile.hpp
+1404399886 d:\cpp\channel\include\unixfile.hpp
 	"abstractfile.hpp"
 	<sys/types.h>
 	<sys/stat.h>
 	<fcntl.h>
 
-1404315706 source:d:\cpp\channel\src\windowsfile.cpp
+1404406282 source:d:\cpp\channel\src\windowsfile.cpp
 	"prchdrs.h"
 	"WindowsFile.hpp"
-	<boost/pool/object_pool.hpp>
-	<boost/thread/once.hpp>
-	<cassert>
-	<cstdlib>
 
 1312304647 d:\cpp\boost_1_54_0\boost\pool\object_pool.hpp
 	<boost/pool/poolfwd.hpp>
@@ -7377,18 +7374,41 @@
 1404315693 source:d:\cpp\channel\src\prchdrs.cpp
 	"prchdrs.h"
 
-1404332310 d:\cpp\channel\src\prchdrs.h
+1404417330 d:\cpp\channel\src\prchdrs.h
 	<channels_config.h>
+	<smallobjectpool.hpp>
 	<bytebuffer.hpp>
 	<channels.hpp>
 	"helpers.hpp"
 
-1404332310 source:d:\cpp\channel\src\prchdrs.h
+1404417330 source:d:\cpp\channel\src\prchdrs.h
 	<channels_config.h>
+	<smallobjectpool.hpp>
 	<bytebuffer.hpp>
 	<channels.hpp>
 	"helpers.hpp"
 
 1404332652 d:\cpp\channel\src\helpers.hpp
 	<channels_config.h>
+
+1404418831 d:\cpp\channel\include\smallobjectpool.hpp
+	<channels_config.h>
+	<stdexcept>
+	<cassert>
+	<boost/throw_exception.hpp>
+	<boost/pool/pool.hpp>
+	<boost/unordered_map.hpp>
+	<boost/thread/once.hpp>
+	<boost/thread/mutex.hpp>
+
+1404418181 source:d:\cpp\channel\src\smallobjectpool.cpp
+	"prchdrs.h"
+	"smallobjectpool.hpp"
+
+1404318161 source:d:\cpp\channel\src\mlang_i.cpp
+	"prchdrs.h"
+	<rpc.h>
+	<rpcndr.h>
+	<guiddef.h>
+	<guiddef.h>
 

@@ -4,10 +4,6 @@
 #include "prchdrs.h"
 
 #include "WindowsFile.hpp"
-#include <boost/pool/object_pool.hpp>
-#include <boost/thread/once.hpp>
-#include <cassert>
-#include <cstdlib>
 
 namespace io {
 
@@ -71,56 +67,21 @@ SReadWriteChannel  File::openForReadWrite() throw(io_exception)
 	return SReadWriteChannel(new FileChannel(hFile, true));
 }
 
-// small object memory allocation
-namespace _private_mmt {
-	class Allocator:private boost::noncopyable {
-	private:
-		static Allocator* _instance;
-		static boost::once_flag _once;
-		static void initilizeSigleton() {
-			_instance = new Allocator();
-			std::atexit(&Allocator::utilizeSigleton);
-		}
-		static void utilizeSigleton(void) {
-			delete _instance;
-		}
-	public:
-		static Allocator* const instance() {
-			boost::call_once(&Allocator::initilizeSigleton,_once);
-			return _instance;
-		}
-		void* allocate() throw(std::bad_alloc) {
-			return pool_.malloc();
-		}
-		void free(void *ptr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
-			assert(size == sizeof(io::FileChannel));
-			pool_.free(static_cast<io::FileChannel*>(ptr));
-		}
-	private:
-		boost::object_pool<io::FileChannel> pool_;
-	};
-
-	Allocator* Allocator::_instance = NULL;
-
-	boost::once_flag Allocator::_once = BOOST_ONCE_INIT;
-}
-
-void* FileChannel::operator new(std::size_t size) throw(std::bad_alloc)
-{
-	return _private_mmt::Allocator::instance()->allocate();
-}
-
-void FileChannel::operator delete(void *ptr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW
-{
-	_private_mmt::Allocator::instance()->free(ptr,size);
-}
 
 // FileChannel
 FileChannel::FileChannel(HANDLE id, bool close) BOOST_NOEXCEPT_OR_NOTHROW:
 	ReadWriteChannel(),
+	SmallObject(),
 	id_(id),
 	close_(close)
 {
+}
+
+FileChannel::~FileChannel()
+{
+	if(close_) {
+		::CloseHandle(id_);
+	}
 }
 
 std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
@@ -152,13 +113,6 @@ void FileChannel::seek(std::size_t offset, MoveMethod method) throw(io_exception
 {
 	if(INVALID_SET_FILE_POINTER == ::SetFilePointer(id_,offset,NULL,method)) {
 		boost::throw_exception(io_exception("Can not move file pointer"));
-	}
-}
-
-FileChannel::~FileChannel()
-{
-	if(close_) {
-		::CloseHandle(id_);
 	}
 }
 

@@ -137,7 +137,7 @@ int _tmain(int argc, TCHAR *argv[])
 {
 	try {
 		charset_console_sample();
-		//pipe_sample();
+		pipe_sample();
 		file_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;

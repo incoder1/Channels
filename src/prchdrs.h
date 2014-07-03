@@ -3,6 +3,8 @@
 #define __PRCHDRS_HPP_INCLUDED__
 
 #include <channels_config.h>
+
+#include <smallobjectpool.hpp>
 #include <bytebuffer.hpp>
 #include <channels.hpp>
 

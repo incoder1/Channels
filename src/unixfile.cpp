@@ -19,7 +19,7 @@ FileChannel::FileChannel(int file) BOOST_NOEXCEPT_OR_NOTHROW:
 
 FileChannel::~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {
-	::close(file_);
+	assert(::close(file_));
 }
 
 std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1404306192 source:d:\cpp\channel\textdemo\main.cpp
+1404416273 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -8,24 +8,20 @@
 	<datachannel.hpp>
 	<pipe.hpp>
 
-1398265129 d:\cpp\channel\include\console.hpp
+1404324458 d:\cpp\channel\include\console.hpp
 	<channels_config.h>
-	<boost/noncopyable.hpp>
-	<boost/config.hpp>
-	<convert.hpp>
-	<file.hpp>
 	<WindowsConsole.hpp>
 
-1402680414 d:\cpp\channel\include\channels_config.h
+1404308741 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
 	<windows.h>
 
-1402680866 d:\cpp\channel\include\file.hpp
+1404308741 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1403724138 d:\cpp\channel\include\channels.hpp
+1404309763 d:\cpp\channel\include\channels.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<channels_config.h>
@@ -1340,7 +1336,7 @@
 
 1355254521 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\operator_bool.hpp
 
-1402601804 d:\cpp\channel\include\bytebuffer.hpp
+1404308741 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1631,7 +1627,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1402688090 d:\cpp\channel\include\buffers.hpp
+1404308741 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1921,7 +1917,7 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1403720661 d:\cpp\channel\include\readwrite.hpp
+1404308741 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<charbuffers.hpp>
 	<convert.hpp>
@@ -1930,7 +1926,7 @@
 1382620558 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1402600823 d:\cpp\channel\include\convert.hpp
+1404308741 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<charbuffers.hpp>
@@ -10636,20 +10632,81 @@
 	<channels.hpp>
 	<file.hpp>
 
-1401472652 d:\cpp\channel\include\windowsconsole.hpp
+1404406667 d:\cpp\channel\include\windowsconsole.hpp
+	<boost/noncopyable.hpp>
+	<boost/config.hpp>
 	<boost/function.hpp>
 	<boost/bind.hpp>
+	<convert.hpp>
+	<file.hpp>
 	<channels.hpp>
 
-1404306127 d:\cpp\channel\include\windowsfile.hpp
+1404406253 d:\cpp\channel\include\windowsfile.hpp
 	"abstractfile.hpp"
+	"smallobjectpool.hpp"
 
-1404303583 d:\cpp\channel\include\abstractfile.hpp
+1404308576 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1403182980 d:\cpp\channel\include\unixfile.hpp
+1404399886 d:\cpp\channel\include\unixfile.hpp
 	"abstractfile.hpp"
-	<unistd.h>
 	<sys/types.h>
 	<sys/stat.h>
+	<fcntl.h>
+
+1404417423 d:\cpp\channel\include\smallobjectpool.hpp
+	<channels_config.h>
+	<stdexcept>
+	<cassert>
+	<boost/throw_exception.hpp>
+	<boost/pool/pool.hpp>
+	<boost/unordered_map.hpp>
+	<boost/thread/once.hpp>
+	<boost/thread/mutex.hpp>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\object_pool.hpp
+	<boost/pool/poolfwd.hpp>
+	<boost/pool/pool.hpp>
+	<boost/pool/detail/pool_construct.ipp>
+	<boost/pool/detail/pool_construct_simple.ipp>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\poolfwd.hpp
+	<boost/config.hpp>
+	<cstddef>
+	<boost/pool/detail/mutex.hpp>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\detail\mutex.hpp
+	<boost/config.hpp>
+	<boost/thread/mutex.hpp>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\pool.hpp
+	<boost/config.hpp>
+	<functional>
+	<new>
+	<cstddef>
+	<cstdlib>
+	<exception>
+	<algorithm>
+	<boost/pool/poolfwd.hpp>
+	<boost/math/common_factor_ct.hpp>
+	<boost/pool/simple_segregated_storage.hpp>
+	<boost/type_traits/alignment_of.hpp>
+	<boost/assert.hpp>
+	<iostream>
+	<iomanip>
+	<set>
+	<valgrind/memcheck.h>
+
+1277998801 d:\cpp\boost_1_54_0\boost\math\common_factor_ct.hpp
+	<boost/math_fwd.hpp>
+	<boost/config.hpp>
+	<boost/mpl/integral_c.hpp>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\simple_segregated_storage.hpp
+	<functional>
+	<boost/pool/poolfwd.hpp>
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\detail\pool_construct.ipp
+
+1312304647 d:\cpp\boost_1_54_0\boost\pool\detail\pool_construct_simple.ipp
 
