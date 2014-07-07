@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1404416273 source:d:\cpp\channel\textdemo\main.cpp
+1404733974 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -7,16 +7,17 @@
 	<readwrite.hpp>
 	<datachannel.hpp>
 	<pipe.hpp>
+	<boost/thread/thread.hpp>
 
-1404324458 d:\cpp\channel\include\console.hpp
+1404734073 d:\cpp\channel\include\console.hpp
 	<channels_config.h>
 	<WindowsConsole.hpp>
 
-1404308741 d:\cpp\channel\include\channels_config.h
+1404734073 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
 	<windows.h>
 
-1404308741 d:\cpp\channel\include\file.hpp
+1404734073 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"WindowsFile.hpp"
 	"unixfile.hpp"
@@ -1336,7 +1337,7 @@
 
 1355254521 d:\cpp\boost_1_54_0\boost\smart_ptr\detail\operator_bool.hpp
 
-1404308741 d:\cpp\channel\include\bytebuffer.hpp
+1404499098 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1627,7 +1628,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1404308741 d:\cpp\channel\include\buffers.hpp
+1404495340 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -1917,7 +1918,7 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1404308741 d:\cpp\channel\include\readwrite.hpp
+1404500288 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<charbuffers.hpp>
 	<convert.hpp>
@@ -10626,11 +10627,9 @@
 
 1365979818 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
 
-1396039300 d:\cpp\channel\include\pipe.hpp
-	<boost/thread.hpp>
-	<boost/thread/condition_variable.hpp>
-	<channels.hpp>
-	<file.hpp>
+1404734073 d:\cpp\channel\include\pipe.hpp
+	<channels_config.h>
+	"WindowsPipe.hpp"
 
 1404406667 d:\cpp\channel\include\windowsconsole.hpp
 	<boost/noncopyable.hpp>
@@ -10654,7 +10653,7 @@
 	<sys/stat.h>
 	<fcntl.h>
 
-1404417423 d:\cpp\channel\include\smallobjectpool.hpp
+1404418831 d:\cpp\channel\include\smallobjectpool.hpp
 	<channels_config.h>
 	<stdexcept>
 	<cassert>
@@ -10709,4 +10708,10 @@
 1312304647 d:\cpp\boost_1_54_0\boost\pool\detail\pool_construct.ipp
 
 1312304647 d:\cpp\boost_1_54_0\boost\pool\detail\pool_construct_simple.ipp
+
+1404493728 d:\cpp\channel\include\windowspipe.hpp
+	<boost/thread/mutex.hpp>
+	<boost/thread/condition_variable.hpp>
+	<channels.hpp>
+	<file.hpp>
 

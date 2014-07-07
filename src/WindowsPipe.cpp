@@ -1,37 +1,21 @@
 #include "prchdrs.h"
-#include "pipe.hpp"
+#include "WindowsPipe.hpp"
 
 namespace io {
 
-// Abstract Pipe
-Pipe::Pipe() BOOST_NOEXCEPT_OR_NOTHROW
-{}
-
-Pipe::~Pipe() BOOST_NOEXCEPT_OR_NOTHROW
-{}
-
-// factory function
-SPipe CHANNEL_PUBLIC open_pipe() throw(io_exception)
-{
-	HANDLE sync;
-	HANDLE src;
-	// No inheritance and default system buffer size
-	if(!::CreatePipe(&src, &sync, NULL, 0)) {
-		boost::throw_exception(io_exception("Can not create anonymous pipe"));
-	}
-	return SPipe(new WindowsPipe(sync,src));
-}
-
 //Windows Pipe
-
-WindowsPipe::WindowsPipe(HANDLE sink, HANDLE source) BOOST_NOEXCEPT_OR_NOTHROW:
-Pipe(),
+WindowsPipe::WindowsPipe() throw(io_exception):
      mutex_(),
      condition_(),
-     canRead_(false),
-     sink_(sink),
-     source_(source)
-{}
+     sink_(NULL),
+     source_(NULL),
+     canRead_(false)
+{
+	// No inheritance and default system buffer size
+	if(!::CreatePipe(&source_, &sink_, NULL, 0)) {
+		boost::throw_exception(io_exception("Can not create anonymous pipe"));
+	}
+}
 
 WindowsPipe::~WindowsPipe() BOOST_NOEXCEPT_OR_NOTHROW
 {}

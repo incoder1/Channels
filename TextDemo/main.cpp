@@ -32,6 +32,8 @@
 #include <datachannel.hpp>
 #include <pipe.hpp>
 
+#include <boost/thread/thread.hpp>
+
 //#include <network.hpp>
 
 #ifndef HAS_CPP11
@@ -44,7 +46,7 @@ typedef std::basic_string<TCHAR> wstring;
 // UTF8 string
 typedef std::string ustring;
 
-#if	defined(PLATFROM_WINDOWS)
+#if	defined(PLATFORM_WINDOWS)
 // Windows NT Unicode console - UTF-16LE
 const char* LOCALE_CH = "UTF-16LE";
 
@@ -76,16 +78,6 @@ typedef io::Reader<ustring> reader_u8;
 typedef io::Writer<wstring> writer_u16le;
 typedef io::Reader<wstring> reader_u16le;
 
-void pipe_write_routine(io::SPipe pipe) throw(io::io_exception)
-{
-	try {
-		writer_u8 out(pipe->sink(),io::char_empty_converter());
-		out.write(U8("Hello from Pipe"));
-	} catch(std::exception& exc) {
-		std::cerr<<exc.what()<<std::endl;
-	}
-}
-
 void charset_console_sample() throw(io::io_exception)
 {
 	const io::Charset* utf16 = io::Charsets::forName(LOCALE_CH);
@@ -100,13 +92,24 @@ void charset_console_sample() throw(io::io_exception)
 	out.write(in.read());
 }
 
+void pipe_write_routine(io::SWriteChannel sink) throw(io::io_exception)
+{
+	try {
+		writer_u8 out(sink,io::char_empty_converter());
+		out.write(U8("Hello from Pipe"));
+	} catch(std::exception& exc) {
+		std::cerr<<exc.what()<<std::endl;
+	}
+}
+
+
 void pipe_sample() throw(io::io_exception)
 {
 	// pipe sample
-	io::SPipe pipe = io::open_pipe();
-	boost::thread writeThread(boost::bind(pipe_write_routine,pipe));
+	io::Pipe pipe;
+	boost::thread writeThread(boost::bind(pipe_write_routine,pipe.sink()));
 	writeThread.start_thread();
-	reader_u16le reader(pipe->source(), io::new_byte_byffer(100), to_console_conv());
+	reader_u16le reader(pipe.source(), io::new_byte_byffer(100), to_console_conv());
 	wstring str = reader.read();
 	io::Console con;
 	writer_u16le out(con.outChanell(), io::char_empty_converter());
@@ -137,8 +140,8 @@ int _tmain(int argc, TCHAR *argv[])
 {
 	try {
 		charset_console_sample();
-		pipe_sample();
-		file_sample();
+		//pipe_sample();
+		//file_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}

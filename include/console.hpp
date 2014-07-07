@@ -3,7 +3,7 @@
 
 #include <channels_config.h>
 
-#ifdef PLATFROM_WINDOWS
+#ifdef PLATFORM_WINDOWS
 #	include <WindowsConsole.hpp>
 #endif
 

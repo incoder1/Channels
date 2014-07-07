@@ -186,6 +186,13 @@
 			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
+		<Unit filename="include/WindowsPipe.hpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="ReleaseMSVC10" />
+			<Option target="ReleaseMSVC10-ICU" />
+			<Option target="DebugMinGW32-ICU" />
+		</Unit>
 		<Unit filename="include/abstractfile.hpp" />
 		<Unit filename="include/buffers.hpp" />
 		<Unit filename="include/bytebuffer.hpp" />
@@ -207,6 +214,7 @@
 		</Unit>
 		<Unit filename="include/pipe.hpp" />
 		<Unit filename="include/readwrite.hpp" />
+		<Unit filename="include/smallobjectpool.hpp" />
 		<Unit filename="include/unixfile.hpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>
@@ -260,6 +268,7 @@
 			<Option weight="0" />
 			<Option compiler="msvc10" use="0" buildCommand="$compiler /nologo $options $includes /c $file /Yc$objects_output_dir\prchrd.pch" />
 		</Unit>
+		<Unit filename="src/smallobjectpool.cpp" />
 		<Unit filename="src/unixfile.cpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>

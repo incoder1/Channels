@@ -13,11 +13,11 @@
 	<stdexcept>
 	<cstring>
 
-1404308741 d:\cpp\channel\include\channels_config.h
+1404734073 d:\cpp\channel\include\channels_config.h
 	<unistd.h>
 	<windows.h>
 
-1404308741 d:\cpp\channel\include\bytebuffer.hpp
+1404499098 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1350,7 +1350,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1404308741 d:\cpp\channel\include\buffers.hpp
+1404495340 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -5540,7 +5540,7 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1404315687 source:d:\cpp\channel\src\main.cpp
+1404734073 source:d:\cpp\channel\src\main.cpp
 	"prchdrs.h"
 	<channels_config.h>
 	"WindowsFile.hpp"
@@ -5548,14 +5548,14 @@
 1401736735 source:d:\cpp\channel\src\windows_file.cpp
 	"file.hpp"
 
-1404308741 d:\cpp\channel\include\file.hpp
+1404734073 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1404315713 source:d:\cpp\channel\src\windowspipe.cpp
+1404493700 source:d:\cpp\channel\src\windowspipe.cpp
 	"prchdrs.h"
-	"pipe.hpp"
+	"WindowsPipe.hpp"
 
 1396039300 d:\cpp\channel\include\pipe.hpp
 	<boost/thread.hpp>
@@ -7388,7 +7388,7 @@
 	<channels.hpp>
 	"helpers.hpp"
 
-1404332652 d:\cpp\channel\src\helpers.hpp
+1404743745 d:\cpp\channel\src\helpers.hpp
 	<channels_config.h>
 
 1404418831 d:\cpp\channel\include\smallobjectpool.hpp
@@ -7401,7 +7401,7 @@
 	<boost/thread/once.hpp>
 	<boost/thread/mutex.hpp>
 
-1404418181 source:d:\cpp\channel\src\smallobjectpool.cpp
+1404749431 source:d:\cpp\channel\src\smallobjectpool.cpp
 	"prchdrs.h"
 	"smallobjectpool.hpp"
 
@@ -7411,4 +7411,10 @@
 	<rpcndr.h>
 	<guiddef.h>
 	<guiddef.h>
+
+1404493728 d:\cpp\channel\include\windowspipe.hpp
+	<boost/thread/mutex.hpp>
+	<boost/thread/condition_variable.hpp>
+	<channels.hpp>
+	<file.hpp>
 

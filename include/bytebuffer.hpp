@@ -24,10 +24,6 @@ public:
 	typedef basic_buffer<uint8_t>::iterator iterator;
 	typedef basic_buffer<uint8_t>::const_iterator const_iterator;
 
-	byte_buffer(const byte_buffer& c) BOOST_NOEXCEPT_OR_NOTHROW:
-		basic_buffer<uint8_t>( static_cast<basic_buffer<uint8_t> >(c))
-	{}
-
 	inline std::size_t put(uint8_t e) {
 		return basic_buffer<uint8_t>::put(e);
 	}
@@ -136,7 +132,7 @@ inline byte_buffer wrap_array(const uint8_t* arr, std::size_t size) {
 
 inline byte_buffer copy_array(const uint8_t* arr, std::size_t size) {
 	byte_buffer result = new_byte_byffer(size);
-	std::copy(arr,arr+size,result.begin());
+	std::copy(arr,arr+size,result.position());
 	return result;
 }
 

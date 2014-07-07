@@ -73,7 +73,7 @@ public:
 		buff_.flip();
 		conv_->convert(buff_,conv);
 		conv.flip();
-		return String(conv.begin(),conv.last());
+		return String(conv.position(),conv.last());
 	}
 private:
 	SReadChannel src_;

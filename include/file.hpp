@@ -3,7 +3,7 @@
 
 #include "channels_config.h"
 
-#ifdef PLATFROM_WINDOWS
+#ifdef PLATFORM_WINDOWS
 #	include "WindowsFile.hpp"
 #elif defined(PLATFORM_UNIX)
 #	include "unixfile.hpp"

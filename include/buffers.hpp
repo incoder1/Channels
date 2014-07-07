@@ -125,30 +125,6 @@ public:
 public:
 
 	/**
-	 * Constant iterator to the before first buffer element
-	 * \return constant begin iterator
-	 */
-	const_iterator begin() const {
-		return const_iterator(NULL, NULL, data_.get());
-	}
-
-	/**
-	 * Constant iterator to the after last buffer element
-	 * \return constant end iterator
-	 */
-	const_iterator end() const {
-		return const_iterator(NULL, NULL, end_);
-	}
-
-	/**
-	 * Iterator to the before first buffer element
-	 * \return begin iterator
-	 */
-	iterator begin() {
-		return iterator(NULL, NULL, data_.get());
-	}
-
-	/**
 	 * Move this buffer position into offset. If offset is larger then buffer capacity,
 	 * position pointer would be moved into the buffer last element.
 	 * \param offset the offset to move position pointer
@@ -171,14 +147,6 @@ public:
 	 */
 	std::size_t remain() const {
 		return (end_-1) - last_;
-	}
-
-	/**
-	 * Iterator to the after last buffer element
-	 * \return begin iterator
-	 */
-	iterator end() {
-		return iterator(NULL, NULL , end_);
 	}
 
 	/**
@@ -207,11 +175,11 @@ public:
 
 
 	/**
-	 * Constant iterator to the last buffer element
+	 * Constant iterator after the last buffer element
 	 * \return constant iterator to the last buffer element
 	 */
 	const_iterator last() const {
-		return const_iterator(NULL, end_, last_);
+		return const_iterator(NULL, end_, last_+1);
 	}
 
 	/**
@@ -235,7 +203,7 @@ public:
 
 	std::size_t put(iterator& first, iterator& last) {
 		std::size_t result = 0;
-		for(iterator it = first; (it < last) && it <= end(); ++it) {
+		for(iterator it = first; (it < last) && it.ptr() <= end_; ++it) {
 			put(*it);
 			++result;
 		}

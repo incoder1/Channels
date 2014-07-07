@@ -16,8 +16,8 @@
 
 
 #if defined(_WIN32) || defined(_WIN64)
-#	ifndef PLATFROM_WINDOWS
-#		define PLATFROM_WINDOWS 1
+#	ifndef PLATFORM_WINDOWS
+#		define PLATFORM_WINDOWS 1
 #	endif
 #endif
 
@@ -27,7 +27,7 @@
 #endif
 
 // Shared lib / DLL special keywords if any
-#ifdef PLATFROM_WINDOWS
+#ifdef PLATFORM_WINDOWS
 
 #	include <windows.h>
 

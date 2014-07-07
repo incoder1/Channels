@@ -9,7 +9,7 @@ inline void* vpos(const byte_buffer& buff) {
 	return static_cast<void*>(buff.position().ptr());
 }
 
-#ifdef PLATFROM_WINDOWS
+#ifdef PLATFORM_WINDOWS
 
 static std::string last_error_str(DWORD lastError)
 {
@@ -27,20 +27,25 @@ static std::string last_error_str(DWORD lastError)
 	return result;
 }
 
-inline void validate_io(BOOL ioResult, const char* message) throw(io_exception)
-{
-	if(!ioResult) {
+template<class Exception_T>
+inline void validate(BOOL expression, const char* failMessage) throw(Exception_T) {
+  if(!expression) {
 		DWORD lastError = ::GetLastError();
 		if(ERROR_IO_PENDING != lastError) {
-			std::string errMsg(message);
+			std::string errMsg(failMessage);
 			errMsg.append(" ");
 			errMsg.append(last_error_str(lastError));
-			boost::throw_exception(io_exception(errMsg));
+			boost::throw_exception(Exception_T(errMsg));
 		}
 	}
 }
 
-#endif // PLATFROM_WINDOWS
+inline void validate_io(BOOL ioResult, const char* message) throw(io_exception)
+{
+	validate<io_exception>(ioResult, message);
+}
+
+#endif // PLATFORM_WINDOWS
 
 }
 #endif // HELPERS_HPP_INCLUDED

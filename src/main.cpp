@@ -1,7 +1,7 @@
 #include "prchdrs.h"
 #include <channels_config.h>
 
-#ifdef PLATFROM_WINDOWS
+#ifdef PLATFORM_WINDOWS
 
 #include "WindowsFile.hpp"
 
@@ -19,6 +19,6 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 	}
 	return TRUE; // successful
 }
-#endif // PLATFROM_WINDOWS
+#endif // PLATFORM_WINDOWS
 
 
