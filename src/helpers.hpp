@@ -3,6 +3,8 @@
 
 #include <channels_config.h>
 
+#include <boost/system/error_code.hpp>
+
 namespace io {
 
 inline void* vpos(const byte_buffer& buff) {
@@ -46,6 +48,18 @@ inline void validate_io(BOOL ioResult, const char* message) throw(io_exception)
 }
 
 #endif // PLATFORM_WINDOWS
+
+#ifdef PLATFORM_UNIX
+inline void validate_io(ssize_t res, const char* msg) {
+	if(-1 == res) {
+		boost::system::error_code ec;
+		std::string smsg(msg);
+		smgs.append("");
+		smgs.append(ec.category().what());
+		boost::throw_exception(io_exception(smsg));
+	}
+}
+#endif // PLATFROM UNIX
 
 }
 #endif // HELPERS_HPP_INCLUDED

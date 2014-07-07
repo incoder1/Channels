@@ -7302,7 +7302,7 @@
 	"abstractfile.hpp"
 	"smallobjectpool.hpp"
 
-1404308576 d:\cpp\channel\include\abstractfile.hpp
+1404759463 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1404399886 d:\cpp\channel\include\unixfile.hpp
@@ -7388,8 +7388,9 @@
 	<channels.hpp>
 	"helpers.hpp"
 
-1404743745 d:\cpp\channel\src\helpers.hpp
+1404751223 d:\cpp\channel\src\helpers.hpp
 	<channels_config.h>
+	<boost/system/error_code.hpp>
 
 1404418831 d:\cpp\channel\include\smallobjectpool.hpp
 	<channels_config.h>
@@ -7401,7 +7402,7 @@
 	<boost/thread/once.hpp>
 	<boost/thread/mutex.hpp>
 
-1404749431 source:d:\cpp\channel\src\smallobjectpool.cpp
+1404749538 source:d:\cpp\channel\src\smallobjectpool.cpp
 	"prchdrs.h"
 	"smallobjectpool.hpp"
 

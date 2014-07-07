@@ -3,16 +3,50 @@
 
 namespace io {
 
-inline void validate_io(ssize_t res, const char* msg) {
-	if(-1 == res) {
-		boost::system::error_code ec;
-		std::string smsg(msg);
-		smgs.append("");
-		smgs.append(ec.category().what());
-		boost::throw_exception(io_exception(smsg));
-	}
+// File
+File::File(const char* path) BOOST_NOEXCEPT_OR_NOTHROW:
+	path_(path)
+{
 }
 
+bool File::create() const BOOST_NOEXCEPT_OR_NOTHROW
+{
+	return -1 != ::creat(path_, O_CREAT);
+}
+
+bool File::errace() const BOOST_NOEXCEPT_OR_NOTHROW
+{
+	return -1 != ::remove(path_);
+}
+
+bool File::exist() const BOOST_NOEXCEPT_OR_NOTHROW
+{
+	struct ::stat st;
+	return 0 == ::stat(path_,&st);
+}
+
+SReadChannel File::openForRead() throw(io_exception)
+{
+	int fd = ::open(path_, O_APPEND | O_SYNC, O_RDONLY);
+	validate_io(fd, "Can not open file");
+	return SReadChannel(new FileChannel(fd));
+}
+
+SWriteChannel File::openForWrite() throw(io_exception)
+{
+	int fd = ::open(path_, O_APPEND | O_SYNC, O_WRONLY);
+	validate_io(fd, "Can not open file");
+	return SReadChannel(new FileChannel(fd));
+}
+
+SReadWriteChannel File::openForReadWrite() throw(io_exception)
+{
+	int fd = ::open(path_, O_APPEND | O_SYNC, O_RDWR);
+	validate_io(fd, "Can not open file");
+	return SReadChannel(new FileChannel(fd));
+}
+
+// FileChannel
 FileChannel::FileChannel(int file) BOOST_NOEXCEPT_OR_NOTHROW:
 	file_(file)
 {}
@@ -26,7 +60,7 @@ std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 {
 	::ssize_t result = ::read(file_, vpos(buffer), buffer.capacity());
 	validate_io(result, "Read file error");
-	buffer.move((std::size_t)result);
+	buffer.move(static_cast<std::size_t>(result));
 	return static_cast<std::size_t>(result);
 }
 
@@ -39,17 +73,10 @@ std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 
 void FileChannel::seek(std::size_t offset, MoveMethod method) throw(io_exception)
 {
-	off_t res = lseek(file_, offset, method);
+	off_t res = ::lseek(file_, offset, method);
 	validate_io(static_cast<ssize_t>(result), "Move file pointer error");
 	return result;
 }
 
-void * FileChannel::operator new(std::size_t size) throw(std::bad_alloc)
-{
-}
-
-void FileChannel::operator delete(void* ptr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW
-{
-}
 
 } // namespace io

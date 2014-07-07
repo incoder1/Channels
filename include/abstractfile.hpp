@@ -48,7 +48,6 @@ public:
 	 * \return reference smart pointer on read-write file channel
 	 */
 	SReadWriteChannel openForReadWrite() throw(io_exception);
-
 };
 
 } // namespace io
