@@ -15,6 +15,8 @@
 #include <unicode/uloc.h>
 #include <unicode/unistr.h>
 
+#include <smallobjectpool.hpp>
+
 namespace io {
 
 class ICUEngine {
@@ -32,7 +34,7 @@ public:
  *  to the another.
  * \param CharType - the byte type character representation. I.e. char, wchar_t, char8_t, char16_t etc.
  */
-class CHANNEL_PUBLIC ICUConverter:public Converter {
+class CHANNEL_PUBLIC ICUConverter:public virtual Converter, public virtual SmallObject {
 private:
 	ICUEngine engine_;
 	void fromUnicode(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);

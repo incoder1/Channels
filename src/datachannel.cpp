@@ -4,7 +4,7 @@
 namespace io {
 
 	DataChannel::DataChannel(void *data, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW:
-		data_(wrap_array(reinterpret_cast<uint8_t*>(data),size))
+		data_(byte_buffer::wrap_array(static_cast<uint8_t*>(data),size))
 	{}
 
 	DataChannel::DataChannel(const byte_buffer& buff) BOOST_NOEXCEPT_OR_NOTHROW:
@@ -23,7 +23,7 @@ namespace io {
 
 	std::size_t DataChannel::write(const byte_buffer& buffer) throw(io_exception)
 	{
-		return data_.put(buffer);
+		return data_.put(buffer.position(), buffer.last());
 	}
 
 	void DataChannel::seek(std::size_t offset, MoveMethod method) throw(io_exception)

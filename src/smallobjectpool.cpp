@@ -91,27 +91,29 @@ private:
 		// delete the singleton
 		delete _instance;
 	}
+
 	typedef boost::pool<heap_allocator> pool_type;
-	typedef boost::shared_ptr<pool_type> SPool;
-	typedef boost::unordered_map<std::size_t,SPool> pool_table_t;
 
 	explicit SmallObjectAllocator() BOOST_NOEXCEPT_OR_NOTHROW
-	{}
+	{
+		for(std::size_t i=0; i < SMALL_OBJECT_LIMIT; i++) {
+			pooltbl_[i] = NULL;
+		}
+	}
 
-	inline SPool getPool(std::size_t size) {
-		pool_table_t::const_iterator it = pooltbl_.find(size);
-		// double check that new pool is not created with other thread
-		if(pooltbl_.end() == it) {
-			// need write protection
+	pool_type* getPool(std::size_t size) throw(std::bad_alloc) {
+		pool_type *result = pooltbl_[size];
+		// double check that new pool is not created by other thread
+		if(NULL == result) {
 			boost::unique_lock<boost::mutex> lock(mutex_);
-			it = pooltbl_.find(size);
-			if(pooltbl_.end() == it) {
-				SPool result(new pool_type(size));
-				pooltbl_.insert(std::make_pair(size,result));
+			result = pooltbl_[size];
+			if(NULL == result) {
+				result = new pool_type(size);
+				pooltbl_[size] = result;
 				return result;
 			}
 		}
-		return it->second;
+		return result;
 	}
 public:
 	static SmallObjectAllocator* const instance() {
@@ -119,6 +121,15 @@ public:
 		boost::call_once(&SmallObjectAllocator::initilizeSigleton,_once);
 		return _instance;
 	}
+
+	~SmallObjectAllocator() BOOST_NOEXCEPT_OR_NOTHROW {
+		for(std::size_t i=0; i < SMALL_OBJECT_LIMIT; i++) {
+			if(NULL != pooltbl_[i]) {
+				delete pooltbl_[i];
+			}
+		}
+	}
+
 	/// Allocates memory block for the small object, speed O(1)
 	inline void* allocate(std::size_t size) throw(std::bad_alloc) {
 		void* result = NULL;
@@ -144,7 +155,7 @@ public:
 	}
 private:
 	boost::mutex mutex_;
-	pool_table_t pooltbl_;
+	pool_type* pooltbl_[SMALL_OBJECT_LIMIT];
 };
 
 // initialize the singleton global variables

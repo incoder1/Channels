@@ -6,7 +6,6 @@ namespace io {
 //ConsoleReadChannel
 ConsoleReadChannel::ConsoleReadChannel(HANDLE hCons, bool wide) BOOST_NOEXCEPT_OR_NOTHROW:
 	ReadChannel(),
-	SmallObject(),
 	hCons_(hCons),
 	peer_(wide? readf_t(ReadConsoleW) : readf_t(ReadConsoleA) ),
 	charSize_(wide? sizeof(WCHAR) : sizeof(CHAR) )
@@ -28,7 +27,6 @@ ConsoleReadChannel::~ConsoleReadChannel() BOOST_NOEXCEPT_OR_NOTHROW
 //ConsoleWriteChannel
 ConsoleWriteChannel::ConsoleWriteChannel(HANDLE hCons, bool unicode) BOOST_NOEXCEPT_OR_NOTHROW:
 	WriteChannel(),
-	SmallObject(),
 	hCons_(hCons),
 	peer_(unicode ?  writef_t(WriteConsoleW) : writef_t(WriteConsoleA) ),
 	charSize_(unicode? sizeof(WCHAR) : sizeof(CHAR) )

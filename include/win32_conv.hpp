@@ -1,11 +1,12 @@
 #ifndef WIN32_CONV_HPP_INCLUDE
 #define WIN32_CONV_HPP_INCLUDE
 
-#include <convert.hpp>
-
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/thread/once.hpp>
+
+#include <convert.hpp>
+#include <smallobjectpool.hpp>
 
 #include <Objbase.h>
 #include <Mlang.h>
@@ -54,7 +55,7 @@ public:
 /**
  * ! \brief Microsoft MLang (Internet Explorer component) based converter
  */
-class CHANNEL_PUBLIC Win32Converter : public Converter {
+class CHANNEL_PUBLIC Win32Converter : public virtual Converter, public virtual SmallObject {
 public:
 	Win32Converter(PMLang engine,const Charset* srcCt,const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
 	~Win32Converter() BOOST_NOEXCEPT_OR_NOTHROW;

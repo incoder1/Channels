@@ -9,6 +9,8 @@
 #include <convert.hpp>
 #include <iconv.h>
 
+#include <smallobjectpool.hpp>
+
 namespace io {
 
 class IconvEngine {
@@ -45,7 +47,7 @@ public:
  *  to the another.
  * \param CharType - the byte type character representation. I.e. char, wchar_t, char8_t, char16_t etc.
  */
-class CHANNEL_PUBLIC IconvConverter:public Converter {
+class CHANNEL_PUBLIC IconvConverter:public virtual Converter, public virtual SmallObject {
 private:
 	IconvEngine engine_;
 public:

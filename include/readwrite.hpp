@@ -69,10 +69,9 @@ public:
 		buff_.clear();
 		std::size_t bytesRead = src_->read(buff_);
 		const std::size_t maxChSize = conv_->destCharset()->charSize();
-		byte_buffer conv = new_byte_byffer(bytesRead*maxChSize);
+		byte_buffer conv = byte_buffer::new_heap_buffer(bytesRead*maxChSize);
 		buff_.flip();
 		conv_->convert(buff_,conv);
-		conv.flip();
 		return String(conv.position(),conv.last());
 	}
 private:
@@ -106,11 +105,13 @@ public:
 	 * Writes STL string into write channel
 	 */
 	void write(const String& str) throw(io_exception,charset_exception) {
-		write(wrap_string(str));
+		byte_buffer buff = byte_buffer::wrap_array(str.data(), str.length()-1); // 0 ending symbol should be avoided
+		write(buff);
 	}
-	void write(const byte_buffer& buff) throw(io_exception, charset_exception) {
+
+	void write(const byte_buffer& buff) throw(io_exception, charset_exception, std::bad_alloc) {
 		const std::size_t destCharSize = conv_->destCharset()->charSize();
-		byte_buffer convBytes = new_byte_byffer(buff.length()*destCharSize);
+		byte_buffer convBytes = byte_buffer::new_heap_buffer(buff.length()*destCharSize);
 		conv_->convert(buff, convBytes);
 		convBytes.flip();
 		out_->write(convBytes);

@@ -2,7 +2,6 @@
 #define HELPERS_HPP_INCLUDED
 
 #include <channels_config.h>
-
 #include <boost/system/error_code.hpp>
 
 namespace io {
@@ -23,6 +22,7 @@ static std::string last_error_str(DWORD lastError)
 	                   (LPTSTR) &lpMsgBuf, 0, NULL );
 	if (bufLen) {
 		LPCSTR lpMsgStr = (LPCSTR)lpMsgBuf;
+		result.append(" - ");
 		result.append(lpMsgStr, lpMsgStr+bufLen);
 		::LocalFree(lpMsgBuf);
 	}

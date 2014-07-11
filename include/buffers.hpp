@@ -75,8 +75,16 @@ public:
 		return buffer_iterator(begin_, end_, position_+offset);
 	}
 
+	const difference_type operator+(const buffer_iterator& rhs) const {
+		return position_ + rhs.position_;
+	}
+
 	const buffer_iterator operator-(const difference_type& offset) const {
 		return buffer_iterator(begin_, end_, position_-offset);
+	}
+
+	const difference_type operator-(const buffer_iterator& rhs) const {
+		return position_ - rhs.position_;
 	}
 
 	inline bool operator==(const buffer_iterator& it) const {
@@ -129,16 +137,12 @@ public:
 	 * position pointer would be moved into the buffer last element.
 	 * \param offset the offset to move position pointer
 	 */
-	void move(std::size_t offset) {
-		if( (position_+offset) >= end_ ) {
-			last_ = end_ - 1;
-			position_ = last_;
-		} else {
-			if( (position_ + offset) >= last_) {
-				last_ = position_ + offset;
-			}
-			position_ += offset;
-		}
+	std::size_t move(std::size_t offset) {
+		T *endPtr = position_+offset;
+		std::size_t result = (endPtr < end_) ? offset : end_ - position_;
+		position_ += result;
+		last_ = position_+1;
+		return result;
 	}
 
 	/**
@@ -146,7 +150,7 @@ public:
 	 * \return remaining elements count
 	 */
 	std::size_t remain() const {
-		return (end_-1) - last_;
+		return end_ - (last_-1);
 	}
 
 	/**
@@ -166,47 +170,42 @@ public:
 	}
 
 	/**
-	 * Iterator to the last buffer element
+	 * Iterator to the last filled buffer element
 	 * \return constant iterator to the last buffer element
 	 */
 	iterator last() {
-		return const_iterator(NULL, end_, last_);
+		return iterator(NULL, end_, last_);
 	}
 
 
 	/**
-	 * Constant iterator after the last buffer element
+	 * Constant iterator after the last filled buffer element
 	 * \return constant iterator to the last buffer element
 	 */
 	const_iterator last() const {
-		return const_iterator(NULL, end_, last_+1);
+		return const_iterator(NULL, end_, last_);
 	}
 
 	/**
-	 * Inserts a single element into the buffer end.
-	 * This method incrementing buffers length
+	 * Inserts a single element into last buffer, increases if success the position.
 	 * \param t element to be inserted into current buffer position
+	 * \return 1 if element was put, 0 if no more space left
 	 */
 	std::size_t put(T& e)  {
+		std::size_t result = 0;
 		if(position_ + 1 != end_) {
 			*position_ = e;
-			if( (last_ == position_) || (position_+ 1 > last_) ) {
-				++position_;
-				last_ = position_;
-			} else {
-				++position_;
-			}
-			return 1;
+			last_ = position_ + 1;
+			result = 1;
 		}
-		return 0;
+		return result;
 	}
 
 	std::size_t put(iterator& first, iterator& last) {
-		std::size_t result = 0;
-		for(iterator it = first; (it < last) && it.ptr() <= end_; ++it) {
-			put(*it);
-			++result;
-		}
+		std::size_t distance = std::size_t(last - first);
+		std::size_t result = distance < remain() ? distance : remain();
+		std::copy(first,first+result,position());
+		move(result);
 		return result;
 	}
 
@@ -214,26 +213,12 @@ public:
 		return put(const_cast<iterator&>(first), const_cast<iterator&>(last));
 	}
 
-	std::size_t put(const basic_buffer& other) {
-		return put(other.position(), other.last());
-	}
-
-	std::size_t put(const T* arr, std::size_t size) {
-		std::size_t avaliable = capacity() - length();
-		std::size_t offset = (size > avaliable) ? avaliable : size;
-		std::copy(arr, arr+offset, position_);
-		if( (last_ == position_) ) {
-			last_ += offset;
-		}
-		position_ += offset;
-		return offset;
-	}
-
 	/**
 	 * Sets current buffer position into array begin,
 	 * Use this method when you need read data from the buffer
 	 */
 	void flip() {
+		// put last on the current state, and move position to the begin
 		position_ = data_.get();
 	}
 
@@ -250,7 +235,7 @@ public:
 	 * \return buffer length
 	 */
 	std::size_t length() const {
-		return last_ - data_.get();
+		return (last_-1) - data_.get();
 	}
 
 	/**
@@ -261,25 +246,6 @@ public:
 		return (end_-1) - data_.get();
 	}
 
-	basic_buffer(const basic_buffer& c) BOOST_NOEXCEPT_OR_NOTHROW:
-		data_(c.data_),
-		position_(c.position_),
-		last_(c.last_),
-		end_(c.end_)
-	{}
-
-	basic_buffer& operator=(const basic_buffer& rhs) BOOST_NOEXCEPT_OR_NOTHROW
-	{
-		basic_buffer cp(rhs);
-		std::swap(*this,cp);
-		return *this;
-	}
-
-	/**
-	 * Deallocates buffer array
-	 */
-	virtual ~basic_buffer()
-	{}
 private:
 	boost::shared_array<T> data_;
 	T* position_;
@@ -303,7 +269,9 @@ inline void delete_free(T* ptr)
 	delete [] ptr;
 }
 
-// Do not allocate dynamic memory, used for wrapping static arrays or STL containers
+/// !\brief Don't allocates dynamic memory,
+/// Used for wrapping static arrays
+/// to avoid deep copying of data
 template<typename T>
 class empty_alloc {
 private:
@@ -312,7 +280,7 @@ public:
 	empty_alloc(const T* array) BOOST_NOEXCEPT_OR_NOTHROW:
 		array_(array)
 	{}
-	inline T* operator()(std::size_t size) {
+	inline T* operator()(std::size_t size) const {
 		return const_cast<T*>(array_);
 	}
 };
@@ -321,7 +289,7 @@ template<typename T>
 class empty_free {
 public:
 	// should be removed by the compiler optimization
-	inline void operator()(T*) BOOST_NOEXCEPT_OR_NOTHROW
+	inline void operator()(T*)
 	{}
 };
 

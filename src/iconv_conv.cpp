@@ -51,7 +51,8 @@ void IconvConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(cha
 	}
 	// calc size of char buffer, and move it
 	std::size_t offset = dest.capacity() - avail;
-	dest.move(0 != offset ? offset: dest.capacity() - 1);
+	dest.move(0 != offset ? offset: (dest.capacity()-1) );
+	dest.flip();
 }
 
 } // namespace io

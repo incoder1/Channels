@@ -86,30 +86,28 @@ void charset_console_sample() throw(io::io_exception)
 	// char set conversation sample
 	writer_u8 out(con.outChanell(), to_console_conv());
 	out.write(U8("Hello world English version. Привет мир, русская верссия\n\r"));
-	io::byte_buffer readBuff = io::new_byte_byffer(512);
+	io::byte_buffer readBuff = io::byte_buffer::new_heap_buffer(512);
 	reader_u8 in(con.inChanell(),readBuff, from_console_conv());
 	out.write(U8("Type something :> "));
 	out.write(in.read());
 }
 
-void pipe_write_routine(io::SWriteChannel sink) throw(io::io_exception)
-{
+void pipe_write_routine(io::SWriteChannel sink) {
 	try {
-		writer_u8 out(sink,io::char_empty_converter());
-		out.write(U8("Hello from Pipe"));
+		sink->write(io::byte_buffer::wrap_array("Hello from Pipe",15));
 	} catch(std::exception& exc) {
 		std::cerr<<exc.what()<<std::endl;
 	}
 }
 
 
-void pipe_sample() throw(io::io_exception)
+void pipe_sample()
 {
 	// pipe sample
-	io::Pipe pipe;
+	io::Pipe pipe(io::byte_buffer::new_heap_buffer(30));
 	boost::thread writeThread(boost::bind(pipe_write_routine,pipe.sink()));
 	writeThread.start_thread();
-	reader_u16le reader(pipe.source(), io::new_byte_byffer(100), to_console_conv());
+	reader_u16le reader(pipe.source(), io::byte_buffer::new_heap_buffer(100), to_console_conv());
 	wstring str = reader.read();
 	io::Console con;
 	writer_u16le out(con.outChanell(), io::char_empty_converter());
@@ -132,6 +130,22 @@ void file_sample() {
 	out.write(L"ASCII     abcde xyz\nGerman  äöü ÄÖÜ ß\nPolish  ąęźżńł\nRussian  абвгдеж эюя\nCJK  你好");
 }
 
+void buffers_smaple() {
+	using namespace io;
+	const char* hello = "Hello ";
+	const char* world = "world!!!";
+
+	byte_buffer result = byte_buffer::new_heap_buffer(std::strlen("Hello world!!!"));
+
+	byte_buffer wrap = byte_buffer::wrap_array(hello, std::strlen(hello)-1); //not wrap the 0 ending
+	byte_buffer deepCopy = byte_buffer::copy_array(world, std::strlen(world)+1); // copy 0 also
+
+	result.put(wrap.position(), wrap.last());
+	result.put(deepCopy.position(), deepCopy.last());
+	result.flip();
+	std::cout<<"Buffer length: "<<result.length()<<" Buffer content: "<<result.position().ptr()<<std::endl;
+}
+
 #ifndef _MSC_VER
 int main(int argc, const char** argv)
 #else
@@ -139,7 +153,8 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	try {
-		charset_console_sample();
+		buffers_smaple();
+		//charset_console_sample();
 		//pipe_sample();
 		//file_sample();
 	} catch(std::exception &e) {

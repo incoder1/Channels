@@ -17,7 +17,7 @@
 	<unistd.h>
 	<windows.h>
 
-1404499098 d:\cpp\channel\include\bytebuffer.hpp
+1405079023 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1350,7 +1350,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1404495340 d:\cpp\channel\include\buffers.hpp
+1405018188 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -5210,7 +5210,7 @@
 
 1310276757 d:\cpp\boost_1_54_0\boost\exception\detail\clone_current_exception.hpp
 
-1404315674 source:d:\cpp\channel\src\datachannel.cpp
+1405078789 source:d:\cpp\channel\src\datachannel.cpp
 	"prchdrs.h"
 	"datachannel.hpp"
 
@@ -5557,11 +5557,11 @@
 	"prchdrs.h"
 	"WindowsPipe.hpp"
 
-1396039300 d:\cpp\channel\include\pipe.hpp
-	<boost/thread.hpp>
+1405009677 d:\cpp\channel\include\pipe.hpp
+	<boost/weak_ptr.hpp>
+	<boost/thread/mutex.hpp>
 	<boost/thread/condition_variable.hpp>
 	<channels.hpp>
-	<file.hpp>
 
 1362873305 d:\cpp\boost_1_54_0\boost\thread.hpp
 	<boost/thread/thread.hpp>
@@ -7112,17 +7112,18 @@
 
 1365979818 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
 
-1404315682 source:d:\cpp\channel\src\iconv_conv.cpp
+1405018960 source:d:\cpp\channel\src\iconv_conv.cpp
 	"prchdrs.h"
 	"iconv_conv.hpp"
 
-1402600841 d:\cpp\channel\include\iconv_conv.hpp
+1404993866 d:\cpp\channel\include\iconv_conv.hpp
 	<string>
 	<cstring>
 	<cerrno>
 	<cstdio>
 	<convert.hpp>
 	<iconv.h>
+	<smallobjectpool.hpp>
 
 1372792865 c:\mingw\msys\1.0\local\include\iconv.h
 	"iconv.h"
@@ -7133,7 +7134,7 @@
 	<time.h>
 	<wchar.h>
 
-1404406501 source:d:\cpp\channel\src\windowsconsole.cpp
+1404997293 source:d:\cpp\channel\src\windowsconsole.cpp
 	"prchdrs.h"
 	"WindowsConsole.hpp"
 
@@ -7156,11 +7157,12 @@
 	"prchdrs.h"
 	"win32_conv.hpp"
 
-1383333841 d:\cpp\channel\include\win32_conv.hpp
-	<convert.hpp>
+1404994259 d:\cpp\channel\include\win32_conv.hpp
 	<boost/shared_ptr.hpp>
 	<boost/noncopyable.hpp>
 	<boost/thread/once.hpp>
+	<convert.hpp>
+	<smallobjectpool.hpp>
 	<Objbase.h>
 	<Mlang.h>
 
@@ -7305,11 +7307,11 @@
 1404759463 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1404399886 d:\cpp\channel\include\unixfile.hpp
-	"abstractfile.hpp"
+1404759569 d:\cpp\channel\include\unixfile.hpp
 	<sys/types.h>
 	<sys/stat.h>
 	<fcntl.h>
+	"abstractfile.hpp"
 
 1404406282 source:d:\cpp\channel\src\windowsfile.cpp
 	"prchdrs.h"
@@ -7388,7 +7390,7 @@
 	<channels.hpp>
 	"helpers.hpp"
 
-1404751223 d:\cpp\channel\src\helpers.hpp
+1405006661 d:\cpp\channel\src\helpers.hpp
 	<channels_config.h>
 	<boost/system/error_code.hpp>
 
@@ -7402,7 +7404,7 @@
 	<boost/thread/once.hpp>
 	<boost/thread/mutex.hpp>
 
-1404749538 source:d:\cpp\channel\src\smallobjectpool.cpp
+1404996697 source:d:\cpp\channel\src\smallobjectpool.cpp
 	"prchdrs.h"
 	"smallobjectpool.hpp"
 
@@ -7418,4 +7420,350 @@
 	<boost/thread/condition_variable.hpp>
 	<channels.hpp>
 	<file.hpp>
+
+1367954687 d:\cpp\boost_1_54_0\boost\lexical_cast.hpp
+	<boost/config.hpp>
+	<climits>
+	<cstddef>
+	<string>
+	<cstring>
+	<cstdio>
+	<typeinfo>
+	<exception>
+	<boost/limits.hpp>
+	<boost/mpl/if.hpp>
+	<boost/throw_exception.hpp>
+	<boost/type_traits/ice.hpp>
+	<boost/type_traits/is_pointer.hpp>
+	<boost/static_assert.hpp>
+	<boost/detail/lcast_precision.hpp>
+	<boost/detail/workaround.hpp>
+	<locale>
+	<strstream>
+	<sstream>
+	<cmath>
+	<istream>
+	<array>
+	<boost/array.hpp>
+	<boost/numeric/conversion/cast.hpp>
+	<boost/type_traits/make_unsigned.hpp>
+	<boost/type_traits/is_signed.hpp>
+	<boost/type_traits/is_integral.hpp>
+	<boost/type_traits/is_arithmetic.hpp>
+	<boost/type_traits/remove_pointer.hpp>
+	<boost/type_traits/has_left_shift.hpp>
+	<boost/type_traits/has_right_shift.hpp>
+	<boost/math/special_functions/sign.hpp>
+	<boost/math/special_functions/fpclassify.hpp>
+	<boost/range/iterator_range_core.hpp>
+	<boost/container/container_fwd.hpp>
+	<boost/integer.hpp>
+	<cwchar>
+
+1266168681 d:\cpp\boost_1_54_0\boost\detail\lcast_precision.hpp
+	<climits>
+	<ios>
+	<limits>
+	<boost/config.hpp>
+	<boost/integer_traits.hpp>
+	<boost/mpl/if.hpp>
+	<boost/type_traits/is_abstract.hpp>
+	<boost/assert.hpp>
+	<boost/static_assert.hpp>
+
+1317922037 d:\cpp\boost_1_54_0\boost\numeric\conversion\cast.hpp
+	<boost/detail/workaround.hpp>
+	<boost/numeric/conversion/detail/old_numeric_cast.hpp>
+	<boost/type.hpp>
+	<boost/numeric/conversion/converter.hpp>
+	<boost/numeric/conversion/numeric_cast_traits.hpp>
+
+1206225955 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\old_numeric_cast.hpp
+	<boost/config.hpp>
+	<cassert>
+	<typeinfo>
+	<boost/type.hpp>
+	<boost/limits.hpp>
+	<boost/numeric/conversion/converter_policies.hpp>
+
+1331368296 d:\cpp\boost_1_54_0\boost\numeric\conversion\converter_policies.hpp
+	<typeinfo>
+	<boost/config/no_tr1/cmath.hpp>
+	<boost/throw_exception.hpp>
+	<functional>
+	"boost/type_traits/is_arithmetic.hpp"
+	"boost/mpl/if.hpp"
+	"boost/mpl/integral_c.hpp"
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\converter.hpp
+	"boost/numeric/conversion/conversion_traits.hpp"
+	"boost/numeric/conversion/converter_policies.hpp"
+	"boost/numeric/conversion/detail/converter.hpp"
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\conversion_traits.hpp
+	"boost/numeric/conversion/detail/conversion_traits.hpp"
+	"boost/detail/workaround.hpp"
+	"boost/config.hpp"
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\conversion_traits.hpp
+	"boost/type_traits/is_arithmetic.hpp"
+	"boost/type_traits/is_same.hpp"
+	"boost/type_traits/remove_cv.hpp"
+	"boost/numeric/conversion/detail/meta.hpp"
+	"boost/numeric/conversion/detail/int_float_mixture.hpp"
+	"boost/numeric/conversion/detail/sign_mixture.hpp"
+	"boost/numeric/conversion/detail/udt_builtin_mixture.hpp"
+	"boost/numeric/conversion/detail/is_subranged.hpp"
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\meta.hpp
+	"boost/type_traits/remove_cv.hpp"
+	"boost/mpl/if.hpp"
+	"boost/mpl/eval_if.hpp"
+	"boost/mpl/equal_to.hpp"
+	"boost/mpl/not.hpp"
+	"boost/mpl/and.hpp"
+	"boost/mpl/bool.hpp"
+	"boost/mpl/identity.hpp"
+
+1223705942 d:\cpp\boost_1_54_0\boost\mpl\equal_to.hpp
+	<boost/mpl/aux_/comparison_op.hpp>
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\int_float_mixture.hpp
+	"boost/config.hpp"
+	"boost/limits.hpp"
+	"boost/numeric/conversion/int_float_mixture_enum.hpp"
+	"boost/numeric/conversion/detail/meta.hpp"
+	"boost/mpl/integral_c.hpp"
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\int_float_mixture_enum.hpp
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\sign_mixture.hpp
+	"boost/config.hpp"
+	"boost/limits.hpp"
+	"boost/numeric/conversion/sign_mixture_enum.hpp"
+	"boost/numeric/conversion/detail/meta.hpp"
+	"boost/mpl/integral_c.hpp"
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\sign_mixture_enum.hpp
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\udt_builtin_mixture.hpp
+	"boost/type_traits/is_arithmetic.hpp"
+	"boost/numeric/conversion/udt_builtin_mixture_enum.hpp"
+	"boost/numeric/conversion/detail/meta.hpp"
+	"boost/mpl/integral_c.hpp"
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\udt_builtin_mixture_enum.hpp
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\is_subranged.hpp
+	"boost/config.hpp"
+	"boost/limits.hpp"
+	"boost/mpl/int.hpp"
+	"boost/mpl/multiplies.hpp"
+	"boost/mpl/less.hpp"
+	"boost/mpl/equal_to.hpp"
+	"boost/type_traits/is_same.hpp"
+	"boost/numeric/conversion/detail/meta.hpp"
+	"boost/numeric/conversion/detail/int_float_mixture.hpp"
+	"boost/numeric/conversion/detail/sign_mixture.hpp"
+	"boost/numeric/conversion/detail/udt_builtin_mixture.hpp"
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\converter.hpp
+	<functional>
+	"boost/numeric/conversion/detail/meta.hpp"
+	"boost/numeric/conversion/detail/conversion_traits.hpp"
+	"boost/numeric/conversion/bounds.hpp"
+	"boost/type_traits/is_same.hpp"
+	"boost/mpl/integral_c.hpp"
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\bounds.hpp
+	"boost/numeric/conversion/detail/bounds.hpp"
+
+1216826127 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\bounds.hpp
+	"boost/limits.hpp"
+	"boost/config.hpp"
+	"boost/mpl/if.hpp"
+
+1317922037 d:\cpp\boost_1_54_0\boost\numeric\conversion\numeric_cast_traits.hpp
+	<boost/numeric/conversion/converter_policies.hpp>
+	<boost/cstdint.hpp>
+	<boost/numeric/conversion/detail/numeric_cast_traits.hpp>
+
+1328150572 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\numeric_cast_traits.hpp
+	<boost/numeric/conversion/detail/preprocessed/numeric_cast_traits_common.hpp>
+	<boost/numeric/conversion/detail/preprocessed/numeric_cast_traits_long_long.hpp>
+	<boost/preprocessor/seq/elem.hpp>
+	<boost/preprocessor/seq/size.hpp>
+	<boost/preprocessor/iteration/iterate.hpp>
+
+1328150572 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\preprocessed\numeric_cast_traits_common.hpp
+
+1328150572 d:\cpp\boost_1_54_0\boost\numeric\conversion\detail\preprocessed\numeric_cast_traits_long_long.hpp
+
+1366015628 d:\cpp\boost_1_54_0\boost\math\special_functions\sign.hpp
+	<boost/math/tools/config.hpp>
+	<boost/math/special_functions/math_fwd.hpp>
+	<boost/math/special_functions/detail/fp_traits.hpp>
+
+1366015628 d:\cpp\boost_1_54_0\boost\math\tools\config.hpp
+	<boost/config.hpp>
+	<boost/cstdint.hpp>
+	<boost/detail/workaround.hpp>
+	<algorithm>
+	<boost/config/no_tr1/cmath.hpp>
+	<climits>
+	<cfloat>
+	<math.h>
+	<boost/math/tools/user.hpp>
+	<float.h>
+	"boost/type.hpp"
+	"boost/non_type.hpp"
+	<boost/detail/fenv.hpp>
+	<iostream>
+	<iomanip>
+	<typeinfo>
+
+1216139427 d:\cpp\boost_1_54_0\boost\math\tools\user.hpp
+
+1369483871 d:\cpp\boost_1_54_0\boost\detail\fenv.hpp
+	<boost/config.hpp>
+	<features.h>
+	<bits/fenv.h>
+	<stdio.h>
+	<fenv.h>
+
+1366015628 d:\cpp\boost_1_54_0\boost\math\special_functions\math_fwd.hpp
+	<boost/math/special_functions/detail/round_fwd.hpp>
+	<boost/math/tools/promotion.hpp>
+	<boost/math/policies/policy.hpp>
+	<boost/mpl/comparison.hpp>
+	<boost/config/no_tr1/complex.hpp>
+
+1366015628 d:\cpp\boost_1_54_0\boost\math\special_functions\detail\round_fwd.hpp
+	<boost/config.hpp>
+	<boost/math/tools/promotion.hpp>
+
+1294511586 d:\cpp\boost_1_54_0\boost\math\tools\promotion.hpp
+	<boost/math/tools/config.hpp>
+	<boost/type_traits/is_floating_point.hpp>
+	<boost/type_traits/is_integral.hpp>
+	<boost/type_traits/is_convertible.hpp>
+	<boost/type_traits/is_same.hpp>
+	<boost/type_traits/remove_cv.hpp>
+	<boost/mpl/if.hpp>
+	<boost/mpl/and.hpp>
+	<boost/mpl/or.hpp>
+	<boost/mpl/not.hpp>
+	<boost/static_assert.hpp>
+
+1366015628 d:\cpp\boost_1_54_0\boost\math\policies\policy.hpp
+	<boost/mpl/list.hpp>
+	<boost/mpl/contains.hpp>
+	<boost/mpl/if.hpp>
+	<boost/mpl/find_if.hpp>
+	<boost/mpl/remove_if.hpp>
+	<boost/mpl/vector.hpp>
+	<boost/mpl/push_back.hpp>
+	<boost/mpl/at.hpp>
+	<boost/mpl/size.hpp>
+	<boost/mpl/comparison.hpp>
+	<boost/type_traits/is_same.hpp>
+	<boost/static_assert.hpp>
+	<boost/assert.hpp>
+	<boost/math/tools/config.hpp>
+	<limits>
+	<limits.h>
+	<stdlib.h>
+	<stddef.h>
+	<math.h>
+
+1223705942 d:\cpp\boost_1_54_0\boost\mpl\list.hpp
+	<boost/mpl/limits/list.hpp>
+	<boost/mpl/aux_/na.hpp>
+	<boost/mpl/aux_/config/preprocessor.hpp>
+	<boost/preprocessor/inc.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/stringize.hpp>
+	<boost/mpl/aux_/config/use_preprocessed.hpp>
+	<boost/mpl/aux_/include_preprocessed.hpp>
+	<boost/mpl/limits/list.hpp>
+	<boost/mpl/aux_/sequence_wrapper.hpp>
+
+1223705942 d:\cpp\boost_1_54_0\boost\mpl\limits\list.hpp
+
+1223705942 d:\cpp\boost_1_54_0\boost\mpl\remove_if.hpp
+	<boost/mpl/fold.hpp>
+	<boost/mpl/reverse_fold.hpp>
+	<boost/mpl/eval_if.hpp>
+	<boost/mpl/identity.hpp>
+	<boost/mpl/protect.hpp>
+	<boost/mpl/lambda.hpp>
+	<boost/mpl/apply.hpp>
+	<boost/mpl/aux_/inserter_algorithm.hpp>
+
+1223705942 d:\cpp\boost_1_54_0\boost\mpl\comparison.hpp
+	<boost/mpl/equal_to.hpp>
+	<boost/mpl/not_equal_to.hpp>
+	<boost/mpl/less.hpp>
+	<boost/mpl/greater.hpp>
+	<boost/mpl/less_equal.hpp>
+	<boost/mpl/greater_equal.hpp>
+
+1223705942 d:\cpp\boost_1_54_0\boost\mpl\not_equal_to.hpp
+	<boost/mpl/aux_/comparison_op.hpp>
+
+1223705942 d:\cpp\boost_1_54_0\boost\mpl\greater.hpp
+	<boost/mpl/aux_/comparison_op.hpp>
+
+1223705942 d:\cpp\boost_1_54_0\boost\mpl\less_equal.hpp
+	<boost/mpl/aux_/comparison_op.hpp>
+
+1223705942 d:\cpp\boost_1_54_0\boost\mpl\greater_equal.hpp
+	<boost/mpl/aux_/comparison_op.hpp>
+
+1129739920 d:\cpp\boost_1_54_0\boost\config\no_tr1\complex.hpp
+	<complex>
+
+1325506901 d:\cpp\boost_1_54_0\boost\math\special_functions\detail\fp_traits.hpp
+	<cstring>
+	<boost/assert.hpp>
+	<boost/cstdint.hpp>
+	<boost/detail/endian.hpp>
+	<boost/static_assert.hpp>
+	<boost/type_traits/is_floating_point.hpp>
+
+1369567150 d:\cpp\boost_1_54_0\boost\detail\endian.hpp
+	<endian.h>
+	<machine/endian.h>
+	<sys/endian.h>
+	"machine/_types.h"
+
+1369394271 d:\cpp\boost_1_54_0\boost\math\special_functions\fpclassify.hpp
+	<math.h>
+	<boost/config/no_tr1/cmath.hpp>
+	<boost/limits.hpp>
+	<boost/math/tools/real_cast.hpp>
+	<boost/type_traits/is_floating_point.hpp>
+	<boost/math/special_functions/math_fwd.hpp>
+	<boost/math/special_functions/detail/fp_traits.hpp>
+	<float.h>
+
+1216139427 d:\cpp\boost_1_54_0\boost\math\tools\real_cast.hpp
+
+1349091124 d:\cpp\boost_1_54_0\boost\container\container_fwd.hpp
+	<utility>
+	<memory>
+	<functional>
+	<iosfwd>
+	<string>
+
+1405010960 source:d:\cpp\channel\src\pipe.cpp
+	"prchdrs.h"
+	"pipe.hpp"
+
+1236014536 d:\cpp\boost_1_54_0\boost\weak_ptr.hpp
+	<boost/smart_ptr/weak_ptr.hpp>
+
+1405079063 source:d:\cpp\channel\src\bytebuffer.cpp
+	"prchdrs.h"
+	"bytebuffer.hpp"
 

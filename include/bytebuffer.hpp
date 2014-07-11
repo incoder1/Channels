@@ -16,25 +16,29 @@ class byte_buffer_allocator;
  */
 class CHANNEL_PUBLIC byte_buffer:public basic_buffer<uint8_t> {
 private:
-	byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp) BOOST_NOEXCEPT_OR_NOTHROW:
-		basic_buffer<uint8_t>(data,endp)
-	{}
+	byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp) BOOST_NOEXCEPT_OR_NOTHROW;
 	friend class byte_buffer_allocator;
 public:
 	typedef basic_buffer<uint8_t>::iterator iterator;
 	typedef basic_buffer<uint8_t>::const_iterator const_iterator;
 
+	static byte_buffer new_heap_buffer(const std::size_t capacity) throw(std::bad_alloc);
+
+	template<typename ElementType>
+	static byte_buffer wrap_array(ElementType* const arr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW;
+
+	template<typename ElementType>
+	static byte_buffer copy_array(ElementType* const arr, std::size_t size) throw(std::bad_alloc);
+
 	inline std::size_t put(uint8_t e) {
 		return basic_buffer<uint8_t>::put(e);
 	}
 
-	std::size_t put(uint8_t* begin, uint8_t* end) {
-		std::size_t result = (end - begin) > 0 ?  end - begin : 0;
-		if(result) {
-			for(uint8_t* i = begin; i < end; i++) {
-				basic_buffer<uint8_t>::put(*i);
-			}
-		}
+	std::size_t put(uint8_t* first, uint8_t* last) {
+		std::size_t distance = std::size_t(last - first);
+		std::size_t result = distance < remain() ? distance : remain();
+		std::copy(first, last+result, position());
+		move(result);
 		return result;
 	}
 
@@ -46,9 +50,6 @@ public:
 		return  basic_buffer<uint8_t>::put(first, last);
 	}
 
-	inline std::size_t put(const byte_buffer& another) {
-		return basic_buffer<uint8_t>::put(another);
-	}
 };
 
 /**
@@ -84,42 +85,15 @@ public:
 		boost::shared_array<uint8_t> array(data,free_functor_);
 		return byte_buffer(array, endp);
 	}
-	/**
-	 * Wraps buffer of any type into byte buffer
-	 * \param buff
-	 *			 buffer of any type
-	 * \return byte buffer
-	 */
-	template<typename T>
-	static byte_buffer wrap_buffer(const basic_buffer<T>& buff) {
-		buff.flip();
-		boost::shared_array<T> data = buff.ref();
-		alloc_functor_t noDel(&byte_buffer_allocator::no_delete_free);
-		uint8_t *start = reinterpret_cast<uint8_t*>((buff.position()).ptr());
-		uint8_t *end = reinterpret_cast<uint8_t*>((buff.last()).ptr());
-		boost::shared_array<uint8_t> array(start, noDel);
-		return byte_buffer(array, end);
-	}
-
 private:
-	static void no_delete_free(uint8_t* data)
-	{}
 	alloc_functor_t alloc_functor_;
 	free_functor_t free_functor_;
 };
 
 
-inline byte_buffer new_byte_byffer(const std::size_t capacity) throw(std::bad_alloc)
-{
-	byte_buffer_allocator::alloc_functor_t alloc(new_alloc<uint8_t>);
-	byte_buffer_allocator::free_functor_t free(delete_free<uint8_t>);
-	byte_buffer_allocator all(alloc,free);
-	return all.allocate(capacity);
-}
-
-
-inline byte_buffer wrap_array(const uint8_t* arr, std::size_t size) {
-	empty_alloc<uint8_t> fake_allocator(arr);
+template<typename ElementType>
+byte_buffer byte_buffer::wrap_array(ElementType* const arr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
+	empty_alloc<uint8_t> fake_allocator(reinterpret_cast<const uint8_t*>(arr));
 	empty_free<uint8_t> fake_free;
 	byte_buffer_allocator::alloc_functor_t alloc(fake_allocator);
 	byte_buffer_allocator::free_functor_t free(fake_free);
@@ -130,29 +104,17 @@ inline byte_buffer wrap_array(const uint8_t* arr, std::size_t size) {
 	return result;
 }
 
-inline byte_buffer copy_array(const uint8_t* arr, std::size_t size) {
-	byte_buffer result = new_byte_byffer(size);
-	std::copy(arr,arr+size,result.position());
+template<typename ElementType>
+byte_buffer byte_buffer::copy_array(ElementType* const arr, std::size_t size) throw(std::bad_alloc) {
+	byte_buffer result = byte_buffer::new_heap_buffer(size);
+	uint8_t* start = (uint8_t*)(arr);
+	uint8_t* last = start+(size*sizeof(ElementType));
+	std::copy(start,last,result.position());
+	result.move(size);
+	result.flip();
 	return result;
 }
 
-template<typename _CharT>
-inline byte_buffer wrap_string(const std::basic_string<_CharT>& str) {
-	std::size_t size = str.length()*sizeof(_CharT);
-	return wrap_array(
-		// we can covert any array to byte array
-		reinterpret_cast<const uint8_t*>(str.data()),
-		size);
-}
-
-template<typename _CharT>
-inline byte_buffer copy_string(const std::basic_string<_CharT>& str) {
-	std::size_t size = str.length()*sizeof(_CharT);
-	return copy_array(
-					reinterpret_cast<const uint8_t>(str.data()),
-					size
-					);
-}
 
 } // namespace io
 

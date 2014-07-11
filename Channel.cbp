@@ -186,13 +186,6 @@
 			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
-		<Unit filename="include/WindowsPipe.hpp">
-			<Option target="DebugMinGW32" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="ReleaseMSVC10" />
-			<Option target="ReleaseMSVC10-ICU" />
-			<Option target="DebugMinGW32-ICU" />
-		</Unit>
 		<Unit filename="include/abstractfile.hpp" />
 		<Unit filename="include/buffers.hpp" />
 		<Unit filename="include/bytebuffer.hpp" />
@@ -235,13 +228,6 @@
 			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
-		<Unit filename="src/WindowsPipe.cpp">
-			<Option target="DebugMinGW32" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="ReleaseMSVC10" />
-			<Option target="ReleaseMSVC10-ICU" />
-			<Option target="DebugMinGW32-ICU" />
-		</Unit>
 		<Unit filename="src/channels.cpp" />
 		<Unit filename="src/convert.cpp" />
 		<Unit filename="src/datachannel.cpp" />
@@ -259,6 +245,7 @@
 		<Unit filename="src/mlang_i.cpp">
 			<Option target="ReleaseMSVC10" />
 		</Unit>
+		<Unit filename="src/pipe.cpp" />
 		<Unit filename="src/prchdrs.cpp">
 			<Option weight="1" />
 			<Option compiler="msvc10" use="1" buildCommand="$compiler /c /nologo $options $includes $file /Ycprchdrs.h /Fo$object" />
