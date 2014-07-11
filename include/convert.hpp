@@ -3,7 +3,6 @@
 
 #include <channels_config.h>
 #include <bytebuffer.hpp>
-#include <charbuffers.hpp>
 #include <bytebuffer.hpp>
 
 #include <boost/unordered_map.hpp>

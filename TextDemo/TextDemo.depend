@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1405081617 source:d:\cpp\channel\textdemo\main.cpp
+1405103982 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -1413,23 +1413,22 @@
 	<boost/bind/arg.hpp>
 	<boost/config.hpp>
 
-1404308741 d:\cpp\channel\include\convert.hpp
+1405096912 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
-	<charbuffers.hpp>
 	<bytebuffer.hpp>
 	<boost/unordered_map.hpp>
 	<boost/exception/all.hpp>
 	<stdexcept>
 	<cstring>
 
-1405081889 d:\cpp\channel\include\bytebuffer.hpp
+1405103296 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
 	<buffers.hpp>
 
-1405018188 d:\cpp\channel\include\buffers.hpp
+1405103685 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -6300,18 +6299,17 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1405079385 d:\cpp\channel\include\readwrite.hpp
+1405100377 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
-	<charbuffers.hpp>
 	<convert.hpp>
 	<channels.hpp>
 
 1385124524 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1405009677 d:\cpp\channel\include\pipe.hpp
+1405083721 d:\cpp\channel\include\pipe.hpp
 	<boost/weak_ptr.hpp>
-	<boost/thread/mutex.hpp>
+	<boost/thread/shared_mutex.hpp>
 	<boost/thread/condition_variable.hpp>
 	<channels.hpp>
 

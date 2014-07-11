@@ -3,10 +3,9 @@
 	"prchdrs.h"
 	"convert.hpp"
 
-1404308741 d:\cpp\channel\include\convert.hpp
+1405096912 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
-	<charbuffers.hpp>
 	<bytebuffer.hpp>
 	<boost/unordered_map.hpp>
 	<boost/exception/all.hpp>
@@ -17,7 +16,7 @@
 	<unistd.h>
 	<windows.h>
 
-1405079023 d:\cpp\channel\include\bytebuffer.hpp
+1405105495 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1350,7 +1349,7 @@
 1090722569 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1405018188 d:\cpp\channel\include\buffers.hpp
+1405105133 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -5557,9 +5556,9 @@
 	"prchdrs.h"
 	"WindowsPipe.hpp"
 
-1405009677 d:\cpp\channel\include\pipe.hpp
+1405083721 d:\cpp\channel\include\pipe.hpp
 	<boost/weak_ptr.hpp>
-	<boost/thread/mutex.hpp>
+	<boost/thread/shared_mutex.hpp>
 	<boost/thread/condition_variable.hpp>
 	<channels.hpp>
 
@@ -7756,14 +7755,14 @@
 	<iosfwd>
 	<string>
 
-1405010960 source:d:\cpp\channel\src\pipe.cpp
+1405093803 source:d:\cpp\channel\src\pipe.cpp
 	"prchdrs.h"
 	"pipe.hpp"
 
 1236014536 d:\cpp\boost_1_54_0\boost\weak_ptr.hpp
 	<boost/smart_ptr/weak_ptr.hpp>
 
-1405079063 source:d:\cpp\channel\src\bytebuffer.cpp
+1405103272 source:d:\cpp\channel\src\bytebuffer.cpp
 	"prchdrs.h"
 	"bytebuffer.hpp"
 

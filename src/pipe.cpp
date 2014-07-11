@@ -16,17 +16,21 @@ PipeChannel::PipeChannel(byte_buffer source) BOOST_NOEXCEPT_OR_NOTHROW:
 
 
 std::size_t PipeChannel::read(byte_buffer& buffer) throw(io_exception) {
-		lock_t lock(mutex_);
-		while(!canRead_) {
-			condition_.wait(lock);
-		}
-		source_.flip();
-		return buffer.put(source_.position(), source_.last());
+	boost::shared_lock<boost::shared_mutex> lock(mutex_);
+	while(!canRead_) {
+		condition_.wait(lock);
+	}
+	std::size_t result = buffer.put(source_.position(), source_.last());
+	std::printf("result %o", result);
+	source_.move(result);
+	std::printf("left %0",source_.length());
+	return result;
 }
 
 std::size_t PipeChannel::write(const byte_buffer& buffer) throw(io_exception)
 {
-		lock_t lock(mutex_);
+		boost::upgrade_lock<boost::shared_mutex> lock(mutex_);
+		boost::upgrade_to_unique_lock<boost::shared_mutex> uniqueLock(lock);
 		source_.clear();
 		std::size_t result = source_.put(buffer.position(), buffer.last());
 		canRead_ = true;

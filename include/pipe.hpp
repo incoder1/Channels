@@ -3,7 +3,7 @@
 
 // boost imports
 #include <boost/weak_ptr.hpp>
-#include <boost/thread/mutex.hpp>
+#include <boost/thread/shared_mutex.hpp>
 #include <boost/thread/condition_variable.hpp>
 
 // modules imports
@@ -15,15 +15,13 @@ namespace io {
 namespace _pipe {
 
 class PipeChannel:public virtual ReadChannel, public virtual WriteChannel, public virtual SmallObject {
-private:
-	typedef boost::unique_lock<boost::mutex> lock_t;
 public:
 	explicit PipeChannel(byte_buffer source) BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
 	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
 private:
 	byte_buffer source_;
-	boost::mutex mutex_;
+	boost::shared_mutex mutex_;
 	boost::condition_variable_any condition_;
 	bool volatile canRead_;
 };

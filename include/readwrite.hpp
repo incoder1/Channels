@@ -2,7 +2,6 @@
 #define READER_HPP_INCLUDED
 
 #include <stdexcept>
-#include <charbuffers.hpp>
 #include <convert.hpp>
 #include <channels.hpp>
 
@@ -22,27 +21,29 @@ public:
 	}
 };
 
+namespace _private {
+	template<class T>
+	class no_free_static_ref {
+		public:
+			inline void operator()(T*) {
+			}
+	};
+}
+
 inline SConverter char_empty_converter() {
 	static Charset emptyCharset(sizeof(char),"CHAR",sizeof(char),false);
 	static EmptyConverter converter(&emptyCharset);
-	static empty_free<EmptyConverter> noFree;
+	static _private::no_free_static_ref<EmptyConverter> noFree;
 	return SConverter(const_cast<EmptyConverter*>(&converter), noFree);
 }
 
 inline SConverter wchar_t_empty_converter() {
 	static Charset emptyCharset(sizeof(wchar_t),"WCHAR_T",sizeof(wchar_t),true);
 	static EmptyConverter converter(&emptyCharset);
-	static empty_free<EmptyConverter> noFree;
+	static _private::no_free_static_ref<EmptyConverter> noFree;
 	return SConverter(const_cast<EmptyConverter*>(&converter), noFree);
 }
 
-template<typename CharacterType>
-inline SConverter empty_conveter(const char name,bool unicode) {
-	Charset emptyCharset(sizeof(CharacterType), name, sizeof(CharacterType), unicode);
-	EmptyConverter converter(&emptyCharset);
-	empty_free<EmptyConverter> noFree;
-	return SConverter(const_cast<EmptyConverter*>(&converter), noFree);
-}
 /**
  * ! \brief Reader template, provides functionality for read STL strings from read channel,
  *  with automatic character set conversation
