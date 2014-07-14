@@ -20,6 +20,7 @@
 					<Add option="-fno-rtti" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
+					<Add option="-DDEBUG" />
 					<Add directory="../boost_1_54_0" />
 					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>
@@ -191,7 +192,6 @@
 		<Unit filename="include/bytebuffer.hpp" />
 		<Unit filename="include/channels.hpp" />
 		<Unit filename="include/channels_config.h" />
-		<Unit filename="include/charbuffers.hpp" />
 		<Unit filename="include/console.hpp" />
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/datachannel.hpp" />
@@ -228,6 +228,7 @@
 			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
+		<Unit filename="src/bytebuffer.cpp" />
 		<Unit filename="src/channels.cpp" />
 		<Unit filename="src/convert.cpp" />
 		<Unit filename="src/datachannel.cpp" />

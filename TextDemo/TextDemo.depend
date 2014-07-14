@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1405103982 source:d:\cpp\channel\textdemo\main.cpp
+1405345737 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -1413,22 +1413,21 @@
 	<boost/bind/arg.hpp>
 	<boost/config.hpp>
 
-1405096912 d:\cpp\channel\include\convert.hpp
+1405341603 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
-	<bytebuffer.hpp>
 	<bytebuffer.hpp>
 	<boost/unordered_map.hpp>
 	<boost/exception/all.hpp>
 	<stdexcept>
 	<cstring>
 
-1405103296 d:\cpp\channel\include\bytebuffer.hpp
+1405105495 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
 	<buffers.hpp>
 
-1405103685 d:\cpp\channel\include\buffers.hpp
+1405105133 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>

@@ -104,14 +104,15 @@ void pipe_write_routine(io::SWriteChannel sink) {
 
 void pipe_sample()
 {
+	char buff[3];
 	// pipe sample
-	io::Pipe pipe(io::byte_buffer::new_heap_buffer(30));
+	io::Pipe pipe(io::byte_buffer::wrap_array(buff,3));
 	boost::thread writeThread(boost::bind(pipe_write_routine,pipe.sink()));
 	writeThread.start_thread();
-	char rd[16];
-	rd[15] = 0;
-	io::byte_buffer result = io::byte_buffer::wrap_array(rd,15);
-	pipe.source()->read(result);
+	char rd[17];
+	io::byte_buffer result = io::byte_buffer::wrap_array(rd,17);
+	while(0 != pipe.source()->read(result))
+	{}
 	std::cout<<rd<<std::endl;
 }
 
@@ -155,9 +156,9 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	try {
-		buffers_sample();
+		//buffers_sample();
 		//charset_console_sample();
-		//pipe_sample();
+		pipe_sample();
 		//file_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;

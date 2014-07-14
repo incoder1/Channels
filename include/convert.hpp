@@ -3,7 +3,6 @@
 
 #include <channels_config.h>
 #include <bytebuffer.hpp>
-#include <bytebuffer.hpp>
 
 #include <boost/unordered_map.hpp>
 #include <boost/exception/all.hpp>
@@ -135,6 +134,14 @@ inline void validate(bool expr, const std::string& msg) throw(charset_exception)
  * ! \brief  Implementor of {@code Converter} should provide conversation from one character set into another
  */
 class CHANNEL_PUBLIC Converter {
+#ifdef BOOST_NO_DELETED_FUNCTIONS
+private:  // emphasize the following members are private
+	Converter( const Converter&);
+	Converter& operator=( const Converter& );
+#else
+	Converter( const Converter& ) = delete;
+	Converter& operator=( const Converter& ) = delete;
+#endif
 private:
 	const Charset* srcCt_;
 	const Charset* destCt_;
@@ -144,7 +151,6 @@ protected:
 		destCt_(destCt)
 	{}
 public:
-
 	/**
 	 * Returns source character set
 	 * \return constant pointer to the source character set

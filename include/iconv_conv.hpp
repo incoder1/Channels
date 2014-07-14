@@ -15,30 +15,14 @@ namespace io {
 
 class IconvEngine {
 private:
-	mutable ::iconv_t conv_;
-	inline void swap(const IconvEngine& c) {
-		conv_ = c.conv_;
-		c.conv_ = NULL;
-	}
+	boost::shared_ptr<void> conv_;
 public:
 	explicit IconvEngine(::iconv_t conv) BOOST_NOEXCEPT_OR_NOTHROW:
-		conv_(conv)
+		conv_(conv,::iconv_close)
 	{}
-	~IconvEngine() BOOST_NOEXCEPT_OR_NOTHROW {
-		if(NULL != conv_) {
-			::iconv_close(conv_);
-		}
-	}
-	IconvEngine(const IconvEngine& c) BOOST_NOEXCEPT_OR_NOTHROW {
-		swap(c);
-	}
-	const IconvEngine& operator=(const IconvEngine& c) BOOST_NOEXCEPT_OR_NOTHROW {
-		swap(c);
-		return *this;
-	}
 	inline std::size_t conv(char** src, std::size_t *srclen, char **dstptr, std::size_t *avail) const
 	{
-		return ::iconv(conv_, src, srclen, dstptr, avail);
+		return ::iconv(conv_.get(), src, srclen, dstptr, avail);
 	}
 };
 
