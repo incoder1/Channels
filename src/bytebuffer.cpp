@@ -15,7 +15,7 @@ namespace io {
 		return put(buff.position(), --buff.last());
 	}
 
-	std::size_t byte_buffer::put(uint8_t* first, uint8_t* last) {
+	std::size_t byte_buffer::put(uint8_t* const first, uint8_t* const last) {
 		std::size_t distance = std::size_t(last - first);
 		std::size_t result = distance < remain() ? distance : remain();
 		std::copy(first, first+result, position());
@@ -39,7 +39,7 @@ namespace io {
 		delete [] block;
 	}
 
-	byte_buffer byte_buffer::new_heap_buffer(const std::size_t capacity) throw(std::bad_alloc) {
+	byte_buffer byte_buffer::heap_buffer(const std::size_t capacity) throw(std::bad_alloc) {
 		uint8_t* start = new_heap_block(capacity);
 		boost::shared_array<uint8_t> data( start, free_heap_block );
 		return byte_buffer(data, start+capacity);

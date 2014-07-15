@@ -86,7 +86,7 @@ void charset_console_sample() throw(io::io_exception)
 	// char set conversation sample
 	writer_u8 out(con.outChanell(), to_console_conv());
 	out.write(U8("Hello world English version. Привет мир, русская верссия\n\r"));
-	io::byte_buffer readBuff = io::byte_buffer::new_heap_buffer(512);
+	io::byte_buffer readBuff = io::byte_buffer::heap_buffer(512);
 	reader_u8 in(con.inChanell(),readBuff, from_console_conv());
 	out.write(U8("Type something :> "));
 	out.write(in.read());
@@ -137,7 +137,7 @@ void buffers_sample() {
 	const char* hello = "Hello ";
 	const char* world = "world!!!";
 
-	byte_buffer result = byte_buffer::new_heap_buffer(15);
+	byte_buffer result = byte_buffer::heap_buffer(15);
 
 	byte_buffer wrap = byte_buffer::wrap_array(hello, 6); //not wrap the 0 ending
 	byte_buffer deepCopy = byte_buffer::copy_array(world, 9); // copy 0 also

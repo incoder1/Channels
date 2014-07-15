@@ -70,7 +70,7 @@ public:
 		buff_.clear();
 		std::size_t bytesRead = src_->read(buff_);
 		const std::size_t maxChSize = conv_->destCharset()->charSize();
-		byte_buffer conv = byte_buffer::new_heap_buffer(bytesRead*maxChSize);
+		byte_buffer conv = byte_buffer::heap_buffer(bytesRead*maxChSize);
 		buff_.flip();
 		conv_->convert(buff_,conv);
 		return String(conv.position(),conv.last());
@@ -112,7 +112,7 @@ public:
 
 	void write(const byte_buffer& buff) throw(io_exception, charset_exception, std::bad_alloc) {
 		const std::size_t destCharSize = conv_->destCharset()->charSize();
-		byte_buffer convBytes = byte_buffer::new_heap_buffer(buff.length()*destCharSize);
+		byte_buffer convBytes = byte_buffer::heap_buffer(buff.length()*destCharSize);
 		conv_->convert(buff, convBytes);
 		convBytes.flip();
 		out_->write(convBytes);

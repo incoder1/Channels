@@ -20,7 +20,7 @@ public:
 	typedef basic_buffer<uint8_t>::iterator iterator;
 	typedef basic_buffer<uint8_t>::const_iterator const_iterator;
 
-	static byte_buffer new_heap_buffer(const std::size_t capacity) throw(std::bad_alloc);
+	static byte_buffer heap_buffer(const std::size_t capacity) throw(std::bad_alloc);
 
 	template<typename ElementType>
 	static byte_buffer wrap_array(ElementType* const arr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW;
@@ -30,7 +30,7 @@ public:
 
 	std::size_t put(uint8_t e);
 
-	std::size_t put(uint8_t* first, uint8_t* last);
+	std::size_t put(uint8_t* const first, uint8_t* const last);
 
 	std::size_t put(const byte_buffer& buff);
 
@@ -62,7 +62,7 @@ byte_buffer byte_buffer::wrap_array(ElementType* const arr, std::size_t size) BO
 template<typename ElementType>
 byte_buffer byte_buffer::copy_array(ElementType* const arr, std::size_t size) throw(std::bad_alloc) {
 	std::size_t arraySize = size*sizeof(ElementType);
-	byte_buffer result = byte_buffer::new_heap_buffer(arraySize);
+	byte_buffer result = byte_buffer::heap_buffer(arraySize);
 	uint8_t* start = (uint8_t*)(arr);
 	uint8_t* last = start+arraySize;
 	result.put(start, last);
