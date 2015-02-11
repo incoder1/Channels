@@ -4,6 +4,10 @@
 
 #include <channels_config.h>
 
+#ifdef PLATFORM_WINDOWS
+#	include "winver.h"
+#endif // PLATFORM_WINDOWS
+
 #include <smallobjectpool.hpp>
 #include <bytebuffer.hpp>
 #include <channels.hpp>

@@ -10,6 +10,20 @@ inline void* vpos(const byte_buffer& buff) {
 	return static_cast<void*>(buff.position().ptr());
 }
 
+template<typename R>
+inline R vpos(const byte_buffer& buff) {
+	return reinterpret_cast<R>(buff.position().ptr());
+}
+
+/// Helper function used to throw char set error when expression
+template<typename E>
+void validate(bool expr, const std::string& msg) throw(E)
+{
+	if(!expr) {
+		boost::throw_exception(E(msg));
+	}
+}
+
 #ifdef PLATFORM_WINDOWS
 
 static std::string last_error_str(DWORD lastError)
@@ -29,22 +43,16 @@ static std::string last_error_str(DWORD lastError)
 	return result;
 }
 
-template<class Exception_T>
-inline void validate(BOOL expression, const char* failMessage) throw(Exception_T) {
+inline void validate_io(BOOL expression, const char* failMessage) throw(io_exception) {
   if(!expression) {
 		DWORD lastError = ::GetLastError();
 		if(ERROR_IO_PENDING != lastError) {
 			std::string errMsg(failMessage);
 			errMsg.append(" ");
 			errMsg.append(last_error_str(lastError));
-			boost::throw_exception(Exception_T(errMsg));
+			boost::throw_exception(io_exception(errMsg));
 		}
 	}
-}
-
-inline void validate_io(BOOL ioResult, const char* message) throw(io_exception)
-{
-	validate<io_exception>(ioResult, message);
 }
 
 #endif // PLATFORM_WINDOWS

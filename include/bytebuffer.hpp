@@ -28,15 +28,20 @@ public:
 	template<typename ElementType>
 	static byte_buffer copy_array(ElementType* const arr, std::size_t size) throw(std::bad_alloc);
 
-	std::size_t put(uint8_t e);
+	static byte_buffer wrap_str(const char* str) BOOST_NOEXCEPT_OR_NOTHROW;
 
-	std::size_t put(uint8_t* const first, uint8_t* const last);
+	/**
+	 *
+	 */
+	iterator put(uint8_t e);
 
-	std::size_t put(const byte_buffer& buff);
+	iterator put(uint8_t* const first, uint8_t* const last);
 
-	std::size_t put(iterator& first, iterator& last);
+	iterator put(const byte_buffer& buff);
 
-	std::size_t put(const_iterator& first,const_iterator& last);
+	iterator put(iterator& first, iterator& last);
+
+	iterator put(const_iterator& first,const_iterator& last);
 };
 
 

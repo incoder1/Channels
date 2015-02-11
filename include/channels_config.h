@@ -28,14 +28,10 @@
 
 // Shared lib / DLL special keywords if any
 #ifdef PLATFORM_WINDOWS
-
+#	include <win32/winver.h>
 #	include <windows.h>
 
-#	ifdef CHANNEL_BUILD_DLL
-#		define WIN32_LEAN_AND_MEAN
-#	endif // WIN32_LEAN_AND_MEAN
-
-// MSVC and MinGW
+// MSVC and MinGW Windows DLL
 #	ifdef CHANNEL_BUILD_DLL
 #		define CHANNEL_PUBLIC __declspec(dllexport)
 #	else
@@ -43,7 +39,7 @@
 #	endif
 
 #else
-// UNIX(ELF32/64) not need anything special
+// UNIX(ELF32/64)
 #	define CHANNEL_PUBLIC
 #endif
 

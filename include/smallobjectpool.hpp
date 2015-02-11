@@ -11,6 +11,8 @@
 #include <boost/thread/once.hpp>
 #include <boost/thread/mutex.hpp>
 
+#include <boost/atomic.hpp>
+
 namespace io {
 
 /// !\brief Abstract class, which offspring will use segregate storage memory allocation.

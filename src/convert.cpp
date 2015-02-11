@@ -2,7 +2,6 @@
 #include "convert.hpp"
 namespace io {
 
-
 // Charset
 
 Charset::Charset(std::size_t id, const char* name, const std::size_t charSize, bool isUnicode) BOOST_NOEXCEPT_OR_NOTHROW:
@@ -139,6 +138,13 @@ const Charset* Charsets::find(const char* name) const BOOST_NOEXCEPT_OR_NOTHROW
 	return searchRes == nameMap_.end() ? NULL : searchRes->second;
 }
 
+const Charset* Charsets::forName(const char* name) BOOST_NOEXCEPT_OR_NOTHROW {
+		return instance()->find(name);
+}
+
+const Charset* Charsets::windowsUnicode() BOOST_NOEXCEPT_OR_NOTHROW {
+	return &UTF_16LE;
+}
 // Converter
 Converter::~Converter() BOOST_NOEXCEPT_OR_NOTHROW
 {}

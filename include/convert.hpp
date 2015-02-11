@@ -15,17 +15,12 @@ namespace io {
  * ! \brief Represent basic information about character set
  */
 class CHANNEL_PUBLIC Charset {
+BOOST_MOVABLE_BUT_NOT_COPYABLE(Charset)
 private:
 	const std::size_t id_;
 	const char* name_;
 	const std::size_t charSize_;
 	bool unicode_;
-private:
-	Charset(const Charset& c):id_(c.id_),name_(c.name_),charSize_(c.charSize_),unicode_(false)
-	{}
-	const Charset& operator=(const Charset&) {
-		return *this;
-	}
 public:
 	/**
 	 * Constructs character set
@@ -97,9 +92,8 @@ public:
 	inline void insert(const std::string& name, const Charset* ptr) {
 		nameMap_.insert(std::make_pair(name,ptr));
 	}
-	static const Charset* forName(const char* name) BOOST_NOEXCEPT_OR_NOTHROW {
-		return instance()->find(name);
-	}
+	static const Charset* forName(const char* name) BOOST_NOEXCEPT_OR_NOTHROW;
+	static const Charset* windowsUnicode() BOOST_NOEXCEPT_OR_NOTHROW;
 private:
 	ctmap_t nameMap_;
 };
@@ -122,29 +116,11 @@ public:
 	}
 };
 
-// Helper function used to throw char set error when expression
-inline void validate(bool expr, const std::string& msg) throw(charset_exception)
-{
-	if(expr) {
-		boost::throw_exception(charset_exception(msg));
-	}
-}
-
 /**
  * ! \brief  Implementor of {@code Converter} should provide conversation from one character set into another
  */
 class CHANNEL_PUBLIC Converter {
-#ifdef BOOST_NO_DELETED_FUNCTIONS
-private:  // emphasize the following members are private
-	Converter( const Converter&);
-	Converter& operator=( const Converter& );
-#else
-	Converter( const Converter& ) = delete;
-	Converter& operator=( const Converter& ) = delete;
-#endif
-private:
-	const Charset* srcCt_;
-	const Charset* destCt_;
+BOOST_COPYABLE_AND_MOVABLE(Converter)
 protected:
 	Converter(const Charset* srcCt,const Charset* destCt) BOOST_NOEXCEPT_OR_NOTHROW:
 		srcCt_(srcCt),
@@ -181,7 +157,10 @@ public:
 	/**
 	 * Frees resources allocated by converter
 	 */
-	virtual ~Converter() BOOST_NOEXCEPT_OR_NOTHROW;
+	virtual ~Converter() BOOST_NOEXCEPT_OR_NOTHROW = 0;
+private:
+	const Charset* srcCt_;
+	const Charset* destCt_;
 };
 
 

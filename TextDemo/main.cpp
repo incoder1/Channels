@@ -29,7 +29,6 @@
 #include <iostream>
 #include <console.hpp>
 #include <readwrite.hpp>
-#include <datachannel.hpp>
 #include <pipe.hpp>
 
 #include <boost/thread/thread.hpp>
@@ -75,8 +74,8 @@ inline io::SConverter from_console_conv() {
 typedef io::Writer<ustring> writer_u8;
 typedef io::Reader<ustring> reader_u8;
 
-typedef io::Writer<wstring> writer_u16le;
-typedef io::Reader<wstring> reader_u16le;
+typedef io::Writer<wstring> wwriter;
+typedef io::Reader<wstring> wreader;
 
 void charset_console_sample() throw(io::io_exception)
 {
@@ -86,16 +85,17 @@ void charset_console_sample() throw(io::io_exception)
 	// char set conversation sample
 	writer_u8 out(con.outChanell(), to_console_conv());
 	out.write(U8("Hello world English version. Привет мир, русская верссия\n\r"));
-	io::byte_buffer readBuff = io::byte_buffer::heap_buffer(512);
-	reader_u8 in(con.inChanell(),readBuff, from_console_conv());
+	uint8_t stackBuff[512];
+	io::byte_buffer readBuff = io::byte_buffer::wrap_array(stackBuff,512);
+	reader_u8 in(con.inChanell(), readBuff, from_console_conv());
 	out.write(U8("Type something :> "));
 	out.write(in.read());
 }
 
 void pipe_write_routine(io::SWriteChannel sink) {
 	try {
-		static const char* msg = "Hello from Pipe!";
-		sink->write(io::byte_buffer::wrap_array(msg,std::strlen(msg)));
+		static const char* msg = "Hello from Pipe!\n";
+		sink->write(io::byte_buffer::wrap_array(msg, std::strlen(msg)));
 	} catch(std::exception& exc) {
 		std::cerr<<exc.what()<<std::endl;
 	}
@@ -104,16 +104,14 @@ void pipe_write_routine(io::SWriteChannel sink) {
 
 void pipe_sample()
 {
-	char buff[3];
 	// pipe sample
-	io::Pipe pipe(io::byte_buffer::wrap_array(buff,3));
-	boost::thread writeThread(boost::bind(pipe_write_routine,pipe.sink()));
-	writeThread.start_thread();
-	char rd[17];
-	io::byte_buffer result = io::byte_buffer::wrap_array(rd,17);
-	while(0 != pipe.source()->read(result))
-	{}
-	std::cout<<rd<<std::endl;
+	io::SPipe pipe = io::create_pipe(17, io::PipeSinkRoutine(pipe_write_routine));
+	io::byte_buffer readbuf = io::byte_buffer::heap_buffer(17);
+	while( 0 < pipe->source()->read(readbuf) )
+	{
+		readbuf.flip();
+		std::cout<<readbuf.position().ptr();
+	}
 }
 
 /**
@@ -121,15 +119,19 @@ void pipe_sample()
  */
 void file_sample() {
 	using namespace io;
-	File file("sample.txt");
+	File file("result.txt");
 	if(file.exist()) {
 		if(!file.errace()) {
-			boost::throw_exception(io_exception("Can not delete sample.txt"));
+			boost::throw_exception(io_exception("Can not delete result.txt"));
 		}
 	}
 	file.create();
-	writer_u16le out(file.openForWrite(), io::new_converter(LOCALE_CH,"UTF-8"));
-	out.write(L"ASCII     abcde xyz\nGerman  äöü ÄÖÜ ß\nPolish  ąęźżńł\nRussian  абвгдеж эюя\nCJK  你好");
+	auto fileChannel = file.openForWrite();
+	uint8_t bom[2] = {0xFF,0xFE};
+	io::byte_buffer buff = io::byte_buffer::wrap_array(bom,2);
+	fileChannel->write(buff);
+	writer_u8 out(fileChannel, io::new_converter("UTF-8","UTF-16LE"));
+	out.write("ASCII     abcde xyz\n\rGerman  äöü ÄÖÜ ß\n\rPolish  ąęźżńł\n\rRussian  абвгдеж эюя\n\rCJK  你好\n\r");
 }
 
 void buffers_sample() {
@@ -158,8 +160,8 @@ int _tmain(int argc, TCHAR *argv[])
 	try {
 		//buffers_sample();
 		//charset_console_sample();
-		pipe_sample();
-		//file_sample();
+		//pipe_sample();
+		file_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}

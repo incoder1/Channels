@@ -11,7 +11,7 @@ namespace io {
 
 namespace mmt {
 
-static const std::size_t SMALL_OBJECT_LIMIT = 64;
+static const std::size_t SMALL_OBJECT_LIMIT = 512;
 
 #ifdef PLATFORM_WINDOWS
 class PrivateHeapAllocator {
@@ -102,16 +102,18 @@ private:
 	}
 
 	pool_type* getPool(std::size_t size) throw(std::bad_alloc) {
-		pool_type *result = pooltbl_[size];
-		// double check that new pool is not created by other thread
-		if(NULL == result) {
+		pool_type *result = pooltbl_[size].load(boost::memory_order_consume);
+		// each chunk pool should be unique
+		if(!result) {
 			boost::unique_lock<boost::mutex> lock(mutex_);
-			result = pooltbl_[size];
+			result = pooltbl_[size].load(boost::memory_order_consume);
 			if(NULL == result) {
 				result = new pool_type(size);
-				pooltbl_[size] = result;
+				pooltbl_[size].store(result, boost::memory_order_release);
 				return result;
 			}
+		} else {
+			boost::atomic_thread_fence(boost::memory_order_release);
 		}
 		return result;
 	}
@@ -124,8 +126,9 @@ public:
 
 	~SmallObjectAllocator() BOOST_NOEXCEPT_OR_NOTHROW {
 		for(std::size_t i=0; i < SMALL_OBJECT_LIMIT; i++) {
-			if(NULL != pooltbl_[i]) {
-				delete pooltbl_[i];
+			pool_type* pool = pooltbl_[i].load(boost::memory_order_relaxed);
+			if(NULL != pool) {
+				delete pool;
 			}
 		}
 	}
@@ -150,12 +153,12 @@ public:
 		if(size > SMALL_OBJECT_LIMIT) {
 			std::free(ptr);
 		} else {
-			pooltbl_[size]->free(ptr);
+			pooltbl_[size].load(boost::memory_order_relaxed)->free(ptr);
 		}
 	}
 private:
 	boost::mutex mutex_;
-	pool_type* pooltbl_[SMALL_OBJECT_LIMIT];
+	boost::atomic<pool_type*> pooltbl_[SMALL_OBJECT_LIMIT];
 };
 
 // initialize the singleton global variables

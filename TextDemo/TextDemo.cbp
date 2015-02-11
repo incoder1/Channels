@@ -23,15 +23,17 @@
 					<Add option="-std=gnu++11" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add option="-DDEBUG" />
-					<Add directory="C:/MinGW/msys/1.0/local/include" />
+					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/include" />
+					<Add directory="D:/cpp/boost_1_57_0" />
 				</Compiler>
 				<Linker>
 					<Add option="-pg -lgmon" />
-					<Add library="boost_thread-mgw47-mt-d-1_54.dll" />
-					<Add library="boost_system-mgw47-mt-d-1_54.dll" />
+					<Add library="Channel" />
+					<Add library="boost_thread-mt-d.dll" />
+					<Add library="boost_system-mt-d.dll" />
 					<Add directory="../bin/DebugMinWG32" />
-					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
-					<Add directory="C:/MinGW/msys/1.0/local/lib" />
+					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
+					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/lib64" />
 				</Linker>
 			</Target>
 			<Target title="ReleaseMinGW32">
@@ -131,15 +133,19 @@
 					<Add option="-mmmx" />
 					<Add option="-m3dnow" />
 					<Add option="-DCONV_ENGINE_IBM_ICU" />
-					<Add directory="C:/MinGW/msys/1.0/local/include" />
+					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/include" />
+					<Add directory="D:/cpp/boost_1_57_0" />
 				</Compiler>
 				<Linker>
-					<Add library="C:\MinGW\msys\1.0\local\lib\icudt.dll.a" />
-					<Add library="C:\MinGW\msys\1.0\local\lib\icuuc.dll.a" />
-					<Add library="boost_system-mgw47-mt-d-1_54.dll" />
-					<Add library="boost_thread-mgw47-mt-d-1_54.dll" />
+					<Add library="Channel" />
+					<Add library="boost_thread-mt-d.dll" />
+					<Add library="boost_system-mt-d.dll" />
+					<Add library="Ws2_32" />
+					<Add library="icuuc.dll" />
+					<Add library="icudt.dll" />
 					<Add directory="../bin/DebugMinWG32-ICU" />
-					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
+					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
+					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/lib64" />
 				</Linker>
 			</Target>
 		</Build>

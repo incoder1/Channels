@@ -7,6 +7,7 @@
 
 namespace io {
 
+
 inline void validate_file_handle(HANDLE hFile) {
 	validate_io(INVALID_HANDLE_VALUE != hFile, "Can not open file. Reason:");
 }
@@ -108,12 +109,34 @@ std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 	return result;
 }
 
-
-void FileChannel::seek(std::size_t offset, MoveMethod method) throw(io_exception)
+uint64_t FileChannel::seek(uint64_t offset, DWORD method) throw(io_exception)
 {
-	if(INVALID_SET_FILE_POINTER == ::SetFilePointer(id_,offset,NULL,method)) {
-		boost::throw_exception(io_exception("Can not move file pointer"));
-	}
+	::LARGE_INTEGER li;
+	li.QuadPart = static_cast<LONG>(offset);
+	validate_io(::SetFilePointerEx(id_, li, &li,method), "Can not move file pointer");
+	return static_cast<uint64_t>(li.QuadPart);
+}
+uint64_t FileChannel::position() {
+	return seek(0, FILE_CURRENT);
+}
+
+uint64_t FileChannel::forward(uint64_t offset) throw (io_exception) {
+	return seek(offset, FILE_CURRENT);
+}
+
+uint64_t FileChannel::backward(uint64_t offset) throw (io_exception)
+{
+	int64_t step = static_cast<int64_t>(offset);
+	return seek(-step, FILE_CURRENT);
+}
+
+uint64_t FileChannel::fromBegin(uint64_t offset) throw (io_exception) {
+	return seek(offset, FILE_BEGIN);
+}
+
+uint64_t FileChannel::fromEnd(uint64_t offset) throw (io_exception) {
+	int64_t step = static_cast<int64_t>(offset);
+	return seek(-step, FILE_END);
 }
 
 } // namespace io

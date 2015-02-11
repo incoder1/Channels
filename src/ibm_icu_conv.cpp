@@ -4,11 +4,11 @@
 namespace io {
 
 inline void validate_charset(const Charset* ch, const std::string& name) throw(charset_exception) {
-	validate(NULL == ch, name + " is not provided by IBM ICU converter");
+	validate<charset_exception>(NULL != ch, name + " is not provided by IBM ICU converter");
 }
 
 inline void validate_create_conv(const UErrorCode& errCode, const std::string& chName) {
-	validate(U_FAILURE(errCode), "Can not build IBM ICU converter for converting "+chName);
+	validate<charset_exception>(U_SUCCESS(errCode), "Can not build IBM ICU converter for converting "+chName);
 }
 
 static const std::size_t UTF16LE = 1200;
@@ -46,7 +46,7 @@ SConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(chars
 	validate_charset(srcCt, src);
 	const Charset* destCt = Charsets::forName(dst);
 	validate_charset(destCt, dst);
-	validate(srcCt->equal(destCt),"Source character set is equal destination, no conversation needed");
+	validate<charset_exception>(!srcCt->equal(destCt),"Source character set is equal destination, no conversation needed");
 	UConverter* intoUnc = openConverter(srcCt);
 	UConverter* fromUnc = openConverter(destCt);
 	ICUEngine engine(intoUnc, fromUnc);
@@ -130,9 +130,9 @@ void ICUConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(chars
 	} else if(notUTF16(destCharset())) {
 		fromUnicode(src, dest);
 	} else
-	// Conversation over Unicode, will not be invoked in most cases
+	// Conversation over Unicode, wouldn't be used
 	if(notUTF16(srcCharset()) && notUTF16(destCharset())) {
-		byte_buffer unicodeBuff = new_byte_byffer(src.length()*sizeof(UChar));
+		byte_buffer unicodeBuff = byte_buffer::heap_buffer(src.length()*sizeof(UChar));
 		intoUnicode(src,unicodeBuff);
 		unicodeBuff.flip();
 		fromUnicode(unicodeBuff, dest);

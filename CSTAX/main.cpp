@@ -30,7 +30,7 @@ private:
 };
 
 XMLEvent::XMLEvent(XMLEventType type) BOOST_NOEXCEPT_OR_NOTHROW:
-type_(type)
+	type_(type)
 {}
 
 XMLEvent::~XMLEvent() BOOST_NOEXCEPT_OR_NOTHROW
@@ -62,7 +62,6 @@ public:
 
 StartElementEvent::~StartElementEvent() BOOST_NOEXCEPT_OR_NOTHROW {
 }
-
 
 
 int main(int argc,const char **argv) {

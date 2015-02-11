@@ -2,31 +2,18 @@
 #define CHANNEL_PIPE_HPP_INCLUDED
 
 // boost imports
-#include <boost/weak_ptr.hpp>
-#include <boost/thread/shared_mutex.hpp>
-#include <boost/thread/condition_variable.hpp>
+#include <boost/thread/thread.hpp>
+#include <boost/function.hpp>
+#include <boost/shared_ptr.hpp>
+#include <boost/bind.hpp>
 
 // modules imports
 #include <channels.hpp>
 
 namespace io {
 
-// private implementation, not visible outside of library
-namespace _pipe {
 
-class PipeChannel:public virtual ReadChannel, public virtual WriteChannel, public virtual SmallObject {
-public:
-	explicit PipeChannel(byte_buffer source) BOOST_NOEXCEPT_OR_NOTHROW;
-	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
-	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
-private:
-	byte_buffer source_;
-	boost::shared_mutex mutex_;
-	boost::condition_variable_any condition_;
-	bool volatile canRead_;
-};
-
-} // namespace _pipe
+typedef boost::function<void(SWriteChannel)> PipeSinkRoutine;
 
 /**
 * ! \brief  A pair of channels that implements a unidirectional pipe.
@@ -41,15 +28,25 @@ private:
 * buffer up to a certain number of bytes between the sink and source channels.
  </p>
 */
-class CHANNEL_PUBLIC Pipe:private boost::noncopyable {
+class CHANNEL_PUBLIC Pipe:public SmallObject {
+BOOST_MOVABLE_BUT_NOT_COPYABLE(Pipe)
+protected:
+	Pipe(PipeSinkRoutine routine) BOOST_NOEXCEPT_OR_NOTHROW:
+		sinkRoutine_(routine)
+	{}
+	inline PipeSinkRoutine sinkRoutine() const {
+		return sinkRoutine_;
+	}
 public:
-	Pipe(const byte_buffer& buffer) throw (std::bad_alloc);
-	SWriteChannel sink() BOOST_NOEXCEPT_OR_NOTHROW;
-	SReadChannel source() BOOST_NOEXCEPT_OR_NOTHROW;
+	virtual SReadChannel source() const = 0;
+	virtual ~Pipe() BOOST_NOEXCEPT_OR_NOTHROW;
 private:
-	boost::shared_ptr<_pipe::PipeChannel> pipeCh_;
-	bool volatile canRead_;
+	PipeSinkRoutine sinkRoutine_;
 };
+
+typedef boost::shared_ptr<Pipe> SPipe;
+
+SPipe CHANNEL_PUBLIC create_pipe(std::size_t buffer_size, PipeSinkRoutine sink) throw(io_exception);
 
 } // namespace io
 

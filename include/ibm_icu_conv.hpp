@@ -4,6 +4,7 @@
 #define DEBUG_TMI 0  /* define to 1 to enable Too Much Information */
 
 #include <boost/format.hpp>
+#include <boost/array.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include <convert.hpp>

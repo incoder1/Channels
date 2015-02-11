@@ -101,12 +101,16 @@ public:
 		conv_(conv)
 	{}
 
-
 	/**
 	 * Writes STL string into write channel
 	 */
 	void write(const String& str) throw(io_exception,charset_exception) {
-		byte_buffer buff = byte_buffer::wrap_array(str.data(), str.length()-1); // 0 ending symbol should be avoided
+		byte_buffer buff = byte_buffer::wrap_array(str.data(), str.length()); // 0 ending symbol should be avoided
+		write(buff);
+	}
+
+	void write(const char* str) throw (io_exception, charset_exception) {
+		byte_buffer buff = byte_buffer::wrap_str(str);
 		write(buff);
 	}
 

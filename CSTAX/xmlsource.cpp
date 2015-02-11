@@ -7,14 +7,14 @@ Source::Source(io::PReadChannel source, const io::byte_buffer& readBuffer) BOOST
 	readBuff_(readBuffer)
 {}
 
+io::PConverter Source::detectInputCharset() throw(std::runtime_error) {
+}
 
-Source::reader Source::newReader() throw(std::runtime_error)
-{
+Source::reader Source::newReader() throw(std::runtime_error) {
 	return reader(src_, readBuff_, detectInputCharset());
 }
 
-Source::~Source() BOOST_NOEXCEPT_OR_NOTHROW
-{
+Source::~Source() BOOST_NOEXCEPT_OR_NOTHROW {
 }
 
 }

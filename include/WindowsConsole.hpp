@@ -19,18 +19,18 @@
 #endif
 
 #ifdef __GNUC__
-typedef struct _CONSOLE_READCONSOLE_CONTROL {
-	ULONG nLength;
-	ULONG nInitialChars;
-	ULONG dwCtrlWakeupMask;
-	ULONG dwControlKeyState;
-} CONSOLE_READCONSOLE_CONTROL, *PCONSOLE_READCONSOLE_CONTROL;
+//typedef struct _CONSOLE_READCONSOLE_CONTROL {
+//	ULONG nLength;
+//	ULONG nInitialChars;
+//	ULONG dwCtrlWakeupMask;
+//	ULONG dwControlKeyState;
+//} CONSOLE_READCONSOLE_CONTROL, *PCONSOLE_READCONSOLE_CONTROL;
 #endif /* __GNUC__ */
 
 // Use the const char* console version
 // by default if WIDE_CONSOLE is not defined
 #ifndef WIDE_CONSOLE
-#	define WIDE_CONSOLE 0
+#	define WIDE_CONSOLE false
 #endif
 
 
@@ -50,7 +50,7 @@ class CHANNEL_PUBLIC ConsoleReadChannel:public virtual ReadChannel, public virtu
 		std::size_t charSize_;
 };
 
-class CHANNEL_PUBLIC ConsoleWriteChannel:public WriteChannel, public virtual SmallObject {
+class CHANNEL_PUBLIC ConsoleWriteChannel:public virtual WriteChannel, public virtual SmallObject {
 private:
 	typedef boost::function<BOOL(HANDLE,const void*,DWORD,PDWORD,PVOID)> writef_t;
 public:
@@ -63,7 +63,7 @@ private:
 	std::size_t charSize_;
 };
 
-namespace _cn {
+namespace {
 
 template<class ChannelType>
 inline ChannelType* cons_ch(DWORD handleId, bool wide) {
@@ -82,7 +82,8 @@ inline SWriteChannel cech(bool wide) {
 	return SWriteChannel(cons_ch<ConsoleWriteChannel>(STD_ERROR_HANDLE,wide));
 }
 
-} // namesapce _cn
+} // namesapce
+
 
 /**
  * ! \brief Factory for obtaining channels for windows standard streams.
@@ -95,15 +96,23 @@ private:
 	SWriteChannel cech_;
 public:
 	explicit Console(bool wide):
-		cwch_(_cn::cwch(wide)),
-		crch_(_cn::crch(wide)),
-		cech_(_cn::cech(wide))
-	{}
+		cwch_(cwch(wide)),
+		crch_(crch(wide)),
+		cech_(cech(wide))
+	{
+		if(wide) {
+			setCharset(Charsets::windowsUnicode());
+		}
+	}
 	explicit Console():
-		cwch_(_cn::cwch(WIDE_CONSOLE)),
-		crch_(_cn::crch(WIDE_CONSOLE)),
-		cech_(_cn::cech(WIDE_CONSOLE))
-	{}
+		cwch_(cwch(WIDE_CONSOLE)),
+		crch_(crch(WIDE_CONSOLE)),
+		cech_(cech(WIDE_CONSOLE))
+	{
+		if(WIDE_CONSOLE) {
+			setCharset(Charsets::windowsUnicode());
+		}
+	}
 	Console(::HANDLE handle, bool wide):
 		cwch_(SWriteChannel(new ConsoleWriteChannel(handle,wide))),
 		crch_(SReadChannel(new ConsoleReadChannel(handle,wide))),

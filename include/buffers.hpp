@@ -18,7 +18,7 @@ namespace io {
  * Random access iterator, STL compatible
  */
 template<typename T>
-class buffer_iterator: public std::iterator<std::bidirectional_iterator_tag,uint64_t> {
+class buffer_iterator: public std::iterator<std::bidirectional_iterator_tag, std::ptrdiff_t> {
 private:
 	mutable T* position_;
 public:
@@ -85,23 +85,15 @@ public:
 	bool operator<=(const buffer_iterator& rhs) const {
 		return position_ <= rhs.position_;
 	}
-	template<typename E>
-	friend ssize_t operator+(const buffer_iterator<E>& lhs, const buffer_iterator<E>& rhs);
-	template<typename E>
-	friend ssize_t operator-(const buffer_iterator<E>& lhs, const buffer_iterator<E>& rhs);
+
+	difference_type operator+(const buffer_iterator& lhs) const {
+		return position_ + lhs.position_;
+	}
+
+	difference_type operator-(const buffer_iterator& lhs) const {
+		return position_ - lhs.position_;
+	}
 };
-
-template<typename T>
-ssize_t operator+(const buffer_iterator<T>& lhs, const buffer_iterator<T>& rhs)
-{
-	return lhs.position_ + rhs.position_;
-}
-
-template<typename T>
-static ssize_t operator-(const buffer_iterator<T>& lhs, const buffer_iterator<T>& rhs) {
-	return  lhs.position_ - rhs.position_;
-}
-
 
 
 /**
@@ -129,21 +121,36 @@ public:
 	 * position pointer would be moved into the buffer last element.
 	 * \param offset the offset to move position pointer
 	 */
-	std::size_t move(std::size_t offset) {
+	std::ptrdiff_t move(std::size_t offset) {
 		T *endPtr = position_+offset;
 		std::size_t result = (endPtr <= end_) ? offset : remain();
 		position_ += result;
 		if(position_ > last_) {
 			last_ = position_+1;
 		}
+		if(last_ >= end_) {
+			last_ = end_;
+		}
 		return result;
+	}
+
+	/**
+	 * Move this buffer position to the iterator position
+	 * \param position - iterator where to move
+	 */
+	iterator move(iterator position) {
+		position_ = position.ptr();
+		if(position_ > last_) {
+			last_ = position_+1;
+		}
+		return iterator(position_);
 	}
 
 	/**
 	 * Returns remain elements possible to put
 	 * \return remaining elements count
 	 */
-	std::size_t remain() const {
+	std::ptrdiff_t remain() const {
 		return size_t(end_ - position_);
 	}
 
@@ -180,35 +187,37 @@ public:
 		return const_iterator(last_);
 	}
 
+	const_iterator end() const {
+		return const_iterator(end_);
+	}
+
 	/**
 	 * Inserts a single element into last buffer, increases if success the position.
 	 * \param t element to be inserted into current buffer position
 	 * \return 1 if element was put, 0 if no more space left
 	 */
-	std::size_t put(T& e)  {
-		std::size_t result = 0;
+	iterator put(T& e)  {
 		if(position_ + 1 != end_) {
 			*position_ = e;
 			++position_;
 			last_ = position_ + 1;
-			result = 1;
 		}
-		return result;
+		return position();
 	}
 
-	std::size_t put(iterator& first, iterator& last) {
-		size_t size = size_t(last - first);
-		size_t offset = ((position_ + size) <= end_) ? size : remain();
+	iterator put(iterator& first, iterator& last) {
+		ssize_t size = ssize_t(last - first)+1;
+		ssize_t offset = ((position_ + size) <= end_) ? size : remain();
 		std::copy(first, first+offset, position_);
 		position_ += offset;
 		last_ = position_ + 1;
-		return offset;
+		return position();
 	}
 
-
-	std::size_t put(const_iterator& first,const_iterator& last) {
+	iterator put(const_iterator& first,const_iterator& last) {
 		return put(const_cast<iterator&>(first), const_cast<iterator&>(last));
 	}
+
 
 	/**
 	 * Sets current buffer position into array begin,
@@ -231,20 +240,24 @@ public:
 		return (last_ == position_);
 	}
 
+	bool full() const {
+		return last_ == end_-1;
+	}
+
 	/**
 	 * Count of filled elements
 	 * \return buffer length
 	 */
-	std::size_t length() const {
-		return (last_-1) - data_.get();
+	std::ptrdiff_t length() const {
+		return last_ - data_.get();
 	}
 
 	/**
 	 * This buffer capacity
 	 * \return buffer capacity
 	 */
-	std::size_t capacity() const {
-		return std::size_t(end_ - data_.get());
+	std::ptrdiff_t capacity() const {
+		return end_ - data_.get();
 	}
 
 private:
