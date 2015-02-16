@@ -18,14 +18,15 @@
 #	define BOOST_BIND_ENABLE_FASTCALL
 #endif
 
-#ifdef __GNUC__
-//typedef struct _CONSOLE_READCONSOLE_CONTROL {
-//	ULONG nLength;
-//	ULONG nInitialChars;
-//	ULONG dwCtrlWakeupMask;
-//	ULONG dwControlKeyState;
-//} CONSOLE_READCONSOLE_CONTROL, *PCONSOLE_READCONSOLE_CONTROL;
-#endif /* __GNUC__ */
+#if  defined(__MINGW32__) && !defined(_WIN64)
+// MinGW64 have this structure in windows.h
+typedef struct _CONSOLE_READCONSOLE_CONTROL {
+	ULONG nLength;
+	ULONG nInitialChars;
+	ULONG dwCtrlWakeupMask;
+	ULONG dwControlKeyState;
+} CONSOLE_READCONSOLE_CONTROL, *PCONSOLE_READCONSOLE_CONTROL;
+#endif /* __MINGW32__ */
 
 // Use the const char* console version
 // by default if WIDE_CONSOLE is not defined
@@ -33,13 +34,12 @@
 #	define WIDE_CONSOLE false
 #endif
 
-
 namespace io {
 
 class CHANNEL_PUBLIC ConsoleReadChannel:public virtual ReadChannel, public virtual SmallObject
 {
 	private:
-		typedef boost::function<BOOL (HANDLE,LPVOID,DWORD,LPDWORD,PCONSOLE_READCONSOLE_CONTROL) > readf_t;
+		typedef WINBOOL (*readf_t)(HANDLE,LPVOID,DWORD,LPDWORD,LPVOID);
 	public:
 		explicit ConsoleReadChannel(HANDLE hCons,bool unicode) BOOST_NOEXCEPT_OR_NOTHROW;
 		virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
@@ -118,9 +118,12 @@ public:
 		crch_(SReadChannel(new ConsoleReadChannel(handle,wide))),
 		cech_(SWriteChannel(new ConsoleWriteChannel(handle,wide)))
 	{}
-	void setCharset(const Charset* charset) BOOST_NOEXCEPT {
+	inline void setCharset(const Charset* charset) BOOST_NOEXCEPT {
 		::SetConsoleCP(charset->id());
 		::SetConsoleOutputCP(charset->id());
+	}
+	inline void setCharset(const char* name) BOOST_NOEXCEPT_OR_NOTHROW {
+		setCharset(Charsets::forName(name));
 	}
 	inline SWriteChannel outChanell() const {
 		return cwch_;

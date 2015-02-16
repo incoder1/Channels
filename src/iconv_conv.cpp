@@ -37,7 +37,7 @@ void IconvConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(cha
 {
 	char *itptr = reinterpret_cast<char*>(src.position().ptr());
 	char *dstptr = reinterpret_cast<char*>(dest.position().ptr());
-	std::size_t srclen = src.length();
+	std::size_t srclen = size_t(--src.last() - src.position());
 	std::size_t avail = dest.capacity();
 	std::size_t iconvValue = ::iconv(conv_.get(), &itptr, &srclen, &dstptr, &avail);
 	if( static_cast<std::size_t>(-1) == iconvValue) {

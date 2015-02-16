@@ -7,7 +7,7 @@ namespace io {
 ConsoleReadChannel::ConsoleReadChannel(HANDLE hCons, bool wide) BOOST_NOEXCEPT_OR_NOTHROW:
 	ReadChannel(),
 	hCons_(hCons),
-	peer_(wide? readf_t(ReadConsoleW) : readf_t(ReadConsoleA) ),
+	peer_(wide? ReadConsoleW : ReadConsoleA ),
 	charSize_(wide? sizeof(WCHAR) : sizeof(CHAR) )
 {}
 
@@ -16,8 +16,8 @@ std::size_t ConsoleReadChannel::read(byte_buffer& buff) throw(io_exception)
 	DWORD result;
 	CONSOLE_READCONSOLE_CONTROL control;
 	BOOL readRes = peer_(hCons_,vpos(buff),buff.capacity() / charSize_, &result, &control);
-	buff.move(result*charSize_);
 	validate_io(readRes, "Can't read from console" );
+	buff.move(result*charSize_);
 	return result;
 }
 

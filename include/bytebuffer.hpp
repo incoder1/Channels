@@ -57,9 +57,9 @@ namespace _private {
 template<typename ElementType>
 byte_buffer byte_buffer::wrap_array(ElementType* const arr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
 	boost::shared_array<uint8_t> data((uint8_t*)arr, _private::empty_free() );
-	uint8_t* endp =  ((uint8_t*)arr) + (size*sizeof(ElementType));
-	byte_buffer result(data,endp);
-	result.move(size);
+	ElementType *endp = arr + size;
+	byte_buffer result(data,(uint8_t*)endp);
+	result.move(result.end());
 	result.flip();
 	return result;
 }

@@ -122,16 +122,8 @@ public:
 	 * \param offset the offset to move position pointer
 	 */
 	std::ptrdiff_t move(std::size_t offset) {
-		T *endPtr = position_+offset;
-		std::size_t result = (endPtr <= end_) ? offset : remain();
-		position_ += result;
-		if(position_ > last_) {
-			last_ = position_+1;
-		}
-		if(last_ >= end_) {
-			last_ = end_;
-		}
-		return result;
+		iterator prevPos = position();
+		return move(prevPos + offset) - prevPos;
 	}
 
 	/**
@@ -140,8 +132,13 @@ public:
 	 */
 	iterator move(iterator position) {
 		position_ = position.ptr();
-		if(position_ > last_) {
-			last_ = position_+1;
+		if(position_ > end_) {
+			position_ = end_-1;
+			last_ = end_;
+		} else {
+			if(position_ > last_) {
+				last_ = position_+1;
+			}
 		}
 		return iterator(position_);
 	}
@@ -196,22 +193,20 @@ public:
 	 * \param t element to be inserted into current buffer position
 	 * \return 1 if element was put, 0 if no more space left
 	 */
-	iterator put(T& e)  {
-		if(position_ + 1 != end_) {
-			*position_ = e;
-			++position_;
-			last_ = position_ + 1;
+	iterator put(T& e) {
+		iterator pos = position();
+		if(pos+1 < end() ) {
+			*(++pos) = e;
 		}
-		return position();
+		return move(pos);
 	}
 
 	iterator put(iterator& first, iterator& last) {
-		ssize_t size = ssize_t(last - first)+1;
-		ssize_t offset = ((position_ + size) <= end_) ? size : remain();
-		std::copy(first, first+offset, position_);
-		position_ += offset;
-		last_ = position_ + 1;
-		return position();
+		ssize_t size = ssize_t(last - first);
+		iterator pos = position();
+		std::ptrdiff_t offset = (pos + size) <= end() ? size : remain();
+		pos = std::copy(first, first+offset, pos);
+		return move(pos);
 	}
 
 	iterator put(const_iterator& first,const_iterator& last) {
@@ -241,7 +236,7 @@ public:
 	}
 
 	bool full() const {
-		return last_ == end_-1;
+		return last_ == end_;
 	}
 
 	/**
@@ -249,7 +244,7 @@ public:
 	 * \return buffer length
 	 */
 	std::ptrdiff_t length() const {
-		return last_ - data_.get();
+		return --last() - iterator(data_.get());
 	}
 
 	/**

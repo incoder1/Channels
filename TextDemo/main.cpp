@@ -53,19 +53,12 @@ inline io::SConverter to_console_conv() {
 	return io::new_converter("UTF-8",LOCALE_CH);
 }
 
-inline io::SConverter from_console_conv() {
-	return io::new_converter(LOCALE_CH,"UTF-8");
-}
-
 #elif defined(PLATFROM_UNIX)
 
 inline io::SConverter to_console_conv() {
 	return io::char_empty_converter();
 }
 
-inline io::SConverter from_console_conv() {
-	return io::char_empty_converter();
-}
 #else
 #	error "This operating system is not supported yet"
 #endif
@@ -79,17 +72,11 @@ typedef io::Reader<wstring> wreader;
 
 void charset_console_sample() throw(io::io_exception)
 {
-	const io::Charset* utf16 = io::Charsets::forName(LOCALE_CH);
 	io::Console con(true);
-	con.setCharset(utf16);
-	// char set conversation sample
+	con.setCharset(LOCALE_CH);
 	writer_u8 out(con.outChanell(), to_console_conv());
-	out.write(U8("Hello world English version. Привет мир, русская верссия\n\r"));
-	uint8_t stackBuff[512];
-	io::byte_buffer readBuff = io::byte_buffer::wrap_array(stackBuff,512);
-	reader_u8 in(con.inChanell(), readBuff, from_console_conv());
-	out.write(U8("Type something :> "));
-	out.write(in.read());
+	out.write("Hello! Привет! こんにちは! 您好！ \n");
+	out.write("If you can't see your language please change console font");
 }
 
 void pipe_write_routine(io::SWriteChannel sink) {
@@ -148,7 +135,7 @@ void buffers_sample() {
 	result.put(deepCopy);
 	result.flip();
 
-	std::cout<<result.position().ptr()<<std::endl;
+	std::cout<<"Length:"<<result.length()<<" "<<result.position().ptr()<<std::endl;
 }
 
 #ifndef _MSC_VER
@@ -159,9 +146,9 @@ int _tmain(int argc, TCHAR *argv[])
 {
 	try {
 		//buffers_sample();
-		//charset_console_sample();
+		charset_console_sample();
 		//pipe_sample();
-		file_sample();
+		//file_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}

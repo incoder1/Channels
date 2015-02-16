@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1423674242 source:d:\cpp\channel\textdemo\main.cpp
+1424116977 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -19,7 +19,7 @@
 	<win32/winver.h>
 	<windows.h>
 
-1423671724 d:\cpp\channel\include\windowsconsole.hpp
+1424116172 d:\cpp\channel\include\windowsconsole.hpp
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<boost/function.hpp>
@@ -1421,13 +1421,13 @@
 	<stdexcept>
 	<cstring>
 
-1423078979 d:\cpp\channel\include\bytebuffer.hpp
+1424115141 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
 	<buffers.hpp>
 
-1423673099 d:\cpp\channel\include\buffers.hpp
+1424113950 d:\cpp\channel\include\buffers.hpp
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -6300,7 +6300,7 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1423078000 d:\cpp\channel\include\readwrite.hpp
+1424106447 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>

@@ -72,6 +72,8 @@ public:
 		const std::size_t maxChSize = conv_->destCharset()->charSize();
 		byte_buffer conv = byte_buffer::heap_buffer(bytesRead*maxChSize);
 		buff_.flip();
+		std::string str((const char*)(buff_.position().ptr()),bytesRead);
+		std::cout<<str.length()<<std::endl;
 		conv_->convert(buff_,conv);
 		return String(conv.position(),conv.last());
 	}

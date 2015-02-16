@@ -17,6 +17,7 @@
 					<Add option="-Winline" />
 					<Add option="-Wunreachable-code" />
 					<Add option="-pedantic-errors" />
+					<Add option="-std=c++11" />
 					<Add option="-pg" />
 					<Add option="-g" />
 					<Add option="-fexceptions" />
