@@ -1,6 +1,8 @@
 #include "prchdrs.h"
 #include "helpers.hpp"
 
+#include  <boost/thread/scoped_thread.hpp>
+
 #include  <pipe.hpp>
 #include  <WindowsFile.hpp>
 
@@ -21,7 +23,9 @@ WindowsPipe::WindowsPipe(PipeSinkRoutine routine,HANDLE sink,HANDLE source):
 	 Pipe(routine),
      source_(new FileChannel(source,true))
 {
-	boost::thread sinkThread(boost::bind(&WindowsPipe::write_routine, routine, sink) );
+	boost::thread sinkThread(boost::bind(&WindowsPipe::write_routine, routine, sink));
+	boost::strict_scoped_thread<> s(boost::move(sinkThread));
+	sinkThread.detach();
 }
 
 void WindowsPipe::write_routine(const PipeSinkRoutine routine, HANDLE hSink) {

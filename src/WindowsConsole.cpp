@@ -7,7 +7,7 @@ namespace io {
 ConsoleReadChannel::ConsoleReadChannel(HANDLE hCons, bool wide) BOOST_NOEXCEPT_OR_NOTHROW:
 	ReadChannel(),
 	hCons_(hCons),
-	peer_(wide? ReadConsoleW : ReadConsoleA ),
+	peer_(wide? readf_t(ReadConsoleW) : readf_t(ReadConsoleA) ),
 	charSize_(wide? sizeof(WCHAR) : sizeof(CHAR) )
 {}
 

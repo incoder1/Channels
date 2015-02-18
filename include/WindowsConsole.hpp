@@ -1,6 +1,8 @@
 #ifndef WINDOWS_CONSOLE_HPP_INCLUDED
 #define WINDOWS_CONSOLE_HPP_INCLUDED
 
+#include <windows.h>
+
 #include <boost/noncopyable.hpp>
 #include <boost/config.hpp>
 #include <boost/function.hpp>
@@ -39,7 +41,7 @@ namespace io {
 class CHANNEL_PUBLIC ConsoleReadChannel:public virtual ReadChannel, public virtual SmallObject
 {
 	private:
-		typedef WINBOOL (*readf_t)(HANDLE,LPVOID,DWORD,LPDWORD,LPVOID);
+       typedef boost::function<BOOL(HANDLE,LPVOID,DWORD,LPDWORD,PCONSOLE_READCONSOLE_CONTROL)> readf_t;
 	public:
 		explicit ConsoleReadChannel(HANDLE hCons,bool unicode) BOOST_NOEXCEPT_OR_NOTHROW;
 		virtual std::size_t read(byte_buffer& buffer) throw(io_exception);

@@ -30,6 +30,7 @@
 #include <console.hpp>
 #include <readwrite.hpp>
 #include <pipe.hpp>
+#include <network.hpp>
 
 #include <boost/thread/thread.hpp>
 
@@ -138,6 +139,49 @@ void buffers_sample() {
 	std::cout<<"Length:"<<result.length()<<" "<<result.position().ptr()<<std::endl;
 }
 
+void network_client_sample() {
+
+	using namespace boost::asio;
+
+	io::SConverter conv = to_console_conv();
+
+	io::Console con(true);
+	con.setCharset(LOCALE_CH);
+
+	io_service service;
+	ip::tcp::resolver resolver(service);
+	ip::tcp::resolver::query query("www.google.com", "80");
+	ip::tcp::resolver::iterator iter = resolver.resolve(query);
+	boost::asio::ip::tcp::endpoint ep = *iter;
+
+	std::cout<<"Connecting to:"<< ep.address().to_string() << ":" << ep.port() << "/" << ep.protocol().family() << std::endl;
+
+	service.run();
+
+	boost::shared_ptr<ip::tcp::socket> sock(new ip::tcp::socket(service) );
+	sock->open(ep.protocol());
+	sock->connect(ep);
+	io::net::STCPSocketCahnnel netCh( new io::net::TCPSocketChannel(sock) );
+
+	const char* REQ = "GET / HTTP/1.1\r\nHost:www.google.com\r\nAccept: */*\r\nUser-Agent:Channels C++ IO library\r\nAccept-Charset:ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\nPragma: no-cache\n\rCache-Control: no-cache\n\rConnection: close\r\n\r\n";
+	std::cout<<"REQUEST:"<<REQ<<std::endl<<std::endl;
+	netCh->write(io::byte_buffer::wrap_str(REQ));
+
+	// Character conversation from UTF-8 to console, in case of windows - UTF16-LE
+	auto readb = io::byte_buffer::heap_buffer(128);
+	auto convb = io::byte_buffer::heap_buffer(256);
+	while(netCh->read(readb) > 0) {
+		readb.flip();
+		conv->convert(readb,convb);
+		convb.flip();
+		// write to console
+		con.outChanell()->write(convb);
+		convb.clear();
+		readb.clear();
+	}
+
+}
+
 #ifndef _MSC_VER
 int main(int argc, const char** argv)
 #else
@@ -146,9 +190,10 @@ int _tmain(int argc, TCHAR *argv[])
 {
 	try {
 		//buffers_sample();
-		charset_console_sample();
+		//charset_console_sample();
 		//pipe_sample();
 		//file_sample();
+		network_client_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}

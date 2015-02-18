@@ -1,6 +1,7 @@
 #ifndef BUFFERS_HPP_INCLUDED
 #define BUFFERS_HPP_INCLUDED
 
+#include <stdint.h>
 #include <cstddef>
 #include <algorithm>
 
@@ -202,7 +203,7 @@ public:
 	}
 
 	iterator put(iterator& first, iterator& last) {
-		ssize_t size = ssize_t(last - first);
+		std::ptrdiff_t size = std::ptrdiff_t(last - first);
 		iterator pos = position();
 		std::ptrdiff_t offset = (pos + size) <= end() ? size : remain();
 		pos = std::copy(first, first+offset, pos);

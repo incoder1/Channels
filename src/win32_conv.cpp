@@ -27,12 +27,12 @@ MLangEngine::~MLangEngine()
 
 inline void validate_charset(const Charset* ch, const std::string& name) throw(charset_exception)
 {
-	validate(NULL == ch, name + " is not provided by MLang converter");
+	validate<charset_exception>(NULL != ch, name + " is not provided by MLang converter");
 }
 
 inline void validate_engine(HRESULT status) throw(charset_exception)
 {
-	validate(FAILED(status),"Can not construct MLang Engine instance");
+	validate<charset_exception>(SUCCEEDED(status),"Can not construct MLang Engine instance");
 }
 
 PMLang MLangEngine::createConveter(const Charset *src, const Charset *dst) const throw(charset_exception)
@@ -101,7 +101,7 @@ void Win32Converter::convert(const byte_buffer& src, byte_buffer& dest) throw(ch
 	UINT srclen = src.length();
 	UINT avail = dest.capacity();
 	HRESULT status = engine_->DoConversion(srcptr, &srclen, dstptr, &avail);
-	validate(status != S_OK , "MLang character conversation failed");
+	validate<charset_exception>(status == S_OK , "MLang character conversation failed");
 	// calc size of char buffer, and move it
 	std::size_t offset = dest.capacity() - avail;
 	dest.move(0 != offset ? offset: dest.capacity() - 1);

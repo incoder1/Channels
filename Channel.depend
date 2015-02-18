@@ -1349,7 +1349,8 @@
 1090718969 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1424113950 d:\cpp\channel\include\buffers.hpp
+1424174070 d:\cpp\channel\include\buffers.hpp
+	<stdint.h>
 	<cstddef>
 	<algorithm>
 	<boost/limits.hpp>
@@ -5555,9 +5556,10 @@
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1423671098 source:d:\cpp\channel\src\windowspipe.cpp
+1424178327 source:d:\cpp\channel\src\windowspipe.cpp
 	"prchdrs.h"
 	"helpers.hpp"
+	<boost/thread/scoped_thread.hpp>
 	<pipe.hpp>
 	<WindowsFile.hpp>
 
@@ -7139,11 +7141,12 @@
 	<time.h>
 	<wchar.h>
 
-1424111394 source:d:\cpp\channel\src\windowsconsole.cpp
+1424174648 source:d:\cpp\channel\src\windowsconsole.cpp
 	"prchdrs.h"
 	"WindowsConsole.hpp"
 
-1424110147 d:\cpp\channel\include\windowsconsole.hpp
+1424174792 d:\cpp\channel\include\windowsconsole.hpp
+	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<boost/function.hpp>
@@ -7158,11 +7161,11 @@
 	<guiddef.h>
 	<guiddef.h>
 
-1404315697 source:d:\cpp\channel\src\win32_conv.cpp
+1424175121 source:d:\cpp\channel\src\win32_conv.cpp
 	"prchdrs.h"
 	"win32_conv.hpp"
 
-1405519918 d:\cpp\channel\include\win32_conv.hpp
+1405516318 d:\cpp\channel\include\win32_conv.hpp
 	<boost/shared_ptr.hpp>
 	<boost/noncopyable.hpp>
 	<boost/thread/once.hpp>
@@ -7412,11 +7415,11 @@
 	<boost/thread/mutex.hpp>
 	<boost/atomic.hpp>
 
-1423067695 source:d:\cpp\channel\src\smallobjectpool.cpp
+1424176624 source:d:\cpp\channel\src\smallobjectpool.cpp
 	"prchdrs.h"
 	"smallobjectpool.hpp"
 
-1404318161 source:d:\cpp\channel\src\mlang_i.cpp
+1404314561 source:d:\cpp\channel\src\mlang_i.cpp
 	"prchdrs.h"
 	<rpc.h>
 	<rpcndr.h>
@@ -7771,7 +7774,7 @@
 1236010936 d:\cpp\boost_1_54_0\boost\weak_ptr.hpp
 	<boost/smart_ptr/weak_ptr.hpp>
 
-1423078789 source:d:\cpp\channel\src\bytebuffer.cpp
+1424194272 source:d:\cpp\channel\src\bytebuffer.cpp
 	"prchdrs.h"
 	"bytebuffer.hpp"
 
@@ -7779,11 +7782,11 @@
 
 1406715784 d:\cpp\channel\include\win32\winver.h
 
-1406542971 source:d:\cpp\channel\src\network.cpp
+1424275519 source:d:\cpp\channel\src\network.cpp
 	"prchdrs.h"
 	"network.hpp"
 
-1412764949 d:\cpp\channel\include\network.hpp
+1424277058 d:\cpp\channel\include\network.hpp
 	<smallobjectpool.hpp>
 	<channels.hpp>
 	<winsock2.h>
@@ -21512,4 +21515,21 @@
 	<boost/throw_exception.hpp>
 
 1399910779 d:\cpp\boost_1_57_0\boost\format\detail\unset_macros.hpp
+
+1414165406 d:\cpp\boost_1_57_0\boost\thread\scoped_thread.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/thread/detail/move.hpp>
+	<boost/thread/thread_functors.hpp>
+	<boost/thread/thread_only.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1414165406 d:\cpp\boost_1_57_0\boost\thread\thread_functors.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/thread/detail/move.hpp>
+	<boost/thread/thread_only.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
 

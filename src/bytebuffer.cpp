@@ -22,7 +22,7 @@ byte_buffer::iterator byte_buffer::put(const byte_buffer& buff)
 byte_buffer::iterator byte_buffer::put(uint8_t* const first, uint8_t* const last)
 {
 	std::size_t distance = std::size_t(last - first);
-	std::size_t result = distance < remain() ? distance : remain();
+	std::size_t result = distance < static_cast<std::size_t>(remain()) ? distance : static_cast<std::size_t>(remain());
 	std::copy(first, first+result, position());
 	move(result);
 	return position();
