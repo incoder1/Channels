@@ -16,7 +16,6 @@
 				<Compiler>
 					<Add option="-Winline" />
 					<Add option="-Wunreachable-code" />
-					<Add option="-pedantic-errors" />
 					<Add option="-std=c++11" />
 					<Add option="-pg" />
 					<Add option="-g" />
@@ -30,6 +29,7 @@
 				<Linker>
 					<Add option="-pg -lgmon" />
 					<Add library="Channel" />
+					<Add library="Ws2_32" />
 					<Add library="boost_thread-mt-d.dll" />
 					<Add library="boost_system-mt-d.dll" />
 					<Add directory="../bin/DebugMinWG32" />
@@ -84,10 +84,10 @@
 				<Linker>
 					<Add library="ole32" />
 					<Add library="kernel32" />
-					<Add library="boost_system-vc100-mt-1_54" />
-					<Add library="boost_thread-vc100-mt-1_54" />
+					<Add library="boost_system-mt" />
+					<Add library="boost_thread-mt" />
 					<Add directory="../bin/ReleaseMSVC10" />
-					<Add directory="../../boost_1_54_0/stage/msvc/lib" />
+					<Add directory="D:/cpp/boost_1_57_0/stage/msvc/lib" />
 				</Linker>
 			</Target>
 			<Target title="ReleaseMSVC64-ICU">
@@ -123,7 +123,6 @@
 				<Compiler>
 					<Add option="-Winline" />
 					<Add option="-Wunreachable-code" />
-					<Add option="-pedantic-errors" />
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-fexceptions" />
@@ -154,7 +153,7 @@
 			<Add option="-Wall" />
 			<Add directory="include" />
 			<Add directory="../include" />
-			<Add directory="../../boost_1_54_0" />
+			<Add directory="D:/cpp/boost_1_57_0" />
 		</Compiler>
 		<Linker>
 			<Add library="Channel" />

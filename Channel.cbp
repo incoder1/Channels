@@ -22,7 +22,6 @@
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add option="-DDEBUG" />
 					<Add directory="C:/MinGW/msys/1.0/include" />
-					<Add directory="D:/cpp/boost_1_57_0" />
 				</Compiler>
 				<Linker>
 					<Add library="iconv.dll" />
@@ -54,7 +53,6 @@
 					<Add option="-m3dnow" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
-					<Add directory="../boost_1_54_0" />
 					<Add directory="C:/MinGW/msys/1.0/local/include" />
 				</Compiler>
 				<Linker>
@@ -88,9 +86,9 @@
 				<Linker>
 					<Add library="kernel32" />
 					<Add library="ole32" />
-					<Add library="boost_system-vc100-mt-1_54" />
-					<Add library="boost_thread-vc100-mt-1_54" />
-					<Add directory="../boost_1_54_0/stage/msvc/lib" />
+					<Add library="boost_system-mt" />
+					<Add library="boost_thread-mt" />
+					<Add directory="D:/cpp/boost_1_57_0/stage/msvc/lib" />
 				</Linker>
 			</Target>
 			<Target title="ReleaseMSVC10-ICU">
@@ -112,7 +110,6 @@
 					<Add option="/DCHANNEL_BUILD_DLL" />
 					<Add option="/DBOOST_ALL_NO_LIB" />
 					<Add option="/DCONV_ENGINE_IBM_ICU" />
-					<Add directory="../boost_1_54_0/icu/include" />
 				</Compiler>
 				<Linker>
 					<Add library="icuuc" />
@@ -139,7 +136,6 @@
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_IBM_ICU" />
 					<Add directory="C:/MinGW/msys/1.0/include" />
-					<Add directory="D:/cpp/boost_1_57_0" />
 				</Compiler>
 				<Linker>
 					<Add library="icuuc.dll" />
@@ -168,10 +164,9 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-O2" />
 			<Add option="-Wall" />
 			<Add directory="include" />
-			<Add directory="../boost_1_54_0" />
+			<Add directory="D:/cpp/boost_1_57_0" />
 		</Compiler>
 		<Unit filename="include/WindowsConsole.hpp">
 			<Option target="DebugMinGW32" />
@@ -259,7 +254,6 @@
 		<Unit filename="src/mlang_i.cpp">
 			<Option target="ReleaseMSVC10" />
 		</Unit>
-		<Unit filename="src/network.cpp" />
 		<Unit filename="src/pipe.cpp" />
 		<Unit filename="src/prchdrs.cpp">
 			<Option weight="1" />
