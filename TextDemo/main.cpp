@@ -19,22 +19,14 @@
 #	define HAS_CPP11
 #endif // __cplusplus
 
-#ifdef HAS_CPP11
-#	define U8(str) u8##str
-#else
-#	define U8(str) str
-#endif // HAS_CPP11
-
 // Only to handle exception if any
 #include <iostream>
 #include <console.hpp>
-#include <readwrite.hpp>
+#include <text.hpp>
 #include <pipe.hpp>
 #include <network.hpp>
 
 #include <boost/thread/thread.hpp>
-
-//#include <network.hpp>
 
 #ifndef HAS_CPP11
 	typedef unsigned short char16_t;
@@ -43,8 +35,6 @@
 
 // wide string string
 typedef std::basic_string<TCHAR> wstring;
-// UTF8 string
-typedef std::string ustring;
 
 #if	defined(PLATFORM_WINDOWS)
 // Windows NT Unicode console - UTF-16LE
@@ -65,8 +55,8 @@ inline io::SConverter to_console_conv() {
 #endif
 
 
-typedef io::Writer<ustring> writer_u8;
-typedef io::Reader<ustring> reader_u8;
+typedef io::Writer<std::string> writer_u8;
+typedef io::Reader<std::string> reader_u8;
 
 typedef io::Writer<wstring> wwriter;
 typedef io::Reader<wstring> wreader;
@@ -76,29 +66,29 @@ void charset_console_sample() throw(io::io_exception)
 	io::Console con(true);
 	con.setCharset(LOCALE_CH);
 	writer_u8 out(con.outChanell(), to_console_conv());
-	out.write("Hello! Привет! こんにちは! 您好！ \n");
+	out.write("Hello! Привет! Χαιρετίσματα! こんにちは! 您好！ \n\r");
 	out.write("If you can't see your language please change console font");
 }
 
 void pipe_write_routine(io::SWriteChannel sink) {
-	try {
-		static const char* msg = "Hello from Pipe!\n";
-		sink->write(io::byte_buffer::wrap_array(msg, std::strlen(msg)));
-	} catch(std::exception& exc) {
-		std::cerr<<exc.what()<<std::endl;
-	}
+	writer_u8 pout(sink, io::char_empty_converter());
+	pout.write("Hello from pipe!\n");
+	pout.write("\tПривет из канала!\n");
+	//pout.write("\tΧαιρετίσματα από το κανάλι!\n");
+	pout.write("\tGrüße aus dem Kanal!\n");
 }
 
 
 void pipe_sample()
 {
 	// pipe sample
-	io::SPipe pipe = io::create_pipe(17, io::PipeSinkRoutine(pipe_write_routine));
-	io::byte_buffer readbuf = io::byte_buffer::heap_buffer(17);
-	while( 0 < pipe->source()->read(readbuf) )
-	{
+	io::SPipe pipe = io::create_pipe(100, io::PipeSinkRoutine(pipe_write_routine));
+	io::byte_buffer readbuf = io::byte_buffer::heap_buffer(80);
+	io::Console con(true);
+	wwriter cwr(con.outChanell(), to_console_conv());
+	while( 0 < pipe->source()->read(readbuf) ) {
 		readbuf.flip();
-		std::cout<<readbuf.position().ptr();
+		cwr.write(readbuf);
 	}
 }
 
@@ -116,7 +106,7 @@ void file_sample() {
 	file.create();
 	auto fileChannel = file.openForWrite();
 	uint8_t bom[2] = {0xFF,0xFE};
-	io::byte_buffer buff = io::byte_buffer::wrap_array(bom,2);
+	const io::byte_buffer buff = io::byte_buffer::wrap_array(bom,2);
 	fileChannel->write(buff);
 	writer_u8 out(fileChannel, io::new_converter("UTF-8","UTF-16LE"));
 	out.write("ASCII     abcde xyz\n\rGerman  äöü ÄÖÜ ß\n\rPolish  ąęźżńł\n\rRussian  абвгдеж эюя\n\rCJK  你好\n\r");
@@ -129,10 +119,11 @@ void buffers_sample() {
 
 	byte_buffer result = byte_buffer::heap_buffer(15);
 
-	byte_buffer wrap = byte_buffer::wrap_array(hello, 6); //not wrap the 0 ending
+	const byte_buffer wrap = byte_buffer::wrap_array(hello, 6); //not wrap the 0 ending
 	byte_buffer deepCopy = byte_buffer::copy_array(world, 9); // copy 0 also
+	byte_buffer wrapDeepCopy(wrap);
 
-	result.put(wrap);
+	result.put(wrapDeepCopy);
 	result.put(deepCopy);
 	result.flip();
 
@@ -153,14 +144,13 @@ void network_client_sample() {
 	ip::tcp::resolver::query query("www.google.com", "80");
 	ip::tcp::resolver::iterator iter = resolver.resolve(query);
 	boost::asio::ip::tcp::endpoint ep = *iter;
-
-	std::cout<<"Connecting to:"<< ep.address().to_string() << ":" << ep.port() << "/" << ep.protocol().family() << std::endl;
-
 	service.run();
 
 	boost::shared_ptr<ip::tcp::socket> sock(new ip::tcp::socket(service) );
 	sock->open(ep.protocol());
 	sock->connect(ep);
+	std::cout<<"Connecting to:"<< ep.address().to_string() << ":" << ep.port() << "/" << ep.protocol().family() << std::endl;
+
 	io::net::STCPSocketCahnnel netCh( new io::net::TCPSocketChannel(sock) );
 
 	const char* REQ = "GET / HTTP/1.1\r\nHost:www.google.com\r\nAccept: */*\r\nUser-Agent:Channels C++ IO library\r\nAccept-Charset:ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\nPragma: no-cache\n\rCache-Control: no-cache\n\rConnection: close\r\n\r\n";
@@ -190,10 +180,10 @@ int _tmain(int argc, TCHAR *argv[])
 {
 	try {
 		//buffers_sample();
-		//charset_console_sample();
+		charset_console_sample();
 		//pipe_sample();
 		//file_sample();
-		network_client_sample();
+		//network_client_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}

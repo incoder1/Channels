@@ -201,8 +201,8 @@
 		</Unit>
 		<Unit filename="include/network.hpp" />
 		<Unit filename="include/pipe.hpp" />
-		<Unit filename="include/readwrite.hpp" />
 		<Unit filename="include/smallobjectpool.hpp" />
+		<Unit filename="include/text.hpp" />
 		<Unit filename="include/unixfile.hpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>

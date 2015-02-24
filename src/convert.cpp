@@ -142,9 +142,14 @@ const Charset* Charsets::forName(const char* name) BOOST_NOEXCEPT_OR_NOTHROW {
 		return instance()->find(name);
 }
 
-const Charset* Charsets::windowsUnicode() BOOST_NOEXCEPT_OR_NOTHROW {
+const Charset* Charsets::utf16le() BOOST_NOEXCEPT_OR_NOTHROW {
 	return &UTF_16LE;
 }
+
+const Charset* Charsets::utf8() BOOST_NOEXCEPT_OR_NOTHROW {
+	return &UTF_8;
+}
+
 // Converter
 Converter::~Converter() BOOST_NOEXCEPT_OR_NOTHROW
 {}

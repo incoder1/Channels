@@ -8,6 +8,9 @@
 #	include "winver.h"
 #endif // PLATFORM_WINDOWS
 
+#include <boost/config.hpp>
+#include <boost/system/error_code.hpp>
+
 #include <smallobjectpool.hpp>
 #include <bytebuffer.hpp>
 #include <channels.hpp>

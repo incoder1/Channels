@@ -1,6 +1,8 @@
 #ifndef CHANNELS_CONFIG_H_INCLUDED
 #define CHANNELS_CONFIG_H_INCLUDED4
 
+#include <boost/config.hpp>
+
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #	define MSVC_CL
 /*	Disable warnings:
@@ -42,6 +44,13 @@
 // UNIX(ELF32/64)
 #	define CHANNEL_PUBLIC
 #endif
+
+// Whether exception handling is disabled.
+#if !defined(CHANNELS_NO_EXCEPTIONS)
+# if defined(BOOST_ASIO_HAS_BOOST_CONFIG) && defined(BOOST_NO_EXCEPTIONS)
+#  define CHANNELS_NO_EXCEPTIONS 1
+# endif // !defined(BOOST_NO_EXCEPTIONS)
+#endif // !defined(CHANNELS_NO_EXCEPTIONS)
 
 
 #endif // CHANNELS_CONFIG_H_INCLUDED

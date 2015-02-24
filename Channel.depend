@@ -1,9 +1,9 @@
 # depslib dependency file v1.0
-1423064965 source:d:\cpp\channel\src\convert.cpp
+1424695733 source:d:\cpp\channel\src\convert.cpp
 	"prchdrs.h"
 	"convert.hpp"
 
-1423064972 d:\cpp\channel\include\convert.hpp
+1424712282 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<boost/unordered_map.hpp>
@@ -11,12 +11,13 @@
 	<stdexcept>
 	<cstring>
 
-1412765306 d:\cpp\channel\include\channels_config.h
+1424803180 d:\cpp\channel\include\channels_config.h
+	<boost/config.hpp>
 	<unistd.h>
 	<win32/winver.h>
 	<windows.h>
 
-1424115141 d:\cpp\channel\include\bytebuffer.hpp
+1424705300 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1349,7 +1350,7 @@
 1090718969 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1424174070 d:\cpp\channel\include\buffers.hpp
+1424704321 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5217,11 +5218,13 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1422546205 d:\cpp\channel\include\channels.hpp
-	<boost/config.hpp>
-	<stdexcept>
-	<boost/shared_ptr.hpp>
+1424804603 d:\cpp\channel\include\channels.hpp
 	<channels_config.h>
+	<stdexcept>
+	<boost/config.hpp>
+	<boost/system/error_code.hpp>
+	<boost/function.hpp>
+	<boost/shared_ptr.hpp>
 	<bytebuffer.hpp>
 
 1423675300 source:d:\cpp\channel\src\ibm_icu_conv.cpp
@@ -5556,7 +5559,7 @@
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1424178327 source:d:\cpp\channel\src\windowspipe.cpp
+1424798574 source:d:\cpp\channel\src\windowspipe.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	<boost/thread/scoped_thread.hpp>
@@ -7145,7 +7148,7 @@
 	"prchdrs.h"
 	"WindowsConsole.hpp"
 
-1424174792 d:\cpp\channel\include\windowsconsole.hpp
+1424695826 d:\cpp\channel\include\windowsconsole.hpp
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -7304,7 +7307,7 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1420462344 source:d:\cpp\channel\src\channels.cpp
+1424709125 source:d:\cpp\channel\src\channels.cpp
 	"prchdrs.h"
 	<channels.hpp>
 
@@ -7321,7 +7324,7 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1422990172 source:d:\cpp\channel\src\windowsfile.cpp
+1424804588 source:d:\cpp\channel\src\windowsfile.cpp
 	"prchdrs.h"
 	"WindowsFile.hpp"
 
@@ -7384,17 +7387,21 @@
 1406714635 source:d:\cpp\channel\src\prchdrs.cpp
 	"prchdrs.h"
 
-1406714936 d:\cpp\channel\src\prchdrs.h
+1424802887 d:\cpp\channel\src\prchdrs.h
 	<channels_config.h>
 	"winver.h"
+	<boost/config.hpp>
+	<boost/system/error_code.hpp>
 	<smallobjectpool.hpp>
 	<bytebuffer.hpp>
 	<channels.hpp>
 	"helpers.hpp"
 
-1406714936 source:d:\cpp\channel\src\prchdrs.h
+1424802887 source:d:\cpp\channel\src\prchdrs.h
 	<channels_config.h>
 	"winver.h"
+	<boost/config.hpp>
+	<boost/system/error_code.hpp>
 	<smallobjectpool.hpp>
 	<bytebuffer.hpp>
 	<channels.hpp>
@@ -7404,7 +7411,7 @@
 	<channels_config.h>
 	<boost/system/error_code.hpp>
 
-1409760889 d:\cpp\channel\include\smallobjectpool.hpp
+1424707636 d:\cpp\channel\include\smallobjectpool.hpp
 	<channels_config.h>
 	<stdexcept>
 	<cassert>
@@ -7415,7 +7422,7 @@
 	<boost/thread/mutex.hpp>
 	<boost/atomic.hpp>
 
-1424176624 source:d:\cpp\channel\src\smallobjectpool.cpp
+1424696543 source:d:\cpp\channel\src\smallobjectpool.cpp
 	"prchdrs.h"
 	"smallobjectpool.hpp"
 
@@ -7774,7 +7781,7 @@
 1236010936 d:\cpp\boost_1_54_0\boost\weak_ptr.hpp
 	<boost/smart_ptr/weak_ptr.hpp>
 
-1424194272 source:d:\cpp\channel\src\bytebuffer.cpp
+1424704366 source:d:\cpp\channel\src\bytebuffer.cpp
 	"prchdrs.h"
 	"bytebuffer.hpp"
 
@@ -21532,4 +21539,6 @@
 	<boost/thread/thread_only.hpp>
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
+
+1414767002 d:\cpp\boost_1_57_0\boost
 

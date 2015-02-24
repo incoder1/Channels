@@ -1,10 +1,10 @@
 # depslib dependency file v1.0
-1424284135 source:d:\cpp\channel\textdemo\main.cpp
+1424806125 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
 	<console.hpp>
-	<readwrite.hpp>
+	<text.hpp>
 	<pipe.hpp>
 	<network.hpp>
 	<boost/thread/thread.hpp>
@@ -15,12 +15,13 @@
 	<channels_config.h>
 	<WindowsConsole.hpp>
 
-1412765306 d:\cpp\channel\include\channels_config.h
+1424803180 d:\cpp\channel\include\channels_config.h
+	<boost/config.hpp>
 	<unistd.h>
 	<win32/winver.h>
 	<windows.h>
 
-1424174792 d:\cpp\channel\include\windowsconsole.hpp
+1424695826 d:\cpp\channel\include\windowsconsole.hpp
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -1415,7 +1416,7 @@
 	<boost/bind/arg.hpp>
 	<boost/config.hpp>
 
-1423064972 d:\cpp\channel\include\convert.hpp
+1424712282 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<boost/unordered_map.hpp>
@@ -1423,13 +1424,13 @@
 	<stdexcept>
 	<cstring>
 
-1424115141 d:\cpp\channel\include\bytebuffer.hpp
+1424705300 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
 	<buffers.hpp>
 
-1424174070 d:\cpp\channel\include\buffers.hpp
+1424704321 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5299,14 +5300,16 @@
 1404755863 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1422546205 d:\cpp\channel\include\channels.hpp
-	<boost/config.hpp>
-	<stdexcept>
-	<boost/shared_ptr.hpp>
+1424804603 d:\cpp\channel\include\channels.hpp
 	<channels_config.h>
+	<stdexcept>
+	<boost/config.hpp>
+	<boost/system/error_code.hpp>
+	<boost/function.hpp>
+	<boost/shared_ptr.hpp>
 	<bytebuffer.hpp>
 
-1409760889 d:\cpp\channel\include\smallobjectpool.hpp
+1424707636 d:\cpp\channel\include\smallobjectpool.hpp
 	<channels_config.h>
 	<stdexcept>
 	<cassert>
@@ -6303,7 +6306,7 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1424106447 d:\cpp\channel\include\readwrite.hpp
+1424705520 d:\cpp\channel\include\readwrite.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
@@ -16807,4 +16810,9 @@
 	<boost/asio/detail/throw_error.hpp>
 	<boost/asio/detail/push_options.hpp>
 	<boost/asio/detail/pop_options.hpp>
+
+1424712183 d:\cpp\channel\include\text.hpp
+	<stdexcept>
+	<convert.hpp>
+	<channels.hpp>
 

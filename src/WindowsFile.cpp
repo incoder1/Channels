@@ -92,7 +92,9 @@ std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 	                          vpos(buffer),
 	                          buffer.capacity(),
 	                          &result,NULL);
-	validate_io(succeeded,"Read file error.");
+	if(!succeeded && 0 != result) {
+		validate_io(succeeded,"Read file error.");
+	}
 	buffer.move(result);
 	return result;
 }
@@ -116,6 +118,7 @@ uint64_t FileChannel::seek(uint64_t offset, DWORD method) throw(io_exception)
 	validate_io(::SetFilePointerEx(id_, li, &li,method), "Can not move file pointer");
 	return static_cast<uint64_t>(li.QuadPart);
 }
+
 uint64_t FileChannel::position() {
 	return seek(0, FILE_CURRENT);
 }

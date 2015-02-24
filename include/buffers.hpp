@@ -169,7 +169,7 @@ public:
 	}
 
 	/**
-	 * Iterator to the last filled buffer element
+	 * Iterator iterator to the next element after the last inserted element
 	 * \return constant iterator to the last buffer element
 	 */
 	iterator last() {
@@ -178,13 +178,23 @@ public:
 
 
 	/**
-	 * Constant iterator after the last filled buffer element
+	 * Constant iterator to the next element after the last inserted element
 	 * \return constant iterator to the last buffer element
 	 */
 	const_iterator last() const {
 		return const_iterator(last_);
 	}
 
+	/**
+	 * Returns constant iterator on first memory element of this buffer
+	 */
+	const_iterator begin() const {
+		return const_iterator(data_.get());
+	}
+
+	/**
+	 * Returns constant iterator on element after last element of this buffer
+	 */
 	const_iterator end() const {
 		return const_iterator(end_);
 	}
@@ -203,7 +213,7 @@ public:
 	}
 
 	iterator put(iterator& first, iterator& last) {
-		std::ptrdiff_t size = std::ptrdiff_t(last - first);
+		std::ptrdiff_t size = std::ptrdiff_t( (--last) - first);
 		iterator pos = position();
 		std::ptrdiff_t offset = (pos + size) <= end() ? size : remain();
 		pos = std::copy(first, first+offset, pos);
@@ -245,7 +255,7 @@ public:
 	 * \return buffer length
 	 */
 	std::ptrdiff_t length() const {
-		return --last() - iterator(data_.get());
+		return (last_-1) - data_.get();
 	}
 
 	/**
@@ -254,6 +264,13 @@ public:
 	 */
 	std::ptrdiff_t capacity() const {
 		return end_ - data_.get();
+	}
+
+	void swap(basic_buffer& oth) {
+		data_.swap(oth.data_);
+		std::swap(position_,oth.position_);
+		std::swap(last_,oth.last_);
+		std::swap(end_,oth.end_);
 	}
 
 private:

@@ -93,7 +93,8 @@ public:
 		nameMap_.insert(std::make_pair(name,ptr));
 	}
 	static const Charset* forName(const char* name) BOOST_NOEXCEPT_OR_NOTHROW;
-	static const Charset* windowsUnicode() BOOST_NOEXCEPT_OR_NOTHROW;
+	static const Charset* utf16le() BOOST_NOEXCEPT_OR_NOTHROW;
+	static const Charset* utf8() BOOST_NOEXCEPT_OR_NOTHROW;
 private:
 	ctmap_t nameMap_;
 };
@@ -120,7 +121,7 @@ public:
  * ! \brief  Implementor of {@code Converter} should provide conversation from one character set into another
  */
 class CHANNEL_PUBLIC Converter {
-BOOST_COPYABLE_AND_MOVABLE(Converter)
+BOOST_MOVABLE_BUT_NOT_COPYABLE(Converter)
 protected:
 	Converter(const Charset* srcCt,const Charset* destCt) BOOST_NOEXCEPT_OR_NOTHROW:
 		srcCt_(srcCt),

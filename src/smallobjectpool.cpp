@@ -68,9 +68,9 @@ PrivateHeapAllocator* PrivateHeapAllocator::_instance = NULL;
 boost::once_flag PrivateHeapAllocator::_once  = BOOST_ONCE_INIT;
 
 typedef PrivateHeapAllocator heap_allocator;
-#else
+#else // PLATFORM_WINDOWS
 typedef boost::default_user_allocator_malloc_free heap_allocator;
-#endif // PLATFORM_WINDOWS
+#endif // Any Unix
 
 /// !\brief Small object memory allocation
 class SmallObjectAllocator:private boost::noncopyable {

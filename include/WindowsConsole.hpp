@@ -103,7 +103,7 @@ public:
 		cech_(cech(wide))
 	{
 		if(wide) {
-			setCharset(Charsets::windowsUnicode());
+			setCharset(Charsets::utf16le());
 		}
 	}
 	explicit Console():
@@ -112,7 +112,7 @@ public:
 		cech_(cech(WIDE_CONSOLE))
 	{
 		if(WIDE_CONSOLE) {
-			setCharset(Charsets::windowsUnicode());
+			setCharset(Charsets::utf16le());
 		}
 	}
 	Console(::HANDLE handle, bool wide):

@@ -29,7 +29,7 @@ WindowsPipe::WindowsPipe(PipeSinkRoutine routine,HANDLE sink,HANDLE source):
 }
 
 void WindowsPipe::write_routine(const PipeSinkRoutine routine, HANDLE hSink) {
-	routine(SWriteChannel(new FileChannel(hSink, false)));
+	routine(SWriteChannel(new FileChannel(hSink, true)));
 }
 
 WindowsPipe::~WindowsPipe() {

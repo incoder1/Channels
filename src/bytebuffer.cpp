@@ -5,7 +5,7 @@ namespace io {
 
 
 byte_buffer::byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp) BOOST_NOEXCEPT_OR_NOTHROW:
-basic_buffer<uint8_t>(data,endp)
+	basic_buffer<uint8_t>(data,endp)
 {}
 
 
@@ -16,7 +16,7 @@ byte_buffer::iterator byte_buffer::put(uint8_t e)
 
 byte_buffer::iterator byte_buffer::put(const byte_buffer& buff)
 {
-	return put(buff.position(), --buff.last());
+	return put(buff.position(), buff.last());
 }
 
 byte_buffer::iterator byte_buffer::put(uint8_t* const first, uint8_t* const last)
@@ -51,11 +51,12 @@ static void free_heap_block(uint8_t* block)
 byte_buffer byte_buffer::heap_buffer(const std::size_t capacity) throw(std::bad_alloc)
 {
 	uint8_t* start = new_heap_block(capacity);
-	boost::shared_array<uint8_t> data( start, free_heap_block );
-	return byte_buffer(data, start+capacity);
+	boost::shared_array<uint8_t> data(start, free_heap_block);
+	byte_buffer result(data, start+capacity);
+	return result;
 }
 
-byte_buffer byte_buffer::wrap_str(const char* str) BOOST_NOEXCEPT_OR_NOTHROW {
+const byte_buffer byte_buffer::wrap_str(const char* str) BOOST_NOEXCEPT_OR_NOTHROW {
 	uint8_t *begin = (uint8_t*)str;
 	std::size_t strlen = std::char_traits<char>::length(str);
 	boost::shared_array<uint8_t> data(begin, _private::empty_free() );
