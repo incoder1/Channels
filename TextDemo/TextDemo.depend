@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1424806125 source:d:\cpp\channel\textdemo\main.cpp
+1425489365 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -1416,7 +1416,7 @@
 	<boost/bind/arg.hpp>
 	<boost/config.hpp>
 
-1424712282 d:\cpp\channel\include\convert.hpp
+1425471142 d:\cpp\channel\include\convert.hpp
 	<channels_config.h>
 	<bytebuffer.hpp>
 	<boost/unordered_map.hpp>
@@ -1430,7 +1430,7 @@
 	<boost/function.hpp>
 	<buffers.hpp>
 
-1424704321 d:\cpp\channel\include\buffers.hpp
+1425488680 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5293,14 +5293,14 @@
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1422546777 d:\cpp\channel\include\windowsfile.hpp
+1425486331 d:\cpp\channel\include\windowsfile.hpp
 	"abstractfile.hpp"
 	"smallobjectpool.hpp"
 
 1404755863 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1424804603 d:\cpp\channel\include\channels.hpp
+1425487816 d:\cpp\channel\include\channels.hpp
 	<channels_config.h>
 	<stdexcept>
 	<boost/config.hpp>
@@ -13096,7 +13096,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1424282120 d:\cpp\channel\include\network.hpp
+1425410045 d:\cpp\channel\include\network.hpp
 	<smallobjectpool.hpp>
 	<channels.hpp>
 	<winsock2.h>
@@ -16811,7 +16811,7 @@
 	<boost/asio/detail/push_options.hpp>
 	<boost/asio/detail/pop_options.hpp>
 
-1424712183 d:\cpp\channel\include\text.hpp
+1425479598 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>

@@ -51,29 +51,30 @@ SReadChannel File::openForRead() throw(io_exception)
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	validate_file_handle(hFile);
-	return SReadChannel(new FileChannel(hFile, true));
+	return SReadChannel(new FileChannel(hFile, GENERIC_READ, true));
 }
 
 SWriteChannel  File::openForWrite() throw(io_exception)
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	validate_file_handle(hFile);
-	return SWriteChannel(new FileChannel(hFile, true));
+	return SWriteChannel(new FileChannel(hFile, GENERIC_WRITE, true));
 }
 
 SReadWriteChannel  File::openForReadWrite() throw(io_exception)
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_READ | GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, 0);
 	validate_file_handle(hFile);
-	return SReadWriteChannel(new FileChannel(hFile, true));
+	return SReadWriteChannel(new FileChannel(hFile, GENERIC_READ | GENERIC_WRITE, true));
 }
 
 
 // FileChannel
-FileChannel::FileChannel(HANDLE id, bool close) BOOST_NOEXCEPT_OR_NOTHROW:
+FileChannel::FileChannel(HANDLE id, DWORD desiredAccess, bool close) BOOST_NOEXCEPT_OR_NOTHROW:
 	ReadWriteChannel(),
 	SmallObject(),
 	id_(id),
+	desiredAccess_(desiredAccess),
 	close_(close)
 {
 }
@@ -91,11 +92,14 @@ std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 	BOOL succeeded = ::ReadFile(id_,
 	                          vpos(buffer),
 	                          buffer.capacity(),
-	                          &result,NULL);
-	if(!succeeded && 0 != result) {
+	                          &result,
+	                          NULL);
+	if(!succeeded && 0 != result ) {
 		validate_io(succeeded,"Read file error.");
 	}
-	buffer.move(result);
+	if(result > 0) {
+		buffer.move(result-1);
+	}
 	return result;
 }
 

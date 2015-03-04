@@ -104,12 +104,22 @@ void file_sample() {
 		}
 	}
 	file.create();
-	auto fileChannel = file.openForWrite();
-	uint8_t bom[2] = {0xFF,0xFE};
-	const io::byte_buffer buff = io::byte_buffer::wrap_array(bom,2);
-	fileChannel->write(buff);
-	writer_u8 out(fileChannel, io::new_converter("UTF-8","UTF-16LE"));
-	out.write("ASCII     abcde xyz\n\rGerman  äöü ÄÖÜ ß\n\rPolish  ąęźżńł\n\rRussian  абвгдеж эюя\n\rCJK  你好\n\r");
+	{
+		auto fileChannel = file.openForWrite();
+		uint8_t bom[2] = {0xFF,0xFE};
+		const io::byte_buffer buff = io::byte_buffer::wrap_array(bom,2);
+		fileChannel->write(buff);
+		writer_u8 out(fileChannel, io::new_converter("UTF-8","UTF-16LE"));
+		out.write("ASCII     abcde xyz\n\rGerman  äöü ÄÖÜ ß\n\rPolish  ąęźżńł\n\rRussian  абвгдежэюя\n\rCJK  你好\n\r");
+	}
+	auto in = file.openForRead();
+	Console con(true);
+	byte_buffer buff = byte_buffer::heap_buffer(128);
+	while(in->read(buff) > 0) {
+		buff.flip();
+		con.outChanell()->write(buff);
+		buff.clear();
+	}
 }
 
 void buffers_sample() {
@@ -153,7 +163,7 @@ void network_client_sample() {
 
 	io::net::STCPSocketCahnnel netCh( new io::net::TCPSocketChannel(sock) );
 
-	const char* REQ = "GET / HTTP/1.1\r\nHost:www.google.com\r\nAccept: */*\r\nUser-Agent:Channels C++ IO library\r\nAccept-Charset:ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\nPragma: no-cache\n\rCache-Control: no-cache\n\rConnection: close\r\n\r\n";
+	const char* REQ = "HEAD / HTTP/1.1\r\nHost:www.google.com\r\nAccept: */*\r\nUser-Agent:Channels C++ IO library\r\nAccept-Charset:ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\nPragma: no-cache\n\rCache-Control: no-cache\n\rConnection: close\r\n\r\n";
 	std::cout<<"REQUEST:"<<REQ<<std::endl<<std::endl;
 	netCh->write(io::byte_buffer::wrap_str(REQ));
 
@@ -180,9 +190,9 @@ int _tmain(int argc, TCHAR *argv[])
 {
 	try {
 		//buffers_sample();
-		charset_console_sample();
+		//charset_console_sample();
 		//pipe_sample();
-		//file_sample();
+		file_sample();
 		//network_client_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;

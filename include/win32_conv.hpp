@@ -59,7 +59,7 @@ class CHANNEL_PUBLIC Win32Converter : public virtual Converter, public virtual S
 public:
 	Win32Converter(PMLang engine,const Charset* srcCt,const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
 	~Win32Converter() BOOST_NOEXCEPT_OR_NOTHROW;
-	virtual void convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception);
+	virtual ssize_t convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception);
 private:
 	PMLang engine_;
 	const Charset* srcCt_;

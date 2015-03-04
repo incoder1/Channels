@@ -11,13 +11,18 @@
 				<Option object_output="obj/DebugMinGW32/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectLibDirsRelation="1" />
 				<Compiler>
-					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add option="-std=gnu++11" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 				</Compiler>
 				<Linker>
+					<Add library="Ws2_32" />
+					<Add library="boost_system-mt-d.dll" />
+					<Add library="boost_thread-mt-d.dll" />
 					<Add directory="../bin/DebugMinWG32" />
+					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
 				</Linker>
 			</Target>
 			<Target title="ReleaseMinGW32">
@@ -38,16 +43,20 @@
 			<Add option="-fexceptions" />
 			<Add directory="include" />
 			<Add directory="../include" />
-			<Add directory="../../boost_1_54_0" />
+			<Add directory="D:/cpp/boost_1_57_0" />
 		</Compiler>
 		<Linker>
 			<Add library="Channel" />
 		</Linker>
 		<Unit filename="include/cstax.hpp" />
+		<Unit filename="include/element.hpp" />
+		<Unit filename="include/event.hpp" />
+		<Unit filename="include/streamreader.hpp" />
+		<Unit filename="include/xmlgrammar.hpp" />
+		<Unit filename="include/xmlsource.hpp" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/cstax.cpp" />
-		<Unit filename="xmlsource.cpp" />
-		<Unit filename="xmlsource.hpp" />
+		<Unit filename="src/streamreader.cpp" />
+		<Unit filename="src/xmlsource.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -94,7 +94,7 @@ Win32Converter::Win32Converter(PMLang engine,const Charset* srcCt,const Charset*
 		engine_(engine)
 {}
 
-void Win32Converter::convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception)
+std::size_t Win32Converter::convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception)
 {
 	BYTE *srcptr = const_cast<BYTE*>(src.position().ptr());
 	BYTE *dstptr = const_cast<BYTE*>(dest.position().ptr());
@@ -105,6 +105,7 @@ void Win32Converter::convert(const byte_buffer& src, byte_buffer& dest) throw(ch
 	// calc size of char buffer, and move it
 	std::size_t offset = dest.capacity() - avail;
 	dest.move(0 != offset ? offset: dest.capacity() - 1);
+	return offset;
 }
 
 Win32Converter::~Win32Converter() BOOST_NOEXCEPT_OR_NOTHROW

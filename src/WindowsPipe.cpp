@@ -21,7 +21,7 @@ private:
 
 WindowsPipe::WindowsPipe(PipeSinkRoutine routine,HANDLE sink,HANDLE source):
 	 Pipe(routine),
-     source_(new FileChannel(source,true))
+     source_(new FileChannel(source,GENERIC_READ,true))
 {
 	boost::thread sinkThread(boost::bind(&WindowsPipe::write_routine, routine, sink));
 	boost::strict_scoped_thread<> s(boost::move(sinkThread));
@@ -29,7 +29,7 @@ WindowsPipe::WindowsPipe(PipeSinkRoutine routine,HANDLE sink,HANDLE source):
 }
 
 void WindowsPipe::write_routine(const PipeSinkRoutine routine, HANDLE hSink) {
-	routine(SWriteChannel(new FileChannel(hSink, true)));
+	routine(SWriteChannel(new FileChannel(hSink, GENERIC_WRITE, true)));
 }
 
 WindowsPipe::~WindowsPipe() {

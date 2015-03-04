@@ -153,7 +153,7 @@ public:
 	 * \throw charset_exception
 	 *			when conversation fails, the reason can be obtained by what method
 	 */
-	virtual void convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception) = 0;
+	virtual ssize_t convert(const byte_buffer& src, byte_buffer& dest) throw(charset_exception) = 0;
 
 	/**
 	 * Frees resources allocated by converter

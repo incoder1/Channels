@@ -29,6 +29,8 @@ namespace net {
 				size_t result = socket_->read_some(asio_buffer(buffer), boost::ref(error));
 				if( (error != boost::asio::error::eof) && error) {
 					boost::throw_exception(io_exception("Read socket error "+error.message()));
+				} else if(error == boost::asio::error::eof) {
+					return -1;
 				}
 				buffer.move(result);
 				return result;

@@ -30,7 +30,7 @@ public:
 	 * \param src source characters in their bytes sequence representation
 	 * \param dest destination characters in their character type representation
 	 */
-	virtual void convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);
+	virtual ssize_t convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);
 private:
 	boost::shared_ptr<void> conv_;
 };

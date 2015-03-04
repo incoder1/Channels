@@ -115,6 +115,7 @@ protected:
 public:
 	typedef buffer_iterator<T> iterator;
 	typedef const buffer_iterator<T> const_iterator;
+	typedef typename iterator::difference_type diff_t;
 public:
 
 	/**
@@ -133,13 +134,11 @@ public:
 	 */
 	iterator move(iterator position) {
 		position_ = position.ptr();
-		if(position_ > end_) {
+		if(position_ >= end_) {
 			position_ = end_-1;
 			last_ = end_;
 		} else {
-			if(position_ > last_) {
-				last_ = position_+1;
-			}
+			last_ = (position_ > last_) ? position_+1 : last_;
 		}
 		return iterator(position_);
 	}
@@ -213,11 +212,10 @@ public:
 	}
 
 	iterator put(iterator& first, iterator& last) {
-		std::ptrdiff_t size = std::ptrdiff_t( (--last) - first);
-		iterator pos = position();
-		std::ptrdiff_t offset = (pos + size) <= end() ? size : remain();
-		pos = std::copy(first, first+offset, pos);
-		return move(pos);
+		iterator dest = position();
+		iterator border =  ( (last - first) < remain() ) ? last : first + remain();
+		dest = std::copy(first, border, dest);
+		return move(dest);
 	}
 
 	iterator put(const_iterator& first,const_iterator& last) {
@@ -247,7 +245,7 @@ public:
 	}
 
 	bool full() const {
-		return last_ == end_;
+		return (position_+1) == end_;
 	}
 
 	/**
@@ -255,7 +253,7 @@ public:
 	 * \return buffer length
 	 */
 	std::ptrdiff_t length() const {
-		return (last_-1) - data_.get();
+		return last_ - data_.get();
 	}
 
 	/**
