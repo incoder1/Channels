@@ -13,11 +13,13 @@
 				<Option compiler="gcc" />
 				<Option projectLibDirsRelation="1" />
 				<Compiler>
+					<Add option="-pg" />
 					<Add option="-g" />
 					<Add option="-std=gnu++11" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 				</Compiler>
 				<Linker>
+					<Add option="-pg -lgmon" />
 					<Add library="Ws2_32" />
 					<Add library="boost_system-mt-d.dll" />
 					<Add library="boost_thread-mt-d.dll" />
@@ -32,9 +34,16 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-std=gnu++11" />
+					<Add option="-DCONV_ENGINE_ICONV" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add library="Ws2_32" />
+					<Add library="boost_system-mt.dll" />
+					<Add library="boost_thread-mt.dll" />
+					<Add directory="../bin/ReleaseMinGW32" />
+					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -51,11 +60,13 @@
 		<Unit filename="include/cstax.hpp" />
 		<Unit filename="include/element.hpp" />
 		<Unit filename="include/event.hpp" />
+		<Unit filename="include/qname.hpp" />
 		<Unit filename="include/streamreader.hpp" />
-		<Unit filename="include/xmlgrammar.hpp" />
 		<Unit filename="include/xmlsource.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/streamreader.cpp" />
+		<Unit filename="src/xmlgrammar.cpp" />
+		<Unit filename="src/xmlgrammar.hpp" />
 		<Unit filename="src/xmlsource.cpp" />
 		<Extensions>
 			<code_completion />

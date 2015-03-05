@@ -1,18 +1,30 @@
-#include "streamreader.hpp"
+#include <streamreader.hpp>
+#include "xmlgrammar.hpp"
 
 #include <iostream>
 
 namespace xml {
 
-static const uint8_t LEFTB = '<';
-static const uint8_t RIGHTB = '>';
-static const uint8_t QE = '?';
-static const uint8_t QT = '"';
-static const uint8_t EQ = '=';
-static const uint8_t SPACE = ' ';
-static const uint8_t TAB = '\t';
-static const uint8_t SCORE = '-';
+const uint8_t LEFTB = '<';
+const uint8_t RIGHTB = '>';
+const uint8_t QE = '?';
+const uint8_t QT = '"';
+const uint8_t EQ = '=';
+const uint8_t SPACE = ' ';
+const uint8_t TAB = '\t';
+const uint8_t SCORE = '-';
+const uint8_t SLASH = '/';
 
+namespace rxp = boost::xpressive;
+
+static std::string extract_doc_attr_val(const std::string &src, const rxp::sregex& exp) BOOST_NOEXCEPT_OR_NOTHROW {
+	rxp::smatch matcher;
+	std::string result;
+	if(rxp::regex_search(src.begin(), src.end(), matcher, exp, rxp::regex_constants::format_first_only)) {
+		result.append(matcher[2]);
+	}
+	return result;
+}
 
 //StreamReader
 
@@ -67,9 +79,16 @@ SEvent StreamReader::parseStartDocument() {
 		}
 		nextByte = src_.nextByte();
 	}
-	std::string version(spec.begin(),spec.end());
-	return boost::shared_ptr<DocumentEvent>(new DocumentEvent(version,""));
+	if(rxp::regex_match(spec.begin(),spec.end(),grm::xml_document_exp())) {
+		std::string version = extract_doc_attr_val(spec,grm::doc_ver_exp());
+		std::string encoding = extract_doc_attr_val(spec,grm::doc_encd_exp());
+		std::string stanaloneV = extract_doc_attr_val(spec,grm::doc_stendalone_exp());
+		bool stanalone = !stanaloneV.empty() && rxp::regex_match(stanaloneV,grm::true_exp());
+		return boost::shared_ptr<DocumentEvent>(new DocumentEvent(version,encoding,stanalone));
+	}
+	return SEvent((Event*)NULL);
 }
+
 
 std::string getElementText() throw(xml_stream_error)
 {

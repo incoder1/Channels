@@ -29,8 +29,9 @@ SConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(cha
 
 // IconvConverter
 IconvConverter::IconvConverter(iconv_t conv, const Charset* srcCt, const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW:
-		  Converter(srcCt,dstCt),
-		  conv_(conv,::iconv_close)
+	Converter(srcCt,dstCt),
+	SmallObject(),
+	conv_(conv,::iconv_close)
 {}
 
 ssize_t IconvConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception)

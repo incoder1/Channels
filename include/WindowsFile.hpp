@@ -2,7 +2,7 @@
 #define WINDOWSFILE_HPP_INCLUDED
 
 #include "abstractfile.hpp"
-#include "smallobjectpool.hpp"
+#include "smallobject.hpp"
 
 namespace io {
 

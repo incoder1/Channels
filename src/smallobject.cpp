@@ -1,5 +1,5 @@
 #include "prchdrs.h"
-#include "smallobjectpool.hpp"
+#include "smallobject.hpp"
 
 #ifdef PLATFORM_WINDOWS
 #	ifndef HEAP_CREATE_ENABLE_EXECUTE
@@ -11,7 +11,7 @@ namespace io {
 
 namespace mmt {
 
-static const std::size_t SMALL_OBJECT_LIMIT = 512;
+static const std::size_t SMALL_OBJECT_LIMIT = 128;
 
 #ifdef PLATFORM_WINDOWS
 class PrivateHeapAllocator {
@@ -169,6 +169,9 @@ boost::once_flag SmallObjectAllocator::_once = BOOST_ONCE_INIT;
 } // namesapace mmg
 
 // Small Object
+SmallObject::SmallObject() BOOST_NOEXCEPT_OR_NOTHROW
+{}
+
 SmallObject::~SmallObject() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
@@ -182,4 +185,4 @@ void SmallObject::operator delete(void* ptr, std::size_t size) BOOST_NOEXCEPT_OR
 	io::mmt::SmallObjectAllocator::instance()->free(ptr,size);
 }
 
-}
+} // namespace io

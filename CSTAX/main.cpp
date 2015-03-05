@@ -17,7 +17,7 @@ int main(int argc,const char **argv) {
 		switch( event->type() ) {
 		case START_DOCUMENT:
 			SDocumentEvent ev = boost::static_pointer_cast<DocumentEvent,Event>(event);
-			std::cout<<ev->version()<<std::endl;
+			std::cout<<"version:"<<ev->version()<<" encoding:"<<ev->encoding()<<" standalone:"<<ev->isStandalone()<<std::endl;
 			return 0;
 		}
 	}

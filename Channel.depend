@@ -17,7 +17,7 @@
 	<win32/winver.h>
 	<windows.h>
 
-1424705300 d:\cpp\channel\include\bytebuffer.hpp
+1425490499 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -5566,7 +5566,7 @@
 	<pipe.hpp>
 	<WindowsFile.hpp>
 
-1422458769 d:\cpp\channel\include\pipe.hpp
+1425564142 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -7122,18 +7122,18 @@
 
 1365979818 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
 
-1425487483 source:d:\cpp\channel\src\iconv_conv.cpp
+1425564734 source:d:\cpp\channel\src\iconv_conv.cpp
 	"prchdrs.h"
 	"iconv_conv.hpp"
 
-1425471332 d:\cpp\channel\include\iconv_conv.hpp
+1425563433 d:\cpp\channel\include\iconv_conv.hpp
 	<string>
 	<cstring>
 	<cerrno>
 	<cstdio>
 	<convert.hpp>
 	<iconv.h>
-	<smallobjectpool.hpp>
+	<smallobject.hpp>
 
 1372789265 c:\mingw\msys\1.0\local\include\iconv.h
 	"iconv.h"
@@ -7144,7 +7144,7 @@
 	<time.h>
 	<wchar.h>
 
-1424174648 source:d:\cpp\channel\src\windowsconsole.cpp
+1425564253 source:d:\cpp\channel\src\windowsconsole.cpp
 	"prchdrs.h"
 	"WindowsConsole.hpp"
 
@@ -7311,9 +7311,9 @@
 	"prchdrs.h"
 	<channels.hpp>
 
-1425486331 d:\cpp\channel\include\windowsfile.hpp
+1425563441 d:\cpp\channel\include\windowsfile.hpp
 	"abstractfile.hpp"
-	"smallobjectpool.hpp"
+	"smallobject.hpp"
 
 1404755863 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
@@ -7324,7 +7324,7 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1425488770 source:d:\cpp\channel\src\windowsfile.cpp
+1425489660 source:d:\cpp\channel\src\windowsfile.cpp
 	"prchdrs.h"
 	"WindowsFile.hpp"
 
@@ -7387,22 +7387,22 @@
 1406714635 source:d:\cpp\channel\src\prchdrs.cpp
 	"prchdrs.h"
 
-1424802887 d:\cpp\channel\src\prchdrs.h
+1425563416 d:\cpp\channel\src\prchdrs.h
 	<channels_config.h>
 	"winver.h"
 	<boost/config.hpp>
 	<boost/system/error_code.hpp>
-	<smallobjectpool.hpp>
+	<smallobject.hpp>
 	<bytebuffer.hpp>
 	<channels.hpp>
 	"helpers.hpp"
 
-1424802887 source:d:\cpp\channel\src\prchdrs.h
+1425563416 source:d:\cpp\channel\src\prchdrs.h
 	<channels_config.h>
 	"winver.h"
 	<boost/config.hpp>
 	<boost/system/error_code.hpp>
-	<smallobjectpool.hpp>
+	<smallobject.hpp>
 	<bytebuffer.hpp>
 	<channels.hpp>
 	"helpers.hpp"
@@ -21541,4 +21541,19 @@
 	<boost/config/abi_suffix.hpp>
 
 1414767002 d:\cpp\boost_1_57_0\boost
+
+1425564598 d:\cpp\channel\include\smallobject.hpp
+	<channels_config.h>
+	<stdexcept>
+	<cassert>
+	<boost/throw_exception.hpp>
+	<boost/pool/pool.hpp>
+	<boost/unordered_map.hpp>
+	<boost/thread/once.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/atomic.hpp>
+
+1425564573 source:d:\cpp\channel\src\smallobject.cpp
+	"prchdrs.h"
+	"smallobject.hpp"
 

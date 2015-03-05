@@ -32,6 +32,7 @@ class CHANNEL_PUBLIC Pipe:public SmallObject {
 BOOST_MOVABLE_BUT_NOT_COPYABLE(Pipe)
 protected:
 	Pipe(PipeSinkRoutine routine) BOOST_NOEXCEPT_OR_NOTHROW:
+		SmallObject(),
 		sinkRoutine_(routine)
 	{}
 	inline PipeSinkRoutine sinkRoutine() const {

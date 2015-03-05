@@ -42,25 +42,19 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="-std=c++11" />
 					<Add option="-fexceptions" />
-					<Add option="-fno-rtti" />
-					<Add option="-msse" />
-					<Add option="-msse2" />
-					<Add option="-msse3" />
-					<Add option="-mssse3" />
-					<Add option="-mmmx" />
-					<Add option="-m3dnow" />
+					<Add option="-std=gnu++11" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
-					<Add directory="C:/MinGW/msys/1.0/local/include" />
+					<Add directory="C:/MinGW/msys/1.0/include" />
 				</Compiler>
 				<Linker>
 					<Add library="iconv.dll" />
-					<Add library="boost_system-mgw47-mt-1_54.dll" />
-					<Add library="boost_thread-mgw47-mt-1_54.dll" />
-					<Add directory="C:/MinGW/msys/1.0/local/lib" />
-					<Add directory="../boost_1_54_0/stage/gcc/lib" />
+					<Add library="Ws2_32" />
+					<Add library="boost_system-mt.dll" />
+					<Add library="boost_thread-mt.dll" />
+					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
+					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/lib64" />
 				</Linker>
 			</Target>
 			<Target title="ReleaseMSVC10">
@@ -201,7 +195,7 @@
 		</Unit>
 		<Unit filename="include/network.hpp" />
 		<Unit filename="include/pipe.hpp" />
-		<Unit filename="include/smallobjectpool.hpp" />
+		<Unit filename="include/smallobject.hpp" />
 		<Unit filename="include/text.hpp" />
 		<Unit filename="include/unixfile.hpp">
 			<Option target="LinuxGCCDebug" />
@@ -264,7 +258,7 @@
 			<Option weight="0" />
 			<Option compiler="msvc10" use="0" buildCommand="$compiler /nologo $options $includes /c $file /Yc$objects_output_dir\prchrd.pch" />
 		</Unit>
-		<Unit filename="src/smallobjectpool.cpp" />
+		<Unit filename="src/smallobject.cpp" />
 		<Unit filename="src/unixfile.cpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>

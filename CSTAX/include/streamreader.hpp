@@ -2,10 +2,12 @@
 #define STREAMREADER_HPP_INCUDED
 
 #include <stdexcept>
+
+#include <boost/core/ref.hpp>
+
 #include <event.hpp>
 #include <xmlsource.hpp>
 
-#include <boost/core/ref.hpp>
 
 namespace xml {
 

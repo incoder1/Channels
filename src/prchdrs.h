@@ -11,7 +11,7 @@
 #include <boost/config.hpp>
 #include <boost/system/error_code.hpp>
 
-#include <smallobjectpool.hpp>
+#include <smallobject.hpp>
 #include <bytebuffer.hpp>
 #include <channels.hpp>
 

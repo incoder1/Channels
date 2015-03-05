@@ -9,7 +9,7 @@
 #include <convert.hpp>
 #include <iconv.h>
 
-#include <smallobjectpool.hpp>
+#include <smallobject.hpp>
 
 namespace io {
 

@@ -62,4 +62,4 @@ Source Source::create(io::SReadChannel src, const char* inputChaset) {
 	return Source(src,conv,read,cnvb);
 }
 
-}
+} // namespace xml
