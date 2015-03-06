@@ -9080,10 +9080,10 @@
 	<boost/functional/hash_fwd.hpp>
 	<boost/unordered/detail/fwd.hpp>
 
-1425554692 d:\cpp\channel\cstax\include\xmlsource.hpp
+1425656200 d:\cpp\channel\cstax\include\xmlsource.hpp
 	<text.hpp>
 
-1425554617 source:d:\cpp\channel\cstax\src\xmlsource.cpp
+1425656837 source:d:\cpp\channel\cstax\src\xmlsource.cpp
 	"xmlsource.hpp"
 	<console.hpp>
 
@@ -9107,12 +9107,12 @@
 	<event.hpp>
 	<xmlsource.hpp>
 
-1425564871 d:\cpp\channel\cstax\include\event.hpp
+1425657321 d:\cpp\channel\cstax\include\event.hpp
 	<smallobject.hpp>
 	<boost/enable_shared_from_this.hpp>
 	<element.hpp>
 
-1425406079 d:\cpp\channel\cstax\include\element.hpp
+1425657188 d:\cpp\channel\cstax\include\element.hpp
 	<boost/move/move.hpp>
 
 1425585937 source:d:\cpp\channel\cstax\src\streamreader.cpp
@@ -16294,7 +16294,7 @@
 	<boost/xpressive/xpressive.hpp>
 	<boost/xpressive/regex_algorithms.hpp>
 
-1425585701 source:d:\cpp\channel\cstax\src\xmlgrammar.cpp
+1425586875 source:d:\cpp\channel\cstax\src\xmlgrammar.cpp
 	"xmlgrammar.hpp"
 
 1425564598 d:\cpp\channel\include\smallobject.hpp

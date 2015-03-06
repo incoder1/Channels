@@ -40,6 +40,7 @@ private:
 typedef boost::shared_ptr<Event> SEvent;
 
 class DocumentEvent:public Event {
+BOOST_MOVABLE_BUT_NOT_COPYABLE(DocumentEvent)
 public:
 	DocumentEvent(const std::string& version, const std::string& encoding, bool standalone) BOOST_NOEXCEPT_OR_NOTHROW:
 		Event(START_DOCUMENT),
@@ -65,21 +66,22 @@ private:
 typedef boost::shared_ptr<DocumentEvent> SDocumentEvent;
 
 class ElementEvent:public Event {
+BOOST_MOVABLE_BUT_NOT_COPYABLE(ElementEvent)
 public:
-	ElementEvent(EvenType type, const char* uri, const char* localName) BOOST_NOEXCEPT_OR_NOTHROW:
+	ElementEvent(EvenType type, const std::string& uri, const std::string& localName) BOOST_NOEXCEPT_OR_NOTHROW:
 		Event(type),
 		uri_(uri),
 		localName_(localName)
 	{}
-	inline const char* uri() const {
+	inline std::string uri() const {
 		return uri_;
 	}
-	inline const char* localName() const {
+	inline std::string localName() const {
 		return localName_;
 	}
 private:
-	const char *uri_;
-	const char *localName_;
+	const std::string uri_;
+	const std::string localName_;
 };
 
 class AttributeEvent:public Event {
@@ -95,17 +97,11 @@ public:
 	}
 };
 
-class CharactersEvnet:public Event {
+class CharactersEvent:public Event {
 public:
-	CharactersEvnet(const char* characters) BOOST_NOEXCEPT_OR_NOTHROW:
-		Event(CHARACTERS),
-		characters_(characters)
+	CharactersEvent() BOOST_NOEXCEPT_OR_NOTHROW:
+		Event(CHARACTERS)
 	{}
-	inline const char* characters() {
-		return characters_;
-	}
-private:
-	const char* characters_;
 };
 
 } // xmlevent

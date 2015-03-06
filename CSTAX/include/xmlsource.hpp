@@ -22,7 +22,6 @@ class Source
 		io::SReadChannel src_;
 		io::byte_buffer readBuff_;
 		io::byte_buffer convBuff_;
-		io::SWriteChannel dbg;
 };
 
 

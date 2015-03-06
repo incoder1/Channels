@@ -12,10 +12,7 @@ Source::Source(SReadChannel source, SConverter charsetConverter,const byte_buffe
 	converter_(charsetConverter),
 	readBuff_(readBuff),
 	convBuff_(convBuff)
-{
-	io::Console con(true);
-	dbg = con.outChanell();
-}
+{}
 
 
 std::size_t Source::readMore() {
@@ -29,12 +26,14 @@ std::size_t Source::readMore() {
 	return result;
 }
 
+static inline bool need_more_data(const byte_buffer& buff) {
+	return buff.empty() || (buff.position()+1 == buff.end());
+}
+
 bool Source::hasNext() {
-	if(convBuff_.empty() || convBuff_.position()+1 == convBuff_.end() ) {
-		return readMore() > 0;
-	} else {
-		return true;
-	}
+	bool result = need_more_data(convBuff_);
+	result = result ? readMore() > 0 : !result;
+	return result;
 }
 
 uint8_t Source::nextByte() {
