@@ -1,7 +1,7 @@
 #ifndef CHANNELS_NETWORK_HPP_INCLUDED
 #define CHANNELS_NETWORK_HPP_INCLUDED
 
-#include <smallobjectpool.hpp>
+#include <smallobject.hpp>
 #include <channels.hpp>
 
 #if  defined(__MINGW32__) && !defined(__MINGW64__)

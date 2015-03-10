@@ -11,7 +11,6 @@
 #include <boost/thread/once.hpp>
 #include <boost/thread/mutex.hpp>
 
-#include <boost/atomic.hpp>
 
 namespace io {
 

@@ -23,7 +23,7 @@
 #	endif
 #endif
 
-#if defined(__unix__)
+#if defined(__unix__) || defined(__linux__)
 #	define PLATFORM_UNIX 1
 #	include <unistd.h>
 #endif
@@ -52,5 +52,33 @@
 # endif // !defined(BOOST_NO_EXCEPTIONS)
 #endif // !defined(CHANNELS_NO_EXCEPTIONS)
 
+
+
+#if defined(__GNUC__) && ((__GNUC__ == 4 && __GNUC_MINOR__ >= 6) || (__GNUC__ >= 5))
+# define HACK_GCC_ITS_CPP0X 1
+#endif
+
+#if ((BOOST_VERSION / 100) % 1000) > 55
+#   include <boost/atomic.hpp>
+#else
+#   define OLD_BOOST
+#endif // NO Atomic
+
+#ifdef OLD_BOOST
+
+#define BOOST_MOVABLE_BUT_NOT_COPYABLE(TYPE)\
+private:\
+   TYPE(TYPE &);\
+   TYPE& operator=(TYPE &);\
+public:\
+   operator const TYPE&() \
+      {  return *static_cast< const TYPE* >(this);  }\
+    operator const TYPE& () const \
+      {  return *static_cast<const TYPE* >(this);  } \
+private:
+
+#define BOOST_NOEXCEPT_OR_NOTHROW throw()
+
+#endif // OLD_BOOST
 
 #endif // CHANNELS_CONFIG_H_INCLUDED

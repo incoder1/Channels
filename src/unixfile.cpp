@@ -36,14 +36,14 @@ SWriteChannel File::openForWrite() throw(io_exception)
 {
 	int fd = ::open(path_, O_APPEND | O_SYNC, O_WRONLY);
 	validate_io(fd, "Can not open file");
-	return SReadChannel(new FileChannel(fd));
+	return SWriteChannel(new FileChannel(fd));
 }
 
 SReadWriteChannel File::openForReadWrite() throw(io_exception)
 {
 	int fd = ::open(path_, O_APPEND | O_SYNC, O_RDWR);
 	validate_io(fd, "Can not open file");
-	return SReadChannel(new FileChannel(fd));
+	return SReadWriteChannel(new FileChannel(fd));
 }
 
 // FileChannel
@@ -76,32 +76,32 @@ static bool determ_endian() {
 	return *(char *)&num == 1;
 }
 
-uint64_t FileChannel::seek(std::size_t offset, int whence) throw(io_exception)
+std::size_t FileChannel::seek(std::size_t offset, int whence) throw(io_exception)
 {
 	off_t res = ::lseek(file_, offset, whence);
-	validate_io(static_cast<ssize_t>(result), "Move file pointer error");
-	return result;
+	validate_io(static_cast<ssize_t>(res) > 0, "Move file pointer error");
+	return static_cast<std::size_t>(res);
 }
 
-uint64_t FileChannel::position() {
+std::size_t FileChannel::position() {
 	return seek(0,SEEK_CUR);
 }
 
-uint64_t FileChannel::forward(uint64_t offset) throw (io_exception)
+std::size_t FileChannel::forward(uint64_t offset) throw (io_exception)
 {
 	return seek(offset,SEEK_CUR);
 }
 
-uint64_t FileChannel::backward(uint64_t offset) throw (io_exception)
+std::size_t FileChannel::backward(uint64_t offset) throw (io_exception)
 {
 	return seek(-((off_t)offset),SEEK_CUR);
 }
 
-uint64_t FileChannel::fromBegin(uint64_t offset) throw (io_exception) {
+std::size_t FileChannel::fromBegin(uint64_t offset) throw (io_exception) {
 	return seek(offset,SEEK_SET);
 }
 
-uint64_t FileChannel::fromEnd(uint64_t offset) throw (io_exception) {
+std::size_t FileChannel::fromEnd(uint64_t offset) throw (io_exception) {
 	return seek(-((off_t)offset),SEEK_END);
 }
 

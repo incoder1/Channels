@@ -62,8 +62,8 @@ inline void validate_io(ssize_t res, const char* msg) {
 	if(-1 == res) {
 		boost::system::error_code ec;
 		std::string smsg(msg);
-		smgs.append("");
-		smgs.append(ec.category().what());
+		smsg.append(" ");
+		smsg.append(ec.message());
 		boost::throw_exception(io_exception(smsg));
 	}
 }
