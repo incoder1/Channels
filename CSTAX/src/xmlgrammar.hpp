@@ -35,11 +35,22 @@ static inline const boost::xpressive::sregex xml_document_exp() {
 
 private:
 
+// yes or true
+static const boost::xpressive::sregex TRUE_EXP;
+
+// start document
 static const boost::xpressive::sregex START_DOCUMENT_EXP;
 static const boost::xpressive::sregex DOCUMENT_VERSION_EXP;
 static const boost::xpressive::sregex DOCUMENT_ENCODING_EXP;
 static const boost::xpressive::sregex DOCUMENT_STENDALONE_EXP;
-static const boost::xpressive::sregex TRUE_EXP;
+
+// processing instruction
+static const boost::xpressive::sregex INSTRUCTION_TYPE_EXP;
+static const boost::xpressive::sregex INSTRUCTION_HREF_EXP;
+
+// element
+static const boost::xpressive::sregex ELEMENT_NAME_EXP;
+static const boost::xpressive::sregex ATTRIBUTE_EXP;
 
 }; // struct grm
 

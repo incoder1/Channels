@@ -52,11 +52,11 @@ BOOST_MOVABLE_BUT_NOT_COPYABLE(ReadWriteChannel)
 protected:
 	ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 public:
-	virtual uint64_t position() = 0;
-	virtual uint64_t forward(uint64_t offset) throw (io_exception) = 0;
-	virtual uint64_t backward(uint64_t offset) throw (io_exception) = 0;
-	virtual uint64_t fromBegin(uint64_t offset) throw (io_exception) = 0;
-	virtual uint64_t fromEnd(uint64_t offset) throw (io_exception) = 0;
+	virtual std::size_t position() = 0;
+	virtual std::size_t forward(std::size_t offset) throw (io_exception) = 0;
+	virtual std::size_t backward(std::size_t offset) throw (io_exception) = 0;
+	virtual std::size_t fromBegin(std::size_t offset) throw (io_exception) = 0;
+	virtual std::size_t fromEnd(std::size_t offset) throw (io_exception) = 0;
 	virtual ~ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
 
@@ -68,7 +68,6 @@ public:
 	typedef boost::function<void(boost::system::error_code&,std::size_t,const byte_buffer)> read_callback;
 	AsynchReadChannel(const read_callback& callback,byte_buffer& buff) BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual ~AsynchReadChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
-	virtual void open(boost::system::error_code& err) BOOST_NOEXCEPT_OR_NOTHROW = 0;
 protected:
 	inline byte_buffer buffer() const {
 		return buffer_;

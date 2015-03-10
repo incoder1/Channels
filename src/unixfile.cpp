@@ -71,11 +71,38 @@ std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 	return result;
 }
 
-void FileChannel::seek(std::size_t offset, MoveMethod method) throw(io_exception)
+static bool determ_endian() {
+	short num = 1;
+	return *(char *)&num == 1;
+}
+
+uint64_t FileChannel::seek(std::size_t offset, int whence) throw(io_exception)
 {
-	off_t res = ::lseek(file_, offset, method);
+	off_t res = ::lseek(file_, offset, whence);
 	validate_io(static_cast<ssize_t>(result), "Move file pointer error");
 	return result;
+}
+
+uint64_t FileChannel::position() {
+	return seek(0,SEEK_CUR);
+}
+
+uint64_t FileChannel::forward(uint64_t offset) throw (io_exception)
+{
+	return seek(offset,SEEK_CUR);
+}
+
+uint64_t FileChannel::backward(uint64_t offset) throw (io_exception)
+{
+	return seek(-((off_t)offset),SEEK_CUR);
+}
+
+uint64_t FileChannel::fromBegin(uint64_t offset) throw (io_exception) {
+	return seek(offset,SEEK_SET);
+}
+
+uint64_t FileChannel::fromEnd(uint64_t offset) throw (io_exception) {
+	return seek(-((off_t)offset),SEEK_END);
 }
 
 

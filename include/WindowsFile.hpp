@@ -17,16 +17,18 @@ public:
 	virtual ~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
 	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
-	virtual uint64_t position();
-	virtual uint64_t forward(uint64_t offset) throw (io_exception);
-	virtual uint64_t backward(uint64_t offset) throw (io_exception);
-	virtual uint64_t fromBegin(uint64_t offset) throw (io_exception);
-	virtual uint64_t fromEnd(uint64_t offset) throw (io_exception);
+	virtual std::size_t position();
+	virtual std::size_t forward(std::size_t offset) throw (io_exception);
+	virtual std::size_t backward(std::size_t offset) throw (io_exception);
+	virtual std::size_t fromBegin(std::size_t offset) throw (io_exception);
+	virtual std::size_t fromEnd(std::size_t offset) throw (io_exception);
 private:
 	HANDLE id_;
 	DWORD desiredAccess_;
 	const bool close_;
 };
+
+// AssychReadFileChannel
 
 } // namespace io
 

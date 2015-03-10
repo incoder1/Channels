@@ -115,36 +115,38 @@ std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
 	return result;
 }
 
-uint64_t FileChannel::seek(uint64_t offset, DWORD method) throw(io_exception)
+std::size_t FileChannel::seek(std::size_t offset, DWORD whence) throw(io_exception)
 {
 	::LARGE_INTEGER li;
 	li.QuadPart = static_cast<LONG>(offset);
-	validate_io(::SetFilePointerEx(id_, li, &li,method), "Can not move file pointer");
-	return static_cast<uint64_t>(li.QuadPart);
+	validate_io(::SetFilePointerEx(id_, li, &li,whence), "Can not move file pointer");
+	return static_cast<std::size_t>(li.QuadPart);
 }
 
-uint64_t FileChannel::position() {
+std::size_t FileChannel::position() {
 	return seek(0, FILE_CURRENT);
 }
 
-uint64_t FileChannel::forward(uint64_t offset) throw (io_exception) {
+std::size_t FileChannel::forward(std::size_t offset) throw (io_exception) {
 	return seek(offset, FILE_CURRENT);
 }
 
-uint64_t FileChannel::backward(uint64_t offset) throw (io_exception)
+std::size_t FileChannel::backward(std::size_t offset) throw (io_exception)
 {
-	int64_t step = static_cast<int64_t>(offset);
+	ssize_t step = static_cast<std::size_t>(offset);
 	return seek(-step, FILE_CURRENT);
 }
 
-uint64_t FileChannel::fromBegin(uint64_t offset) throw (io_exception) {
+std::size_t FileChannel::fromBegin(std::size_t offset) throw (io_exception) {
 	return seek(offset, FILE_BEGIN);
 }
 
-uint64_t FileChannel::fromEnd(uint64_t offset) throw (io_exception) {
-	int64_t step = static_cast<int64_t>(offset);
+std::size_t FileChannel::fromEnd(std::size_t offset) throw (io_exception) {
+	ssize_t step = static_cast<ssize_t>(offset);
 	return seek(-step, FILE_END);
 }
+
+// AsychReadFileChannel
 
 } // namespace io
 

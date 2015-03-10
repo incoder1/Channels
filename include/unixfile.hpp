@@ -18,7 +18,13 @@ public:
 	virtual ~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
 	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
-	virtual void seek(std::size_t offset, MoveMethod method) throw(io_exception);
+	virtual std::size_t position();
+	virtual std::size_t forward(uint64_t offset) throw (io_exception);
+	virtual std::size_t backward(uint64_t offset) throw (io_exception);
+	virtual std::size_t fromBegin(uint64_t offset) throw (io_exception);
+	virtual std::size_t fromEnd(uint64_t offset) throw (io_exception);
+private:
+	std::size_t seek(std::size_t,int) throw(io_exception);
 private:
 	int file_;
 };
