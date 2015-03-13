@@ -189,10 +189,10 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	try {
-		//buffers_sample();
+		buffers_sample();
 		//charset_console_sample();
 		//pipe_sample();
-		file_sample();
+		//file_sample();
 		//network_client_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;

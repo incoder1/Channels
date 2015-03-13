@@ -11,6 +11,8 @@
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
 
+#include <boost/move/move.hpp>
+
 #include <bytebuffer.hpp>
 
 namespace io {

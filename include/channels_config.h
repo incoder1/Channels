@@ -1,7 +1,13 @@
 #ifndef CHANNELS_CONFIG_H_INCLUDED
 #define CHANNELS_CONFIG_H_INCLUDED4
 
+#if __cplusplus < 201103 // Check CPP 03
+#	error "This library needs at least CPP 03 standard compiller"
+#endif  // Check CPP 03
+
 #include <boost/config.hpp>
+#include <boost/move/move.hpp>
+
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #	define MSVC_CL
@@ -51,34 +57,5 @@
 #  define CHANNELS_NO_EXCEPTIONS 1
 # endif // !defined(BOOST_NO_EXCEPTIONS)
 #endif // !defined(CHANNELS_NO_EXCEPTIONS)
-
-
-
-#if defined(__GNUC__) && ((__GNUC__ == 4 && __GNUC_MINOR__ >= 6) || (__GNUC__ >= 5))
-# define HACK_GCC_ITS_CPP0X 1
-#endif
-
-#if ((BOOST_VERSION / 100) % 1000) > 55
-#   include <boost/atomic.hpp>
-#else
-#   define OLD_BOOST
-#endif // NO Atomic
-
-#ifdef OLD_BOOST
-
-#define BOOST_MOVABLE_BUT_NOT_COPYABLE(TYPE)\
-private:\
-   TYPE(TYPE &);\
-   TYPE& operator=(TYPE &);\
-public:\
-   operator const TYPE&() \
-      {  return *static_cast< const TYPE* >(this);  }\
-    operator const TYPE& () const \
-      {  return *static_cast<const TYPE* >(this);  } \
-private:
-
-#define BOOST_NOEXCEPT_OR_NOTHROW throw()
-
-#endif // OLD_BOOST
 
 #endif // CHANNELS_CONFIG_H_INCLUDED

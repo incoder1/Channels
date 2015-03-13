@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1425559939 source:d:\cpp\channel\cstax\main.cpp
+1426077627 source:d:\cpp\channel\cstax\main.cpp
 	<cstax.hpp>
 	<file.hpp>
 	<iostream>
+	<console.hpp>
 
 1425404832 source:d:\cpp\channel\cstax\src\cstax.cpp
 	"cstax.hpp"
@@ -1912,8 +1913,9 @@
 	<stdexcept>
 	<cstring>
 
-1424803180 d:\cpp\channel\include\channels_config.h
+1426075075 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
+	<boost/move/move.hpp>
 	<unistd.h>
 	<win32/winver.h>
 	<windows.h>
@@ -5224,13 +5226,14 @@
 
 1310273157 d:\cpp\boost_1_54_0\boost\exception\detail\clone_current_exception.hpp
 
-1425487816 d:\cpp\channel\include\channels.hpp
+1426069551 d:\cpp\channel\include\channels.hpp
 	<channels_config.h>
 	<stdexcept>
 	<boost/config.hpp>
 	<boost/system/error_code.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
+	<boost/move/move.hpp>
 	<bytebuffer.hpp>
 
 1221733859 d:\cpp\boost_1_54_0\boost\unordered_set.hpp
@@ -5258,7 +5261,7 @@
 1383594446 d:\cpp\channel\cstax\xmlsource.hpp
 	<readwrite.hpp>
 
-1425479598 d:\cpp\channel\include\text.hpp
+1426079475 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
@@ -9125,7 +9128,7 @@
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1425563441 d:\cpp\channel\include\windowsfile.hpp
+1426013020 d:\cpp\channel\include\windowsfile.hpp
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
@@ -11474,7 +11477,7 @@
 	<cstring>
 	<boost/atomic/detail/config.hpp>
 
-1404755969 d:\cpp\channel\include\unixfile.hpp
+1426012957 d:\cpp\channel\include\unixfile.hpp
 	<sys/types.h>
 	<sys/stat.h>
 	<fcntl.h>
@@ -11484,7 +11487,7 @@
 	<channels_config.h>
 	<WindowsConsole.hpp>
 
-1424695826 d:\cpp\channel\include\windowsconsole.hpp
+1426079168 d:\cpp\channel\include\windowsconsole.hpp
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -16294,10 +16297,10 @@
 	<boost/xpressive/xpressive.hpp>
 	<boost/xpressive/regex_algorithms.hpp>
 
-1425989183 source:d:\cpp\channel\cstax\src\xmlgrammar.cpp
+1425991751 source:d:\cpp\channel\cstax\src\xmlgrammar.cpp
 	"xmlgrammar.hpp"
 
-1425564598 d:\cpp\channel\include\smallobject.hpp
+1426069539 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
 	<stdexcept>
 	<cassert>
@@ -16306,5 +16309,4 @@
 	<boost/unordered_map.hpp>
 	<boost/thread/once.hpp>
 	<boost/thread/mutex.hpp>
-	<boost/atomic.hpp>
 

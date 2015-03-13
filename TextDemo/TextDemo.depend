@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1425489365 source:d:\cpp\channel\textdemo\main.cpp
+1426070159 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -15,8 +15,9 @@
 	<channels_config.h>
 	<WindowsConsole.hpp>
 
-1424803180 d:\cpp\channel\include\channels_config.h
+1426071196 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
+	<boost/move/move.hpp>
 	<unistd.h>
 	<win32/winver.h>
 	<windows.h>
@@ -1424,7 +1425,7 @@
 	<stdexcept>
 	<cstring>
 
-1424705300 d:\cpp\channel\include\bytebuffer.hpp
+1425490499 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -5293,20 +5294,21 @@
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1425486331 d:\cpp\channel\include\windowsfile.hpp
+1426013020 d:\cpp\channel\include\windowsfile.hpp
 	"abstractfile.hpp"
-	"smallobjectpool.hpp"
+	"smallobject.hpp"
 
 1404755863 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1425487816 d:\cpp\channel\include\channels.hpp
+1426069551 d:\cpp\channel\include\channels.hpp
 	<channels_config.h>
 	<stdexcept>
 	<boost/config.hpp>
 	<boost/system/error_code.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
+	<boost/move/move.hpp>
 	<bytebuffer.hpp>
 
 1424707636 d:\cpp\channel\include\smallobjectpool.hpp
@@ -6300,7 +6302,7 @@
 	<boost/atomic/detail/config.hpp>
 	<boost/type_traits/is_integral.hpp>
 
-1404755969 d:\cpp\channel\include\unixfile.hpp
+1426012957 d:\cpp\channel\include\unixfile.hpp
 	<sys/types.h>
 	<sys/stat.h>
 	<fcntl.h>
@@ -6314,7 +6316,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1422458769 d:\cpp\channel\include\pipe.hpp
+1425564142 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -13096,8 +13098,8 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1425410045 d:\cpp\channel\include\network.hpp
-	<smallobjectpool.hpp>
+1426069539 d:\cpp\channel\include\network.hpp
+	<smallobject.hpp>
 	<channels.hpp>
 	<winsock2.h>
 	<boost/asio.hpp>
@@ -16815,4 +16817,14 @@
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
+
+1426069539 d:\cpp\channel\include\smallobject.hpp
+	<channels_config.h>
+	<stdexcept>
+	<cassert>
+	<boost/throw_exception.hpp>
+	<boost/pool/pool.hpp>
+	<boost/unordered_map.hpp>
+	<boost/thread/once.hpp>
+	<boost/thread/mutex.hpp>
 

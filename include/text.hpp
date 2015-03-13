@@ -114,7 +114,7 @@ public:
 	/**
 	 * Writes C zero ending sting into write channel
 	 */
-	void write(const char* str) throw (io_exception, charset_exception) {
+	void write(const _TChar* str) throw (io_exception, charset_exception) {
 		byte_buffer buff = byte_buffer::wrap_str(str);
 		write(buff);
 	}

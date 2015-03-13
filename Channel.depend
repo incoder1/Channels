@@ -11,8 +11,9 @@
 	<stdexcept>
 	<cstring>
 
-1424803180 d:\cpp\channel\include\channels_config.h
+1426075075 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
+	<boost/move/move.hpp>
 	<unistd.h>
 	<win32/winver.h>
 	<windows.h>
@@ -5218,13 +5219,14 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1426012793 d:\cpp\channel\include\channels.hpp
+1426069551 d:\cpp\channel\include\channels.hpp
 	<channels_config.h>
 	<stdexcept>
 	<boost/config.hpp>
 	<boost/system/error_code.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
+	<boost/move/move.hpp>
 	<bytebuffer.hpp>
 
 1423675300 source:d:\cpp\channel\src\ibm_icu_conv.cpp
@@ -7144,11 +7146,11 @@
 	<time.h>
 	<wchar.h>
 
-1425564253 source:d:\cpp\channel\src\windowsconsole.cpp
+1426074279 source:d:\cpp\channel\src\windowsconsole.cpp
 	"prchdrs.h"
 	"WindowsConsole.hpp"
 
-1424695826 d:\cpp\channel\include\windowsconsole.hpp
+1426079168 d:\cpp\channel\include\windowsconsole.hpp
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -7324,7 +7326,7 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1425489660 source:d:\cpp\channel\src\windowsfile.cpp
+1426013048 source:d:\cpp\channel\src\windowsfile.cpp
 	"prchdrs.h"
 	"WindowsFile.hpp"
 
@@ -7407,7 +7409,7 @@
 	<channels.hpp>
 	"helpers.hpp"
 
-1423674717 d:\cpp\channel\src\helpers.hpp
+1426069539 d:\cpp\channel\src\helpers.hpp
 	<channels_config.h>
 	<boost/system/error_code.hpp>
 
@@ -21542,7 +21544,7 @@
 
 1414767002 d:\cpp\boost_1_57_0\boost
 
-1425564598 d:\cpp\channel\include\smallobject.hpp
+1426069539 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
 	<stdexcept>
 	<cassert>
@@ -21551,11 +21553,11 @@
 	<boost/unordered_map.hpp>
 	<boost/thread/once.hpp>
 	<boost/thread/mutex.hpp>
-	<boost/atomic.hpp>
 
-1425564573 source:d:\cpp\channel\src\smallobject.cpp
+1426071030 source:d:\cpp\channel\src\smallobject.cpp
 	"prchdrs.h"
 	"smallobject.hpp"
+	<boost/atomic.hpp>
 
 1426013308 source:/home/atgdev/Channels/src/prchdrs.h
 	<channels_config.h>

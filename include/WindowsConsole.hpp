@@ -86,16 +86,28 @@ inline SWriteChannel cech(bool wide) {
 
 } // namesapce
 
+const uint8_t BLACK        = 0x0;
+const uint8_t NAVY_BLUE    = 0x1;
+const uint8_t NAVY_GREEN   = 0x2;
+const uint8_t NAVY_AQUA    = 0x3;
+const uint8_t NAVY_RED     = 0x4;
+const uint8_t NAVY_PURPLE  = 0x5;
+const uint8_t NAVY_YELLOW  = 0x6;
+const uint8_t WHITE        = 0x7;
+const uint8_t GREY         = 0x8;
+const uint8_t LIGHT_BLUE   = 0x9;
+const uint8_t LIGHT_GREEN  = 0xA;
+const uint8_t LIGHT_AQUA   = 0xB;
+const uint8_t LIGHT_RED    = 0xC;
+const uint8_t LIGHT_PURPLE = 0xD;
+const uint8_t LIGHT_YELLOW = 0xE;
+const uint8_t BRIGHT_WHITE = 0xF;
 
 /**
  * ! \brief Factory for obtaining channels for windows standard streams.
  *  Standard in, out and error streams supported.
  */
 class Console {
-private:
-	SWriteChannel cwch_;
-	SReadChannel crch_;
-	SWriteChannel cech_;
 public:
 	explicit Console(bool wide):
 		cwch_(cwch(wide)),
@@ -136,6 +148,15 @@ public:
 	inline SWriteChannel errChanell() const {
 		return cech_;
 	}
+	inline void setColor(uint8_t foreground, uint8_t backgound) const {
+		HANDLE hCons = ::GetStdHandle(STD_OUTPUT_HANDLE);
+		DWORD attrs = foreground | backgound << 4;
+		::SetConsoleTextAttribute(hCons, attrs);
+	}
+private:
+	SWriteChannel cwch_;
+	SReadChannel crch_;
+	SWriteChannel cech_;
 };
 
 } // namespace io
