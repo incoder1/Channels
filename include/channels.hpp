@@ -41,7 +41,7 @@ BOOST_MOVABLE_BUT_NOT_COPYABLE(WriteChannel)
 protected:
 	WriteChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 public:
-	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception) = 0;
+	virtual std::size_t write(byte_buffer& buffer) throw(io_exception) = 0;
 	virtual ~WriteChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
 

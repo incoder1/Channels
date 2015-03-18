@@ -12,12 +12,12 @@ namespace io {
 /**
  * ! \brief Unix depended blocking file Channel implementation.
  */
-class CHANNEL_PUBLIC FileChannel:public virtual ReadWriteChannel, public virtual SmallObject {
+class CHANNEL_PUBLIC FileChannel:public virtual ReadWriteChannel, public virtual object {
 public:
 	FileChannel(int file) BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual ~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
-	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
+	virtual std::size_t write(byte_buffer& buffer) throw(io_exception);
 	virtual std::size_t position();
 	virtual std::size_t forward(uint64_t offset) throw (io_exception);
 	virtual std::size_t backward(uint64_t offset) throw (io_exception);

@@ -9,14 +9,14 @@ namespace io {
 /**
  * ! \brief Windows depended blocking file Channel implementation.
  */
-class CHANNEL_PUBLIC FileChannel:public virtual ReadWriteChannel, public virtual SmallObject {
+class CHANNEL_PUBLIC FileChannel:public virtual ReadWriteChannel, public virtual object {
 private:
 	inline uint64_t seek(uint64_t,DWORD method) throw(io_exception);
 public:
 	FileChannel(HANDLE id, DWORD desiredAccess, bool close) BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual ~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
-	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
+	virtual std::size_t write(byte_buffer& buffer) throw(io_exception);
 	virtual std::size_t position();
 	virtual std::size_t forward(std::size_t offset) throw (io_exception);
 	virtual std::size_t backward(std::size_t offset) throw (io_exception);

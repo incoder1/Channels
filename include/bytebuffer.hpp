@@ -28,13 +28,32 @@ public:
 
 	/**
 	 * Wraps an C style array into byte buffer
+	 *
+	 * Please note, if underlying wrap memory is not controlled by byte_buffer.
+	 * Use wrapping only in scope of the current context.
+	 * <pre>
+	 * Valid usage:
+	 *	uint8_t data[3] = {0x00,0xFA,0xFF};
+     *	io::byte_buffer buff = io::byte_buffer::wrap_array(data, 3);
+     *	doSomething(buff); // data array still in stack
+     *
+	 *	Invalid usage:
+	 *	io::byte_buffer get_buffer() {
+	 * 		uint8_t data[3] = {0x00,0xFA,0xFF};
+     *		return io::byte_buffer::wrap_array(data, 3);
+	 *	}
+	 * ....
+	 * // array lives stack, buffer pointer shows on invalid memory block
+	 *	doSomething(get_buffer());
+	 * </pre>
+	 *
 	 * \tparam ElementType the type of C style array
 	 * \param arr a pointer on memory block to start copy
 	 * \param size count of array element to copy
-	 * \return the read only byte buffer C array wrapped memory content
+	 * \return the wrap reference buffer C array wrapped memory content
 	 */
 	template<typename ElementType>
-	static byte_buffer const wrap_array(ElementType* const arr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW;
+	static byte_buffer wrap_array(ElementType* const arr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**
 	 * Deep copy an C style array into byte buffer
@@ -45,13 +64,6 @@ public:
 	 */
 	template<typename ElementType>
 	static byte_buffer copy_array(ElementType* const arr, std::size_t size) throw(std::bad_alloc);
-
-	/**
-	 * Wraps a C style 0 ending string into byte buffer,the memory of sting is not getting copied is just a reference
-	 * \param str an C style 0 ending string to wrap
-	 * \return the read only byte buffer with wrapped C string content
-	 */
-	static byte_buffer const wrap_str(const char* str) BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**
 	 * Puts single byte into buffer
@@ -100,9 +112,8 @@ public:
 };
 }
 
-
 template<typename ElementType>
-byte_buffer const byte_buffer::wrap_array(ElementType* const arr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
+byte_buffer byte_buffer::wrap_array(ElementType* const arr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
 	boost::shared_array<uint8_t> data((uint8_t*)arr, _private::empty_free());
 	ElementType *endp = arr + size;
 	byte_buffer result(data,(uint8_t*)endp);

@@ -35,7 +35,7 @@ public:
  *  to the another.
  * \param CharType - the byte type character representation. I.e. char, wchar_t, char8_t, char16_t etc.
  */
-class CHANNEL_PUBLIC ICUConverter:public virtual Converter, public virtual SmallObject {
+class CHANNEL_PUBLIC ICUConverter:public object {
 private:
 	ICUEngine engine_;
 	void fromUnicode(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);

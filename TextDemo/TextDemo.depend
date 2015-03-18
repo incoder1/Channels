@@ -1,13 +1,13 @@
 # depslib dependency file v1.0
-1426070159 source:d:\cpp\channel\textdemo\main.cpp
+1426706997 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
 	<console.hpp>
 	<text.hpp>
+	<file.hpp>
 	<pipe.hpp>
 	<network.hpp>
-	<boost/thread/thread.hpp>
 
 1379001152 d:\cpp\channel\textdemo\winver.h
 
@@ -15,22 +15,22 @@
 	<channels_config.h>
 	<WindowsConsole.hpp>
 
-1426071196 d:\cpp\channel\include\channels_config.h
+1426075075 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
 	<win32/winver.h>
 	<windows.h>
 
-1424695826 d:\cpp\channel\include\windowsconsole.hpp
+1426707132 d:\cpp\channel\include\windowsconsole.hpp
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<boost/function.hpp>
 	<boost/bind.hpp>
-	<convert.hpp>
-	<file.hpp>
-	<channels.hpp>
+	<tchar.h>
+	<text.hpp>
+	"smallobject.hpp"
 
 1365857392 d:\cpp\boost_1_54_0\boost\noncopyable.hpp
 	<boost/config.hpp>
@@ -1417,21 +1417,16 @@
 	<boost/bind/arg.hpp>
 	<boost/config.hpp>
 
-1425471142 d:\cpp\channel\include\convert.hpp
-	<channels_config.h>
-	<bytebuffer.hpp>
-	<boost/unordered_map.hpp>
-	<boost/exception/all.hpp>
-	<stdexcept>
-	<cstring>
+1426695173 d:\cpp\channel\include\convert.hpp
+	"iconv_conv.hpp"
 
-1425490499 d:\cpp\channel\include\bytebuffer.hpp
+1426697770 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
 	<buffers.hpp>
 
-1425488680 d:\cpp\channel\include\buffers.hpp
+1426676959 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5294,14 +5289,14 @@
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1426013020 d:\cpp\channel\include\windowsfile.hpp
+1426696786 d:\cpp\channel\include\windowsfile.hpp
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1404755863 d:\cpp\channel\include\abstractfile.hpp
+1426676808 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1426069551 d:\cpp\channel\include\channels.hpp
+1426696664 d:\cpp\channel\include\channels.hpp
 	<channels_config.h>
 	<stdexcept>
 	<boost/config.hpp>
@@ -6302,7 +6297,7 @@
 	<boost/atomic/detail/config.hpp>
 	<boost/type_traits/is_integral.hpp>
 
-1426012957 d:\cpp\channel\include\unixfile.hpp
+1426696747 d:\cpp\channel\include\unixfile.hpp
 	<sys/types.h>
 	<sys/stat.h>
 	<fcntl.h>
@@ -6316,7 +6311,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1425564142 d:\cpp\channel\include\pipe.hpp
+1426687208 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -13098,7 +13093,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1426069539 d:\cpp\channel\include\network.hpp
+1426687208 d:\cpp\channel\include\network.hpp
 	<smallobject.hpp>
 	<channels.hpp>
 	<winsock2.h>
@@ -16813,18 +16808,30 @@
 	<boost/asio/detail/push_options.hpp>
 	<boost/asio/detail/pop_options.hpp>
 
-1425479598 d:\cpp\channel\include\text.hpp
+1426707083 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
 
-1426069539 d:\cpp\channel\include\smallobject.hpp
+1426688316 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
 	<stdexcept>
-	<cassert>
-	<boost/throw_exception.hpp>
-	<boost/pool/pool.hpp>
+	<boost/move/move.hpp>
+	<boost/enable_shared_from_this.hpp>
+
+1426688758 d:\cpp\channel\include\charsets.hpp
+	<channels_config.h>
 	<boost/unordered_map.hpp>
-	<boost/thread/once.hpp>
-	<boost/thread/mutex.hpp>
+
+1426704782 d:\cpp\channel\include\iconv_conv.hpp
+	<stdexcept>
+	<boost/shared_ptr.hpp>
+	<cerrno>
+	<iconv.h>
+	"bytebuffer.hpp"
+	"charsets.hpp"
+	"smallobject.hpp"
+
+1420895773 c:\mingw\msys\1.0\opt\windows_64\include\iconv.h
+	<stddef.h>
 

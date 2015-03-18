@@ -4,66 +4,69 @@
 namespace io {
 
 // helpers
-inline void validate_conversion(bool condition, const std::string& name) throw(charset_exception)
+inline void validate_conversion(bool condition, const std::string& name) throw(std::runtime_error)
 {
-	validate<charset_exception>(condition,name);
+	validate<std::runtime_error>(condition,name);
 }
 
-inline void validate_charset(const Charset* ch, const std::string& name) throw(charset_exception)
+inline void validate_charset(const Charset* ch, const std::string& name) throw(std::runtime_error)
 {
-	validate<charset_exception>(NULL != ch, name + " is not provided by iconv converter");
-}
-
-SConverter CHANNEL_PUBLIC iconv_conv(const char* src, const char* dst) throw(charset_exception)
-{
-	const Charset* srcCt = Charsets::forName(src);
-	validate_charset(srcCt, src);
-	const Charset* destCt = Charsets::forName(dst);
-	validate_charset(destCt, dst);
-	validate_conversion(!srcCt->equal(destCt),"Source character set is equal destination, no conversation needed");
-	::iconv_t descrpt = ::iconv_open(destCt->name(), srcCt->name());
-	validate_conversion(descrpt != (::iconv_t)(-1), "Can not construct iconv engine instance");
-	return SConverter(new IconvConverter(descrpt, srcCt, destCt) );
+	validate<std::runtime_error>(NULL != ch, name + " is not provided by iconv converter");
 }
 
 
 // IconvConverter
-IconvConverter::IconvConverter(iconv_t conv, const Charset* srcCt, const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW:
-	Converter(srcCt,dstCt),
-	SmallObject(),
-	conv_(conv,::iconv_close)
+IconvConverter::IconvConverter(const Charset* from, const Charset* to):
+	from_(from),
+	to_(to)
+{
+	validate_conversion(!from_->equal(to_),"Source character set is equal destination, no conversation needed");
+	::iconv_t descrpt = ::iconv_open(to_->name(),from_->name());
+	validate_conversion(descrpt != (::iconv_t)(-1), "Can not construct iconv engine instance");
+	conv_.reset(descrpt,::iconv_close);
+}
+
+IconvConverter::~IconvConverter() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
-ssize_t IconvConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception)
+byte_buffer IconvConverter::convert(const byte_buffer& src) throw(std::bad_alloc,std::runtime_error)
 {
-	char *itptr = reinterpret_cast<char*>(src.position().ptr());
-	char *dstptr = reinterpret_cast<char*>(dest.position().ptr());
+	std::size_t buffSize = 0;
+	if(to_->charSize() > from_->charSize() || from_ == Charsets::utf8() ){
+		buffSize = src.length() * to_->charSize();
+	} else {
+		buffSize = src.length();
+	}
+	byte_buffer dest = byte_buffer::heap_buffer(buffSize);
+	char *itptr = (char*)src.position().ptr();
+	char *dstptr = (char*)dest.position().ptr();
 	std::size_t srclen = src.length();
-	std::size_t avail = dest.capacity();
+	std::size_t avail = dest.remain();
 	std::size_t iconvValue = ::iconv(conv_.get(), &itptr, &srclen, &dstptr, &avail);
 	if( static_cast<std::size_t>(-1) == iconvValue) {
 		switch (errno) {
 			/* See "man 3 iconv" for an explanation. */
 		case EILSEQ:
-			boost::throw_exception(charset_exception("Invalid multi-byte sequence"));
+			boost::throw_exception(std::runtime_error("Invalid multi-byte sequence"));
 		case EINVAL:
-			boost::throw_exception(charset_exception("Incomplete multi-byte sequence"));
+			boost::throw_exception(std::runtime_error("Incomplete multi-byte sequence"));
 		case E2BIG:
-			boost::throw_exception(charset_exception("No more room"));
+			boost::throw_exception(std::runtime_error("No more room"));
 		default:
-			boost::throw_exception(charset_exception(std::strerror(errno)));
+			boost::throw_exception(std::runtime_error(std::strerror(errno)));
 		}
 	}
 	// calc size of char buffer, and move it
-	ptrdiff_t  offset = (uint8_t*)dstptr - dest.position().ptr();
-	if(offset > 0) {
-		dest.move(offset);
+	if(avail > 0) {
+		dest.clear();
+		ptrdiff_t offset = (uint8_t*)dstptr - dest.position().ptr();
+		dest.move((std::size_t)offset);
+	} else {
+		dest.move(dest.end());
 	}
 	dest.flip();
-	return offset;
+	return dest;
 }
 
-IconvConverter::~IconvConverter() BOOST_NOEXCEPT_OR_NOTHROW
-{}
 
 } // namespace io

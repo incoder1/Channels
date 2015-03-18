@@ -55,7 +55,7 @@ public:
 /**
  * ! \brief Microsoft MLang (Internet Explorer component) based converter
  */
-class CHANNEL_PUBLIC Win32Converter : public virtual Converter, public virtual SmallObject {
+class CHANNEL_PUBLIC Win32Converter : public virtual Converter, public virtual object {
 public:
 	Win32Converter(PMLang engine,const Charset* srcCt,const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
 	~Win32Converter() BOOST_NOEXCEPT_OR_NOTHROW;

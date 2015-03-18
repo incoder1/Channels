@@ -72,7 +72,7 @@ SReadWriteChannel  File::openForReadWrite() throw(io_exception)
 // FileChannel
 FileChannel::FileChannel(HANDLE id, DWORD desiredAccess, bool close) BOOST_NOEXCEPT_OR_NOTHROW:
 	ReadWriteChannel(),
-	SmallObject(),
+	object(),
 	id_(id),
 	desiredAccess_(desiredAccess),
 	close_(close)
@@ -103,15 +103,18 @@ std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 	return result;
 }
 
-std::size_t FileChannel::write(const byte_buffer& buffer) throw(io_exception)
+std::size_t FileChannel::write(byte_buffer& buffer) throw(io_exception)
 {
-	DWORD result;
-	BOOL succeeded = ::WriteFile(id_,
+	DWORD result = 0;
+	if(!buffer.full()) {
+		BOOL succeeded = ::WriteFile(id_,
 	                vpos(buffer),
 	                buffer.length(),
 	                &result,
 	                NULL);
-	validate_io(succeeded,"Write file error.");
+		validate_io(succeeded,"Write file error.");
+		buffer.move(result);
+	}
 	return result;
 }
 

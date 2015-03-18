@@ -1,15 +1,10 @@
 # depslib dependency file v1.0
-1424695733 source:d:\cpp\channel\src\convert.cpp
+1426688653 source:d:\cpp\channel\src\convert.cpp
 	"prchdrs.h"
 	"convert.hpp"
 
-1425471142 d:\cpp\channel\include\convert.hpp
-	<channels_config.h>
-	<bytebuffer.hpp>
-	<boost/unordered_map.hpp>
-	<boost/exception/all.hpp>
-	<stdexcept>
-	<cstring>
+1426695173 d:\cpp\channel\include\convert.hpp
+	"iconv_conv.hpp"
 
 1426075075 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
@@ -18,7 +13,7 @@
 	<win32/winver.h>
 	<windows.h>
 
-1425490499 d:\cpp\channel\include\bytebuffer.hpp
+1426697770 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1351,7 +1346,7 @@
 1090718969 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1425488680 d:\cpp\channel\include\buffers.hpp
+1426676959 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5219,7 +5214,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1426069551 d:\cpp\channel\include\channels.hpp
+1426696664 d:\cpp\channel\include\channels.hpp
 	<channels_config.h>
 	<stdexcept>
 	<boost/config.hpp>
@@ -5568,7 +5563,7 @@
 	<pipe.hpp>
 	<WindowsFile.hpp>
 
-1425564142 d:\cpp\channel\include\pipe.hpp
+1426687208 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -7124,18 +7119,18 @@
 
 1365979818 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
 
-1425564734 source:d:\cpp\channel\src\iconv_conv.cpp
+1426704845 source:d:\cpp\channel\src\iconv_conv.cpp
 	"prchdrs.h"
 	"iconv_conv.hpp"
 
-1425563433 d:\cpp\channel\include\iconv_conv.hpp
-	<string>
-	<cstring>
+1426704782 d:\cpp\channel\include\iconv_conv.hpp
+	<stdexcept>
+	<boost/shared_ptr.hpp>
 	<cerrno>
-	<cstdio>
-	<convert.hpp>
 	<iconv.h>
-	<smallobject.hpp>
+	"bytebuffer.hpp"
+	"charsets.hpp"
+	"smallobject.hpp"
 
 1372789265 c:\mingw\msys\1.0\local\include\iconv.h
 	"iconv.h"
@@ -7146,19 +7141,19 @@
 	<time.h>
 	<wchar.h>
 
-1426074279 source:d:\cpp\channel\src\windowsconsole.cpp
+1426703945 source:d:\cpp\channel\src\windowsconsole.cpp
 	"prchdrs.h"
 	"WindowsConsole.hpp"
 
-1426079168 d:\cpp\channel\include\windowsconsole.hpp
+1426707132 d:\cpp\channel\include\windowsconsole.hpp
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<boost/function.hpp>
 	<boost/bind.hpp>
-	<convert.hpp>
-	<file.hpp>
-	<channels.hpp>
+	<tchar.h>
+	<text.hpp>
+	"smallobject.hpp"
 
 1404312343 source:d:\cpp\channel\src\mlang_i.c
 	<rpc.h>
@@ -7313,11 +7308,11 @@
 	"prchdrs.h"
 	<channels.hpp>
 
-1426013020 d:\cpp\channel\include\windowsfile.hpp
+1426696786 d:\cpp\channel\include\windowsfile.hpp
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1404755863 d:\cpp\channel\include\abstractfile.hpp
+1426676808 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1426012957 d:\cpp\channel\include\unixfile.hpp
@@ -7326,7 +7321,7 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1426013048 source:d:\cpp\channel\src\windowsfile.cpp
+1426704159 source:d:\cpp\channel\src\windowsfile.cpp
 	"prchdrs.h"
 	"WindowsFile.hpp"
 
@@ -7783,7 +7778,7 @@
 1236010936 d:\cpp\boost_1_54_0\boost\weak_ptr.hpp
 	<boost/smart_ptr/weak_ptr.hpp>
 
-1424704366 source:d:\cpp\channel\src\bytebuffer.cpp
+1426697733 source:d:\cpp\channel\src\bytebuffer.cpp
 	"prchdrs.h"
 	"bytebuffer.hpp"
 
@@ -21544,20 +21539,19 @@
 
 1414767002 d:\cpp\boost_1_57_0\boost
 
-1426069539 d:\cpp\channel\include\smallobject.hpp
+1426688316 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
 	<stdexcept>
-	<cassert>
-	<boost/throw_exception.hpp>
-	<boost/pool/pool.hpp>
-	<boost/unordered_map.hpp>
-	<boost/thread/once.hpp>
-	<boost/thread/mutex.hpp>
+	<boost/move/move.hpp>
+	<boost/enable_shared_from_this.hpp>
 
-1426071030 source:d:\cpp\channel\src\smallobject.cpp
+1426687001 source:d:\cpp\channel\src\smallobject.cpp
 	"prchdrs.h"
 	"smallobject.hpp"
 	<boost/atomic.hpp>
+	<boost/pool/pool.hpp>
+	<boost/thread/once.hpp>
+	<boost/thread/mutex.hpp>
 
 1426013308 source:/home/atgdev/Channels/src/prchdrs.h
 	<channels_config.h>
@@ -25919,4 +25913,16 @@
 	<sys/types.h>
 
 1420654543 /usr/include/bits/fcntl2.h
+
+1426707083 d:\cpp\channel\include\text.hpp
+	<stdexcept>
+	<convert.hpp>
+	<channels.hpp>
+
+1426688758 d:\cpp\channel\include\charsets.hpp
+	<channels_config.h>
+	<boost/unordered_map.hpp>
+
+1426700442 source:d:\cpp\channel\src\charsets.cpp
+	"charsets.hpp"
 

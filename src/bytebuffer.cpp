@@ -56,15 +56,4 @@ byte_buffer byte_buffer::heap_buffer(const std::size_t capacity) throw(std::bad_
 	return result;
 }
 
-const byte_buffer byte_buffer::wrap_str(const char* str) BOOST_NOEXCEPT_OR_NOTHROW {
-	uint8_t *begin = (uint8_t*)str;
-	std::size_t strlen = std::char_traits<char>::length(str);
-	boost::shared_array<uint8_t> data(begin, _private::empty_free() );
-	uint8_t *endp = begin + strlen;
-	byte_buffer result(data,endp);
-	result.move(strlen);
-	result.flip();
-	return result;
-}
-
 } //namaspace io

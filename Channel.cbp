@@ -181,6 +181,7 @@
 		<Unit filename="include/bytebuffer.hpp" />
 		<Unit filename="include/channels.hpp" />
 		<Unit filename="include/channels_config.h" />
+		<Unit filename="include/charsets.hpp" />
 		<Unit filename="include/console.hpp" />
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/file.hpp" />
@@ -233,6 +234,7 @@
 		</Unit>
 		<Unit filename="src/bytebuffer.cpp" />
 		<Unit filename="src/channels.cpp" />
+		<Unit filename="src/charsets.cpp" />
 		<Unit filename="src/convert.cpp" />
 		<Unit filename="src/helpers.hpp" />
 		<Unit filename="src/ibm_icu_conv.cpp">

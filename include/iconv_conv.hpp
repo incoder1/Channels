@@ -1,39 +1,41 @@
 #ifndef __INCONV_CONV_HPP_INCLUDED
 #define __INCONV_CONV_HPP_INCLUDED
 
-#include <string>
-#include <cstring>
-#include <cerrno>
-#include <cstdio>
+#include <stdexcept>
+#include <boost/shared_ptr.hpp>
 
-#include <convert.hpp>
+#include <cerrno>
 #include <iconv.h>
 
-#include <smallobject.hpp>
+#include "bytebuffer.hpp"
+#include "charsets.hpp"
+#include "smallobject.hpp"
 
 namespace io {
+
 
 /**
  * ! \brief Converts string representing in byte sequence from one code page (charset)
  *  to the another.
  */
-class CHANNEL_PUBLIC IconvConverter:public virtual Converter, public virtual SmallObject {
-private:
-	IconvConverter(::iconv_t conv, const Charset* srcCt, const Charset* dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
-	friend SConverter CHANNEL_PUBLIC iconv_conv(const char*, const char*) throw(charset_exception);
+class CHANNEL_PUBLIC IconvConverter:public object {
 public:
-
-	virtual ~IconvConverter() BOOST_NOEXCEPT_OR_NOTHROW;
-
+	IconvConverter(const Charset* from, const Charset* to);
+	~IconvConverter() BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
 	 * Converting character sequence from source character set into destination charter set
 	 * \param src source characters in their bytes sequence representation
 	 * \param dest destination characters in their character type representation
 	 */
-	virtual ssize_t convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);
+	byte_buffer convert(const byte_buffer& src) throw(std::bad_alloc,std::runtime_error);
 private:
 	boost::shared_ptr<void> conv_;
+	const Charset* from_;
+	const Charset* to_;
 };
+
+typedef IconvConverter Converter;
+typedef boost::shared_ptr<Converter> SConverter;
 
 } // namespace io
 #endif // __INCONV_CONV_HPP_INCLUDED

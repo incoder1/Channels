@@ -8,17 +8,10 @@
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
 
-#include <convert.hpp>
-#include <file.hpp>
-#include <channels.hpp>
+#include <tchar.h>
+#include <text.hpp>
 
-#ifndef BOOST_BIND_ENABLE_STDCALL
-#	define BOOST_BIND_ENABLE_STDCALL
-#endif
-
-#ifndef BOOST_BIND_ENABLE_FASTCALL
-#	define BOOST_BIND_ENABLE_FASTCALL
-#endif
+#include "smallobject.hpp"
 
 #if  defined(__MINGW32__) && !defined(_WIN64)
 // MinGW64 have this structure in windows.h
@@ -30,15 +23,10 @@ typedef struct _CONSOLE_READCONSOLE_CONTROL {
 } CONSOLE_READCONSOLE_CONTROL, *PCONSOLE_READCONSOLE_CONTROL;
 #endif /* __MINGW32__ */
 
-// Use the const char* console version
-// by default if WIDE_CONSOLE is not defined
-#ifndef WIDE_CONSOLE
-#	define WIDE_CONSOLE false
-#endif
 
 namespace io {
 
-class CHANNEL_PUBLIC ConsoleReadChannel:public virtual ReadChannel, public virtual SmallObject
+class CHANNEL_PUBLIC ConsoleReadChannel:public virtual ReadChannel, public virtual object
 {
 	private:
        typedef boost::function<BOOL(HANDLE,LPVOID,DWORD,LPDWORD,PCONSOLE_READCONSOLE_CONTROL)> readf_t;
@@ -52,12 +40,12 @@ class CHANNEL_PUBLIC ConsoleReadChannel:public virtual ReadChannel, public virtu
 		std::size_t charSize_;
 };
 
-class CHANNEL_PUBLIC ConsoleWriteChannel:public virtual WriteChannel, public virtual SmallObject {
+class CHANNEL_PUBLIC ConsoleWriteChannel:public virtual WriteChannel, public virtual object {
 private:
 	typedef boost::function<BOOL(HANDLE,const void*,DWORD,PDWORD,PVOID)> writef_t;
 public:
 	ConsoleWriteChannel(HANDLE hCons, bool unicode) BOOST_NOEXCEPT_OR_NOTHROW;
-	virtual std::size_t write(const byte_buffer& buffer) throw(io_exception);
+	virtual std::size_t write(byte_buffer& buffer) throw(io_exception);
 	virtual ~ConsoleWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 private:
 	HANDLE hCons_;
@@ -110,6 +98,7 @@ const uint8_t BRIGHT_WHITE = 0xF;
 class Console {
 public:
 	explicit Console(bool wide):
+		charSet_( wide ? Charsets::utf16le() : Charsets::forId(::GetConsoleCP()) ),
 		cwch_(cwch(wide)),
 		crch_(crch(wide)),
 		cech_(cech(wide))
@@ -118,34 +107,34 @@ public:
 			setCharset(Charsets::utf16le());
 		}
 	}
-	explicit Console():
-		cwch_(cwch(WIDE_CONSOLE)),
-		crch_(crch(WIDE_CONSOLE)),
-		cech_(cech(WIDE_CONSOLE))
-	{
-		if(WIDE_CONSOLE) {
-			setCharset(Charsets::utf16le());
-		}
-	}
 	Console(::HANDLE handle, bool wide):
+		charSet_( wide ? Charsets::utf16le() : Charsets::forId(::GetConsoleCP()) ),
 		cwch_(SWriteChannel(new ConsoleWriteChannel(handle,wide))),
 		crch_(SReadChannel(new ConsoleReadChannel(handle,wide))),
 		cech_(SWriteChannel(new ConsoleWriteChannel(handle,wide)))
-	{}
+	{
+		if(wide) {
+			setCharset(charSet_);
+		}
+	}
 	inline void setCharset(const Charset* charset) BOOST_NOEXCEPT {
+		charSet_ = charset;
 		::SetConsoleCP(charset->id());
 		::SetConsoleOutputCP(charset->id());
 	}
 	inline void setCharset(const char* name) BOOST_NOEXCEPT_OR_NOTHROW {
 		setCharset(Charsets::forName(name));
 	}
-	inline SWriteChannel outChanell() const {
+	inline const Charset* charset() {
+		return charSet_;
+	}
+	inline SWriteChannel out() const {
 		return cwch_;
 	}
-	inline SReadChannel inChanell() const {
+	inline SReadChannel in() const {
 		return crch_;
 	}
-	inline SWriteChannel errChanell() const {
+	inline SWriteChannel err() const {
 		return cech_;
 	}
 	inline void setColor(uint8_t foreground, uint8_t backgound) const {
@@ -154,6 +143,7 @@ public:
 		::SetConsoleTextAttribute(hCons, attrs);
 	}
 private:
+	const Charset* charSet_;
 	SWriteChannel cwch_;
 	SReadChannel crch_;
 	SWriteChannel cech_;

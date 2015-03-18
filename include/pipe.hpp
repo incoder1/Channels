@@ -28,11 +28,11 @@ typedef boost::function<void(SWriteChannel)> PipeSinkRoutine;
 * buffer up to a certain number of bytes between the sink and source channels.
  </p>
 */
-class CHANNEL_PUBLIC Pipe:public SmallObject {
+class CHANNEL_PUBLIC Pipe:public object {
 BOOST_MOVABLE_BUT_NOT_COPYABLE(Pipe)
 protected:
 	Pipe(PipeSinkRoutine routine) BOOST_NOEXCEPT_OR_NOTHROW:
-		SmallObject(),
+		object(),
 		sinkRoutine_(routine)
 	{}
 	inline PipeSinkRoutine sinkRoutine() const {

@@ -3,6 +3,7 @@
 
 namespace io {
 
+
 //ConsoleReadChannel
 ConsoleReadChannel::ConsoleReadChannel(HANDLE hCons, bool wide) BOOST_NOEXCEPT_OR_NOTHROW:
 	ReadChannel(),
@@ -32,15 +33,19 @@ ConsoleWriteChannel::ConsoleWriteChannel(HANDLE hCons, bool unicode) BOOST_NOEXC
 	charSize_(unicode? sizeof(WCHAR) : sizeof(CHAR) )
 {}
 
-std::size_t ConsoleWriteChannel::write(const byte_buffer& buffer) throw(io_exception)
+std::size_t ConsoleWriteChannel::write(byte_buffer& buffer) throw(io_exception)
 {
-	DWORD result;
-	BOOL succeeded = peer_(hCons_,
+	DWORD result = 0;
+	if(!buffer.full()) {
+		BOOL succeeded = peer_(hCons_,
 	                vpos(buffer),
 	                buffer.length() / charSize_,
 	                &result,
 	                NULL);
-	validate_io(succeeded,"Write console error.");
+		validate_io(succeeded,"Write console error.");
+		result = result * charSize_;
+		buffer.move(result);
+	}
 	return result;
 }
 

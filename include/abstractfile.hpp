@@ -25,7 +25,7 @@ public:
 	bool create() const BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
 	 * Deletes file from dist
-	 * \return whether successful
+	 * \return whether delete was successful
 	 */
 	bool errace() const BOOST_NOEXCEPT_OR_NOTHROW;
 	/**

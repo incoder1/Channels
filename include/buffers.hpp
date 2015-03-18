@@ -264,6 +264,10 @@ public:
 		return end_ - data_.get();
 	}
 
+	/**
+	 * Swaps this buffer with another
+	 * \param oth buffer to swap with this buffer
+	 */
 	void swap(basic_buffer& oth) {
 		data_.swap(oth.data_);
 		std::swap(position_,oth.position_);
