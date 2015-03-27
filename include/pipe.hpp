@@ -29,15 +29,9 @@ typedef boost::function<void(SWriteChannel)> PipeSinkRoutine;
  </p>
 */
 class CHANNEL_PUBLIC Pipe:public object {
-BOOST_MOVABLE_BUT_NOT_COPYABLE(Pipe)
 protected:
-	Pipe(PipeSinkRoutine routine) BOOST_NOEXCEPT_OR_NOTHROW:
-		object(),
-		sinkRoutine_(routine)
-	{}
-	inline PipeSinkRoutine sinkRoutine() const {
-		return sinkRoutine_;
-	}
+	Pipe(PipeSinkRoutine routine) BOOST_NOEXCEPT_OR_NOTHROW;
+	void call_sink_routine(const SWriteChannel& channel) const;
 public:
 	virtual SReadChannel source() const = 0;
 	virtual ~Pipe() BOOST_NOEXCEPT_OR_NOTHROW;

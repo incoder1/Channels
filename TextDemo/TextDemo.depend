@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1426706997 source:d:\cpp\channel\textdemo\main.cpp
+1427382469 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -1417,14 +1417,17 @@
 	<boost/bind/arg.hpp>
 	<boost/config.hpp>
 
-1426695173 d:\cpp\channel\include\convert.hpp
+1427381118 d:\cpp\channel\include\convert.hpp
 	"iconv_conv.hpp"
+	"ibm_icu_conv.hpp"
+	"msmlang_conv.hpp"
 
-1426697770 d:\cpp\channel\include\bytebuffer.hpp
+1427368727 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
-	<buffers.hpp>
+	"channels_config.h"
+	"buffers.hpp"
 
 1426676959 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
@@ -5289,22 +5292,20 @@
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1426696786 d:\cpp\channel\include\windowsfile.hpp
+1427375721 d:\cpp\channel\include\windowsfile.hpp
+	<boost/make_shared.hpp>
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
 1426676808 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1426696664 d:\cpp\channel\include\channels.hpp
-	<channels_config.h>
-	<stdexcept>
-	<boost/config.hpp>
-	<boost/system/error_code.hpp>
+1427375578 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
-	<bytebuffer.hpp>
+	"errors.hpp"
+	"bytebuffer.hpp"
 
 1424707636 d:\cpp\channel\include\smallobjectpool.hpp
 	<channels_config.h>
@@ -6311,7 +6312,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1426687208 d:\cpp\channel\include\pipe.hpp
+1427376740 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -16808,24 +16809,25 @@
 	<boost/asio/detail/push_options.hpp>
 	<boost/asio/detail/pop_options.hpp>
 
-1426707083 d:\cpp\channel\include\text.hpp
+1427374833 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
 
-1426688316 d:\cpp\channel\include\smallobject.hpp
+1427375084 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
 	<stdexcept>
 	<boost/move/move.hpp>
 	<boost/enable_shared_from_this.hpp>
 
-1426688758 d:\cpp\channel\include\charsets.hpp
+1427215159 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
 	<boost/unordered_map.hpp>
 
-1426704782 d:\cpp\channel\include\iconv_conv.hpp
+1427370389 d:\cpp\channel\include\iconv_conv.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
+	<boost/make_shared.hpp>
 	<cerrno>
 	<iconv.h>
 	"bytebuffer.hpp"
@@ -16834,4 +16836,453 @@
 
 1420895773 c:\mingw\msys\1.0\opt\windows_64\include\iconv.h
 	<stddef.h>
+
+1372789265 c:\mingw\msys\1.0\local\include\iconv.h
+	"iconv.h"
+	<stddef.h>
+	<errno.h>
+	<stddef.h>
+	<stdio.h>
+	<time.h>
+	<wchar.h>
+
+1427370306 d:\cpp\channel\include\ibm_icu_conv.hpp
+	<boost/shared_ptr.hpp>
+	<boost/make_shared.hpp>
+	<boost/format.hpp>
+	<unicode/utypes.h>
+	<unicode/ucnv.h>
+	<unicode/ustring.h>
+	<unicode/uchar.h>
+	<unicode/uloc.h>
+	<unicode/unistr.h>
+	"charsets.hpp"
+	"bytebuffer.hpp"
+	"smallobject.hpp"
+
+1399910779 d:\cpp\boost_1_57_0\boost\format.hpp
+	<vector>
+	<string>
+	<boost/detail/workaround.hpp>
+	<boost/config.hpp>
+	<locale>
+	<boost/format/detail/compat_workarounds.hpp>
+	<cctype>
+	<boost/format/format_fwd.hpp>
+	<boost/format/internals_fwd.hpp>
+	<boost/format/internals.hpp>
+	<boost/format/format_class.hpp>
+	<boost/format/exceptions.hpp>
+	<boost/format/format_implementation.hpp>
+	<boost/format/group.hpp>
+	<boost/format/feed_args.hpp>
+	<boost/format/parsing.hpp>
+	<boost/format/free_funcs.hpp>
+	<boost/format/detail/unset_macros.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\compat_workarounds.hpp
+	<boost/format/detail/config_macros.hpp>
+	<streambuf>
+	<ostream>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\config_macros.hpp
+	<boost/config.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/format/detail/workarounds_gcc-2_95.hpp>
+	<boost/format/detail/workarounds_stlport.hpp>
+	<locale>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\workarounds_gcc-2_95.hpp
+	<iostream>
+	<streambuf.h>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\workarounds_stlport.hpp
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\format_fwd.hpp
+	<string>
+	<iosfwd>
+	<boost/format/detail/compat_workarounds.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\internals_fwd.hpp
+	<boost/format/format_fwd.hpp>
+	<boost/config.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\internals.hpp
+	<string>
+	<boost/assert.hpp>
+	<boost/optional.hpp>
+	<boost/limits.hpp>
+	<boost/format/detail/compat_workarounds.hpp>
+	<boost/format/alt_sstream.hpp>
+
+1412797379 d:\cpp\boost_1_57_0\boost\optional.hpp
+	"boost/optional/optional.hpp"
+
+1412797379 d:\cpp\boost_1_57_0\boost\optional\optional.hpp
+	<new>
+	<algorithm>
+	<iosfwd>
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/core/explicit_operator_bool.hpp>
+	<boost/optional/bad_optional_access.hpp>
+	<boost/static_assert.hpp>
+	<boost/throw_exception.hpp>
+	<boost/type.hpp>
+	<boost/type_traits/alignment_of.hpp>
+	<boost/type_traits/has_nothrow_constructor.hpp>
+	<boost/type_traits/type_with_alignment.hpp>
+	<boost/type_traits/remove_const.hpp>
+	<boost/type_traits/remove_reference.hpp>
+	<boost/type_traits/decay.hpp>
+	<boost/type_traits/is_base_of.hpp>
+	<boost/type_traits/is_lvalue_reference.hpp>
+	<boost/type_traits/is_nothrow_move_assignable.hpp>
+	<boost/type_traits/is_nothrow_move_constructible.hpp>
+	<boost/type_traits/is_reference.hpp>
+	<boost/type_traits/is_rvalue_reference.hpp>
+	<boost/type_traits/is_same.hpp>
+	<boost/mpl/if.hpp>
+	<boost/mpl/bool.hpp>
+	<boost/mpl/not.hpp>
+	<boost/detail/reference_content.hpp>
+	<boost/move/utility.hpp>
+	<boost/none.hpp>
+	<boost/utility/addressof.hpp>
+	<boost/utility/compare_pointees.hpp>
+	<boost/utility/enable_if.hpp>
+	<boost/utility/in_place_factory.hpp>
+	<boost/utility/swap.hpp>
+	<boost/optional/optional_fwd.hpp>
+
+1408729807 d:\cpp\boost_1_57_0\boost\core\explicit_operator_bool.hpp
+	<boost/config.hpp>
+
+1412797379 d:\cpp\boost_1_57_0\boost\optional\bad_optional_access.hpp
+	<stdexcept>
+	<string>
+
+1414666041 d:\cpp\boost_1_57_0\boost\type_traits\has_nothrow_constructor.hpp
+	<boost/type_traits/has_trivial_constructor.hpp>
+	<boost/type_traits/detail/bool_trait_def.hpp>
+	<boost/type_traits/detail/bool_trait_undef.hpp>
+
+1414666041 d:\cpp\boost_1_57_0\boost\type_traits\has_trivial_constructor.hpp
+	<boost/type_traits/config.hpp>
+	<boost/type_traits/intrinsics.hpp>
+	<boost/type_traits/is_pod.hpp>
+	<boost/type_traits/detail/ice_or.hpp>
+	<boost/type_traits/detail/bool_trait_def.hpp>
+	<boost/type_traits/detail/bool_trait_undef.hpp>
+
+1402604062 d:\cpp\boost_1_57_0\boost\detail\reference_content.hpp
+	"boost/config.hpp"
+	"boost/mpl/bool.hpp"
+	"boost/type_traits/has_nothrow_copy.hpp"
+	"boost/mpl/void.hpp"
+
+1412797379 d:\cpp\boost_1_57_0\boost\none.hpp
+	"boost/none_t.hpp"
+
+1412797379 d:\cpp\boost_1_57_0\boost\none_t.hpp
+
+1410023964 d:\cpp\boost_1_57_0\boost\utility\compare_pointees.hpp
+	<functional>
+
+1410023964 d:\cpp\boost_1_57_0\boost\utility\in_place_factory.hpp
+	<boost/utility/detail/in_place_factory_prefix.hpp>
+	<boost/utility/detail/in_place_factory_suffix.hpp>
+
+1410023964 d:\cpp\boost_1_57_0\boost\utility\detail\in_place_factory_prefix.hpp
+	<new>
+	<cstddef>
+	<boost/config.hpp>
+	<boost/preprocessor/cat.hpp>
+	<boost/preprocessor/punctuation/paren.hpp>
+	<boost/preprocessor/iteration/iterate.hpp>
+	<boost/preprocessor/repetition/repeat.hpp>
+	<boost/preprocessor/repetition/enum.hpp>
+	<boost/preprocessor/repetition/enum_params.hpp>
+	<boost/preprocessor/repetition/enum_binary_params.hpp>
+	<boost/preprocessor/repetition/enum_trailing_params.hpp>
+
+1410023964 d:\cpp\boost_1_57_0\boost\utility\detail\in_place_factory_suffix.hpp
+
+1412797379 d:\cpp\boost_1_57_0\boost\optional\optional_fwd.hpp
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\alt_sstream.hpp
+	<string>
+	<boost/format/detail/compat_workarounds.hpp>
+	<boost/utility/base_from_member.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/assert.hpp>
+	<boost/format/alt_sstream_impl.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\alt_sstream_impl.hpp
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\format_class.hpp
+	<vector>
+	<string>
+	<boost/optional.hpp>
+	<boost/format/format_fwd.hpp>
+	<boost/format/internals_fwd.hpp>
+	<boost/format/internals.hpp>
+	<boost/format/alt_sstream.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\exceptions.hpp
+	<stdexcept>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\format_implementation.hpp
+	<boost/config.hpp>
+	<boost/throw_exception.hpp>
+	<boost/assert.hpp>
+	<boost/format/format_class.hpp>
+	<algorithm>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\group.hpp
+	<boost/config.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\feed_args.hpp
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/throw_exception.hpp>
+	<boost/format/format_class.hpp>
+	<boost/format/group.hpp>
+	<boost/format/detail/msvc_disambiguater.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\msvc_disambiguater.hpp
+	<boost/format/group.hpp>
+	<ostream>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\parsing.hpp
+	<boost/format/format_class.hpp>
+	<boost/format/exceptions.hpp>
+	<boost/throw_exception.hpp>
+	<boost/assert.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\free_funcs.hpp
+	<boost/format/format_class.hpp>
+	<boost/throw_exception.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\unset_macros.hpp
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\utypes.h
+	"unicode/umachine.h"
+	"unicode/uversion.h"
+	"unicode/uconfig.h"
+	<float.h>
+	"unicode/utf.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\umachine.h
+	"unicode/ptypes.h"
+	<stddef.h>
+	"unicode/urename.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\ptypes.h
+	<stddef.h>
+	"unicode/platform.h"
+	<stdint.h>
+	<features.h>
+	<inttypes.h>
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\platform.h
+	"unicode/uconfig.h"
+	"unicode/uvernum.h"
+	<android/api-level.h>
+	<sys/isa_defs.h>
+	<TargetConditionals.h>
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\uconfig.h
+	"uconfig_local.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\uvernum.h
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\urename.h
+	"unicode/uconfig.h"
+	"unicode/umachine.h"
+	"unicode/uvernum.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\uversion.h
+	"unicode/umachine.h"
+	"unicode/uvernum.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\utf.h
+	"unicode/umachine.h"
+	"unicode/utf8.h"
+	"unicode/utf16.h"
+	"unicode/utf_old.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\utf8.h
+	"unicode/umachine.h"
+	"unicode/utf.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\utf16.h
+	"unicode/umachine.h"
+	"unicode/utf.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\utf_old.h
+	"unicode/utf.h"
+	"unicode/utf8.h"
+	"unicode/utf16.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\ucnv.h
+	"unicode/ucnv_err.h"
+	"unicode/uenum.h"
+	"unicode/localpointer.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\ucnv_err.h
+	"unicode/utypes.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\uenum.h
+	"unicode/utypes.h"
+	"unicode/localpointer.h"
+	"unicode/strenum.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\localpointer.h
+	"unicode/utypes.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\strenum.h
+	"unicode/uobject.h"
+	"unicode/unistr.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\uobject.h
+	"unicode/utypes.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\unistr.h
+	"unicode/utypes.h"
+	"unicode/rep.h"
+	"unicode/std_string.h"
+	"unicode/stringpiece.h"
+	"unicode/bytestream.h"
+	"unicode/ucasemap.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\rep.h
+	"unicode/uobject.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\std_string.h
+	"unicode/utypes.h"
+	<string>
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\stringpiece.h
+	"unicode/utypes.h"
+	"unicode/uobject.h"
+	"unicode/std_string.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\bytestream.h
+	"unicode/utypes.h"
+	"unicode/uobject.h"
+	"unicode/std_string.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\ucasemap.h
+	"unicode/utypes.h"
+	"unicode/ustring.h"
+	"unicode/localpointer.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\ustring.h
+	"unicode/utypes.h"
+	"unicode/putil.h"
+	"unicode/uiter.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\putil.h
+	"unicode/utypes.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\uiter.h
+	"unicode/utypes.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\uchar.h
+	"unicode/utypes.h"
+
+1420897570 c:\mingw\msys\1.0\opt\windows_64\include\unicode\uloc.h
+	"unicode/utypes.h"
+	"unicode/uenum.h"
+
+1427225468 d:\cpp\channel\include\errors.hpp
+	<channels_config.h>
+	<stdexcept>
+	<string>
+	<boost/config.hpp>
+	<boost/system/error_code.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\make_shared.hpp
+	<boost/smart_ptr/make_shared.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\make_shared.hpp
+	<boost/smart_ptr/make_shared_object.hpp>
+	<boost/smart_ptr/make_shared_array.hpp>
+	<boost/smart_ptr/allocate_shared_array.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\make_shared_object.hpp
+	<boost/config.hpp>
+	<boost/smart_ptr/shared_ptr.hpp>
+	<boost/smart_ptr/detail/sp_forward.hpp>
+	<boost/type_traits/type_with_alignment.hpp>
+	<boost/type_traits/alignment_of.hpp>
+	<cstddef>
+	<new>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\sp_forward.hpp
+	<boost/config.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\make_shared_array.hpp
+	<boost/smart_ptr/detail/array_count_impl.hpp>
+	<boost/smart_ptr/detail/sp_if_array.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\array_count_impl.hpp
+	<boost/smart_ptr/detail/array_allocator.hpp>
+	<boost/smart_ptr/detail/sp_counted_impl.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\array_allocator.hpp
+	<boost/align/align.hpp>
+	<boost/smart_ptr/detail/array_traits.hpp>
+	<boost/smart_ptr/detail/array_utility.hpp>
+	<boost/type_traits/alignment_of.hpp>
+
+1412649611 d:\cpp\boost_1_57_0\boost\align\align.hpp
+	<boost/config.hpp>
+	<boost/align/detail/align_cxx11.hpp>
+	<boost/align/detail/align.hpp>
+
+1412649611 d:\cpp\boost_1_57_0\boost\align\detail\align_cxx11.hpp
+	<memory>
+
+1412649611 d:\cpp\boost_1_57_0\boost\align\detail\align.hpp
+	<boost/assert.hpp>
+	<boost/align/detail/address.hpp>
+	<boost/align/detail/is_alignment.hpp>
+	<cstddef>
+
+1412649611 d:\cpp\boost_1_57_0\boost\align\detail\address.hpp
+	<boost/cstdint.hpp>
+	<cstddef>
+
+1412649611 d:\cpp\boost_1_57_0\boost\align\detail\is_alignment.hpp
+	<boost/config.hpp>
+	<cstddef>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\array_traits.hpp
+	<boost/type_traits/remove_cv.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\array_utility.hpp
+	<boost/config.hpp>
+	<boost/type_traits/has_trivial_constructor.hpp>
+	<boost/type_traits/has_trivial_destructor.hpp>
+	<memory>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\sp_if_array.hpp
+	<boost/smart_ptr/shared_ptr.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\allocate_shared_array.hpp
+	<boost/smart_ptr/detail/array_count_impl.hpp>
+	<boost/smart_ptr/detail/sp_if_array.hpp>
+
+1427383280 d:\cpp\channel\include\msmlang_conv.hpp
+	<boost/shared_ptr.hpp>
+	<boost/make_shared.hpp>
+	<boost/noncopyable.hpp>
+	<boost/thread/once.hpp>
+	<smallobject.hpp>
+	<charsets.hpp>
+	<bytebuffer.hpp>
+	<Objbase.h>
+	<Mlang.h>
 

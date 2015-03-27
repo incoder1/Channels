@@ -2,6 +2,7 @@
 #include "helpers.hpp"
 
 #include  <boost/thread/scoped_thread.hpp>
+#include  <boost/make_shared.hpp>
 
 #include  <pipe.hpp>
 #include  <WindowsFile.hpp>
@@ -14,7 +15,7 @@ public:
 	virtual ~WindowsPipe() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual SReadChannel source() const;
 private:
-	static void write_routine(const PipeSinkRoutine routine, HANDLE hSink);
+	static void write_routine(const WindowsPipe* self, HANDLE hSink);
 private:
 	SReadChannel source_;
 };
@@ -23,13 +24,11 @@ WindowsPipe::WindowsPipe(PipeSinkRoutine routine,HANDLE sink,HANDLE source):
 	 Pipe(routine),
      source_(new FileChannel(source,GENERIC_READ,true))
 {
-	boost::thread sinkThread(boost::bind(&WindowsPipe::write_routine, routine, sink));
-	boost::strict_scoped_thread<> s(boost::move(sinkThread));
-	sinkThread.detach();
+	boost::thread sinkThread(boost::bind(&WindowsPipe::write_routine, this, sink));
 }
 
-void WindowsPipe::write_routine(const PipeSinkRoutine routine, HANDLE hSink) {
-	routine(SWriteChannel(new FileChannel(hSink, GENERIC_WRITE, true)));
+void WindowsPipe::write_routine(const WindowsPipe* self, HANDLE hSink) {
+	self->call_sink_routine(SWriteChannel(new FileChannel(hSink, GENERIC_WRITE, true)));
 }
 
 WindowsPipe::~WindowsPipe() {

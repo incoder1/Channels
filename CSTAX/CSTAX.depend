@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1426077627 source:d:\cpp\channel\cstax\main.cpp
+1427487028 source:d:\cpp\channel\cstax\main.cpp
 	<cstax.hpp>
 	<file.hpp>
 	<iostream>
@@ -20,7 +20,7 @@
 1382616958 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1425488680 d:\cpp\channel\include\buffers.hpp
+1427462059 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -1905,13 +1905,10 @@
 	<cstddef>
 	<boost/detail/workaround.hpp>
 
-1425471142 d:\cpp\channel\include\convert.hpp
-	<channels_config.h>
-	<bytebuffer.hpp>
-	<boost/unordered_map.hpp>
-	<boost/exception/all.hpp>
-	<stdexcept>
-	<cstring>
+1427381118 d:\cpp\channel\include\convert.hpp
+	"iconv_conv.hpp"
+	"ibm_icu_conv.hpp"
+	"msmlang_conv.hpp"
 
 1426075075 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
@@ -1920,11 +1917,12 @@
 	<win32/winver.h>
 	<windows.h>
 
-1425490499 d:\cpp\channel\include\bytebuffer.hpp
+1427368727 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
-	<buffers.hpp>
+	"channels_config.h"
+	"buffers.hpp"
 
 1221733859 d:\cpp\boost_1_54_0\boost\unordered_map.hpp
 	<boost/unordered/unordered_map.hpp>
@@ -5226,15 +5224,12 @@
 
 1310273157 d:\cpp\boost_1_54_0\boost\exception\detail\clone_current_exception.hpp
 
-1426069551 d:\cpp\channel\include\channels.hpp
-	<channels_config.h>
-	<stdexcept>
-	<boost/config.hpp>
-	<boost/system/error_code.hpp>
+1427464233 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
-	<bytebuffer.hpp>
+	"errors.hpp"
+	"bytebuffer.hpp"
 
 1221733859 d:\cpp\boost_1_54_0\boost\unordered_set.hpp
 	<boost/unordered/unordered_set.hpp>
@@ -5261,7 +5256,7 @@
 1383594446 d:\cpp\channel\cstax\xmlsource.hpp
 	<readwrite.hpp>
 
-1426079475 d:\cpp\channel\include\text.hpp
+1427374833 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
@@ -9083,10 +9078,12 @@
 	<boost/functional/hash_fwd.hpp>
 	<boost/unordered/detail/fwd.hpp>
 
-1425656200 d:\cpp\channel\cstax\include\xmlsource.hpp
+1427471212 d:\cpp\channel\cstax\include\xmlsource.hpp
 	<text.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/make_shared.hpp>
 
-1425656837 source:d:\cpp\channel\cstax\src\xmlsource.cpp
+1427471187 source:d:\cpp\channel\cstax\src\xmlsource.cpp
 	"xmlsource.hpp"
 	<console.hpp>
 
@@ -9104,23 +9101,23 @@
 	<boost/smart_ptr/detail/shared_count.hpp>
 	<boost/smart_ptr/shared_ptr.hpp>
 
-1425560437 d:\cpp\channel\cstax\include\streamreader.hpp
+1427485450 d:\cpp\channel\cstax\include\streamreader.hpp
 	<stdexcept>
 	<boost/core/ref.hpp>
-	<event.hpp>
-	<xmlsource.hpp>
+	"event.hpp"
+	"xmlsource.hpp"
+	"xmlgrammar.hpp"
 
-1425657321 d:\cpp\channel\cstax\include\event.hpp
+1427479915 d:\cpp\channel\cstax\include\event.hpp
+	<boost/shared_ptr.hpp>
 	<smallobject.hpp>
-	<boost/enable_shared_from_this.hpp>
-	<element.hpp>
+	"element.hpp"
 
-1425657188 d:\cpp\channel\cstax\include\element.hpp
+1427459696 d:\cpp\channel\cstax\include\element.hpp
 	<boost/move/move.hpp>
 
-1425585937 source:d:\cpp\channel\cstax\src\streamreader.cpp
+1427486966 source:d:\cpp\channel\cstax\src\streamreader.cpp
 	<streamreader.hpp>
-	"xmlgrammar.hpp"
 	<iostream>
 
 1404730473 d:\cpp\channel\include\file.hpp
@@ -9128,11 +9125,12 @@
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1426013020 d:\cpp\channel\include\windowsfile.hpp
+1427375721 d:\cpp\channel\include\windowsfile.hpp
+	<boost/make_shared.hpp>
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1404755863 d:\cpp\channel\include\abstractfile.hpp
+1426676808 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1424707636 d:\cpp\channel\include\smallobjectpool.hpp
@@ -11477,7 +11475,7 @@
 	<cstring>
 	<boost/atomic/detail/config.hpp>
 
-1426012957 d:\cpp\channel\include\unixfile.hpp
+1426696747 d:\cpp\channel\include\unixfile.hpp
 	<sys/types.h>
 	<sys/stat.h>
 	<fcntl.h>
@@ -11487,15 +11485,15 @@
 	<channels_config.h>
 	<WindowsConsole.hpp>
 
-1426079168 d:\cpp\channel\include\windowsconsole.hpp
+1426707132 d:\cpp\channel\include\windowsconsole.hpp
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<boost/function.hpp>
 	<boost/bind.hpp>
-	<convert.hpp>
-	<file.hpp>
-	<channels.hpp>
+	<tchar.h>
+	<text.hpp>
+	"smallobject.hpp"
 
 1404698145 d:\cpp\boost_1_57_0\boost\xpressive\xpressive.hpp
 	<boost/xpressive/xpressive_static.hpp>
@@ -16292,21 +16290,253 @@
 	<boost/xpressive/detail/utility/literals.hpp>
 	<boost/xpressive/detail/utility/algorithm.hpp>
 
-1425991758 d:\cpp\channel\cstax\src\xmlgrammar.hpp
+1427477489 d:\cpp\channel\cstax\src\xmlgrammar.hpp
 	<stdint.h>
 	<boost/xpressive/xpressive.hpp>
 	<boost/xpressive/regex_algorithms.hpp>
 
-1425991751 source:d:\cpp\channel\cstax\src\xmlgrammar.cpp
+1427487151 source:d:\cpp\channel\cstax\src\xmlgrammar.cpp
 	"xmlgrammar.hpp"
 
-1426069539 d:\cpp\channel\include\smallobject.hpp
+1427375084 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
 	<stdexcept>
-	<cassert>
-	<boost/throw_exception.hpp>
-	<boost/pool/pool.hpp>
+	<boost/move/move.hpp>
+	<boost/enable_shared_from_this.hpp>
+
+1427370389 d:\cpp\channel\include\iconv_conv.hpp
+	<stdexcept>
+	<boost/shared_ptr.hpp>
+	<boost/make_shared.hpp>
+	<cerrno>
+	<iconv.h>
+	"bytebuffer.hpp"
+	"charsets.hpp"
+	"smallobject.hpp"
+
+1427464945 d:\cpp\channel\include\charsets.hpp
+	<channels_config.h>
 	<boost/unordered_map.hpp>
+
+1427370306 d:\cpp\channel\include\ibm_icu_conv.hpp
+	<boost/shared_ptr.hpp>
+	<boost/make_shared.hpp>
+	<boost/format.hpp>
+	<unicode/utypes.h>
+	<unicode/ucnv.h>
+	<unicode/ustring.h>
+	<unicode/uchar.h>
+	<unicode/uloc.h>
+	<unicode/unistr.h>
+	"charsets.hpp"
+	"bytebuffer.hpp"
+	"smallobject.hpp"
+
+1399910779 d:\cpp\boost_1_57_0\boost\format.hpp
+	<vector>
+	<string>
+	<boost/detail/workaround.hpp>
+	<boost/config.hpp>
+	<locale>
+	<boost/format/detail/compat_workarounds.hpp>
+	<cctype>
+	<boost/format/format_fwd.hpp>
+	<boost/format/internals_fwd.hpp>
+	<boost/format/internals.hpp>
+	<boost/format/format_class.hpp>
+	<boost/format/exceptions.hpp>
+	<boost/format/format_implementation.hpp>
+	<boost/format/group.hpp>
+	<boost/format/feed_args.hpp>
+	<boost/format/parsing.hpp>
+	<boost/format/free_funcs.hpp>
+	<boost/format/detail/unset_macros.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\compat_workarounds.hpp
+	<boost/format/detail/config_macros.hpp>
+	<streambuf>
+	<ostream>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\config_macros.hpp
+	<boost/config.hpp>
+	<boost/detail/workaround.hpp>
+	<boost/format/detail/workarounds_gcc-2_95.hpp>
+	<boost/format/detail/workarounds_stlport.hpp>
+	<locale>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\workarounds_gcc-2_95.hpp
+	<iostream>
+	<streambuf.h>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\workarounds_stlport.hpp
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\format_fwd.hpp
+	<string>
+	<iosfwd>
+	<boost/format/detail/compat_workarounds.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\internals_fwd.hpp
+	<boost/format/format_fwd.hpp>
+	<boost/config.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\internals.hpp
+	<string>
+	<boost/assert.hpp>
+	<boost/optional.hpp>
+	<boost/limits.hpp>
+	<boost/format/detail/compat_workarounds.hpp>
+	<boost/format/alt_sstream.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\alt_sstream.hpp
+	<string>
+	<boost/format/detail/compat_workarounds.hpp>
+	<boost/utility/base_from_member.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/assert.hpp>
+	<boost/format/alt_sstream_impl.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\alt_sstream_impl.hpp
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\format_class.hpp
+	<vector>
+	<string>
+	<boost/optional.hpp>
+	<boost/format/format_fwd.hpp>
+	<boost/format/internals_fwd.hpp>
+	<boost/format/internals.hpp>
+	<boost/format/alt_sstream.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\exceptions.hpp
+	<stdexcept>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\format_implementation.hpp
+	<boost/config.hpp>
+	<boost/throw_exception.hpp>
+	<boost/assert.hpp>
+	<boost/format/format_class.hpp>
+	<algorithm>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\group.hpp
+	<boost/config.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\feed_args.hpp
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/throw_exception.hpp>
+	<boost/format/format_class.hpp>
+	<boost/format/group.hpp>
+	<boost/format/detail/msvc_disambiguater.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\msvc_disambiguater.hpp
+	<boost/format/group.hpp>
+	<ostream>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\parsing.hpp
+	<boost/format/format_class.hpp>
+	<boost/format/exceptions.hpp>
+	<boost/throw_exception.hpp>
+	<boost/assert.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\free_funcs.hpp
+	<boost/format/format_class.hpp>
+	<boost/throw_exception.hpp>
+
+1399910779 d:\cpp\boost_1_57_0\boost\format\detail\unset_macros.hpp
+
+1427225468 d:\cpp\channel\include\errors.hpp
+	<channels_config.h>
+	<stdexcept>
+	<string>
+	<boost/config.hpp>
+	<boost/system/error_code.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\make_shared.hpp
+	<boost/smart_ptr/make_shared.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\make_shared.hpp
+	<boost/smart_ptr/make_shared_object.hpp>
+	<boost/smart_ptr/make_shared_array.hpp>
+	<boost/smart_ptr/allocate_shared_array.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\make_shared_object.hpp
+	<boost/config.hpp>
+	<boost/smart_ptr/shared_ptr.hpp>
+	<boost/smart_ptr/detail/sp_forward.hpp>
+	<boost/type_traits/type_with_alignment.hpp>
+	<boost/type_traits/alignment_of.hpp>
+	<cstddef>
+	<new>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\sp_forward.hpp
+	<boost/config.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\make_shared_array.hpp
+	<boost/smart_ptr/detail/array_count_impl.hpp>
+	<boost/smart_ptr/detail/sp_if_array.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\array_count_impl.hpp
+	<boost/smart_ptr/detail/array_allocator.hpp>
+	<boost/smart_ptr/detail/sp_counted_impl.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\array_allocator.hpp
+	<boost/align/align.hpp>
+	<boost/smart_ptr/detail/array_traits.hpp>
+	<boost/smart_ptr/detail/array_utility.hpp>
+	<boost/type_traits/alignment_of.hpp>
+
+1412649611 d:\cpp\boost_1_57_0\boost\align\align.hpp
+	<boost/config.hpp>
+	<boost/align/detail/align_cxx11.hpp>
+	<boost/align/detail/align.hpp>
+
+1412649611 d:\cpp\boost_1_57_0\boost\align\detail\align_cxx11.hpp
+	<memory>
+
+1412649611 d:\cpp\boost_1_57_0\boost\align\detail\align.hpp
+	<boost/assert.hpp>
+	<boost/align/detail/address.hpp>
+	<boost/align/detail/is_alignment.hpp>
+	<cstddef>
+
+1412649611 d:\cpp\boost_1_57_0\boost\align\detail\address.hpp
+	<boost/cstdint.hpp>
+	<cstddef>
+
+1412649611 d:\cpp\boost_1_57_0\boost\align\detail\is_alignment.hpp
+	<boost/config.hpp>
+	<cstddef>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\array_traits.hpp
+	<boost/type_traits/remove_cv.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\array_utility.hpp
+	<boost/config.hpp>
+	<boost/type_traits/has_trivial_constructor.hpp>
+	<boost/type_traits/has_trivial_destructor.hpp>
+	<memory>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\detail\sp_if_array.hpp
+	<boost/smart_ptr/shared_ptr.hpp>
+
+1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\allocate_shared_array.hpp
+	<boost/smart_ptr/detail/array_count_impl.hpp>
+	<boost/smart_ptr/detail/sp_if_array.hpp>
+
+1427383280 d:\cpp\channel\include\msmlang_conv.hpp
+	<boost/shared_ptr.hpp>
+	<boost/make_shared.hpp>
+	<boost/noncopyable.hpp>
 	<boost/thread/once.hpp>
-	<boost/thread/mutex.hpp>
+	<smallobject.hpp>
+	<charsets.hpp>
+	<bytebuffer.hpp>
+	<Objbase.h>
+	<Mlang.h>
+
+1427475440 source:d:\cpp\channel\cstax\src\event.cpp
+	"event.hpp"
+
+1427485001 d:\cpp\channel\cstax\include\xmlgrammar.hpp
+	<boost/xpressive/xpressive.hpp>
+	<boost/xpressive/regex_algorithms.hpp>
 

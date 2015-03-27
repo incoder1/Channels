@@ -4,12 +4,12 @@
 namespace io {
 
 // helpers
-inline void validate_conversion(bool condition, const std::string& name) throw(std::runtime_error)
+inline void validate_conversion(bool condition, const std::string& name)
 {
 	validate<std::runtime_error>(condition,name);
 }
 
-inline void validate_charset(const Charset* ch, const std::string& name) throw(std::runtime_error)
+inline void validate_charset(const Charset* ch, const std::string& name)
 {
 	validate<std::runtime_error>(NULL != ch, name + " is not provided by iconv converter");
 }
@@ -29,17 +29,27 @@ IconvConverter::IconvConverter(const Charset* from, const Charset* to):
 IconvConverter::~IconvConverter() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
+inline std::size_t IconvConverter::calcBuffSize(const byte_buffer& src) {
+	std::size_t result = 0;
+	if(to_->charSize() > from_->charSize() || from_ == Charsets::utf8() ){
+		result = src.length() * to_->charSize();
+	} else {
+		result= src.length();
+	}
+	return result;
+}
+
 byte_buffer IconvConverter::convert(const byte_buffer& src) throw(std::bad_alloc,std::runtime_error)
 {
-	std::size_t buffSize = 0;
-	if(to_->charSize() > from_->charSize() || from_ == Charsets::utf8() ){
-		buffSize = src.length() * to_->charSize();
-	} else {
-		buffSize = src.length();
-	}
+	std::size_t buffSize = calcBuffSize(src);
 	byte_buffer dest = byte_buffer::heap_buffer(buffSize);
-	char *itptr = (char*)src.position().ptr();
-	char *dstptr = (char*)dest.position().ptr();
+	convert(src,dest);
+	return dest;
+}
+
+std::size_t IconvConverter::convert(const byte_buffer& src, byte_buffer& dest) throw(std::runtime_error) {
+	char *itptr = reinterpret_cast<char*>(src.position().ptr());
+	char *dstptr = reinterpret_cast<char*>(dest.position().ptr());
 	std::size_t srclen = src.length();
 	std::size_t avail = dest.remain();
 	std::size_t iconvValue = ::iconv(conv_.get(), &itptr, &srclen, &dstptr, &avail);
@@ -65,8 +75,12 @@ byte_buffer IconvConverter::convert(const byte_buffer& src) throw(std::bad_alloc
 		dest.move(dest.end());
 	}
 	dest.flip();
-	return dest;
+	return dest.length();
 }
 
+SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to)
+{
+	return boost::make_shared<IconvConverter>(from, to);
+}
 
 } // namespace io

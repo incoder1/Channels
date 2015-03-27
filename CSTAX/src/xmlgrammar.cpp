@@ -2,20 +2,23 @@
 
 namespace xml {
 
-
 using namespace boost::xpressive;
 
-const sregex grm::TRUE_EXP = bos >> "yes" | "YES" | "true" | "TRUE" >> eos;  // (yes|YES|TRUE|true)
+#define DEFINE_EXPR(ID,EXPR) const grm::regex_t grm::ID = EXPR
 
-const sregex grm::START_DOCUMENT_EXP = bos >> "xml" >> space >> -+_ >> eos;
-const sregex grm::DOCUMENT_VERSION_EXP =  (s1 = "version=") >> '"' >> (s2 = -+(_d | '.')) >> '"'; // (version=")((\d|\.)*?)"
-const sregex grm::DOCUMENT_ENCODING_EXP = (s1 = "encoding=") >> '"' >> (s2 = -+_) >> '"'; // "(encoding=")(.+)"
-const sregex grm::DOCUMENT_STENDALONE_EXP =  (s1 = "standalone=") >>'"'>> (s2 = -+_) >>'"'; // (standalone=")(.+?)"
+// (yes|YES|TRUE|true)
+DEFINE_EXPR(TRUE_EXP, bos >> "yes" | "YES" | "true" | "TRUE" >> eos);
+DEFINE_EXPR(START_DOCUMENT_EXP, bos >> "<?xml" >> space >> -+_  >> "?>" >> eos);
+DEFINE_EXPR(DOCUMENT_VERSION_EXP, (s1 = "version=") >> '"' >> (s2 = -+(_d | '.')) >> '"'); // (version=")((\d|\.)*?)"
+DEFINE_EXPR(DOCUMENT_ENCODING_EXP, (s1 = "encoding=") >> '"' >> (s2 = -+_) >> '"'); // "(encoding=")(.+)"
+DEFINE_EXPR(DOCUMENT_STENDALONE_EXP,  (s1 = "standalone=") >>'"'>> (s2 = -+_) >>'"'); // (standalone=")(.+?)"
 
-const sregex grm::INSTRUCTION_TYPE_EXP = (s1 = "type=") >> '"' >> (s2 = -+_) >> '"';
-const sregex grm::INSTRUCTION_HREF_EXP = (s1 = "href=") >> '"' >> (s2 = -+_) >> '"';
+DEFINE_EXPR(INSTRUCTION_TYPE_EXP, (s1 = "type=") >> '"' >> (s2 = -+_) >> '"');
+DEFINE_EXPR(INSTRUCTION_HREF_EXP, (s1 = "href=") >> '"' >> (s2 = -+_) >> '"');
 
-const sregex grm::ELEMENT_NAME_EXP = -+~(set = '=' , '"' , ' ', '\t', '\n', '\r') >> _s;
-const sregex grm::ATTRIBUTE_EXP =  (s1 = -+~(set= '=','"',' ','\t','\n','\r')) >> '"' >> (s2 = -+_) >> '"';
+DEFINE_EXPR(ELEMENT_NAME_EXP,-+~(set = '=' , '"' , ' ', '\t', '\n', '\r') >> _s);
+DEFINE_EXPR(ATTRIBUTE_EXP, (s1 = -+~(set= '=','"',' ','\t','\n','\r')) >> '"' >> (s2 = -+_) >> '"');
+
+#undef DEFINE_EXPR // undefine decl
 
 } // namespace xml

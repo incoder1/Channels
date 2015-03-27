@@ -5,7 +5,9 @@
 #include <vector>
 
 #include <boost/function.hpp>
-#include <buffers.hpp>
+
+#include "channels_config.h"
+#include "buffers.hpp"
 
 namespace io {
 

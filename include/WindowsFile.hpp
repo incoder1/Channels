@@ -1,6 +1,8 @@
 #ifndef WINDOWSFILE_HPP_INCLUDED
 #define WINDOWSFILE_HPP_INCLUDED
 
+#include <boost/make_shared.hpp>
+
 #include "abstractfile.hpp"
 #include "smallobject.hpp"
 
@@ -9,7 +11,7 @@ namespace io {
 /**
  * ! \brief Windows depended blocking file Channel implementation.
  */
-class CHANNEL_PUBLIC FileChannel:public virtual ReadWriteChannel, public virtual object {
+class CHANNEL_PUBLIC FileChannel:public virtual object, public virtual ReadWriteChannel {
 private:
 	inline uint64_t seek(uint64_t,DWORD method) throw(io_exception);
 public:
@@ -29,6 +31,18 @@ private:
 };
 
 // AssychReadFileChannel
+class CHANNEL_PUBLIC AssychReadFileChannel:public AsynchReadChannel
+{
+public:
+	AssychReadFileChannel(HANDLE hFile,const read_callback& callback,std::size_t buffSize) throw (std::bad_alloc);
+	virtual void read();
+private:
+	static VOID CALLBACK completionReadRoutine(DWORD errorCode, DWORD transfered, LPOVERLAPPED loverlapped);
+private:
+	HANDLE id_;
+	OVERLAPPED overlaped_;
+	byte_buffer buffer_;
+};
 
 } // namespace io
 

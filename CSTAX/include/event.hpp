@@ -1,10 +1,12 @@
 #ifndef EVNET_HPP_INCLUDED
 #define EVNET_HPP_INCLUDED
 
+// boost
+#include <boost/shared_ptr.hpp>
+// io
 #include <smallobject.hpp>
-#include <boost/enable_shared_from_this.hpp>
-
-#include <element.hpp>
+// self
+#include "element.hpp"
 
 namespace xml {
 
@@ -21,14 +23,12 @@ enum EvenType {
 	DTD
 };
 
-class Event:public virtual boost::enable_shared_from_this<Event>, public virtual io::SmallObject {
-BOOST_MOVABLE_BUT_NOT_COPYABLE(Event)
+class Event;
+typedef boost::shared_ptr<Event> SEvent;
+
+class Event:public virtual io::object,public virtual boost::enable_shared_from_this<Event> {
 protected:
-	explicit Event(EvenType type) BOOST_NOEXCEPT_OR_NOTHROW:
-		boost::enable_shared_from_this<Event>(),
-		io::SmallObject(),
-		type_(type)
-	{}
+	explicit Event(EvenType type) BOOST_NOEXCEPT_OR_NOTHROW;
 public:
 	EvenType type() const {
 		return type_;
@@ -37,22 +37,22 @@ private:
 	EvenType type_;
 };
 
-typedef boost::shared_ptr<Event> SEvent;
+template<class detail_ptr>
+inline detail_ptr event_up_cast(SEvent ev)
+{
+	typedef typename detail_ptr::element_type UpType;
+	return boost::dynamic_pointer_cast<UpType,Event>(ev->shared_from_this());
+};
 
 class DocumentEvent:public Event {
-BOOST_MOVABLE_BUT_NOT_COPYABLE(DocumentEvent)
 public:
-	DocumentEvent(const std::string& version, const std::string& encoding, bool standalone) BOOST_NOEXCEPT_OR_NOTHROW:
-		Event(START_DOCUMENT),
-		version_(version),
-		encoding_(encoding),
-		standalone_(standalone)
-	{}
+	DocumentEvent(const std::string& version, const std::string& encoding, bool standalone) BOOST_NOEXCEPT_OR_NOTHROW;
+	virtual ~DocumentEvent() BOOST_NOEXCEPT_OR_NOTHROW;
 	std::string version() const {
-		return version_;
+		return std::string(version_);
 	}
 	std::string encoding() const {
-		return encoding_;
+		return std::string(encoding_);
 	}
 	bool isStandalone() const {
 		return standalone_;
@@ -66,43 +66,42 @@ private:
 typedef boost::shared_ptr<DocumentEvent> SDocumentEvent;
 
 class ElementEvent:public Event {
-BOOST_MOVABLE_BUT_NOT_COPYABLE(ElementEvent)
 public:
-	ElementEvent(EvenType type, const std::string& uri, const std::string& localName) BOOST_NOEXCEPT_OR_NOTHROW:
-		Event(type),
-		uri_(uri),
-		localName_(localName)
-	{}
+	typedef boost::shared_ptr<ElementEvent> reference;
+	ElementEvent(EvenType type, const std::string& uri, const std::string& localName) BOOST_NOEXCEPT_OR_NOTHROW;
+	virtual ~ElementEvent() BOOST_NOEXCEPT_OR_NOTHROW;
 	inline std::string uri() const {
-		return uri_;
+		return std::string(uri_);
 	}
 	inline std::string localName() const {
-		return localName_;
+		return std::string(localName_);
 	}
 private:
 	const std::string uri_;
 	const std::string localName_;
 };
 
-class AttributeEvent:public Event {
-private:
-	Attribute attr_;
-public:
-	AttributeEvent(const Attribute& attr) BOOST_NOEXCEPT_OR_NOTHROW:
-		Event(ATTRIBUTE),
-		attr_(attr)
-	{}
-	inline Attribute getAttribute() {
-		return attr_;
-	}
-};
+typedef boost::shared_ptr<ElementEvent> SElementEvent;
 
-class CharactersEvent:public Event {
-public:
-	CharactersEvent() BOOST_NOEXCEPT_OR_NOTHROW:
-		Event(CHARACTERS)
-	{}
-};
+//class AttributeEvent:public Event {
+//public:
+//	AttributeEvent(const Attribute& attr) BOOST_NOEXCEPT_OR_NOTHROW:
+//		Event(ATTRIBUTE),
+//		attr_(attr)
+//	{}
+//	inline Attribute getAttribute() {
+//		return attr_;
+//	}
+//private:
+//	Attribute attr_;
+//};
+
+//class CharactersEvent:public Event {
+//public:
+//	CharactersEvent() BOOST_NOEXCEPT_OR_NOTHROW:
+//		Event(CHARACTERS)
+//	{}
+//};
 
 } // xmlevent
 

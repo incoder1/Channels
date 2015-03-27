@@ -2,7 +2,7 @@
 #define QNAME_HPP_INCLUDED
 
 #include <string>
-#include <boost/detail/noexcept.hpp>
+#include <boost/move/move.hpp>
 
 namespace xml {
 

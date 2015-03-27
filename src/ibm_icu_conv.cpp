@@ -3,12 +3,9 @@
 
 namespace io {
 
-inline void validate_charset(const Charset* ch, const std::string& name) throw(charset_exception) {
-	validate<charset_exception>(NULL != ch, name + " is not provided by IBM ICU converter");
-}
 
 inline void validate_create_conv(const UErrorCode& errCode, const std::string& chName) {
-	validate<charset_exception>(U_SUCCESS(errCode), "Can not build IBM ICU converter for converting "+chName);
+	validate<std::runtime_error>(U_SUCCESS(errCode), "Can not build IBM ICU converter for converting "+chName);
 }
 
 static const std::size_t UTF16LE = 1200;
@@ -22,7 +19,7 @@ inline bool isWindowsChName(const Charset* ch) {
 }
 
 // factory for converter
-UConverter* openConverter(const io::Charset* ch) throw(io::charset_exception) {
+UConverter* openConverter(const io::Charset* ch) throw(std::runtime_error) {
 	UConverter *result = NULL;
 	if(notUTF16(ch)) {
 		std::string chName;
@@ -40,24 +37,15 @@ UConverter* openConverter(const io::Charset* ch) throw(io::charset_exception) {
 	return result;
 }
 
-SConverter CHANNEL_PUBLIC icu_conv(const char* src, const char* dst) throw(charset_exception)
-{
-	const Charset* srcCt = Charsets::forName(src);
-	validate_charset(srcCt, src);
-	const Charset* destCt = Charsets::forName(dst);
-	validate_charset(destCt, dst);
-	validate<charset_exception>(!srcCt->equal(destCt),"Source character set is equal destination, no conversation needed");
-	UConverter* intoUnc = openConverter(srcCt);
-	UConverter* fromUnc = openConverter(destCt);
-	ICUEngine engine(intoUnc, fromUnc);
-	return SConverter(new ICUConverter(engine, srcCt, destCt));
-}
-
 // ICUEngine
+ICUEngine::ICUEngine() BOOST_NOEXCEPT_OR_NOTHROW
+{}
+
 ICUEngine::ICUEngine(::UConverter* into, ::UConverter* from) BOOST_NOEXCEPT_OR_NOTHROW:
 	intoUTF16_(into,::ucnv_close),
 	fromUTF16_(from,::ucnv_close)
-{}
+{
+}
 
 UErrorCode ICUEngine::toUnicode(const char* src, std::size_t srcLen, UChar* dst, std::size_t& aval) const {
 		UErrorCode result = U_ZERO_ERROR;
@@ -72,10 +60,14 @@ UErrorCode ICUEngine::fromUnicode(UChar* src, std::size_t srcLen, char* dst, std
 }
 
 //ICUConverter
-ICUConverter::ICUConverter(ICUEngine engine, const Charset *srcCt, const Charset *dstCt) BOOST_NOEXCEPT_OR_NOTHROW:
-	Converter(srcCt,dstCt),
-	engine_(engine)
+ICUConverter::ICUConverter(const Charset *from, const Charset* to) throw(std::runtime_error):
+	from_(from),
+	to_(to)
 {
+	validate<std::runtime_error>(!from_->equal(to_),"Source character set is equal destination, no conversation needed");
+	UConverter* intoUnc = openConverter(from_);
+	UConverter* fromUnc = openConverter(to_);
+	engine_ = ICUEngine(intoUnc, fromUnc);
 }
 
 ICUConverter::~ICUConverter()
@@ -87,7 +79,7 @@ inline void validate_into_conv(UErrorCode errCode,const Charset* charset) {
 		std::string msg("Can not convert from ");
 		msg.append(charset->name());
 		msg.append(" into UTF-16LE");
-		boost::throw_exception(charset_exception(msg));
+		boost::throw_exception(std::runtime_error(msg));
 	}
 }
 
@@ -95,48 +87,72 @@ inline void validate_from_conv(UErrorCode errCode,const Charset* charset) {
 	if(U_FAILURE(errCode)) {
 		std::string msg("Can not convert from UTF-16LE into ");
 		msg.append(charset->name());
-		boost::throw_exception(charset_exception(msg));
+		boost::throw_exception(std::runtime_error(msg));
 	}
 }
 
-void ICUConverter::intoUnicode(const byte_buffer& source,byte_buffer& dest) throw(charset_exception)
+void ICUConverter::intoUnicode(const byte_buffer& source,byte_buffer& dest) throw(std::runtime_error)
 {
 	char *src = reinterpret_cast<char*>(source.position().ptr());
 	UChar *dst = reinterpret_cast<UChar*>(dest.position().ptr());
 	std::size_t avail = dest.capacity() / sizeof(UChar);
 	std::size_t srclen = source.length();
 	UErrorCode errCode = engine_.toUnicode(src, srclen, dst, avail);
-	validate_into_conv(errCode, srcCharset());
+	validate_into_conv(errCode, to_);
 	std::size_t offset = dest.capacity() - (avail*sizeof(UChar));
 	dest.move(0 != offset ? offset: dest.capacity() - 1);
 }
 
-void ICUConverter::fromUnicode(const byte_buffer& source,byte_buffer& dest) throw(charset_exception)
+void ICUConverter::fromUnicode(const byte_buffer& source,byte_buffer& dest) throw(std::runtime_error)
 {
 	UChar *src = reinterpret_cast<UChar*>(source.position().ptr());
 	char *dst = reinterpret_cast<char*>(dest.position().ptr());
 	std::size_t srclen = source.length() / sizeof(UChar);
 	std::size_t avail = dest.capacity();
 	UErrorCode errCode = engine_.fromUnicode(src, srclen, dst, avail);
-	validate_from_conv(errCode, destCharset());
+	validate_from_conv(errCode, to_);
 	std::size_t offset = dest.capacity() - avail;
 	dest.move(0 != offset ? offset: dest.capacity() - 1);
 }
 
-void ICUConverter::convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception)
+inline std::size_t ICUConverter::calcBuffSize(const byte_buffer& src) {
+	std::size_t result = 0;
+	if(to_->charSize() > from_->charSize() || from_ == Charsets::utf8() ){
+		result = src.length() * to_->charSize();
+	} else {
+		result= src.length();
+	}
+	return result;
+}
+
+std::size_t ICUConverter::convert(const byte_buffer& src, byte_buffer& dest) throw(std::runtime_error)
 {
-	if(notUTF16(srcCharset())) {
+	if(notUTF16(from_)) {
 		intoUnicode(src, dest);
-	} else if(notUTF16(destCharset())) {
+	} else if(notUTF16(to_)) {
 		fromUnicode(src, dest);
 	} else
 	// Conversation over Unicode, wouldn't be used
-	if(notUTF16(srcCharset()) && notUTF16(destCharset())) {
+	if(notUTF16(from_) && notUTF16(to_)) {
 		byte_buffer unicodeBuff = byte_buffer::heap_buffer(src.length()*sizeof(UChar));
 		intoUnicode(src,unicodeBuff);
 		unicodeBuff.flip();
 		fromUnicode(unicodeBuff, dest);
 	}
+	dest.flip();
 }
+
+byte_buffer ICUConverter::convert(const byte_buffer& src) throw(std::bad_alloc,std::runtime_error)
+{
+	std::size_t buffSize = calcBuffSize(src);
+	byte_buffer dest = byte_buffer::heap_buffer(buffSize);
+	convert(src,dest);
+	return dest;
+}
+
+SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to) throw(std::bad_alloc,std::runtime_error) {
+	return boost::make_shared<ICUConverter>(from,to);
+}
+
 
 } // namespace io

@@ -7,18 +7,18 @@ namespace xml {
 
 class Attribute {
 public:
-	Attribute(const char* name, const char* value) BOOST_NOEXCEPT_OR_NOTHROW:
+	Attribute(const std::string& name, const std::string& value) BOOST_NOEXCEPT_OR_NOTHROW:
 		name_(name),value_(value)
 	{}
-	inline std::string name() const {
+	inline const std::string name() const {
 		return name_;
 	}
-	inline std::string value() const {
+	inline const std::string value() const {
 		return value_;
 	}
 private:
-	const std::string name_;
-	const std::string value_;
+	std::string name_;
+	std::string value_;
 };
 
 } // namesapce xml

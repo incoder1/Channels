@@ -38,20 +38,10 @@ byte_buffer::iterator byte_buffer::put(const_iterator& first,const_iterator& las
 	return  basic_buffer<uint8_t>::put(first, last);
 }
 
-static uint8_t* new_heap_block(std::size_t size) throw (std::bad_alloc)
-{
-	return new uint8_t[size];
-}
-
-static void free_heap_block(uint8_t* block)
-{
-	delete [] block;
-}
-
 byte_buffer byte_buffer::heap_buffer(const std::size_t capacity) throw(std::bad_alloc)
 {
-	uint8_t* start = new_heap_block(capacity);
-	boost::shared_array<uint8_t> data(start, free_heap_block);
+	uint8_t* start = new uint8_t[capacity];
+	boost::shared_array<uint8_t> data(start);
 	byte_buffer result(data, start+capacity);
 	return result;
 }

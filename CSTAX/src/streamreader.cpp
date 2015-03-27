@@ -1,5 +1,4 @@
 #include <streamreader.hpp>
-#include "xmlgrammar.hpp"
 
 #include <iostream>
 
@@ -15,6 +14,8 @@ const uint8_t TAB = '\t';
 const uint8_t SCORE = '-';
 const uint8_t SLASH = '/';
 
+
+
 namespace rxp = boost::xpressive;
 
 static std::string extract_doc_attr_val(const std::string &src, const rxp::sregex& exp) BOOST_NOEXCEPT_OR_NOTHROW {
@@ -28,8 +29,8 @@ static std::string extract_doc_attr_val(const std::string &src, const rxp::srege
 
 //StreamReader
 
-StreamReader::StreamReader(const Source& source) BOOST_NOEXCEPT_OR_NOTHROW:
-	 src_(source)
+StreamReader::StreamReader(SSource xmlSource) BOOST_NOEXCEPT_OR_NOTHROW:
+	 src_(xmlSource)
 {}
 
 SEvent StreamReader::next() throw(xml_stream_error)
@@ -43,24 +44,39 @@ SEvent StreamReader::nextTag() throw(xml_stream_error)
 }
 
 SEvent StreamReader::parseNext() throw(xml_stream_error) {
-	if( !src_.hasNext() ) {
-		boost::throw_exception(xml_stream_error("invalid xml structure"));
+	std::string decl = getFullTagDecl();
+	if( matchesExpr( decl, grm::start_doc_exp() ) ) {
+		return parseStartDocument(decl);
 	}
-	uint8_t ch = src_.nextByte();
-	switch(ch) {
-	case QE:
-		return parseStartDocument();
-	default:
-		return SEvent(NULL);
+	return SEvent((Event*)NULL);
+}
+
+bool StreamReader::matchesExpr(const std::string& spec,const grm::regex_t& exp)
+{
+	return rxp::regex_match(spec.begin(),spec.end(),exp);
+}
+
+std::string StreamReader::getFullTagDecl() throw(xml_stream_error) {
+	std::string result("<");
+	uint8_t nextByte = src_->nextByte();
+	while(nextByte != RIGHTB) {
+		if(!src_->hasNext()) {
+			boost::throw_exception(xml_stream_error("invalid xml structure"));
+		} else {
+			result.push_back(static_cast<char>(nextByte));
+		}
+		nextByte = src_->nextByte();
 	}
+	result.push_back('>');
+	return result;
 }
 
 bool StreamReader::hasNext() throw(xml_stream_error)
 {
-	bool hasNextByte = src_.hasNext();
+	bool hasNextByte = src_->hasNext();
 	uint8_t nextByte = 0;
 	while(hasNextByte) {
-		 nextByte = src_.nextByte();
+		 nextByte = src_->nextByte();
 		 if(LEFTB == nextByte) {
 			return true;
 		 }
@@ -68,25 +84,14 @@ bool StreamReader::hasNext() throw(xml_stream_error)
 	return hasNextByte;
 }
 
-SEvent StreamReader::parseStartDocument() {
-	std::string spec;
-	uint8_t nextByte = src_.nextByte();
-	while(nextByte != QE) {
-		if(!src_.hasNext()) {
-			boost::throw_exception(xml_stream_error("invalid xml structure"));
-		} else {
-			spec.push_back(static_cast<char>(nextByte));
-		}
-		nextByte = src_.nextByte();
-	}
-	if(rxp::regex_match(spec.begin(),spec.end(),grm::xml_document_exp())) {
-		std::string version = extract_doc_attr_val(spec,grm::doc_ver_exp());
-		std::string encoding = extract_doc_attr_val(spec,grm::doc_encd_exp());
-		std::string stanaloneV = extract_doc_attr_val(spec,grm::doc_stendalone_exp());
-		bool stanalone = !stanaloneV.empty() && rxp::regex_match(stanaloneV,grm::true_exp());
-		return boost::shared_ptr<DocumentEvent>(new DocumentEvent(version,encoding,stanalone));
-	}
-	return SEvent((Event*)NULL);
+
+SEvent StreamReader::parseStartDocument(const std::string& prologText) {
+	std::string version = extract_doc_attr_val(prologText,grm::doc_version_exp());
+	std::string encoding = extract_doc_attr_val(prologText,grm::doc_encoding_exp());
+	std::string stanaloneV = extract_doc_attr_val(prologText,grm::doc_stendalone_exp());
+	bool stanalone = !stanaloneV.empty() && rxp::regex_match(stanaloneV,grm::true_exp());
+	SDocumentEvent ev = boost::make_shared<DocumentEvent>(version,encoding,stanalone);
+	return ev->shared_from_this();
 }
 
 

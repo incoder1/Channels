@@ -31,8 +31,8 @@
 void charset_console_sample() throw(io::io_exception)
 {
 	io::Console con(true);
-	io::SConverter converter(new io::Converter(io::Charsets::utf8(),con.charset()));
-	io::cnv_writer out(con.out(),converter);
+	io::SConverter conv = io::make_converter(io::Charsets::utf8(),con.charset());
+	io::cnv_writer out(con.out(),conv);
 	out.write("Hello! Привет! Χαιρετίσματα! こんにちは! 您好！ \n\r");
 	out.write("If you can't see your language please change console font");
 }
@@ -41,7 +41,7 @@ void pipe_write_routine(io::SWriteChannel sink) {
 	io::wwriter pout(sink);
 	pout.write(L"Hello from pipe!\n");
 	pout.write(L"\tПривет из канала!\n");
-	//pout.write(L"\tΧαιρετίσματα από το κανάλι!\n");
+	pout.write(L"\tΧαιρετίσματα από το κανάλι!\n");
 	pout.write(L"\tGrüße aus dem Kanal!\n");
 }
 
@@ -73,11 +73,9 @@ void file_sample() {
 	file.create();
 	{
 		auto fileChannel = file.openForWrite();
-		uint8_t bom[2] = {0xFF,0xFE};
-		io::byte_buffer buff = io::byte_buffer::wrap_array(bom,2);
-		fileChannel->write(buff);
-		io::SConverter conv(new io::Converter(io::Charsets::utf8(),io::Charsets::utf16le()));
-		io::cnv_writer out(fileChannel, conv);
+		char bom[2] = {0xFF,0xFE};
+		io::cnv_writer out(fileChannel, io::make_converter(io::Charsets::utf8(),io::Charsets::utf16le()));
+		out.write_raw(bom, 2);
 		out.write("ASCII     abcde xyz\n\rGerman  äöü ÄÖÜ ß\n\rPolish  ąęźżńł\n\rRussian  абвгдежэюя\n\rCJK  你好\n\r");
 	}
 	auto in = file.openForRead();

@@ -1,7 +1,9 @@
 #include "prchdrs.h"
 #include "smallobject.hpp"
 
-#include <boost/atomic.hpp>
+#include <vector>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
 #include <boost/pool/pool.hpp>
 #include <boost/thread/once.hpp>
 #include <boost/thread/mutex.hpp>
@@ -9,7 +11,6 @@
 namespace io {
 
 // Small Object allocator
-static const std::size_t MAX_SIZE = 128;
 
 class SmallObjectAllocator {
 public:
@@ -22,23 +23,12 @@ public:
 		instance()->free(ptr,size);
 	}
 private:
-	typedef boost::default_user_allocator_malloc_free system_allocator;
+	typedef boost::default_user_allocator_new_delete system_allocator;
 	typedef typename boost::pool<system_allocator> pool_t;
-
-	SmallObjectAllocator() throw(std::bad_alloc) {
-		for(std::size_t i=0; i <  MAX_SIZE; i++) {
-			pools_[i].store(NULL,boost::memory_order_seq_cst);
-		}
-	}
-	~SmallObjectAllocator() BOOST_NOEXCEPT_OR_NOTHROW {
-		for(std::size_t i=0; i < MAX_SIZE; i++) {
-			pool_t* pool = pools_[i].load(boost::memory_order_acquire);
-			if(NULL != pool) {
-				delete pool;
-			}
-			boost::atomic_thread_fence(boost::memory_order_release);
-		}
-	}
+	static const std::size_t MAX_SIZE = 128;
+	SmallObjectAllocator():
+		pools_(MAX_SIZE)
+	{}
 	static SmallObjectAllocator* const instance() throw(std::bad_alloc) {
 		boost::call_once(&SmallObjectAllocator::initilize,_once);
 		return _instance;
@@ -51,42 +41,42 @@ private:
 		delete _instance;
 	}
 	void* malloc(std::size_t size) throw(std::bad_alloc) {
+		void * result = NULL;
 		if(size-1 < MAX_SIZE) {
-			pool_t* pool = pools_[size-1].load(boost::memory_order_consume);
-			if(NULL == pool) {
+			boost::shared_ptr<pool_t> pool = pools_[size-1];
+			if(0 == pool.get()) {
 				boost::unique_lock<boost::mutex> lock(mutex_);
-				pool = pools_[size-1].load(boost::memory_order_acquire);
+				pool = pools_[size-1];
 				if(NULL == pool) {
-					pool = new pool_t(size-1);
-					pools_[size-1].exchange(pool, boost::memory_order_release);
+					pool = boost::make_shared<pool_t>(size-1);
+					pools_[size-1] = pool;
 				}
-			} else {
-				boost::atomic_thread_fence(boost::memory_order_release);
 			}
-			return pool->malloc();
+			result = pool->malloc();
+		} else {
+			result = static_cast<void*>(system_allocator::malloc(size));
 		}
-		return static_cast<void*>(system_allocator::malloc(size));
+		return result;
 	}
 	void free(void *ptr, std::size_t size) {
 		if(size-1 >= MAX_SIZE) {
 			system_allocator::free(static_cast<char*>(ptr));
 		} else {
-			pools_[size-1].load(boost::memory_order_relaxed)->free(ptr);
+			pools_[size-1]->free(ptr);
 		}
 	}
 private:
 	static SmallObjectAllocator* _instance;
 	static boost::once_flag _once;
 	boost::mutex mutex_;
-	boost::atomic<pool_t*> pools_[MAX_SIZE];
+	std::vector<boost::shared_ptr<pool_t>> pools_;
 };
 
 SmallObjectAllocator* SmallObjectAllocator::_instance = NULL;
 boost::once_flag SmallObjectAllocator::_once = BOOST_ONCE_INIT;
 
 // object
-object::object() BOOST_NOEXCEPT_OR_NOTHROW:
- boost::enable_shared_from_this<object>()
+object::object() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
 object::~object() BOOST_NOEXCEPT_OR_NOTHROW

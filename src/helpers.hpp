@@ -1,8 +1,7 @@
 #ifndef HELPERS_HPP_INCLUDED
 #define HELPERS_HPP_INCLUDED
 
-#include <channels_config.h>
-#include <boost/system/error_code.hpp>
+#include "errors.hpp"
 
 namespace io {
 

@@ -33,7 +33,7 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-O2" />
+					<Add option="-fexpensive-optimizations" />
 					<Add option="-std=gnu++11" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 				</Compiler>
@@ -62,11 +62,12 @@
 		<Unit filename="include/event.hpp" />
 		<Unit filename="include/qname.hpp" />
 		<Unit filename="include/streamreader.hpp" />
+		<Unit filename="include/xmlgrammar.hpp" />
 		<Unit filename="include/xmlsource.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/event.cpp" />
 		<Unit filename="src/streamreader.cpp" />
 		<Unit filename="src/xmlgrammar.cpp" />
-		<Unit filename="src/xmlgrammar.hpp" />
 		<Unit filename="src/xmlsource.cpp" />
 		<Extensions>
 			<code_completion />

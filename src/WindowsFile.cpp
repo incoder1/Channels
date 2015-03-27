@@ -71,8 +71,8 @@ SReadWriteChannel  File::openForReadWrite() throw(io_exception)
 
 // FileChannel
 FileChannel::FileChannel(HANDLE id, DWORD desiredAccess, bool close) BOOST_NOEXCEPT_OR_NOTHROW:
-	ReadWriteChannel(),
 	object(),
+	ReadWriteChannel(),
 	id_(id),
 	desiredAccess_(desiredAccess),
 	close_(close)
@@ -149,7 +149,24 @@ std::size_t FileChannel::fromEnd(std::size_t offset) throw (io_exception) {
 	return seek(-step, FILE_END);
 }
 
-// AsychReadFileChannel
+// AssychReadFileChannel
+AssychReadFileChannel::AssychReadFileChannel(HANDLE hFile,const read_callback& callback,std::size_t buffSize) throw (std::bad_alloc):
+		AsynchReadChannel(callback),
+		id_(hFile),
+		buffer_(byte_buffer::heap_buffer(buffSize))
+{
+	::ZeroMemory(&overlaped_,sizeof(OVERLAPPED));
+	overlaped_.hEvent = reinterpret_cast<HANDLE>(this);
+}
+
+VOID CALLBACK AssychReadFileChannel::completionReadRoutine(DWORD errorCode, DWORD transfered, LPOVERLAPPED overlapped) {
+	const AssychReadFileChannel* self = reinterpret_cast<const AssychReadFileChannel*>(overlapped->hEvent);
+	//self->handleRead(errorCode,transfered,self->buffer_);
+}
+
+void AssychReadFileChannel::read() {
+	//WINBOOL result = ::ReadFileEx();
+}
 
 } // namespace io
 

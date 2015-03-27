@@ -3,11 +3,9 @@
 
 #define DEBUG_TMI 0  /* define to 1 to enable Too Much Information */
 
-#include <boost/format.hpp>
-#include <boost/array.hpp>
 #include <boost/shared_ptr.hpp>
-
-#include <convert.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/format.hpp>
 
 #include <unicode/utypes.h>   /* Basic ICU data types */
 #include <unicode/ucnv.h>     /* C   Converter API    */
@@ -16,7 +14,9 @@
 #include <unicode/uloc.h>
 #include <unicode/unistr.h>
 
-#include <smallobjectpool.hpp>
+#include "charsets.hpp"
+#include "bytebuffer.hpp"
+#include "smallobject.hpp"
 
 namespace io {
 
@@ -25,6 +25,7 @@ private:
 	boost::shared_ptr<::UConverter> intoUTF16_;
 	boost::shared_ptr<::UConverter> fromUTF16_;
 public:
+	ICUEngine() BOOST_NOEXCEPT_OR_NOTHROW;
 	ICUEngine(::UConverter* into, ::UConverter* from) BOOST_NOEXCEPT_OR_NOTHROW;
 	UErrorCode toUnicode(const char* src, std::size_t srcLen, UChar* dst, std::size_t& aval) const;
 	UErrorCode fromUnicode(UChar* src, std::size_t srcLen, char* dst, std::size_t& aval) const;
@@ -36,10 +37,9 @@ public:
  * \param CharType - the byte type character representation. I.e. char, wchar_t, char8_t, char16_t etc.
  */
 class CHANNEL_PUBLIC ICUConverter:public object {
-private:
-	ICUEngine engine_;
-	void fromUnicode(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);
-	void intoUnicode(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);
+	void fromUnicode(const byte_buffer& src,byte_buffer& dest) throw(std::runtime_error);
+	void intoUnicode(const byte_buffer& src,byte_buffer& dest) throw(std::runtime_error);
+	inline std::size_t calcBuffSize(const byte_buffer& src);
 public:
 	/**
 	 * Constructs new converter
@@ -47,7 +47,7 @@ public:
 	 * \param destCt destination char set
 	 * \throw charset_exception if conversation is not possible
 	 */
-	ICUConverter(ICUEngine engine, const Charset *srcCt, const Charset *dstCt) BOOST_NOEXCEPT_OR_NOTHROW;
+	ICUConverter(const Charset *srcCt, const Charset *dstCt) throw(std::runtime_error);
 
 	/**
 	 * Frees resources allocated by converter
@@ -55,12 +55,33 @@ public:
 	virtual ~ICUConverter();
 
 	/**
-	 * Converting character sequence from source character set into destination charter set
+	 * Converts character sequence from source character set into destination charter set
+	 * \param src source characters in their bytes sequence representation
+	 *  \return heap byte buffer with converted characters
+	 */
+	byte_buffer convert(const byte_buffer& src) throw(std::bad_alloc,std::runtime_error);
+
+	/**
+	 * Converts character sequence from source character set into destination charter set
 	 * \param src source characters in their bytes sequence representation
 	 * \param dest destination characters in their character type representation
+	 * \return converted string length in bytes
 	 */
-	virtual void convert(const byte_buffer& src,byte_buffer& dest) throw(charset_exception);
+	std::size_t convert(const byte_buffer& src, byte_buffer& dest) throw(std::runtime_error);
+
+private:
+	const Charset* from_;
+	const Charset* to_;
+	ICUEngine engine_;
 };
+
+typedef boost::shared_ptr<ICUConverter> SConverter;
+
+SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to) throw(std::bad_alloc,std::runtime_error);
+
+inline SConverter make_converter(const char *from, const char* to) {
+	return make_converter(Charsets::forName(from),Charsets::forName(to));
+}
 
 } // namespace io
 

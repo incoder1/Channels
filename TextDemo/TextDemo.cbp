@@ -45,6 +45,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-Winline" />
 					<Add option="-fexceptions" />
 					<Add option="-fno-rtti" />
 					<Add option="-msse" />
@@ -60,34 +61,36 @@
 					<Add option="-s" />
 					<Add option="-Wl,-s" />
 					<Add option="-flto" />
-					<Add library="boost_system-mgw47-mt-1_54.dll" />
-					<Add library="boost_thread-mgw47-mt-1_54.dll" />
+					<Add library="iconv" />
+					<Add library="Ws2_32" />
+					<Add library="boost_system-mt.dll" />
+					<Add library="boost_thread-mt.dll" />
 					<Add directory="../bin/ReleaseMinGW32" />
-					<Add directory="../../boost_1_54_0/stage/gcc/lib" />
 					<Add directory="C:/MinGW/msys/1.0/local/lib" />
+					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
 				</Linker>
 			</Target>
-			<Target title="ReleaseMSVC64">
+			<Target title="MLangConv">
 				<Option platforms="Windows;" />
-				<Option output="bin/ReleaseMSVC64/TextDemo" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/ReleaseMSVC64/" />
+				<Option output="bin/MLangConv/TextDemo" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/MLangConv/" />
 				<Option type="1" />
-				<Option compiler="msvc10" />
+				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="/MDd" />
-					<Add option="/O2" />
-					<Add option="/W1" />
-					<Add option="/EHsc /D_SCL_SECURE_NO_WARNINGS /Ox" />
-					<Add option="/DBOOST_ALL_NO_LIB" />
-					<Add option="/DCONV_ENGINE_MLANG" />
+					<Add option="-std=c++0x" />
+					<Add option="-pg" />
+					<Add option="-g" />
+					<Add option="-DCONV_ENGINE_MLANG" />
 				</Compiler>
 				<Linker>
-					<Add library="ole32" />
-					<Add library="kernel32" />
-					<Add library="boost_system-mt" />
-					<Add library="boost_thread-mt" />
-					<Add directory="../bin/ReleaseMSVC10" />
-					<Add directory="D:/cpp/boost_1_57_0/stage/msvc/lib" />
+					<Add option="-pg -lgmon" />
+					<Add library="Channel" />
+					<Add library="Ws2_32" />
+					<Add library="boost_thread-mt-d.dll" />
+					<Add library="boost_system-mt-d.dll" />
+					<Add directory="../bin/ReleaseMLang" />
+					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
+					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/lib64" />
 				</Linker>
 			</Target>
 			<Target title="ReleaseMSVC64-ICU">

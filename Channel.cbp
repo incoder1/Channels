@@ -41,7 +41,8 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-O2" />
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-Winline" />
 					<Add option="-fexceptions" />
 					<Add option="-std=gnu++11" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
@@ -104,14 +105,14 @@
 					<Add option="/DCHANNEL_BUILD_DLL" />
 					<Add option="/DBOOST_ALL_NO_LIB" />
 					<Add option="/DCONV_ENGINE_IBM_ICU" />
+					<Add directory="D:/cpp/boost_1_57_0/icu/include" />
 				</Compiler>
 				<Linker>
 					<Add library="icuuc" />
-					<Add library="boost_system-vc100-mt-1_54" />
-					<Add library="boost_thread-vc100-mt-1_54" />
-					<Add library="iconv.dll" />
-					<Add directory="../boost_1_54_0/icu/lib64" />
-					<Add directory="../boost_1_54_0/stage/msvc/lib" />
+					<Add library="boost_system-mt" />
+					<Add library="boost_thread-mt" />
+					<Add directory="D:/cpp/boost_1_57_0/stage/msvc/lib" />
+					<Add directory="D:/cpp/boost_1_57_0/icu/lib64" />
 				</Linker>
 			</Target>
 			<Target title="DebugMinGW32-ICU">
@@ -235,7 +236,6 @@
 		<Unit filename="src/bytebuffer.cpp" />
 		<Unit filename="src/channels.cpp" />
 		<Unit filename="src/charsets.cpp" />
-		<Unit filename="src/convert.cpp" />
 		<Unit filename="src/helpers.hpp" />
 		<Unit filename="src/ibm_icu_conv.cpp">
 			<Option target="ReleaseMSVC10-ICU" />
