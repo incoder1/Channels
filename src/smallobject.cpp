@@ -79,10 +79,11 @@ boost::once_flag SmallObjectAllocator::_once = BOOST_ONCE_INIT;
 object::object() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
+
 object::~object() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
-std::size_t object::hash() const {
+std::size_t object::hash() const BOOST_NOEXCEPT_OR_NOTHROW {
 	return reinterpret_cast<std::size_t>(this);
 }
 

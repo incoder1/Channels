@@ -5,7 +5,6 @@ namespace xml {
 // Event
 Event::Event(EvenType type) BOOST_NOEXCEPT_OR_NOTHROW:
 		io::object(),
-		boost::enable_shared_from_this<Event>(),
 		type_(type)
 {}
 
@@ -22,15 +21,14 @@ DocumentEvent::~DocumentEvent() BOOST_NOEXCEPT_OR_NOTHROW
 {
 }
 
-//ElementEvent
-
-ElementEvent::ElementEvent(EvenType type, const std::string& uri, const std::string& localName) BOOST_NOEXCEPT_OR_NOTHROW:
-		Event(type),
-		uri_(uri),
-		localName_(localName)
+// ProcessingInstructionEvent
+ProcessingInstructionEvent::ProcessingInstructionEvent(const std::string& type, const std::string& href) BOOST_NOEXCEPT_OR_NOTHROW:
+	Event(PROCESSING_INSTRUCTION),
+	type_(type),
+	href_(href)
 {}
 
-ElementEvent::~ElementEvent() BOOST_NOEXCEPT_OR_NOTHROW
+ProcessingInstructionEvent::~ProcessingInstructionEvent() BOOST_NOEXCEPT_OR_NOTHROW
 {
 }
 

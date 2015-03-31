@@ -4,22 +4,58 @@
 #include <channels_config.h>
 
 #include <stdexcept>
+#include <boost/shared_ptr.hpp>
 #include <boost/move/move.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
 namespace io {
 
 /// !\brief Abstract class, which offspring will use segregate storage memory allocation.
-/// WARNING! This working only in case that you object is small i.e. size is less then 64 bytes
-/// If object is bigger then 128 bytes default new/delete will be used
+/// Simple segregate storage allocation will be applied only for objects with size less or equals 128 byte.
+/// If object is bigger then 128 bytes default new/delete allocation from C++ standard library will be used
 class CHANNEL_PUBLIC object {
+  // copying of abstract class is not allowed
   BOOST_MOVABLE_BUT_NOT_COPYABLE(object)
-public:
+protected:
+	/**
+	 * Direct instanciating is not allowed
+	 * Implementor must call inherit basic constructor call according C++ specification
+	 * \throw never throws
+	 */
 	object() BOOST_NOEXCEPT_OR_NOTHROW;
-	virtual std::size_t hash() const;
-	virtual bool equal(object* const obj) const;
+public:
+	/**
+	 * Pure-virtual destructor, implementor must provide an not't throwing destructor
+	 * \throw never throws
+	 */
 	virtual ~object() BOOST_NOEXCEPT_OR_NOTHROW = 0;
+
+	/**
+	 * Returns hash of object, original function returns \code this pointer value.
+	 * \return object hash
+	 * \throw never throws
+	 */
+	virtual std::size_t hash() const BOOST_NOEXCEPT_OR_NOTHROW;
+	/**
+	 * Logical compares this object with another by address. Default implementation compares pointers by value directly
+	 * \return whether objects are logical identical
+	 */
+	virtual bool equal(object* const obj) const;
+	/**
+	 * Ovverides system memory allocator to the sorted single segregate storage allocation.
+	 * If implementor size is lager then 128 bytes, default new will be used
+	 * \param size the size of implementor in bytes
+	 * \return pointer on new allocated object
+	 * \throw std::bad_alloc if memory can not be allocated
+	 */
 	void* operator new(std::size_t size) throw(std::bad_alloc);
+	/**
+	 * Ovverides system memory deleter to the sorted single segregate storage deleter.
+	 * If implementor size is lager then 128 bytes, default delete will be used
+	 * \param ptr pointer on allocated object
+	 * \param size size in bytes of allocated object
+	 * \throw never throws
+	 */
 	void operator delete(void *ptr,std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW;
 };
 

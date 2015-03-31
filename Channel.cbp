@@ -58,63 +58,6 @@
 					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/lib64" />
 				</Linker>
 			</Target>
-			<Target title="ReleaseMSVC10">
-				<Option platforms="Windows;" />
-				<Option output="bin/ReleaseMSVC10/Channel" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/ReleaseMSVC10" />
-				<Option type="3" />
-				<Option compiler="msvc10" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
-				<Option projectLibDirsRelation="1" />
-				<Compiler>
-					<Add option="/MD" />
-					<Add option="/W2" />
-					<Add option="/Zc:wchar_t" />
-					<Add option="/EHsc /Ob2 /Ox /D_SCL_SECURE_NO_WARNINGS" />
-					<Add option="/Yuprchdrs.h" />
-					<Add option="/Fpobj\ReleaseMSVC10\prchdrs.pch" />
-					<Add option="/DCHANNEL_BUILD_DLL" />
-					<Add option="/DBOOST_ALL_NO_LIB" />
-					<Add option="/DCONV_ENGINE_MLANG" />
-				</Compiler>
-				<Linker>
-					<Add library="kernel32" />
-					<Add library="ole32" />
-					<Add library="boost_system-mt" />
-					<Add library="boost_thread-mt" />
-					<Add directory="D:/cpp/boost_1_57_0/stage/msvc/lib" />
-				</Linker>
-			</Target>
-			<Target title="ReleaseMSVC10-ICU">
-				<Option platforms="Windows;" />
-				<Option output="bin/ReleaseMSVC10-ICU/Channel" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/ReleaseMSVC10-ICU" />
-				<Option type="3" />
-				<Option compiler="msvc10" />
-				<Option createDefFile="1" />
-				<Option createStaticLib="1" />
-				<Option projectLibDirsRelation="1" />
-				<Compiler>
-					<Add option="/MD" />
-					<Add option="/W2" />
-					<Add option="/Zc:wchar_t" />
-					<Add option="/EHsc /Ob2 /Ox" />
-					<Add option="/Yuprchdrs.h" />
-					<Add option="/Fpobj\ReleaseMSVC10-ICU\prchdrs.pch" />
-					<Add option="/DCHANNEL_BUILD_DLL" />
-					<Add option="/DBOOST_ALL_NO_LIB" />
-					<Add option="/DCONV_ENGINE_IBM_ICU" />
-					<Add directory="D:/cpp/boost_1_57_0/icu/include" />
-				</Compiler>
-				<Linker>
-					<Add library="icuuc" />
-					<Add library="boost_system-mt" />
-					<Add library="boost_thread-mt" />
-					<Add directory="D:/cpp/boost_1_57_0/stage/msvc/lib" />
-					<Add directory="D:/cpp/boost_1_57_0/icu/lib64" />
-				</Linker>
-			</Target>
 			<Target title="DebugMinGW32-ICU">
 				<Option platforms="Windows;" />
 				<Option output="bin/DebugMinWG32-ICU/Channel" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
@@ -166,15 +109,11 @@
 		<Unit filename="include/WindowsConsole.hpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
-			<Option target="ReleaseMSVC10" />
-			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="include/WindowsFile.hpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
-			<Option target="ReleaseMSVC10" />
-			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="include/abstractfile.hpp" />
@@ -187,7 +126,6 @@
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/file.hpp" />
 		<Unit filename="include/ibm_icu_conv.hpp">
-			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="include/iconv_conv.hpp">
@@ -205,32 +143,21 @@
 		<Unit filename="include/win32/winver.h">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
-			<Option target="ReleaseMSVC10" />
-			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
-		</Unit>
-		<Unit filename="include/win32_conv.hpp">
-			<Option target="ReleaseMSVC10" />
 		</Unit>
 		<Unit filename="src/WindowsConsole.cpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
-			<Option target="ReleaseMSVC10" />
-			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/WindowsFile.cpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
-			<Option target="ReleaseMSVC10" />
-			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/WindowsPipe.cpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
-			<Option target="ReleaseMSVC10" />
-			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/bytebuffer.cpp" />
@@ -238,7 +165,6 @@
 		<Unit filename="src/charsets.cpp" />
 		<Unit filename="src/helpers.hpp" />
 		<Unit filename="src/ibm_icu_conv.cpp">
-			<Option target="ReleaseMSVC10-ICU" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/iconv_conv.cpp">
@@ -247,9 +173,6 @@
 			<Option target="LinuxGCCDebug" />
 		</Unit>
 		<Unit filename="src/main.cpp" />
-		<Unit filename="src/mlang_i.cpp">
-			<Option target="ReleaseMSVC10" />
-		</Unit>
 		<Unit filename="src/pipe.cpp" />
 		<Unit filename="src/prchdrs.cpp">
 			<Option weight="1" />
@@ -265,7 +188,7 @@
 			<Option target="LinuxGCCDebug" />
 		</Unit>
 		<Unit filename="src/win32_conv.cpp">
-			<Option target="ReleaseMSVC10" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="test.txt">
 			<Option target="&lt;{~None~}&gt;" />

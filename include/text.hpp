@@ -5,6 +5,8 @@
 #include <convert.hpp>
 #include <channels.hpp>
 
+#include <boost/format.hpp>
+
 namespace io {
 
 template<typename _char_t, class _traits_t = std::char_traits<_char_t> >
@@ -62,7 +64,9 @@ private:
 template<typename _char_t, class _traits_t = std::char_traits<_char_t> >
 class basic_writer {
 public:
-	typedef std::basic_string<_char_t, _traits_t> string_t;
+	typedef std::basic_string<_char_t, _traits_t> string;
+
+	typedef boost::basic_format<_char_t, _traits_t, std::allocator<_char_t> > format;
 
 	basic_writer(SWriteChannel out) BOOST_NOEXCEPT_OR_NOTHROW:
 		out_(out)
@@ -71,7 +75,7 @@ public:
 	/**
 	 * Writes STL string into write channel
 	 */
-	void write(const string_t& str) {
+	void write(const string& str) {
 		byte_buffer buff = byte_buffer::wrap_array(str.data(), str.length()); // 0 ending symbol should be avoided
 		write(buff);
 	}
@@ -81,7 +85,11 @@ public:
 	}
 
 	void write(const _char_t* cStr) {
-		write(const_cast<_char_t*>(cStr),std::char_traits<_char_t>::length(cStr));
+		write(const_cast<_char_t*>(cStr),_traits_t::length(cStr));
+	}
+
+	void write(const format& format) {
+		write(format.str());
 	}
 
 	void write(const byte_buffer& buff) {
@@ -93,9 +101,13 @@ private:
 	SWriteChannel out_;
 };
 
-template<typename _char_t>
-class conv_writer:public basic_writer<_char_t> {
+template<typename _char_t, class _traits_t = std::char_traits<_char_t> >
+class conv_writer:public basic_writer<_char_t, _traits_t> {
 public:
+
+	typedef typename basic_writer<_char_t,_traits_t>::string string;
+	typedef typename basic_writer<_char_t,_traits_t>::format format;
+
 	/**
 	 * Constructs new writer to write converted string.
 	 * Note, use an empty converter in case when conversation is not needed
@@ -103,16 +115,14 @@ public:
 	 * \param conv smart pointer ti the character converter
 	 */
 	conv_writer(SWriteChannel out,SConverter conv) BOOST_NOEXCEPT_OR_NOTHROW:
-		basic_writer<_char_t>(out),
+		basic_writer<_char_t, _traits_t>(out),
 		conv_(conv)
 	{}
-
-	typedef typename basic_writer<_char_t>::string_t string_t;
 
 	/**
 	 * Writes STL string into write channel, with character conversation
 	 */
-	void write(const string_t& str) {
+	void write(const string& str) {
 		write(byte_buffer::wrap_array(str.data(), str.length()));
 	}
 
@@ -122,6 +132,14 @@ public:
 
 	void write(_char_t* const v, std::size_t size) {
 		write(byte_buffer::wrap_array(v, size));
+	}
+
+	void write(const _char_t* cStr) {
+		write(const_cast<_char_t*>(cStr),_traits_t::length(cStr));
+	}
+
+	void write(const format& format) {
+		write(format.str());
 	}
 
 	/**

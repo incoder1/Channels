@@ -21,7 +21,7 @@ namespace io {
  */
 class CHANNEL_PUBLIC IconvConverter:public object {
 public:
-	IconvConverter(const Charset* from, const Charset* to);
+	IconvConverter(const Charset* from, const Charset* to) throw(std::runtime_error);
 	~IconvConverter() BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**

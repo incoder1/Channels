@@ -46,4 +46,10 @@ byte_buffer byte_buffer::heap_buffer(const std::size_t capacity) throw(std::bad_
 	return result;
 }
 
+byte_buffer byte_buffer::resize(std::size_t capacity) throw(std::bad_alloc) {
+	uint8_t* start = new uint8_t[capacity];
+	basic_buffer<uint8_t>::resize(start,start+capacity);
+	return *this;
+}
+
 } //namaspace io

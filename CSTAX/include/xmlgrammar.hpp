@@ -15,7 +15,7 @@ namespace xml {
 
 class grm {
 public:
-	typedef boost::xpressive::sregex regex_t;
+	typedef boost::xpressive::cregex regex_t;
 // yes or true
 	DECLARE_EXPR(TRUE_EXP,true_exp)
 // start document
@@ -24,6 +24,7 @@ public:
 	DECLARE_EXPR(DOCUMENT_ENCODING_EXP,doc_encoding_exp)
 	DECLARE_EXPR(DOCUMENT_STENDALONE_EXP,doc_stendalone_exp)
 //processing instruction
+	DECLARE_EXPR(PROCESSING_INSTRUCTION_EXP,processing_instruction_exp)
 	DECLARE_EXPR(INSTRUCTION_TYPE_EXP,instr_type_exp)
 	DECLARE_EXPR(INSTRUCTION_HREF_EXP,instr_href_exp)
 // element

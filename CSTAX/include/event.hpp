@@ -3,6 +3,8 @@
 
 // boost
 #include <boost/shared_ptr.hpp>
+#include <boost/flyweight.hpp>
+
 // io
 #include <smallobject.hpp>
 // self
@@ -26,62 +28,51 @@ enum EvenType {
 class Event;
 typedef boost::shared_ptr<Event> SEvent;
 
-class Event:public virtual io::object,public virtual boost::enable_shared_from_this<Event> {
+class Event:public virtual io::object {
 protected:
 	explicit Event(EvenType type) BOOST_NOEXCEPT_OR_NOTHROW;
 public:
 	EvenType type() const {
-		return type_;
+		return type_.get();
 	}
 private:
-	EvenType type_;
-};
-
-template<class detail_ptr>
-inline detail_ptr event_up_cast(SEvent ev)
-{
-	typedef typename detail_ptr::element_type UpType;
-	return boost::dynamic_pointer_cast<UpType,Event>(ev->shared_from_this());
+	boost::flyweights::flyweight<EvenType> type_;
 };
 
 class DocumentEvent:public Event {
 public:
-	DocumentEvent(const std::string& version, const std::string& encoding, bool standalone) BOOST_NOEXCEPT_OR_NOTHROW;
+	DocumentEvent(const std::string& version,const std::string& encoding, bool standalone) BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual ~DocumentEvent() BOOST_NOEXCEPT_OR_NOTHROW;
-	std::string version() const {
-		return std::string(version_);
+	const std::string version() const {
+		return version_.get();
 	}
-	std::string encoding() const {
-		return std::string(encoding_);
+	const std::string encoding() const {
+		return encoding_.get();
 	}
-	bool isStandalone() const {
-		return standalone_;
+	bool standalone() const {
+		return standalone_.get();
 	}
 private:
-	std::string version_;
-	std::string encoding_;
-	bool standalone_;
+	boost::flyweights::flyweight<std::string> version_;
+	boost::flyweights::flyweight<std::string> encoding_;
+	boost::flyweights::flyweight<bool> standalone_;
 };
 
-typedef boost::shared_ptr<DocumentEvent> SDocumentEvent;
-
-class ElementEvent:public Event {
+class ProcessingInstructionEvent:public Event {
 public:
-	typedef boost::shared_ptr<ElementEvent> reference;
-	ElementEvent(EvenType type, const std::string& uri, const std::string& localName) BOOST_NOEXCEPT_OR_NOTHROW;
-	virtual ~ElementEvent() BOOST_NOEXCEPT_OR_NOTHROW;
-	inline std::string uri() const {
-		return std::string(uri_);
+	ProcessingInstructionEvent(const std::string& type, const std::string& href) BOOST_NOEXCEPT_OR_NOTHROW;
+	~ProcessingInstructionEvent() BOOST_NOEXCEPT_OR_NOTHROW;
+	inline const std::string type() const {
+		return type_.get();
 	}
-	inline std::string localName() const {
-		return std::string(localName_);
+	inline const std::string href() const {
+		return href_.get();
 	}
 private:
-	const std::string uri_;
-	const std::string localName_;
+	boost::flyweights::flyweight<std::string> type_;
+	boost::flyweights::flyweight<std::string> href_;
 };
 
-typedef boost::shared_ptr<ElementEvent> SElementEvent;
 
 //class AttributeEvent:public Event {
 //public:
@@ -102,6 +93,26 @@ typedef boost::shared_ptr<ElementEvent> SElementEvent;
 //		Event(CHARACTERS)
 //	{}
 //};
+
+
+typedef boost::shared_ptr<DocumentEvent> SDocumentEvent;
+typedef boost::shared_ptr<ProcessingInstructionEvent> SProcessingInstructionEvent;
+//typedef boost::shared_ptr<ElementEvent> SElementEvent;
+namespace detail {
+	template<class detail_ptr>
+	struct up_cast
+	{
+		typedef typename detail_ptr::element_type UpType;
+		static inline detail_ptr cast(SEvent ev)
+		{
+			return boost::dynamic_pointer_cast<UpType,Event>(ev);
+		}
+	};
+} // namespace detail
+
+inline SDocumentEvent as_document_event(SEvent event) {
+	return detail::up_cast<SDocumentEvent>::cast(event);
+}
 
 } // xmlevent
 

@@ -112,6 +112,15 @@ protected:
 	      last_(position_),
 	      end_(end)
 	{}
+	void resize(T* data, T* const endp)
+	{
+		T* thisData = data_.get();
+		position_ = data + (position_ - thisData);
+		last_ = data + (last_ - thisData);
+		std::copy(thisData,end_,data);
+		end_ = endp;
+		data_.reset(data);
+	}
 public:
 	typedef buffer_iterator<T> iterator;
 	typedef const buffer_iterator<T> const_iterator;

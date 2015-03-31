@@ -18,20 +18,22 @@ public:
 	{}
 };
 
+typedef boost::function<Event*(char*)> tag_parser_f;
+
 class StreamReader {
 public:
-	StreamReader(SSource source) BOOST_NOEXCEPT_OR_NOTHROW;
+	StreamReader(SSource source);
 	SEvent next() throw(xml_stream_error);
-	SEvent nextTag() throw(xml_stream_error);
 	bool hasNext() throw(xml_stream_error);
 	std::string getElementText() throw(xml_stream_error);
 private:
-	SEvent parseNext() throw(xml_stream_error);
-	bool matchesExpr(const std::string& spec,const grm::regex_t& exp);
-	std::string getFullTagDecl() throw(xml_stream_error);
-	SEvent parseStartDocument(const std::string& prologText);
+	Event* parseNext() throw(xml_stream_error);
+	io::byte_buffer getFullTagDecl() throw(xml_stream_error);
 private:
 	SSource src_;
+	boost::unordered_map<EvenType,tag_parser_f> tagParsers_;
+	Event* nextEvent_;
+	io::byte_buffer readBuffer_;
 };
 
 } // namesapce xml

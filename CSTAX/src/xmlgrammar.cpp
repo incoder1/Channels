@@ -8,11 +8,13 @@ using namespace boost::xpressive;
 
 // (yes|YES|TRUE|true)
 DEFINE_EXPR(TRUE_EXP, bos >> "yes" | "YES" | "true" | "TRUE" >> eos);
-DEFINE_EXPR(START_DOCUMENT_EXP, bos >> "<?xml" >> space >> -+_  >> "?>" >> eos);
+// document prolog
+DEFINE_EXPR(START_DOCUMENT_EXP, bos>> -*_ >> "<?xml" >> space >> -+_  >> "?>" >> eos);
 DEFINE_EXPR(DOCUMENT_VERSION_EXP, (s1 = "version=") >> '"' >> (s2 = -+(_d | '.')) >> '"'); // (version=")((\d|\.)*?)"
 DEFINE_EXPR(DOCUMENT_ENCODING_EXP, (s1 = "encoding=") >> '"' >> (s2 = -+_) >> '"'); // "(encoding=")(.+)"
 DEFINE_EXPR(DOCUMENT_STENDALONE_EXP,  (s1 = "standalone=") >>'"'>> (s2 = -+_) >>'"'); // (standalone=")(.+?)"
-
+// Processing instruction
+DEFINE_EXPR(PROCESSING_INSTRUCTION_EXP, bos >> -*_ >> "<?" >> +~_s >> -+_  >> "?>" >> eos);
 DEFINE_EXPR(INSTRUCTION_TYPE_EXP, (s1 = "type=") >> '"' >> (s2 = -+_) >> '"');
 DEFINE_EXPR(INSTRUCTION_HREF_EXP, (s1 = "href=") >> '"' >> (s2 = -+_) >> '"');
 

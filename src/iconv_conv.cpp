@@ -16,7 +16,8 @@ inline void validate_charset(const Charset* ch, const std::string& name)
 
 
 // IconvConverter
-IconvConverter::IconvConverter(const Charset* from, const Charset* to):
+IconvConverter::IconvConverter(const Charset* from, const Charset* to) throw(std::runtime_error):
+	object(),
 	from_(from),
 	to_(to)
 {

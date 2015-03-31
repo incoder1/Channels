@@ -103,6 +103,13 @@ public:
 	 * \return iterator to the new buffer position, or on the previews position if buffer is full
 	 */
 	iterator put(const_iterator& first,const_iterator& last);
+
+	/**
+	 * Calloc memory for the underlying memory block, and change end pointer
+	 * Can be used for grow or truncating byte buffer
+	 * \return new buffer capacity
+	 */
+	byte_buffer resize(std::size_t capacity) throw(std::bad_alloc);
 };
 
 
