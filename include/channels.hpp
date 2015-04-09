@@ -11,7 +11,7 @@
 namespace io {
 
 /**
- * ! \brief Generic interface for reading raw bytes from an input source
+ * ! \brief Channel which allow reading raw bytes from a source
  */
 class CHANNEL_PUBLIC ReadChannel {
 	BOOST_MOVABLE_BUT_NOT_COPYABLE(ReadChannel)
@@ -29,7 +29,7 @@ public:
 	 * \throw io_exception in case of underlying system error
 	 * \return count of bytes read
 	 */
-	virtual std::size_t read(byte_buffer& buffer) throw(io_exception) = 0;
+	virtual std::size_t read(byte_buffer& buffer) = 0;
 	/**
 	 * Pure virtual interface destructor, never throws
 	 */
@@ -44,7 +44,7 @@ public:
 typedef boost::shared_ptr<ReadChannel> SReadChannel;
 
 /**
- * Generic interface for writing raw bytes into output destination
+ * Channel with allow writing raw bytes into a source
  */
 class CHANNEL_PUBLIC WriteChannel {
 	BOOST_MOVABLE_BUT_NOT_COPYABLE(WriteChannel)
@@ -62,7 +62,7 @@ public:
 	 * \throw io_exception in case of system IO error
 	 * \return count of bytes written
 	 */
-	virtual std::size_t write(byte_buffer& buffer) throw(io_exception) = 0;
+	virtual std::size_t write(byte_buffer& buffer) = 0;
 	/**
 	 * Pure virtual destructor, never throws
 	*/
@@ -77,17 +77,34 @@ public:
 typedef boost::shared_ptr<WriteChannel> SWriteChannel;
 
 /**
-* ! \brief Generic random access interface which allows reading and writing into underlying destination
-* in the same time. Also allow to move the read/write position.
+ * ! \brief Channel which allows reading of and writing into the same resource
+ * Implementor must build on source which allows reading and writing at the same time,
+ * like file or named pipe for example
+ */
+class ReadWriteChannel:public virtual ReadChannel,public virtual WriteChannel
+{
+BOOST_MOVABLE_BUT_NOT_COPYABLE(ReadWriteChannel)
+protected:
+	ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW;
+public:
+	virtual ~ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
+};
+
+typedef boost::shared_ptr<ReadWriteChannel> SReadWriteChannel;
+
+/**
+* ! \brief Random access channel with: read, write and move current position operations.
+* Implementor must build on top of source which allows provided operations.
+* E.g. file or memory buffer is good chose
 */
-class CHANNEL_PUBLIC ReadWriteChannel:public virtual ReadChannel,public virtual WriteChannel {
-	BOOST_MOVABLE_BUT_NOT_COPYABLE(ReadWriteChannel)
+class CHANNEL_PUBLIC RandomAccessChannel:public ReadWriteChannel {
+	BOOST_MOVABLE_BUT_NOT_COPYABLE(RandomAccessChannel)
 protected:
 	/**
 	* Default constructor to be called by implementor
 	* Never throws
 	*/
-	ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW;
+	RandomAccessChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 public:
 	/**
 	* Return current channel position
@@ -99,29 +116,29 @@ public:
 	 * \throw io_exception in case of system error
 	 * \return new position channel position
 	 */
-	virtual std::size_t forward(std::size_t offset) throw (io_exception) = 0;
+	virtual std::size_t forward(std::size_t offset) = 0;
 	/**
 	 * Moves current channel position backward from current on offset bytes
 	 * \throw io_exception in case of system error
 	 * \return new position channel position
 	 */
-	virtual std::size_t backward(std::size_t offset) throw (io_exception) = 0;
+	virtual std::size_t backward(std::size_t offset) = 0;
 	/**
 	 * Moves current channel position forward from channel begin on offset bytes
 	 * \throw io_exception in case of system error
 	 * \return new position channel position
 	 */
-	virtual std::size_t fromBegin(std::size_t offset) throw (io_exception) = 0;
+	virtual std::size_t fromBegin(std::size_t offset) = 0;
 	/**
 	 * Moves current channel position backward from channel end on offset bytes
 	 * \throw io_exception in case of system error
 	 * \return new position channel position
 	 */
-	virtual std::size_t fromEnd(std::size_t offset) throw (io_exception) = 0;
+	virtual std::size_t fromEnd(std::size_t offset)  = 0;
 	/**
 	 * Pure virtual interface destructor, never throws
 	 */
-	virtual ~ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
+	virtual ~RandomAccessChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
 
 /**
@@ -129,12 +146,12 @@ public:
  *	All channel interfaces consider to prefer the smart pointers whether
  *	the raw pointers on channel interfaces.
  */
-typedef boost::shared_ptr<ReadWriteChannel> SReadWriteChannel;
+typedef boost::shared_ptr<RandomAccessChannel> SRandomAccessChannel;
 
 /**
 * ! \brief Generic abstract class for asynchronous reading from an underlying resource
 */
-class CHANNEL_PUBLIC AsynchReadChannel:public object {
+class CHANNEL_PUBLIC AsynchReadChannel {
 public:
 	/**
 	 * Functor for handling state of asynchronous read data available

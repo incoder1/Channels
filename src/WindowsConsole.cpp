@@ -12,7 +12,7 @@ ConsoleReadChannel::ConsoleReadChannel(HANDLE hCons, bool wide) BOOST_NOEXCEPT_O
 	charSize_(wide? sizeof(WCHAR) : sizeof(CHAR) )
 {}
 
-std::size_t ConsoleReadChannel::read(byte_buffer& buff) throw(io_exception)
+std::size_t ConsoleReadChannel::read(byte_buffer& buff)
 {
 	DWORD result;
 	CONSOLE_READCONSOLE_CONTROL control;
@@ -33,7 +33,7 @@ ConsoleWriteChannel::ConsoleWriteChannel(HANDLE hCons, bool unicode) BOOST_NOEXC
 	charSize_(unicode? sizeof(WCHAR) : sizeof(CHAR) )
 {}
 
-std::size_t ConsoleWriteChannel::write(byte_buffer& buffer) throw(io_exception)
+std::size_t ConsoleWriteChannel::write(byte_buffer& buffer)
 {
 	DWORD result = 0;
 	if(!buffer.full()) {

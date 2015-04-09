@@ -16,15 +16,15 @@ class CHANNEL_PUBLIC FileChannel:public virtual ReadWriteChannel, public virtual
 public:
 	FileChannel(int file) BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual ~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
-	virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
-	virtual std::size_t write(byte_buffer& buffer) throw(io_exception);
+	virtual std::size_t read(byte_buffer& buffer) ;
+	virtual std::size_t write(byte_buffer& buffer) ;
 	virtual std::size_t position();
-	virtual std::size_t forward(uint64_t offset) throw (io_exception);
-	virtual std::size_t backward(uint64_t offset) throw (io_exception);
-	virtual std::size_t fromBegin(uint64_t offset) throw (io_exception);
-	virtual std::size_t fromEnd(uint64_t offset) throw (io_exception);
+	virtual std::size_t forward(uint64_t offset) ;
+	virtual std::size_t backward(uint64_t offset) ;
+	virtual std::size_t fromBegin(uint64_t offset) ;
+	virtual std::size_t fromEnd(uint64_t offset) ;
 private:
-	std::size_t seek(std::size_t,int) throw(io_exception);
+	std::size_t seek(std::size_t,int) ;
 private:
 	int file_;
 };

@@ -24,7 +24,7 @@ namespace net {
 				ReadChannel(),WriteChannel(),object(),
 				socket_(socket)
 			{}
-			virtual std::size_t read(byte_buffer& buffer) throw(io_exception) {
+			virtual std::size_t read(byte_buffer& buffer)  {
 				boost::system::error_code error;
 				size_t result = socket_->read_some(asio_buffer(buffer), boost::ref(error));
 				if( (error != boost::asio::error::eof) && error) {
@@ -35,7 +35,7 @@ namespace net {
 				buffer.move(result);
 				return result;
 			}
-			virtual std::size_t write(const byte_buffer& buffer) throw(io_exception) {
+			virtual std::size_t write(const byte_buffer& buffer)  {
 				boost::system::error_code error;
 				std::size_t result = socket_->write_some(asio_buffer(buffer), boost::ref(error));
 				if( (error != boost::asio::error::eof) && error) {

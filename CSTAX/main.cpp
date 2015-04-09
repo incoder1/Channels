@@ -21,7 +21,7 @@ int main(int argc,const char **argv)
 	StreamReader reader(source);
 	//while(reader.hasNext()) {
 		SEvent event = reader.next();
-		auto dev = as_document_event(event);
+		auto dev = up_cast<SDocumentEvent>(event);
 		std::cout<<"Version: "<<dev->version()<<" Encoding: "<<dev->encoding()<<" Standalone:"<<dev->standalone()<<std::endl;
 	//}
 	return 0;

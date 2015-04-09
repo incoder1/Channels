@@ -42,7 +42,7 @@ static std::string last_error_str(DWORD lastError)
 	return result;
 }
 
-inline void validate_io(BOOL expression, const char* failMessage) throw(io_exception) {
+inline void validate_io(BOOL expression, const char* failMessage)  {
   if(!expression) {
 		DWORD lastError = ::GetLastError();
 		if(ERROR_IO_PENDING != lastError) {

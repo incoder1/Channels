@@ -26,9 +26,17 @@ ReadWriteChannel::ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW:
 ReadWriteChannel::~ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
+//RandomAccessChannel
+RandomAccessChannel::RandomAccessChannel() BOOST_NOEXCEPT_OR_NOTHROW:
+	ReadWriteChannel()
+{}
+
+RandomAccessChannel::~RandomAccessChannel() BOOST_NOEXCEPT_OR_NOTHROW
+{
+}
+
 // AsynchhReadChannel
 AsynchReadChannel::AsynchReadChannel(const read_callback& callback) BOOST_NOEXCEPT_OR_NOTHROW:
-	object(),
 	callback_(callback)
 {
 }

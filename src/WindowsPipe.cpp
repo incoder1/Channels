@@ -38,7 +38,7 @@ SReadChannel WindowsPipe::source() const {
 	return source_;
 }
 
-SPipe CHANNEL_PUBLIC create_pipe(std::size_t bufferSize, PipeSinkRoutine sinkRoutine) throw(io_exception)
+SPipe CHANNEL_PUBLIC create_pipe(std::size_t bufferSize, PipeSinkRoutine sinkRoutine)
 {
 	HANDLE sink, source = NULL;
 	validate_io(::CreatePipe(&source, &sink, NULL, DWORD(bufferSize)), "Can not create anonymous pipe");

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1427826445 source:d:\cpp\channel\cstax\main.cpp
+1427881737 source:d:\cpp\channel\cstax\main.cpp
 	<cstax.hpp>
 	<file.hpp>
 	<iostream>
@@ -9102,14 +9102,14 @@
 	<boost/smart_ptr/detail/shared_count.hpp>
 	<boost/smart_ptr/shared_ptr.hpp>
 
-1427827036 d:\cpp\channel\cstax\include\streamreader.hpp
+1427827375 d:\cpp\channel\cstax\include\streamreader.hpp
 	<stdexcept>
 	<boost/core/ref.hpp>
 	"event.hpp"
 	"xmlsource.hpp"
 	"xmlgrammar.hpp"
 
-1427826965 d:\cpp\channel\cstax\include\event.hpp
+1427882164 d:\cpp\channel\cstax\include\event.hpp
 	<boost/shared_ptr.hpp>
 	<boost/flyweight.hpp>
 	<smallobject.hpp>
@@ -9118,7 +9118,7 @@
 1427463296 d:\cpp\channel\cstax\include\element.hpp
 	<boost/move/move.hpp>
 
-1427825289 source:d:\cpp\channel\cstax\src\streamreader.cpp
+1427827365 source:d:\cpp\channel\cstax\src\streamreader.cpp
 	<streamreader.hpp>
 	<iostream>
 

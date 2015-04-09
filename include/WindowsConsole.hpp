@@ -32,7 +32,7 @@ class CHANNEL_PUBLIC ConsoleReadChannel:public virtual ReadChannel, public virtu
        typedef boost::function<BOOL(HANDLE,LPVOID,DWORD,LPDWORD,PCONSOLE_READCONSOLE_CONTROL)> readf_t;
 	public:
 		explicit ConsoleReadChannel(HANDLE hCons,bool unicode) BOOST_NOEXCEPT_OR_NOTHROW;
-		virtual std::size_t read(byte_buffer& buffer) throw(io_exception);
+		virtual std::size_t read(byte_buffer& buffer) ;
 		virtual ~ConsoleReadChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	private:
 		HANDLE hCons_;
@@ -45,7 +45,7 @@ private:
 	typedef boost::function<BOOL(HANDLE,const void*,DWORD,PDWORD,PVOID)> writef_t;
 public:
 	ConsoleWriteChannel(HANDLE hCons, bool unicode) BOOST_NOEXCEPT_OR_NOTHROW;
-	virtual std::size_t write(byte_buffer& buffer) throw(io_exception);
+	virtual std::size_t write(byte_buffer& buffer) ;
 	virtual ~ConsoleWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 private:
 	HANDLE hCons_;

@@ -5217,7 +5217,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1427467833 d:\cpp\channel\include\channels.hpp
+1428608589 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -5555,7 +5555,7 @@
 	"WindowsFile.hpp"
 	"unixfile.hpp"
 
-1427380527 source:d:\cpp\channel\src\windowspipe.cpp
+1428607883 source:d:\cpp\channel\src\windowspipe.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	<boost/thread/scoped_thread.hpp>
@@ -5563,7 +5563,7 @@
 	<pipe.hpp>
 	<WindowsFile.hpp>
 
-1427380340 d:\cpp\channel\include\pipe.hpp
+1428607913 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -7142,11 +7142,11 @@
 	<time.h>
 	<wchar.h>
 
-1426707545 source:d:\cpp\channel\src\windowsconsole.cpp
+1428607880 source:d:\cpp\channel\src\windowsconsole.cpp
 	"prchdrs.h"
 	"WindowsConsole.hpp"
 
-1426710732 d:\cpp\channel\include\windowsconsole.hpp
+1428607867 d:\cpp\channel\include\windowsconsole.hpp
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -7305,16 +7305,16 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1427379291 source:d:\cpp\channel\src\channels.cpp
+1428607983 source:d:\cpp\channel\src\channels.cpp
 	"prchdrs.h"
 	<channels.hpp>
 
-1427379321 d:\cpp\channel\include\windowsfile.hpp
+1428607913 d:\cpp\channel\include\windowsfile.hpp
 	<boost/make_shared.hpp>
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1426680408 d:\cpp\channel\include\abstractfile.hpp
+1428608001 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1426012957 d:\cpp\channel\include\unixfile.hpp
@@ -7323,7 +7323,7 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1427379235 source:d:\cpp\channel\src\windowsfile.cpp
+1428608078 source:d:\cpp\channel\src\windowsfile.cpp
 	"prchdrs.h"
 	"WindowsFile.hpp"
 
@@ -7404,7 +7404,7 @@
 	<channels.hpp>
 	"helpers.hpp"
 
-1427222634 d:\cpp\channel\src\helpers.hpp
+1428607889 d:\cpp\channel\src\helpers.hpp
 	"errors.hpp"
 
 1424707636 d:\cpp\channel\include\smallobjectpool.hpp
@@ -7777,7 +7777,7 @@
 1236010936 d:\cpp\boost_1_54_0\boost\weak_ptr.hpp
 	<boost/smart_ptr/weak_ptr.hpp>
 
-1427825548 source:d:\cpp\channel\src\bytebuffer.cpp
+1427826313 source:d:\cpp\channel\src\bytebuffer.cpp
 	"prchdrs.h"
 	"bytebuffer.hpp"
 

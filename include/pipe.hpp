@@ -41,7 +41,7 @@ private:
 
 typedef boost::shared_ptr<Pipe> SPipe;
 
-SPipe CHANNEL_PUBLIC create_pipe(std::size_t buffer_size, PipeSinkRoutine sink) throw(io_exception);
+SPipe CHANNEL_PUBLIC create_pipe(std::size_t buffer_size, PipeSinkRoutine sink) ;
 
 } // namespace io
 

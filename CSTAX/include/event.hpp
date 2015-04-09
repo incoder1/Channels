@@ -100,9 +100,11 @@ typedef boost::shared_ptr<ProcessingInstructionEvent> SProcessingInstructionEven
 //typedef boost::shared_ptr<ElementEvent> SElementEvent;
 namespace detail {
 	template<class detail_ptr>
-	struct up_cast
+	class up_cast
 	{
+	private:
 		typedef typename detail_ptr::element_type UpType;
+	public:
 		static inline detail_ptr cast(SEvent ev)
 		{
 			return boost::dynamic_pointer_cast<UpType,Event>(ev);
@@ -110,8 +112,9 @@ namespace detail {
 	};
 } // namespace detail
 
-inline SDocumentEvent as_document_event(SEvent event) {
-	return detail::up_cast<SDocumentEvent>::cast(event);
+template<class UpEventPtr>
+UpEventPtr up_cast(SEvent ev) {
+	return detail::up_cast<UpEventPtr>::cast(ev);
 }
 
 } // xmlevent

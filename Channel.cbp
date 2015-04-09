@@ -106,6 +106,7 @@
 			<Add directory="include" />
 			<Add directory="D:/cpp/boost_1_57_0" />
 		</Compiler>
+		<Unit filename="include/WidowsNamedPipe.hpp" />
 		<Unit filename="include/WindowsConsole.hpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
@@ -133,6 +134,7 @@
 			<Option target="ReleaseMinGW32" />
 			<Option target="LinuxGCCDebug" />
 		</Unit>
+		<Unit filename="include/namedpipe.hpp" />
 		<Unit filename="include/network.hpp" />
 		<Unit filename="include/pipe.hpp" />
 		<Unit filename="include/smallobject.hpp" />
@@ -145,6 +147,7 @@
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
+		<Unit filename="src/WidowsNamedPipe.cpp" />
 		<Unit filename="src/WindowsConsole.cpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
@@ -186,9 +189,6 @@
 		<Unit filename="src/smallobject.cpp" />
 		<Unit filename="src/unixfile.cpp">
 			<Option target="LinuxGCCDebug" />
-		</Unit>
-		<Unit filename="src/win32_conv.cpp">
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="test.txt">
 			<Option target="&lt;{~None~}&gt;" />

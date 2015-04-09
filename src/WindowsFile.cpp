@@ -47,32 +47,32 @@ bool File::exist() const BOOST_NOEXCEPT_OR_NOTHROW
 	return result;
 }
 
-SReadChannel File::openForRead() throw(io_exception)
+SReadChannel File::openForRead()
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	validate_file_handle(hFile);
 	return SReadChannel(new FileChannel(hFile, GENERIC_READ, true));
 }
 
-SWriteChannel  File::openForWrite() throw(io_exception)
+SWriteChannel  File::openForWrite()
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	validate_file_handle(hFile);
 	return SWriteChannel(new FileChannel(hFile, GENERIC_WRITE, true));
 }
 
-SReadWriteChannel  File::openForReadWrite() throw(io_exception)
+SRandomAccessChannel File::openForReadWrite()
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_READ | GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, 0);
 	validate_file_handle(hFile);
-	return SReadWriteChannel(new FileChannel(hFile, GENERIC_READ | GENERIC_WRITE, true));
+	return SRandomAccessChannel(new FileChannel(hFile, GENERIC_READ | GENERIC_WRITE, true));
 }
 
 
 // FileChannel
 FileChannel::FileChannel(HANDLE id, DWORD desiredAccess, bool close) BOOST_NOEXCEPT_OR_NOTHROW:
+	RandomAccessChannel(),
 	object(),
-	ReadWriteChannel(),
 	id_(id),
 	desiredAccess_(desiredAccess),
 	close_(close)
@@ -86,7 +86,7 @@ FileChannel::~FileChannel()
 	}
 }
 
-std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
+std::size_t FileChannel::read(byte_buffer& buffer)
 {
 	DWORD result;
 	BOOL succeeded = ::ReadFile(id_,
@@ -103,7 +103,7 @@ std::size_t FileChannel::read(byte_buffer& buffer) throw(io_exception)
 	return result;
 }
 
-std::size_t FileChannel::write(byte_buffer& buffer) throw(io_exception)
+std::size_t FileChannel::write(byte_buffer& buffer)
 {
 	DWORD result = 0;
 	if(!buffer.full()) {
@@ -118,7 +118,7 @@ std::size_t FileChannel::write(byte_buffer& buffer) throw(io_exception)
 	return result;
 }
 
-std::size_t FileChannel::seek(std::size_t offset, DWORD whence) throw(io_exception)
+std::size_t FileChannel::seek(std::size_t offset, DWORD whence)
 {
 	::LARGE_INTEGER li;
 	li.QuadPart = static_cast<LONG>(offset);
@@ -130,43 +130,26 @@ std::size_t FileChannel::position() {
 	return seek(0, FILE_CURRENT);
 }
 
-std::size_t FileChannel::forward(std::size_t offset) throw (io_exception) {
+std::size_t FileChannel::forward(std::size_t offset) {
 	return seek(offset, FILE_CURRENT);
 }
 
-std::size_t FileChannel::backward(std::size_t offset) throw (io_exception)
+std::size_t FileChannel::backward(std::size_t offset)
 {
 	ssize_t step = static_cast<std::size_t>(offset);
 	return seek(-step, FILE_CURRENT);
 }
 
-std::size_t FileChannel::fromBegin(std::size_t offset) throw (io_exception) {
+std::size_t FileChannel::fromBegin(std::size_t offset) {
 	return seek(offset, FILE_BEGIN);
 }
 
-std::size_t FileChannel::fromEnd(std::size_t offset) throw (io_exception) {
+std::size_t FileChannel::fromEnd(std::size_t offset) {
 	ssize_t step = static_cast<ssize_t>(offset);
 	return seek(-step, FILE_END);
 }
 
-// AssychReadFileChannel
-AssychReadFileChannel::AssychReadFileChannel(HANDLE hFile,const read_callback& callback,std::size_t buffSize) throw (std::bad_alloc):
-		AsynchReadChannel(callback),
-		id_(hFile),
-		buffer_(byte_buffer::heap_buffer(buffSize))
-{
-	::ZeroMemory(&overlaped_,sizeof(OVERLAPPED));
-	overlaped_.hEvent = reinterpret_cast<HANDLE>(this);
-}
 
-VOID CALLBACK AssychReadFileChannel::completionReadRoutine(DWORD errorCode, DWORD transfered, LPOVERLAPPED overlapped) {
-	const AssychReadFileChannel* self = reinterpret_cast<const AssychReadFileChannel*>(overlapped->hEvent);
-	//self->handleRead(errorCode,transfered,self->buffer_);
-}
-
-void AssychReadFileChannel::read() {
-	//WINBOOL result = ::ReadFileEx();
-}
 
 } // namespace io
 

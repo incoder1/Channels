@@ -37,17 +37,17 @@ public:
 	 * Open blocking read file channel
 	 * \return reference smart pointer on reading file channel
 	 */
-	SReadChannel openForRead() throw(io_exception);
+	SReadChannel openForRead() ;
 	/**
 	 * Open blocking write file channel
 	 * \return reference smart pointer on writing file channel
 	 */
-	SWriteChannel openForWrite() throw(io_exception);
+	SWriteChannel openForWrite() ;
 	/**
 	 * Open blocking read-write file channel
 	 * \return reference smart pointer on read-write file channel
 	 */
-	SReadWriteChannel openForReadWrite() throw(io_exception);
+	SRandomAccessChannel openForReadWrite() ;
 };
 
 } // namespace io
