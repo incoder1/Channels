@@ -1,5 +1,5 @@
-#ifndef READER_HPP_INCLUDED
-#define READER_HPP_INCLUDED
+#ifndef __IO_TEXT_HPP_INCLUDED__
+#define __IO_TEXT_HPP_INCLUDED__
 
 #include <stdexcept>
 #include <convert.hpp>
@@ -94,7 +94,9 @@ public:
 
 	void write(const byte_buffer& buff) {
 		byte_buffer b(buff);
-		while(out_->write(b) > 0);
+		while(b.last() != b.position()+1) {
+			b.move(out_->write(b));
+		};
 	}
 
 private:
@@ -175,4 +177,4 @@ typedef conv_writer<int32_t> cnv_u32writer;
 
 } // namespace io
 
-#endif // READER_HPP_INCLUDED
+#endif // __IO_TEXT_HPP_INCLUDED__

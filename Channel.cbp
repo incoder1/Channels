@@ -22,6 +22,7 @@
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add option="-DDEBUG" />
 					<Add directory="C:/MinGW/msys/1.0/include" />
+					<Add directory="include/win" />
 				</Compiler>
 				<Linker>
 					<Add library="iconv.dll" />
@@ -48,6 +49,7 @@
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add directory="C:/MinGW/msys/1.0/include" />
+					<Add directory="include/win" />
 				</Compiler>
 				<Linker>
 					<Add library="iconv.dll" />
@@ -74,6 +76,7 @@
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_IBM_ICU" />
 					<Add directory="C:/MinGW/msys/1.0/include" />
+					<Add directory="include/win" />
 				</Compiler>
 				<Linker>
 					<Add library="icuuc.dll" />
@@ -106,17 +109,6 @@
 			<Add directory="include" />
 			<Add directory="D:/cpp/boost_1_57_0" />
 		</Compiler>
-		<Unit filename="include/WidowsNamedPipe.hpp" />
-		<Unit filename="include/WindowsConsole.hpp">
-			<Option target="DebugMinGW32" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="DebugMinGW32-ICU" />
-		</Unit>
-		<Unit filename="include/WindowsFile.hpp">
-			<Option target="DebugMinGW32" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="DebugMinGW32-ICU" />
-		</Unit>
 		<Unit filename="include/abstractfile.hpp" />
 		<Unit filename="include/buffers.hpp" />
 		<Unit filename="include/bytebuffer.hpp" />
@@ -139,26 +131,20 @@
 		<Unit filename="include/pipe.hpp" />
 		<Unit filename="include/smallobject.hpp" />
 		<Unit filename="include/text.hpp" />
-		<Unit filename="include/unixfile.hpp">
+		<Unit filename="include/unix/unixfile.hpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>
-		<Unit filename="include/win32/winver.h">
+		<Unit filename="include/win/WinConsole.hpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
-		<Unit filename="src/WidowsNamedPipe.cpp" />
-		<Unit filename="src/WindowsConsole.cpp">
+		<Unit filename="include/win/WinFile.hpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
-		<Unit filename="src/WindowsFile.cpp">
-			<Option target="DebugMinGW32" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="DebugMinGW32-ICU" />
-		</Unit>
-		<Unit filename="src/WindowsPipe.cpp">
+		<Unit filename="include/win/winver.h">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
@@ -166,7 +152,6 @@
 		<Unit filename="src/bytebuffer.cpp" />
 		<Unit filename="src/channels.cpp" />
 		<Unit filename="src/charsets.cpp" />
-		<Unit filename="src/helpers.hpp" />
 		<Unit filename="src/ibm_icu_conv.cpp">
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
@@ -187,8 +172,33 @@
 			<Option compiler="msvc10" use="0" buildCommand="$compiler /nologo $options $includes /c $file /Yc$objects_output_dir\prchrd.pch" />
 		</Unit>
 		<Unit filename="src/smallobject.cpp" />
-		<Unit filename="src/unixfile.cpp">
+		<Unit filename="src/unix/unixfile.cpp">
 			<Option target="LinuxGCCDebug" />
+		</Unit>
+		<Unit filename="src/win/WinConsole.cpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+		</Unit>
+		<Unit filename="src/win/WinFile.cpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+		</Unit>
+		<Unit filename="src/win/WinNamedPipe.cpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+		</Unit>
+		<Unit filename="src/win/WinPipe.cpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+		</Unit>
+		<Unit filename="src/win/helpers.hpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="test.txt">
 			<Option target="&lt;{~None~}&gt;" />

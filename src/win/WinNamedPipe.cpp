@@ -1,6 +1,7 @@
 #include "prchdrs.h"
 #include "helpers.hpp"
-#include "WidowsNamedPipe.hpp"
+#include "namedpipe.hpp"
+#include "WinFile.hpp"
 
 namespace io {
 

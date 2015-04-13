@@ -66,7 +66,7 @@ void file_sample() {
 	using namespace io;
 	File file("result.txt");
 	if(file.exist()) {
-		if(!file.errace()) {
+		if(!file.remove()) {
 			boost::throw_exception(io_exception("Can not delete result.txt"));
 		}
 	}

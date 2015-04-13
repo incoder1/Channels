@@ -1,5 +1,5 @@
-#ifndef CHANNELS_HPP_INCLUDED
-#define CHANNELS_HPP_INCLUDED
+#ifndef __CHANNELS_HPP_INCLUDED__
+#define __CHANNELS_HPP_INCLUDED__
 
 #include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
@@ -62,7 +62,7 @@ public:
 	 * \throw io_exception in case of system IO error
 	 * \return count of bytes written
 	 */
-	virtual std::size_t write(byte_buffer& buffer) = 0;
+	virtual std::size_t write(const byte_buffer& buffer) = 0;
 	/**
 	 * Pure virtual destructor, never throws
 	*/
@@ -87,6 +87,8 @@ BOOST_MOVABLE_BUT_NOT_COPYABLE(ReadWriteChannel)
 protected:
 	ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 public:
+	virtual std::size_t read(byte_buffer& buffer) = 0;
+	virtual std::size_t write(const byte_buffer& buffer) = 0;
 	virtual ~ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
 
@@ -135,6 +137,10 @@ public:
 	 * \return new position channel position
 	 */
 	virtual std::size_t fromEnd(std::size_t offset)  = 0;
+
+	virtual std::size_t read(byte_buffer& buffer) = 0;
+	virtual std::size_t write(const byte_buffer& buffer) = 0;
+
 	/**
 	 * Pure virtual interface destructor, never throws
 	 */
@@ -199,4 +205,4 @@ inline void transfer(const SReadChannel& src,const SWriteChannel& dst, byte_buff
 
 } // namespace io
 
-#endif // CHANNELS_HPP_INCLUDED
+#endif // __CHANNELS_HPP_INCLUDED__

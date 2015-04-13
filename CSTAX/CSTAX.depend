@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1427881737 source:d:\cpp\channel\cstax\main.cpp
+1427882238 source:d:\cpp\channel\cstax\main.cpp
 	<cstax.hpp>
 	<file.hpp>
 	<iostream>
@@ -1910,11 +1910,11 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1426078675 d:\cpp\channel\include\channels_config.h
+1428656378 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
-	<win32/winver.h>
+	<win/winver.h>
 	<windows.h>
 
 1427738480 d:\cpp\channel\include\bytebuffer.hpp
@@ -5224,7 +5224,7 @@
 
 1310273157 d:\cpp\boost_1_54_0\boost\exception\detail\clone_current_exception.hpp
 
-1427467833 d:\cpp\channel\include\channels.hpp
+1428935986 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -5256,7 +5256,7 @@
 1383594446 d:\cpp\channel\cstax\xmlsource.hpp
 	<readwrite.hpp>
 
-1427723168 d:\cpp\channel\include\text.hpp
+1428935892 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
@@ -9122,9 +9122,9 @@
 	<streamreader.hpp>
 	<iostream>
 
-1404734073 d:\cpp\channel\include\file.hpp
+1428659451 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
-	"WindowsFile.hpp"
+	"win/WinFile.hpp"
 	"unixfile.hpp"
 
 1427379321 d:\cpp\channel\include\windowsfile.hpp
@@ -9132,7 +9132,7 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1426680408 d:\cpp\channel\include\abstractfile.hpp
+1428934994 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1424707636 d:\cpp\channel\include\smallobjectpool.hpp
@@ -11483,9 +11483,9 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1412177372 d:\cpp\channel\include\console.hpp
-	<channels_config.h>
-	<WindowsConsole.hpp>
+1428658104 d:\cpp\channel\include\console.hpp
+	"channels_config.h"
+	"win/WinConsole.hpp"
 
 1426710732 d:\cpp\channel\include\windowsconsole.hpp
 	<windows.h>
@@ -16300,14 +16300,13 @@
 1427732061 source:d:\cpp\channel\cstax\src\xmlgrammar.cpp
 	"xmlgrammar.hpp"
 
-1427719477 d:\cpp\channel\include\smallobject.hpp
+1428915147 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
-	<boost/enable_shared_from_this.hpp>
 
-1427720154 d:\cpp\channel\include\iconv_conv.hpp
+1428936082 d:\cpp\channel\include\iconv_conv.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
@@ -17618,4 +17617,21 @@
 	<boost/flyweight/static_holder_fwd.hpp>
 	<boost/flyweight/holder_tag.hpp>
 	<boost/mpl/aux_/lambda_support.hpp>
+
+1428935953 d:\cpp\channel\include\win\winver.h
+
+1428935907 d:\cpp\channel\include\win\winfile.hpp
+	<boost/make_shared.hpp>
+	"abstractfile.hpp"
+	"smallobject.hpp"
+
+1428940001 d:\cpp\channel\include\win\winconsole.hpp
+	<windows.h>
+	<boost/noncopyable.hpp>
+	<boost/config.hpp>
+	<boost/function.hpp>
+	<boost/bind.hpp>
+	<tchar.h>
+	<text.hpp>
+	"smallobject.hpp"
 

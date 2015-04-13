@@ -1,4 +1,4 @@
-#include "prchdrs.h"
+#include "../prchdrs.h"
 #include "msmlang_conv.hpp"
 
 #ifndef __IID_DEFINED__

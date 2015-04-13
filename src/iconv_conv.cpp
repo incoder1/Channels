@@ -6,17 +6,18 @@ namespace io {
 // helpers
 inline void validate_conversion(bool condition, const std::string& name)
 {
-	validate<std::runtime_error>(condition,name);
+	if(!condition)
+		boost::throw_exception(std::runtime_error(name));
 }
 
 inline void validate_charset(const Charset* ch, const std::string& name)
 {
-	validate<std::runtime_error>(NULL != ch, name + " is not provided by iconv converter");
+	validate_conversion(NULL != ch, name + " is not provided by iconv converter");
 }
 
 
 // IconvConverter
-IconvConverter::IconvConverter(const Charset* from, const Charset* to) throw(std::runtime_error):
+IconvConverter::IconvConverter(const Charset* from, const Charset* to):
 	object(),
 	from_(from),
 	to_(to)

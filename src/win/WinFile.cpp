@@ -2,8 +2,8 @@
  * Windows implementation of file and file channel
  */
 #include "prchdrs.h"
-
-#include "WindowsFile.hpp"
+#include "helpers.hpp"
+#include "WinFile.hpp"
 
 namespace io {
 
@@ -27,7 +27,7 @@ bool File::create() const BOOST_NOEXCEPT_OR_NOTHROW
 	return result;
 }
 
-bool File::errace() const BOOST_NOEXCEPT_OR_NOTHROW
+bool File::remove() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	bool result = exist();
 	if(result) {
@@ -103,18 +103,15 @@ std::size_t FileChannel::read(byte_buffer& buffer)
 	return result;
 }
 
-std::size_t FileChannel::write(byte_buffer& buffer)
+std::size_t FileChannel::write(const byte_buffer& buffer)
 {
 	DWORD result = 0;
-	if(!buffer.full()) {
-		BOOL succeeded = ::WriteFile(id_,
+	BOOL succeeded = ::WriteFile(id_,
 	                vpos(buffer),
 	                buffer.length(),
 	                &result,
 	                NULL);
-		validate_io(succeeded,"Write file error.");
-		buffer.move(result);
-	}
+	validate_io(succeeded,"Write file error.");
 	return result;
 }
 

@@ -1,5 +1,6 @@
 #include "prchdrs.h"
-#include "WindowsConsole.hpp"
+#include "helpers.hpp"
+#include "WinConsole.hpp"
 
 namespace io {
 
@@ -33,19 +34,16 @@ ConsoleWriteChannel::ConsoleWriteChannel(HANDLE hCons, bool unicode) BOOST_NOEXC
 	charSize_(unicode? sizeof(WCHAR) : sizeof(CHAR) )
 {}
 
-std::size_t ConsoleWriteChannel::write(byte_buffer& buffer)
+std::size_t ConsoleWriteChannel::write(const byte_buffer& buffer)
 {
 	DWORD result = 0;
-	if(!buffer.full()) {
-		BOOL succeeded = peer_(hCons_,
+	BOOL succeeded = peer_(hCons_,
 	                vpos(buffer),
 	                buffer.length() / charSize_,
 	                &result,
 	                NULL);
-		validate_io(succeeded,"Write console error.");
-		result = result * charSize_;
-		buffer.move(result);
-	}
+	validate_io(succeeded,"Write console error.");
+	result = result * charSize_;
 	return result;
 }
 

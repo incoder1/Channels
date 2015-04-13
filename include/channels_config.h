@@ -36,7 +36,7 @@
 
 // Shared lib / DLL special keywords if any
 #ifdef PLATFORM_WINDOWS
-#	include <win32/winver.h>
+#	include <win/winver.h>
 #	include <windows.h>
 
 // MSVC and MinGW Windows DLL

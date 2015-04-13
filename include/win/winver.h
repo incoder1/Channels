@@ -1,5 +1,5 @@
-#ifndef CHANNELS_WINVER_H_INCLUDED
-#define CHANNELS_WINVER_H_INCLUDED
+#ifndef __IO_WINVER_H_INCLUDED__
+#define __IO_WINVER_H_INCLUDED__
 
 #ifndef WINVER                  // Minimum platform is Windows XP
 #define WINVER 0x0502
@@ -25,4 +25,4 @@
 #define _USE_MATH_DEFINES
 #endif
 
-#endif // WINVER_H_INCLUDED
+#endif // __IO_WINVER_H_INCLUDED__

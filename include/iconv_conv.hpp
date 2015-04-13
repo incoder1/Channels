@@ -21,8 +21,8 @@ namespace io {
  */
 class CHANNEL_PUBLIC IconvConverter:public object {
 public:
-	IconvConverter(const Charset* from, const Charset* to) throw(std::runtime_error);
-	~IconvConverter() BOOST_NOEXCEPT_OR_NOTHROW;
+	IconvConverter(const Charset* from, const Charset* to);
+	virtual ~IconvConverter() BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**
 	 * Converts character sequence from source character set into destination charter set

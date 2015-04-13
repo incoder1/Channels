@@ -1,12 +1,11 @@
-#ifndef CHANNESL_SMALLOBJECT_HPP_INCLUDED
-#define CHANNESL_SMALLOBJECT_HPP_INCLUDED
+#ifndef __IO_SMALLOBJECT_HPP_INCLUDED__
+#define __IO_SMALLOBJECT_HPP_INCLUDED__
 
 #include <channels_config.h>
 
 #include <stdexcept>
 #include <boost/shared_ptr.hpp>
 #include <boost/move/move.hpp>
-#include <boost/enable_shared_from_this.hpp>
 
 namespace io {
 
@@ -61,4 +60,4 @@ public:
 
 } // namespace io
 
-#endif // CHANNESL_SMALLOBJECT_HPP_INCLUDED
+#endif // __IO_SMALLOBJECT_HPP_INCLUDED__

@@ -4,7 +4,7 @@
 #include "channels_config.h"
 
 #ifdef PLATFORM_WINDOWS
-#	include "WindowsFile.hpp"
+#	include "win/WinFile.hpp"
 #elif defined(PLATFORM_UNIX)
 #	include "unixfile.hpp"
 #else

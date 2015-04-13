@@ -4,8 +4,8 @@
 #include  <boost/thread/scoped_thread.hpp>
 #include  <boost/make_shared.hpp>
 
-#include  <pipe.hpp>
-#include  <WindowsFile.hpp>
+#include  "pipe.hpp"
+#include  "WinFile.hpp"
 
 namespace io {
 

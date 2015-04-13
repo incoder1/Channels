@@ -9,8 +9,6 @@ namespace io  {
  * ! \brief Abstraction for representing file. File system only, no sockets, devices etc.
 */
 class CHANNEL_PUBLIC File {
-private:
-	const char* path_;
 public:
 	/**
 	 * Creates new file, using path (file name)
@@ -24,10 +22,10 @@ public:
 	 */
 	bool create() const BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
-	 * Deletes file from dist
-	 * \return whether delete was successful
+	 * Deletes file
+	 * \return whether successful
 	 */
-	bool errace() const BOOST_NOEXCEPT_OR_NOTHROW;
+	bool remove() const BOOST_NOEXCEPT_OR_NOTHROW;
 	/**
 	 * Returns file exist sate
 	 * \return whether file with this path exist
@@ -36,18 +34,23 @@ public:
 	/**
 	 * Open blocking read file channel
 	 * \return reference smart pointer on reading file channel
+	 * \throw io_exception in case of failure
 	 */
-	SReadChannel openForRead() ;
+	SReadChannel openForRead();
 	/**
 	 * Open blocking write file channel
 	 * \return reference smart pointer on writing file channel
+	 * \throw io_exception in case of failure
 	 */
-	SWriteChannel openForWrite() ;
+	SWriteChannel openForWrite();
 	/**
 	 * Open blocking read-write file channel
 	 * \return reference smart pointer on read-write file channel
+	 * \throw io_exception in case of failure
 	 */
-	SRandomAccessChannel openForReadWrite() ;
+	SRandomAccessChannel openForReadWrite();
+private:
+	const char* path_;
 };
 
 } // namespace io

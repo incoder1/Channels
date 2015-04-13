@@ -1,5 +1,6 @@
 #include "prchdrs.h"
 #include "unixfile.hpp"
+#include "helpers.hpp"
 
 namespace io {
 
@@ -14,7 +15,7 @@ bool File::create() const BOOST_NOEXCEPT_OR_NOTHROW
 	return -1 != ::creat(path_, O_CREAT);
 }
 
-bool File::errace() const BOOST_NOEXCEPT_OR_NOTHROW
+bool File::remove() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	return -1 != ::remove(path_);
 }

@@ -23,8 +23,6 @@ void validate(bool expr, const std::string& msg) throw(E)
 	}
 }
 
-#ifdef PLATFORM_WINDOWS
-
 static std::string last_error_str(DWORD lastError)
 {
 	std::string result;
@@ -53,20 +51,6 @@ inline void validate_io(BOOL expression, const char* failMessage)  {
 		}
 	}
 }
-
-#endif // PLATFORM_WINDOWS
-
-#ifdef PLATFORM_UNIX
-inline void validate_io(ssize_t res, const char* msg) {
-	if(-1 == res) {
-		boost::system::error_code ec;
-		std::string smsg(msg);
-		smsg.append(" ");
-		smsg.append(ec.message());
-		boost::throw_exception(io_exception(smsg));
-	}
-}
-#endif // PLATFROM UNIX
 
 }
 #endif // HELPERS_HPP_INCLUDED

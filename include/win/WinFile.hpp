@@ -17,13 +17,13 @@ private:
 public:
 	FileChannel(HANDLE id, DWORD desiredAccess, bool close) BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual ~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
-	virtual std::size_t read(byte_buffer& buffer) ;
-	virtual std::size_t write(byte_buffer& buffer) ;
+	virtual std::size_t read(byte_buffer& buffer);
+	virtual std::size_t write(const byte_buffer& buffer);
 	virtual std::size_t position();
-	virtual std::size_t forward(std::size_t offset) ;
-	virtual std::size_t backward(std::size_t offset) ;
-	virtual std::size_t fromBegin(std::size_t offset) ;
-	virtual std::size_t fromEnd(std::size_t offset) ;
+	virtual std::size_t forward(std::size_t offset);
+	virtual std::size_t backward(std::size_t offset);
+	virtual std::size_t fromBegin(std::size_t offset);
+	virtual std::size_t fromEnd(std::size_t offset);
 private:
 	HANDLE id_;
 	DWORD desiredAccess_;
