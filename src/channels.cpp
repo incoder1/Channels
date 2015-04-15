@@ -4,21 +4,21 @@
 namespace io {
 
 // ReadChannel
-ReadChannel::ReadChannel() BOOST_NOEXCEPT_OR_NOTHROW
+ReadChannel::ReadChannel()
 {}
 
 ReadChannel::~ReadChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
 //WriteChannel
-WriteChannel::WriteChannel() BOOST_NOEXCEPT_OR_NOTHROW
+WriteChannel::WriteChannel()
 {}
 
 WriteChannel::~WriteChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
 //ReadWriteChannel
-ReadWriteChannel::ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW:
+ReadWriteChannel::ReadWriteChannel():
 	ReadChannel(),
 	WriteChannel()
 {}
@@ -27,7 +27,7 @@ ReadWriteChannel::~ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
 //RandomAccessChannel
-RandomAccessChannel::RandomAccessChannel() BOOST_NOEXCEPT_OR_NOTHROW:
+RandomAccessChannel::RandomAccessChannel():
 	ReadWriteChannel()
 {}
 
@@ -35,18 +35,37 @@ RandomAccessChannel::~RandomAccessChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {
 }
 
-// AsynchhReadChannel
-AsynchReadChannel::AsynchReadChannel(const read_callback& callback) BOOST_NOEXCEPT_OR_NOTHROW:
-	callback_(callback)
+// AsyncResult
+AsyncResult::AsyncResult()
+{}
+
+AsyncResult::~AsyncResult() BOOST_NOEXCEPT_OR_NOTHROW
+{}
+
+// AsynchReadChannel
+AsynchReadChannel::AsynchReadChannel()
 {
 }
 
+AsynchReadChannel::~AsynchReadChannel() BOOST_NOEXCEPT_OR_NOTHROW
+{}
 
-void AsynchReadChannel::handleRead(boost::system::error_code& err, std::size_t read,const byte_buffer& data) const {
-	callback_(err,read,data);
+// AsynchWriteChannel
+AsynchWriteChannel::AsynchWriteChannel()
+{}
+
+AsynchWriteChannel::~AsynchWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW
+{
 }
 
-AsynchReadChannel::~AsynchReadChannel() BOOST_NOEXCEPT_OR_NOTHROW
+// AssynchReadWriteChannel
+AsynchReadWriteChannel::AsynchReadWriteChannel():
+	AsynchReadChannel(),
+	AsynchWriteChannel()
+{
+}
+
+AsynchReadWriteChannel::~AsynchReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {
 }
 

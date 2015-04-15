@@ -8,12 +8,13 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1428656378 d:\cpp\channel\include\channels_config.h
+1429124974 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
 	<win/winver.h>
 	<windows.h>
+	<stdint.h>
 
 1427738480 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
@@ -5217,7 +5218,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1428935986 d:\cpp\channel\include\channels.hpp
+1429126630 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -7305,7 +7306,7 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1428607983 source:d:\cpp\channel\src\channels.cpp
+1429037095 source:d:\cpp\channel\src\channels.cpp
 	"prchdrs.h"
 	<channels.hpp>
 
@@ -7314,7 +7315,7 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1428934994 d:\cpp\channel\include\abstractfile.hpp
+1429104287 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1426012957 d:\cpp\channel\include\unixfile.hpp
@@ -25912,7 +25913,7 @@
 
 1420654543 /usr/include/bits/fcntl2.h
 
-1428935892 d:\cpp\channel\include\text.hpp
+1429014192 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
@@ -26063,7 +26064,7 @@
 	"pipe.hpp"
 	"WindowsFile.hpp"
 
-1428657366 source:d:\cpp\channel\src\win\winnamedpipe.cpp
+1429029646 source:d:\cpp\channel\src\win\winnamedpipe.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	"namedpipe.hpp"
@@ -26072,10 +26073,11 @@
 1428656847 d:\cpp\channel\src\win\helpers.hpp
 	"errors.hpp"
 
-1428656645 d:\cpp\channel\include\namedpipe.hpp
+1429015665 d:\cpp\channel\include\namedpipe.hpp
+	<boost/function.hpp>
 	"channels.hpp"
 
-1428935907 d:\cpp\channel\include\win\winfile.hpp
+1429126703 d:\cpp\channel\include\win\winfile.hpp
 	<boost/make_shared.hpp>
 	"abstractfile.hpp"
 	"smallobject.hpp"
@@ -26088,7 +26090,7 @@
 	"pipe.hpp"
 	"WinFile.hpp"
 
-1428934923 source:d:\cpp\channel\src\win\winfile.cpp
+1429010013 source:d:\cpp\channel\src\win\winfile.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	"WinFile.hpp"
@@ -26107,4 +26109,8 @@
 	<tchar.h>
 	<text.hpp>
 	"smallobject.hpp"
+
+1429015658 source:d:\cpp\channel\src\namedpipe.cpp
+	"prchdrs.h"
+	"namedpipe.hpp"
 

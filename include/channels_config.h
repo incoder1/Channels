@@ -30,7 +30,9 @@
 #endif
 
 #if defined(__unix__) || defined(__linux__)
-#	define PLATFORM_UNIX 1
+#	ifndef PLATFORM_UNIX
+#		define PLATFORM_UNIX 1
+#	endif
 #	include <unistd.h>
 #endif
 
@@ -57,5 +59,12 @@
 #  define CHANNELS_NO_EXCEPTIONS 1
 # endif // !defined(BOOST_NO_EXCEPTIONS)
 #endif // !defined(CHANNELS_NO_EXCEPTIONS)
+
+// Macros for endians
+#include <stdint.h>
+
+#ifndef IS_BIG_ENDIAN
+#	define IS_BIG_ENDIAN (1 == 0x1000)
+#endif
 
 #endif // CHANNELS_CONFIG_H_INCLUDED

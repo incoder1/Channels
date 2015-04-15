@@ -161,6 +161,7 @@
 			<Option target="LinuxGCCDebug" />
 		</Unit>
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/namedpipe.cpp" />
 		<Unit filename="src/pipe.cpp" />
 		<Unit filename="src/prchdrs.cpp">
 			<Option weight="1" />

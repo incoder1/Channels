@@ -7,7 +7,28 @@
 
 #include <boost/format.hpp>
 
+
 namespace io {
+
+#ifdef PLATFORM_WINDOWS
+const char* AENDL = "\n\r";
+const wchar_t* WENDL = L"\n\r";
+#	ifndef BOOST_NO_CHAR16_T
+const char16_t* uENDL = u"\n\r";
+#	endif
+#	ifndef BOOST_NO_CHAR32_T
+const char32_t* UENDL = U"\n\r";
+#	endif
+#else
+const char* AENDL = "\n";
+const wchar_t* WENDL = L"\n";
+#	ifndef BOOST_NO_CHAR16_T
+const char16_t* uENDL = u"\n";
+#	endif
+#	ifndef BOOST_NO_CHAR32_T
+const char32_t UENDL = U"\n";
+#	endif
+#endif
 
 template<typename _char_t, class _traits_t = std::char_traits<_char_t> >
 class basic_reader {
@@ -76,8 +97,7 @@ public:
 	 * Writes STL string into write channel
 	 */
 	void write(const string& str) {
-		byte_buffer buff = byte_buffer::wrap_array(str.data(), str.length()); // 0 ending symbol should be avoided
-		write(buff);
+		write(str.data());
 	}
 
 	void write(_char_t* const v, std::size_t size) {
@@ -91,6 +111,30 @@ public:
 	void write(const format& format) {
 		write(format.str());
 	}
+
+	void writeln(const char* cStr) {
+		write(cStr);
+		write(AENDL);
+	}
+
+	void writeln(const wchar_t* cStr) {
+		write(cStr);
+		write(WENDL);
+	}
+
+#ifndef BOOST_NO_CHAR16_T
+	void writeln(const char16_t* cStr) {
+		write(cStr);
+		write(uENDL);
+	}
+#endif // BOOST_NO_CHAR16_T
+
+#ifndef BOOST_NO_CHAR32_T
+	void writeln(const char32_t* cStr) {
+		write(cStr);
+		write(UENDL);
+	}
+#endif // BOOST_NO_CHAR32_T
 
 	void write(const byte_buffer& buff) {
 		byte_buffer b(buff);
@@ -158,21 +202,28 @@ private:
 
 typedef basic_reader<char> reader;
 typedef basic_reader<wchar_t> wreder;
-typedef basic_reader<int16_t> u16reader;
-typedef basic_reader<int32_t> u32reader;
 typedef conv_reader<char> cnv_reader;
 typedef conv_reader<wchar_t> cnv_wreader;
-typedef conv_reader<int16_t> cnv_u16reader;
-typedef conv_reader<int32_t> cnv_u32wreader;
 
 typedef basic_writer<char> writer;
 typedef basic_writer<wchar_t> wwriter;
-typedef basic_writer<int16_t> u16writer;
-typedef basic_writer<int32_t> u32writer;
 typedef conv_writer<char> cnv_writer;
 typedef conv_writer<wchar_t> cnv_wwriter;
-typedef conv_writer<int16_t> cnv_u16writer;
-typedef conv_writer<int32_t> cnv_u32writer;
+
+
+#ifndef BOOST_NO_CHAR16_T
+typedef basic_reader<char16_t> u16reader;
+typedef basic_writer<char16_t> u16writer;
+typedef conv_reader<char16_t> cnv_u16reader;
+typedef conv_writer<char16_t> cnv_u16writer;
+#endif
+#ifndef BOOST_NO_CHAR32_T
+typedef basic_reader<char32_t> u32reader;
+typedef basic_writer<char32_t> u32writer;
+typedef conv_reader<char32_t> cnv_u32reader;
+typedef conv_writer<char32_t> cnv_u32writer;
+#endif
+
 
 
 } // namespace io

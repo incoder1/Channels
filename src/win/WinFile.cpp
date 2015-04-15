@@ -115,35 +115,33 @@ std::size_t FileChannel::write(const byte_buffer& buffer)
 	return result;
 }
 
-std::size_t FileChannel::seek(std::size_t offset, DWORD whence)
+uint64_t FileChannel::seek(int64_t offset, DWORD whence)
 {
 	::LARGE_INTEGER li;
-	li.QuadPart = static_cast<LONG>(offset);
+	li.QuadPart = (LONGLONG)offset;
 	validate_io(::SetFilePointerEx(id_, li, &li,whence), "Can not move file pointer");
-	return static_cast<std::size_t>(li.QuadPart);
+	return (uint64_t)li.QuadPart;
 }
 
-std::size_t FileChannel::position() {
+uint64_t FileChannel::position() {
 	return seek(0, FILE_CURRENT);
 }
 
-std::size_t FileChannel::forward(std::size_t offset) {
+uint64_t FileChannel::forward(uint64_t offset) {
 	return seek(offset, FILE_CURRENT);
 }
 
-std::size_t FileChannel::backward(std::size_t offset)
+uint64_t FileChannel::backward(uint64_t offset)
 {
-	ssize_t step = static_cast<std::size_t>(offset);
-	return seek(-step, FILE_CURRENT);
+	return seek(-((int64_t)step), FILE_CURRENT | FILE );
 }
 
-std::size_t FileChannel::fromBegin(std::size_t offset) {
+uint64_t FileChannel::fromBegin(uint64_t offset) {
 	return seek(offset, FILE_BEGIN);
 }
 
-std::size_t FileChannel::fromEnd(std::size_t offset) {
-	ssize_t step = static_cast<ssize_t>(offset);
-	return seek(-step, FILE_END);
+uint64_t FileChannel::fromEnd(uint64_t offset) {
+	return seek(-((int64_t)step), FILE_END);
 }
 
 
