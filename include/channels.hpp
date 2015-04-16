@@ -178,13 +178,28 @@ public:
 	virtual ~AsyncResult() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 	/**
 	 * Blocks current execution thread until asynchronous IO operation complete
+	 * \return number of bytes transfered
 	 */
 	virtual std::size_t await() = 0;
 	/**
-	 * Cancels current asynchronous write operation
-	 * \return \code true whether write operation has been canceled, \code false if operation was complete or canceled
+	 * Cancels current asynchronous IO operation
+	 * \return \code true whether write operation has been canceled, \code false if operation was complete or canceled or failed
 	 */
 	virtual bool cancel() = 0;
+
+	/**
+	 * Checks whether asynchronous IO operation is in progress, i.e. pending state
+	 * \return whether asynchronous IO operation in progress
+	 */
+	virtual bool active() = 0;
+
+	/**
+	 * Returns asynchronous IO operation data buffer
+	 * In case of read operation,buffer contains data which were asynchronously read
+	 * In case of write operation, implementor returns original buffer, moved to transfered bytes position
+	 * \return data buffer
+	 */
+	virtual byte_buffer buffer() = 0;
 };
 
 DECLARE_PTR_T(AsyncResult);
@@ -194,7 +209,7 @@ class CHANNEL_PUBLIC AsynchReadChannel {
 protected:
 	AsynchReadChannel();
 public:
-	virtual SAsyncResult read(const completion_routine_f& callback) = 0;
+	virtual SAsyncResult read(uint64_t pos,std::size_t maxbytes) = 0;
 	virtual ~AsynchReadChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
 
@@ -206,7 +221,6 @@ protected:
 	AsynchWriteChannel();
 public:
 	virtual SAsyncResult write(const byte_buffer& buffer) = 0;
-	virtual SAsyncResult write(const byte_buffer& buffer,const completion_routine_f& callback);
 	virtual ~AsynchWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
 
@@ -220,10 +234,8 @@ class CHANNEL_PUBLIC AsynchReadWriteChannel:public virtual AsynchReadChannel, pu
 protected:
 	AsynchReadWriteChannel();
 public:
-	virtual SAsyncResult read(uint64_t pos,const completion_routine_f& callback) = 0;
-	virtual SAsyncResult write(uint64_t pos,const byte_buffer& buffer) = 0;
-	virtual SAsyncResult write(uint64_t pos,const byte_buffer& buffer,const completion_routine_f& callback);
-	virtual void position(resource_position& pos);
+	virtual SAsyncResult read(uint64_t pos,std::size_t maxbytes) = 0;
+	virtual SAsyncResult write(const byte_buffer& buffer) = 0;
 	virtual ~AsynchReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
 
@@ -232,14 +244,16 @@ DECLARE_PTR_T(AsynchReadWriteChannel);
 /**
 * Transfers data from source read channel to the destination write channel using a memory buffer
 * \param src source channel
-* \param dst destination buffer
+* \param dst destination channel
 * \param buffer memory block buffer for copying data
 */
 inline void transfer(const SReadChannel& src,const SWriteChannel& dst, byte_buffer& buffer)
 {
 	while(src->read(buffer) > 0) {
 		buffer.flip();
-		dst->write(buffer);
+		while(!buffer.empty()) {
+			buffer.move(dst->write(buffer));
+		}
 		buffer.clear();
 	}
 }

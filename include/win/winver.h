@@ -1,28 +1,32 @@
 #ifndef __IO_WINVER_H_INCLUDED__
 #define __IO_WINVER_H_INCLUDED__
 
-#ifndef WINVER                  // Minimum platform is Windows XP
-#define WINVER 0x0502
+#ifdef _WIN32_WINNT
+#	undef WINVER
 #endif
 
-#ifndef _WIN32_WINNT            // Minimum platform is Windows XP
-#define _WIN32_WINNT 0x0502
+#ifdef _WIN32_WINNT
+#	undef _WIN32_WINNT
 #endif
 
-#ifndef _WIN32_WINDOWS          // Minimum platform is Windows XP
-#define _WIN32_WINDOWS 0x0502
+#ifdef _WIN32_WINDOWS
+#	undef _WIN32_WINDOWS
 #endif
 
-#ifndef WIN32_LEAN_AND_MEAN     // Exclude rarely-used stuff from Windows headers
-#define WIN32_LEAN_AND_MEAN
+#define WINVER 0x0600
+#define _WIN32_WINNT 0x0600
+#define _WIN32_WINDOWS 0x0600
+
+#ifndef WIN32_LEAN_AND_MEAN
+#	define WIN32_LEAN_AND_MEAN
 #endif
 
-#ifndef NOMINMAX                // Use the standard's templated min/max
-#define NOMINMAX
+#ifndef NOMINMAX
+#	define NOMINMAX
 #endif
 
-#ifndef _USE_MATH_DEFINES       // We do want PI defined
-#define _USE_MATH_DEFINES
+#ifndef _USE_MATH_DEFINES
+#	define _USE_MATH_DEFINES
 #endif
 
 #endif // __IO_WINVER_H_INCLUDED__

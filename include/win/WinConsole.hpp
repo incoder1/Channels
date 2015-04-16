@@ -1,6 +1,7 @@
 #ifndef WINDOWS_CONSOLE_HPP_INCLUDED
 #define WINDOWS_CONSOLE_HPP_INCLUDED
 
+#include "winver.h"
 #include <windows.h>
 
 #include <boost/noncopyable.hpp>
@@ -136,11 +137,6 @@ public:
 	}
 	inline SWriteChannel err() const {
 		return cech_;
-	}
-	inline void setColor(uint8_t foreground, uint8_t backgound) const {
-		HANDLE hCons = ::GetStdHandle(STD_OUTPUT_HANDLE);
-		DWORD attrs = foreground | backgound << 4;
-		::SetConsoleTextAttribute(hCons, attrs);
 	}
 private:
 	const Charset* charSet_;

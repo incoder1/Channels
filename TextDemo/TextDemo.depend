@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1427386069 source:d:\cpp\channel\textdemo\main.cpp
+1429205767 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -15,12 +15,13 @@
 	"channels_config.h"
 	"win/WinConsole.hpp"
 
-1428656378 d:\cpp\channel\include\channels_config.h
+1429124974 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
 	<win/winver.h>
 	<windows.h>
+	<stdint.h>
 
 1426707132 d:\cpp\channel\include\windowsconsole.hpp
 	<windows.h>
@@ -5297,10 +5298,10 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1428608001 d:\cpp\channel\include\abstractfile.hpp
+1429195616 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1428672290 d:\cpp\channel\include\channels.hpp
+1429184376 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -16809,24 +16810,23 @@
 	<boost/asio/detail/push_options.hpp>
 	<boost/asio/detail/pop_options.hpp>
 
-1428672824 d:\cpp\channel\include\text.hpp
+1429206022 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
 	<boost/format.hpp>
 
-1427719477 d:\cpp\channel\include\smallobject.hpp
+1428915147 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
-	<boost/enable_shared_from_this.hpp>
 
-1427468545 d:\cpp\channel\include\charsets.hpp
+1429204273 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
 	<boost/unordered_map.hpp>
 
-1427720154 d:\cpp\channel\include\iconv_conv.hpp
+1428936082 d:\cpp\channel\include\iconv_conv.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
@@ -17288,9 +17288,9 @@
 	<Objbase.h>
 	<Mlang.h>
 
-1406719384 d:\cpp\channel\include\win\winver.h
+1428935953 d:\cpp\channel\include\win\winver.h
 
-1428672112 d:\cpp\channel\include\win\winconsole.hpp
+1429190065 d:\cpp\channel\include\win\winconsole.hpp
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -17300,7 +17300,7 @@
 	<text.hpp>
 	"smallobject.hpp"
 
-1428672401 d:\cpp\channel\include\win\winfile.hpp
+1429181990 d:\cpp\channel\include\win\winfile.hpp
 	<boost/make_shared.hpp>
 	"abstractfile.hpp"
 	"smallobject.hpp"

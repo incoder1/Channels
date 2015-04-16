@@ -115,6 +115,7 @@ public:
 	* \throw never throws
 	*/
 	static const Charset* utf8() BOOST_NOEXCEPT_OR_NOTHROW;
+
 private:
 	ctmap_t nameMap_;
 };

@@ -1,9 +1,11 @@
 #ifndef __IO_WIN_ASYNCH_FILE_CHANNEL_HPP_INCLUDED__
 #define __IO_WIN_ASYNCH_FILE_CHANNEL_HPP_INCLUDED__
 
-#include <Windows.h>
+#include "winver.h"
+#include <windows.h>
 
 #include <boost/scoped_ptr.hpp>
+#include <boost/make_shared.hpp>
 #include <boost/atomic/atomic.hpp>
 
 #include "channels.hpp"
@@ -12,38 +14,38 @@
 namespace io {
 
 
-class WinAsychFileChannel;
 class CHANNEL_PUBLIC WinAsyncResult:public virtual AsyncResult, public virtual object {
 public:
-	WinAsyncResult(::HANDLE hFile,::LPOVERLAPPED overlapped,const completion_routine_f& routine);
-	~WinAsyncResult() BOOST_NOEXCEPT_OR_NOTHROW;
-	virtual std::size_t await() = 0;
+	WinAsyncResult(::HANDLE hFile,uint64_t position,const byte_buffer& buffer);
+	virtual ~WinAsyncResult() BOOST_NOEXCEPT_OR_NOTHROW;
+	virtual std::size_t await();
 	virtual bool active();
-	virtual bool cancel() = 0;
-	static VOID CALLBACK done_routine(DWORD errCode,DWORD transfered, LPOVERLAPPED overlapped);
-private:
-	inline void onComplete(int errorCode,std::size_t transfered);
+	virtual bool cancel();
+	virtual byte_buffer buffer();
+	inline ::LPOVERLAPPED overlapped() const {
+		return overlapped_.get();
+	}
 private:
 	::HANDLE hFile_;
-	::LPOVERLAPPED overlapped_;
-	completion_routine routine_;
+	boost::scoped_ptr<::OVERLAPPED> overlapped_;
+	const completion_routine_f routine_;
 	boost::atomics::atomic_bool active_;
+	byte_buffer buffer_;
 };
 
-class CHANNEL_PUBLIC WinAsychFileChannel:public virtual AsynchReadWriteChannel,public virtual object {
+// Never used for the disk files, only named pipes etc
+class CHANNEL_PUBLIC WinAsychChannel:public virtual AsynchReadWriteChannel,public virtual object {
 public:
-	explicit WinAsychFileChannel(::HANDLE hFile);
-	virtual SAsyncResult read(uint64_t pos,const completion_routine_f& callback);
-	virtual SAsyncResult write(uint64_t pos,const byte_buffer& buffer);
-	virtual SAsyncResult write(uint64_t pos,const byte_buffer& buffer,const completion_routine_f& callback);
-	uint64_t position();
-	~WinAsychFileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
+	explicit WinAsychChannel(::HANDLE id,::HANDLE completionPort);
+	~WinAsychChannel() BOOST_NOEXCEPT_OR_NOTHROW;
+	virtual SAsyncResult read(uint64_t pos,std::size_t max);
+	virtual SAsyncResult write(const byte_buffer& buffer);
+private:
+	inline uint64_t seek(int64_t offset, DWORD whence);
 private:
 	::HANDLE hFile_;
-	::OVERLAPPED position_;
-	boost::scoped_ptr<counter> counter_;
+	::HANDLE cmpltPort_;
 };
-
 
 } // namesapce io
 

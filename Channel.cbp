@@ -45,6 +45,7 @@
 					<Add option="-fexpensive-optimizations" />
 					<Add option="-Winline" />
 					<Add option="-fexceptions" />
+					<Add option="-fno-rtti" />
 					<Add option="-std=gnu++11" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
@@ -134,6 +135,11 @@
 		<Unit filename="include/unix/unixfile.hpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>
+		<Unit filename="include/win/WinAsynchFile.hpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+		</Unit>
 		<Unit filename="include/win/WinConsole.hpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
@@ -175,6 +181,11 @@
 		<Unit filename="src/smallobject.cpp" />
 		<Unit filename="src/unix/unixfile.cpp">
 			<Option target="LinuxGCCDebug" />
+		</Unit>
+		<Unit filename="src/win/WinAsynchFile.cpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/win/WinConsole.cpp">
 			<Option target="DebugMinGW32" />

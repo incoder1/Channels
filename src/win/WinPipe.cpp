@@ -22,13 +22,13 @@ private:
 
 WindowsPipe::WindowsPipe(PipeSinkRoutine routine,HANDLE sink,HANDLE source):
 	 Pipe(routine),
-     source_(new FileChannel(source,GENERIC_READ,true))
+     source_(new WinChannel(source,GENERIC_READ,true))
 {
 	boost::thread sinkThread(boost::bind(&WindowsPipe::write_routine, this, sink));
 }
 
 void WindowsPipe::write_routine(const WindowsPipe* self, HANDLE hSink) {
-	self->call_sink_routine(SWriteChannel(new FileChannel(hSink, GENERIC_WRITE, true)));
+	self->call_sink_routine(SWriteChannel(new WinChannel(hSink, GENERIC_WRITE, true)));
 }
 
 WindowsPipe::~WindowsPipe() {
@@ -40,7 +40,7 @@ SReadChannel WindowsPipe::source() const {
 
 SPipe CHANNEL_PUBLIC create_pipe(std::size_t bufferSize, PipeSinkRoutine sinkRoutine)
 {
-	HANDLE sink, source = NULL;
+	::HANDLE sink, source = NULL;
 	validate_io(::CreatePipe(&source, &sink, NULL, DWORD(bufferSize)), "Can not create anonymous pipe");
 	return SPipe(new WindowsPipe(sinkRoutine,sink,source));
 }

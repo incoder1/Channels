@@ -28,21 +28,23 @@
 #include <pipe.hpp>
 #include <network.hpp>
 
+#include "win/WinAssynchFile.hpp"
+
 void charset_console_sample() throw(io::io_exception)
 {
 	io::Console con(true);
+	con.setTextColor();
 	io::SConverter conv = io::make_converter(io::Charsets::utf8(),con.charset());
 	io::cnv_writer out(con.out(),conv);
-	out.write("Hello! Привет! Χαιρετίσματα! こんにちは! 您好！ \n\r");
-	out.write("If you can't see your language please change console font");
+	out.writeln(boost::format("Hello! Привет! Χαιρετίσματα! %i") % 73);
 }
 
 void pipe_write_routine(io::SWriteChannel sink) {
 	io::wwriter pout(sink);
 	pout.write(L"Hello from pipe!\n");
-	pout.write(L"\tПривет из канала!\n");
-	pout.write(L"\tΧαιρετίσματα από το κανάλι!\n");
-	pout.write(L"\tGrüße aus dem Kanal!\n");
+	pout.write(L"Привет из канала!\n");
+	pout.write(L"Χαιρετίσματα από το κανάλι!\n");
+	pout.write(L"Grüße aus dem Kanal!\n");
 }
 
 
@@ -73,19 +75,31 @@ void file_sample() {
 	file.create();
 	{
 		auto fileChannel = file.openForWrite();
-		char bom[2] = {0xFF,0xFE};
-		io::cnv_writer out(fileChannel, io::make_converter(io::Charsets::utf8(),io::Charsets::utf16le()));
-		out.write_raw(bom, 2);
-		out.write("ASCII     abcde xyz\n\rGerman  äöü ÄÖÜ ß\n\rPolish  ąęźżńł\n\rRussian  абвгдежэюя\n\rCJK  你好\n\r");
+		writer out(fileChannel);
+		uint8_t BOM[3] = {0xEF,0xBB,0xBF};
+		out.flush(BOM, 3);
+		out.write("Hello!\nПривет!\nΧαιρετίσματα!\nこんにちは!\n您好!");
 	}
 	auto in = file.openForRead();
 	Console con(true);
+	wwriter out(con.out());
 	byte_buffer buff = byte_buffer::heap_buffer(128);
-	while(in->read(buff) > 0) {
-		buff.flip();
-		con.out()->write(buff);
+	cnv_reader reader( in, make_converter(Charsets::utf8(),con.charset()) );
+	std::size_t converted = reader.read(buff);
+	while(converted > 0) {
+		out.flush(buff);
 		buff.clear();
+		converted = reader.read(buff);
 	}
+}
+
+void asynch_file_read_routine(long err,std::size_t read,const io::byte_buffer& data) {
+
+}
+
+void asynch_file_sample() {
+	::HANDLE hFile = ::CreateFile();
+ 	//SAsynhFileChannel in(new ::WinAsychFileChannel()):
 }
 
 void buffers_sample() {
@@ -102,8 +116,10 @@ void buffers_sample() {
 	result.put(wrapDeepCopy);
 	result.put(deepCopy);
 	result.flip();
-
-	std::cout<<"Length:"<<result.length()<<" "<<result.position().ptr()<<std::endl;
+	Console con(false);
+	con.setCharset(Charsets::utf8());
+	writer out(con.out());
+	out.write(boost::format("Buffer Length: %i\nBuffer Value: %s\n") % result.length() % result.position().ptr() );
 }
 
 //void network_client_sample() {
@@ -157,7 +173,7 @@ int _tmain(int argc, TCHAR *argv[])
 		//buffers_sample();
 		//charset_console_sample();
 		//pipe_sample();
-		file_sample();
+		//file_sample();
 		//network_client_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;

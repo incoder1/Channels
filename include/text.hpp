@@ -10,24 +10,70 @@
 
 namespace io {
 
+
 #ifdef PLATFORM_WINDOWS
-const char* AENDL = "\n\r";
-const wchar_t* WENDL = L"\n\r";
+
+template<typename _char_t>
+struct endl
+{};
+
+template<>
+struct endl<char> {
+	static const char* id() {
+		return "\n\r";
+	}
+};
+template<>
+struct endl<wchar_t> {
+	static const wchar_t* id() {
+		return L"\n\r";
+	}
+};
 #	ifndef BOOST_NO_CHAR16_T
-const char16_t* uENDL = u"\n\r";
-#	endif
+template<>
+struct endl<char16_t> {
+	static const char16_t* id() {
+		return u"\n\r";
+	}
+};
+#	endif // HAS_CHAR16_T
 #	ifndef BOOST_NO_CHAR32_T
-const char32_t* UENDL = U"\n\r";
-#	endif
+template<>
+struct endl<char32_t> {
+	static const char32_t* id() {
+		return U"\n\r";
+	}
+};
+#	endif // HAS_CHAR32_T
 #else
-const char* AENDL = "\n";
-const wchar_t* WENDL = L"\n";
+template<>
+struct endl<char> {
+	static const char* id() {
+		return "\n";
+	}
+};
+template<>
+struct endl<wchar_t> {
+	static const wchar_t* id() {
+		return L"\n";
+	}
+};
 #	ifndef BOOST_NO_CHAR16_T
-const char16_t* uENDL = u"\n";
-#	endif
+template<>
+struct endl<char16_t> {
+	static const char16_t* id() {
+		return u"\n";
+	}
+};
+#	endif // HAS_CHAR16_T
 #	ifndef BOOST_NO_CHAR32_T
-const char32_t UENDL = U"\n";
-#	endif
+template<>
+struct endl<char32_t> {
+	static const char32_t* id() {
+		return U"\n";
+	}
+};
+#	endif // HAS_CHAR32_T
 #endif
 
 template<typename _char_t, class _traits_t = std::char_traits<_char_t> >
@@ -37,15 +83,14 @@ public:
 	basic_reader(SReadChannel src) BOOST_NOEXCEPT_OR_NOTHROW:
 		src_(src)
 	{}
-	std::size_t read(byte_buffer& dest) {
+	inline std::size_t load(byte_buffer& dest) {
 		std::size_t result = src_->read(dest);
 		dest.flip();
 		return result;
 	}
 	string_t read(std::size_t max) {
 		string_t result(0,max);
-		byte_buffer buff = byte_buffer::wrap_array(result.data(),max);
-		src_->read(buff);
+		load(byte_buffer::wrap_array(result.data(),max));
 		return result;
 	}
 private:
@@ -62,11 +107,8 @@ public:
 	{}
 	std::size_t read(byte_buffer& dest) {
 		byte_buffer src = byte_buffer::heap_buffer(dest.capacity());
-		std::size_t result = read_raw(src);
-		return result > 0 ? result : conv_->convert(src, dest);
-	}
-	std::size_t read_raw(byte_buffer& dest) {
-		return basic_reader<_char_t>::read(dest);
+		std::size_t result =  basic_reader<_char_t>::load(src);
+		return result ?  conv_->convert(src, dest) : result;
 	}
 	string_t read(std::size_t max) {
 		string_t result(0,max);
@@ -93,66 +135,72 @@ public:
 		out_(out)
 	{}
 
-	/**
-	 * Writes STL string into write channel
-	 */
-	void write(const string& str) {
-		write(str.data());
+	inline void write(_char_t* const v, std::size_t size) {
+		flush(byte_buffer::wrap_array(v, size));
 	}
 
-	void write(_char_t* const v, std::size_t size) {
-		write(byte_buffer::wrap_array(v, size));
-	}
-
-	void write(const _char_t* cStr) {
+	inline void write(const _char_t* cStr) {
 		write(const_cast<_char_t*>(cStr),_traits_t::length(cStr));
 	}
 
-	void write(const format& format) {
+	inline void write(const format& format) {
 		write(format.str());
 	}
 
-	void writeln(const char* cStr) {
+	inline void writeln(const _char_t* cStr) {
 		write(cStr);
-		write(AENDL);
+		write(endl<_char_t>::id());
 	}
 
-	void writeln(const wchar_t* cStr) {
-		write(cStr);
-		write(WENDL);
+	/**
+	 * Writes STL string into write channel
+	 */
+	inline void write(const string& str) {
+		flush(byte_buffer::wrap_array(str.data(),str.length()));
 	}
 
-#ifndef BOOST_NO_CHAR16_T
-	void writeln(const char16_t* cStr) {
-		write(cStr);
-		write(uENDL);
+	inline void writeln(const string& str) {
+		write(str);
+		write(endl<_char_t>::id());
 	}
-#endif // BOOST_NO_CHAR16_T
 
-#ifndef BOOST_NO_CHAR32_T
-	void writeln(const char32_t* cStr) {
-		write(cStr);
-		write(UENDL);
+	inline void writeln(const format& format) {
+		writeln(format.str());
 	}
-#endif // BOOST_NO_CHAR32_T
 
-	void write(const byte_buffer& buff) {
+	/**
+	 * Flushes a raw bytes into underlying channel
+	 * \param buff a memory buffer, which is holding the data
+	 */
+	void flush(const byte_buffer& buff) {
+		if(buff.empty()) return;
 		byte_buffer b(buff);
 		while(b.last() != b.position()+1) {
 			b.move(out_->write(b));
 		};
 	}
 
+	/**
+	 * Flushes a raw bytes into underlying channel
+	 * \param arr address to memory lined memory with data to flush
+	 * \param size size of memory block in bytes
+	 */
+	template<typename element_type>
+	void flush(element_type* const arr,std::size_t size) {
+		flush(byte_buffer::wrap_array(reinterpret_cast<uint8_t*>(arr),size*sizeof(element_type)));
+	}
+
 private:
 	SWriteChannel out_;
 };
 
-template<typename _char_t, class _traits_t = std::char_traits<_char_t> >
-class conv_writer:public basic_writer<_char_t, _traits_t> {
-public:
 
-	typedef typename basic_writer<_char_t,_traits_t>::string string;
-	typedef typename basic_writer<_char_t,_traits_t>::format format;
+template<typename _char_t, class _traits_t = std::char_traits<_char_t> >
+class conv_writer:basic_writer<_char_t,_traits_t> {
+public:
+	typedef std::basic_string<_char_t, _traits_t> string;
+
+	typedef boost::basic_format<_char_t, _traits_t, std::allocator<_char_t> > format;
 
 	/**
 	 * Constructs new writer to write converted string.
@@ -165,37 +213,48 @@ public:
 		conv_(conv)
 	{}
 
-	/**
-	 * Writes STL string into write channel, with character conversation
-	 */
-	void write(const string& str) {
-		write(byte_buffer::wrap_array(str.data(), str.length()));
+	inline void write(_char_t* const v, std::size_t size) {
+		write(byte_buffer::wrap_array(v,size));
 	}
 
-	void write_raw(_char_t* const v, std::size_t size) {
-		basic_writer<_char_t>::write(v,size);
-	}
-
-	void write(_char_t* const v, std::size_t size) {
-		write(byte_buffer::wrap_array(v, size));
-	}
-
-	void write(const _char_t* cStr) {
+	inline void write(const _char_t* cStr) {
 		write(const_cast<_char_t*>(cStr),_traits_t::length(cStr));
 	}
 
-	void write(const format& format) {
+	inline void writeln(const _char_t* cStr) {
+		write(cStr);
+		write(endl<_char_t>::id());
+	}
+
+	/**
+	 * Writes STL string into write channel, with character conversation
+	 */
+	inline void write(const string& str) {
+		write(byte_buffer::wrap_array(str.data(), str.length()));
+	}
+
+	inline void write(const format& format) {
 		write(format.str());
 	}
 
 	/**
 	 * Writes content of the byte buffer into write channel
 	 */
-	void write(const byte_buffer& buff) {
+	inline void write(const byte_buffer& buff) {
 		byte_buffer raw(buff);
 		byte_buffer convBytes = conv_->convert(raw);
-		basic_writer<_char_t>::write(convBytes);
+		basic_writer<_char_t, _traits_t>::flush(convBytes);
 	}
+
+	inline void writeln(const string& str) {
+		write(str);
+		write(endl<_char_t>::id());
+	}
+
+	inline void writeln(const format& format) {
+		writeln(format.str());
+	}
+
 private:
 	SConverter conv_;
 };
@@ -223,8 +282,6 @@ typedef basic_writer<char32_t> u32writer;
 typedef conv_reader<char32_t> cnv_u32reader;
 typedef conv_writer<char32_t> cnv_u32writer;
 #endif
-
-
 
 } // namespace io
 

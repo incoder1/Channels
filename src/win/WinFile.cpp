@@ -51,26 +51,26 @@ SReadChannel File::openForRead()
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	validate_file_handle(hFile);
-	return SReadChannel(new FileChannel(hFile, GENERIC_READ, true));
+	return SReadChannel(new WinChannel(hFile, GENERIC_READ, true));
 }
 
 SWriteChannel  File::openForWrite()
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	validate_file_handle(hFile);
-	return SWriteChannel(new FileChannel(hFile, GENERIC_WRITE, true));
+	return SWriteChannel(new WinChannel(hFile, GENERIC_WRITE, true));
 }
 
 SRandomAccessChannel File::openForReadWrite()
 {
 	HANDLE hFile = ::CreateFile(path_, GENERIC_READ | GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, 0);
 	validate_file_handle(hFile);
-	return SRandomAccessChannel(new FileChannel(hFile, GENERIC_READ | GENERIC_WRITE, true));
+	return SRandomAccessChannel(new WinChannel(hFile, GENERIC_READ | GENERIC_WRITE, true));
 }
 
 
-// FileChannel
-FileChannel::FileChannel(HANDLE id, DWORD desiredAccess, bool close) BOOST_NOEXCEPT_OR_NOTHROW:
+// WinChannel
+WinChannel::WinChannel(HANDLE id, DWORD desiredAccess, bool close) BOOST_NOEXCEPT_OR_NOTHROW:
 	RandomAccessChannel(),
 	object(),
 	id_(id),
@@ -79,14 +79,14 @@ FileChannel::FileChannel(HANDLE id, DWORD desiredAccess, bool close) BOOST_NOEXC
 {
 }
 
-FileChannel::~FileChannel()
+WinChannel::~WinChannel()
 {
 	if(close_) {
 		::CloseHandle(id_);
 	}
 }
 
-std::size_t FileChannel::read(byte_buffer& buffer)
+std::size_t WinChannel::read(byte_buffer& buffer)
 {
 	DWORD result;
 	BOOL succeeded = ::ReadFile(id_,
@@ -103,7 +103,7 @@ std::size_t FileChannel::read(byte_buffer& buffer)
 	return result;
 }
 
-std::size_t FileChannel::write(const byte_buffer& buffer)
+std::size_t WinChannel::write(const byte_buffer& buffer)
 {
 	DWORD result = 0;
 	BOOL succeeded = ::WriteFile(id_,
@@ -115,36 +115,31 @@ std::size_t FileChannel::write(const byte_buffer& buffer)
 	return result;
 }
 
-uint64_t FileChannel::seek(int64_t offset, DWORD whence)
+inline uint64_t WinChannel::seek(int64_t offset, DWORD whence)
 {
-	::LARGE_INTEGER li;
-	li.QuadPart = (LONGLONG)offset;
-	validate_io(::SetFilePointerEx(id_, li, &li,whence), "Can not move file pointer");
-	return (uint64_t)li.QuadPart;
+	return file_seek(id_,offset,whence);
 }
 
-uint64_t FileChannel::position() {
+uint64_t WinChannel::position() {
 	return seek(0, FILE_CURRENT);
 }
 
-uint64_t FileChannel::forward(uint64_t offset) {
+uint64_t WinChannel::forward(uint64_t offset) {
 	return seek(offset, FILE_CURRENT);
 }
 
-uint64_t FileChannel::backward(uint64_t offset)
+uint64_t WinChannel::backward(uint64_t offset)
 {
-	return seek(-((int64_t)step), FILE_CURRENT | FILE );
+	return seek(-offset, FILE_CURRENT);
 }
 
-uint64_t FileChannel::fromBegin(uint64_t offset) {
+uint64_t WinChannel::fromBegin(uint64_t offset) {
 	return seek(offset, FILE_BEGIN);
 }
 
-uint64_t FileChannel::fromEnd(uint64_t offset) {
-	return seek(-((int64_t)step), FILE_END);
+uint64_t WinChannel::fromEnd(uint64_t offset) {
+	return seek(-offset, FILE_END);
 }
-
-
 
 } // namespace io
 

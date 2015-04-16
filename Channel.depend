@@ -1350,7 +1350,7 @@
 1090718969 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1427826292 d:\cpp\channel\include\buffers.hpp
+1429213095 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5218,7 +5218,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1429126630 d:\cpp\channel\include\channels.hpp
+1429213893 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -7306,7 +7306,7 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1429037095 source:d:\cpp\channel\src\channels.cpp
+1429209581 source:d:\cpp\channel\src\channels.cpp
 	"prchdrs.h"
 	<channels.hpp>
 
@@ -7315,7 +7315,7 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1429104287 d:\cpp\channel\include\abstractfile.hpp
+1429195616 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1426012957 d:\cpp\channel\include\unixfile.hpp
@@ -20633,10 +20633,10 @@
 	<boost/mpl/bool_fwd.hpp>
 	<locale>
 
-1408650512 d:\cpp\boost_1_57_0\boost\scoped_ptr.hpp
+1408654112 d:\cpp\boost_1_57_0\boost\scoped_ptr.hpp
 	<boost/smart_ptr/scoped_ptr.hpp>
 
-1408650512 d:\cpp\boost_1_57_0\boost\smart_ptr\scoped_ptr.hpp
+1408654112 d:\cpp\boost_1_57_0\boost\smart_ptr\scoped_ptr.hpp
 	<boost/config.hpp>
 	<boost/assert.hpp>
 	<boost/checked_delete.hpp>
@@ -25913,17 +25913,17 @@
 
 1420654543 /usr/include/bits/fcntl2.h
 
-1429014192 d:\cpp\channel\include\text.hpp
+1429206022 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
 	<boost/format.hpp>
 
-1427468545 d:\cpp\channel\include\charsets.hpp
+1429204273 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
 	<boost/unordered_map.hpp>
 
-1427469236 source:d:\cpp\channel\src\charsets.cpp
+1429204266 source:d:\cpp\channel\src\charsets.cpp
 	"charsets.hpp"
 
 1427229068 d:\cpp\channel\include\errors.hpp
@@ -26020,7 +26020,7 @@
 	"prchdrs.h"
 	"msmlang_conv.hpp"
 
-1428935953 d:\cpp\channel\include\win\winver.h
+1429210778 d:\cpp\channel\include\win\winver.h
 
 1428656370 source:d:\cpp\channel\src\win\windowsconsole.cpp
 	"../prchdrs.h"
@@ -26070,19 +26070,21 @@
 	"namedpipe.hpp"
 	"WinFile.hpp"
 
-1428656847 d:\cpp\channel\src\win\helpers.hpp
+1429210002 d:\cpp\channel\src\win\helpers.hpp
 	"errors.hpp"
 
 1429015665 d:\cpp\channel\include\namedpipe.hpp
 	<boost/function.hpp>
 	"channels.hpp"
 
-1429126703 d:\cpp\channel\include\win\winfile.hpp
+1429210026 d:\cpp\channel\include\win\winfile.hpp
+	"winver.h"
+	<windows.h>
 	<boost/make_shared.hpp>
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1428658005 source:d:\cpp\channel\src\win\winpipe.cpp
+1429210264 source:d:\cpp\channel\src\win\winpipe.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	<boost/thread/scoped_thread.hpp>
@@ -26090,17 +26092,18 @@
 	"pipe.hpp"
 	"WinFile.hpp"
 
-1429010013 source:d:\cpp\channel\src\win\winfile.cpp
+1429209550 source:d:\cpp\channel\src\win\winfile.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	"WinFile.hpp"
 
-1428672089 source:d:\cpp\channel\src\win\winconsole.cpp
+1429201936 source:d:\cpp\channel\src\win\winconsole.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	"WinConsole.hpp"
 
-1428940001 d:\cpp\channel\include\win\winconsole.hpp
+1429210016 d:\cpp\channel\include\win\winconsole.hpp
+	"winver.h"
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -26113,4 +26116,17 @@
 1429015658 source:d:\cpp\channel\src\namedpipe.cpp
 	"prchdrs.h"
 	"namedpipe.hpp"
+
+1429185269 source:d:\cpp\channel\src\win\winasynchfile.cpp
+	"prchdrs.h"
+	"WinAsynchFile.hpp"
+	"helpers.hpp"
+
+1429185130 d:\cpp\channel\include\win\winasynchfile.hpp
+	<Windows.h>
+	<boost/scoped_ptr.hpp>
+	<boost/make_shared.hpp>
+	<boost/atomic/atomic.hpp>
+	"channels.hpp"
+	"smallobject.hpp"
 

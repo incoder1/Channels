@@ -5,75 +5,71 @@
 namespace io {
 
 // WinAsyncResult
-WinAsyncResult::WinAsyncResult(::HANDLE hFile,
-							::LPOVERLAPPED overlapped,
-							const completion_routine_f& routine):
+WinAsyncResult::WinAsyncResult(::HANDLE hFile,uint64_t position,const byte_buffer& buffer):
 	AsyncResult(),
 	object(),
-	hFile_(hFile),
-	overlapped_(overlapped_),
-	routine_(routine),
-	active_(true)
+	hFile_(hFile)
 {
-	overlaped_.hEvent = reinterpret_cast<HANDLE>(this);
+	::LARGE_INTEGER li;
+	li.QuadPart = position;
+	overlapped_->OffsetHigh = li.HighPart;
+	overlapped_->Offset = li.LowPart;
+	overlapped_->hEvent = reinterpret_cast<HANDLE>(this);
 }
 
 WinAsyncResult::~WinAsyncResult() BOOST_NOEXCEPT_OR_NOTHROW
 {
 }
 
-inline LPOVERLAPPED WinAsyncResult::overlaped() {
-	return overlaped_;
-}
-
-VOID CALLBACK WinAsyncResult::done_routine(DWORD errCode,DWORD transfered, LPOVERLAPPED overlapped)
-{
-	WinAsyncResult* self = reinterpret_cast<WinAsyncResult*>(overlapped->hEvent);
-	self->onComplete(errCode,transfered);
-}
-
 std::size_t WinAsyncResult::await() {
 	DWORD result;
-	::GetOverlappedResult(hFile_,overlaped_,&result,TRUE);
+	::GetOverlappedResult(hFile_,overlapped_.get(),&result,TRUE);
 	return result;
+}
+
+virtual byte_buffer WinAsyncResult::buffer() {
+	DWORD result;
+	::GetOverlappedResult(hFile_,overlapped_.get(),&result,FALSE);
+	buffer.move(result);
+	return buffer_;
 }
 
 bool WinAsyncResult::cancel()
 {
-	atctive_ = ::CancelIo(hFile_);
+	active_ = ::CancelIoEx(hFile_,overlapped_.get());
 	return active_;
-}
-
-inline void onComplete(int errorCode,std::size_t transfered)
-{
-	active_ = false;
-	routine_(errorCode,transfered);
 }
 
 bool WinAsyncResult::active() {
 	return active_;
 }
 
-// WinAsychFileChannel
-WinAsychFileChannel::WinAsychFileChannel(::HANDLE hFile):
-	AsynchReadWriteChannel(),
+// WinAsychChannel
+WinAsychChannel::WinAsychChannel(::HANDLE hFile,::HANDLE completionPort):
+	AsynchRandomAccessChannel(),
 	object(),
 	hFile_(hFile),
-	counter
+	cmpltPort_(completionPort)
 {
 }
 
-SAsyncResult WinAsychFileChannel::write(const byte_buffer& buffer)
+WinAsychChannel::~WinAsychChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {
-	SAsyncResult asyncResult = boost::make_shared<WinAsyncResult>(hFile_);
- 	BOOL result = ::WriteFileEx(*hFile_,vpos(buff),buffer.length(),asyncResult->overlaped(),&WinAsyncResult::done_routine);
-	validate_io(result && ERROR_SUCCESS == ::GetLastError(), "Asynchronous write file error");
-	return asyncResult;
 }
 
-WinAsychFileChannel::~WinAsychFileChannel() BOOST_NOEXCEPT_OR_NOTHROW
+SAsyncResult WinAsychChannel::read(uint64_t pos,std::size_t maxbytes)
 {
-	::GetOverlappedResultEx();
 }
+
+SAsyncResult WinAsychChannel::write(const byte_buffer& buffer)
+{
+	WinAsyncResult *aRes = new WinAsyncResult(hFile_,0,buffer);
+ 	SAsyncResult result(aRes);
+ 	DWORD errCode = ::GetLastError();
+ 	BOOL error = errCode != ERROR_IO_PENDING && errCode != ERROR_SUCCESS;
+	validate_io(state && error, "Asynchronous write file error");
+	return result;
+}
+
 
 } // namespace io

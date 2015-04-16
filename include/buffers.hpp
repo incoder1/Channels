@@ -109,7 +109,7 @@ protected:
 	basic_buffer(boost::shared_array<T> data, T* const end) BOOST_NOEXCEPT_OR_NOTHROW:
 		  data_(data),
 	      position_(data_.get()),
-	      last_(position_),
+	      last_(position_+1),
 	      end_(end)
 	{}
 	void resize(T* data, T* const endp)
@@ -250,11 +250,11 @@ public:
 	}
 
 	bool empty() const {
-		return (last_ == position_);
+		return (last_ == position_-1);
 	}
 
 	bool full() const {
-		return (position_+1) == end_;
+		return last_ == end_;
 	}
 
 	/**

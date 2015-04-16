@@ -1,6 +1,9 @@
 #ifndef WINDOWSFILE_HPP_INCLUDED
 #define WINDOWSFILE_HPP_INCLUDED
 
+#include "winver.h"
+#include <windows.h>
+
 #include <boost/make_shared.hpp>
 
 #include "abstractfile.hpp"
@@ -9,14 +12,14 @@
 namespace io {
 
 /**
- * ! \brief Windows blocking file Channel implementation.
+ * ! \brief Windows system handle blocking channel implementation.
  */
-class CHANNEL_PUBLIC FileChannel:public virtual RandomAccessChannel,public virtual object {
+class CHANNEL_PUBLIC WinChannel:public virtual RandomAccessChannel,public virtual object {
 private:
-	inline uint64_t seek(uint64_t offset,DWORD method);
+	inline uint64_t seek(int64_t offset, DWORD whence);
 public:
-	FileChannel(HANDLE id, DWORD desiredAccess, bool close) BOOST_NOEXCEPT_OR_NOTHROW;
-	virtual ~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
+	WinChannel(HANDLE id, DWORD desiredAccess, bool close) BOOST_NOEXCEPT_OR_NOTHROW;
+	virtual ~WinChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual std::size_t read(byte_buffer& buffer);
 	virtual std::size_t write(const byte_buffer& buffer);
 	virtual uint64_t position();
@@ -25,7 +28,7 @@ public:
 	virtual uint64_t fromBegin(uint64_t offset);
 	virtual uint64_t fromEnd(uint64_t offset);
 private:
-	HANDLE id_;
+	::HANDLE id_;
 	DWORD desiredAccess_;
 	const bool close_;
 };
