@@ -22,13 +22,13 @@ private:
 
 WindowsPipe::WindowsPipe(PipeSinkRoutine routine,HANDLE sink,HANDLE source):
 	 Pipe(routine),
-     source_(new WinChannel(source,GENERIC_READ,true))
+     source_(new WinChannel(source,GENERIC_READ))
 {
 	boost::thread sinkThread(boost::bind(&WindowsPipe::write_routine, this, sink));
 }
 
 void WindowsPipe::write_routine(const WindowsPipe* self, HANDLE hSink) {
-	self->call_sink_routine(SWriteChannel(new WinChannel(hSink, GENERIC_WRITE, true)));
+	self->call_sink_routine(SWriteChannel(new WinChannel(hSink, GENERIC_WRITE)));
 }
 
 WindowsPipe::~WindowsPipe() {

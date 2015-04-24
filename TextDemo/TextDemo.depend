@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1429205767 source:d:\cpp\channel\textdemo\main.cpp
+1429901109 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -1423,14 +1423,14 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1427738480 d:\cpp\channel\include\bytebuffer.hpp
+1429874593 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
 	"channels_config.h"
 	"buffers.hpp"
 
-1427826292 d:\cpp\channel\include\buffers.hpp
+1429213095 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5301,7 +5301,7 @@
 1429195616 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1429184376 d:\cpp\channel\include\channels.hpp
+1429290978 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -13095,7 +13095,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1428607913 d:\cpp\channel\include\network.hpp
+1429296724 d:\cpp\channel\include\network.hpp
 	<smallobject.hpp>
 	<channels.hpp>
 	<winsock2.h>
@@ -16810,14 +16810,15 @@
 	<boost/asio/detail/push_options.hpp>
 	<boost/asio/detail/pop_options.hpp>
 
-1429206022 d:\cpp\channel\include\text.hpp
+1429798239 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
 	<boost/format.hpp>
 
-1428915147 d:\cpp\channel\include\smallobject.hpp
+1429884037 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
+	<stdint.h>
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -16839,7 +16840,7 @@
 1420899373 c:\mingw\msys\1.0\opt\windows_64\include\iconv.h
 	<stddef.h>
 
-1372789265 c:\mingw\msys\1.0\local\include\iconv.h
+1372792865 c:\mingw\msys\1.0\local\include\iconv.h
 	"iconv.h"
 	<stddef.h>
 	<errno.h>
@@ -16848,7 +16849,7 @@
 	<time.h>
 	<wchar.h>
 
-1427373906 d:\cpp\channel\include\ibm_icu_conv.hpp
+1429887299 d:\cpp\channel\include\ibm_icu_conv.hpp
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
 	<boost/format.hpp>
@@ -17288,9 +17289,10 @@
 	<Objbase.h>
 	<Mlang.h>
 
-1428935953 d:\cpp\channel\include\win\winver.h
+1429210778 d:\cpp\channel\include\win\winver.h
 
-1429190065 d:\cpp\channel\include\win\winconsole.hpp
+1429802140 d:\cpp\channel\include\win\winconsole.hpp
+	"winver.h"
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -17300,8 +17302,140 @@
 	<text.hpp>
 	"smallobject.hpp"
 
-1429181990 d:\cpp\channel\include\win\winfile.hpp
-	<boost/make_shared.hpp>
+1429296079 d:\cpp\channel\include\win\winfile.hpp
+	"winver.h"
+	<windows.h>
+	<boost/scoped_ptr.hpp>
 	"abstractfile.hpp"
 	"smallobject.hpp"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utypes.h
+	"unicode/umachine.h"
+	"unicode/uversion.h"
+	"unicode/uconfig.h"
+	<float.h>
+	"unicode/utf.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\umachine.h
+	"unicode/ptypes.h"
+	<stddef.h>
+	"unicode/urename.h"
+
+1382376317 c:\mingw\msys\1.0\local\include\unicode\ptypes.h
+	<stddef.h>
+	"unicode/platform.h"
+	<stdint.h>
+	<features.h>
+	<inttypes.h>
+
+1382376317 c:\mingw\msys\1.0\local\include\unicode\platform.h
+	"unicode/uconfig.h"
+	"unicode/uvernum.h"
+	<android/api-level.h>
+	<TargetConditionals.h>
+	<sys/isa_defs.h>
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uconfig.h
+	"uconfig_local.h"
+
+1382376326 c:\mingw\msys\1.0\local\include\unicode\uvernum.h
+
+1382376323 c:\mingw\msys\1.0\local\include\unicode\urename.h
+	"unicode/uconfig.h"
+	"unicode/umachine.h"
+	"unicode/uvernum.h"
+
+1382376326 c:\mingw\msys\1.0\local\include\unicode\uversion.h
+	"unicode/umachine.h"
+	"unicode/uvernum.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf.h
+	"unicode/umachine.h"
+	"unicode/utf8.h"
+	"unicode/utf16.h"
+	"unicode/utf_old.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf8.h
+	"unicode/umachine.h"
+	"unicode/utf.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf16.h
+	"unicode/umachine.h"
+	"unicode/utf.h"
+
+1382376325 c:\mingw\msys\1.0\local\include\unicode\utf_old.h
+	"unicode/utf.h"
+	"unicode/utf8.h"
+	"unicode/utf16.h"
+
+1382376320 c:\mingw\msys\1.0\local\include\unicode\ucnv.h
+	"unicode/ucnv_err.h"
+	"unicode/uenum.h"
+	"unicode/localpointer.h"
+
+1382376320 c:\mingw\msys\1.0\local\include\unicode\ucnv_err.h
+	"unicode/utypes.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uenum.h
+	"unicode/utypes.h"
+	"unicode/localpointer.h"
+	"unicode/strenum.h"
+
+1382376316 c:\mingw\msys\1.0\local\include\unicode\localpointer.h
+	"unicode/utypes.h"
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\strenum.h
+	"unicode/uobject.h"
+	"unicode/unistr.h"
+
+1382376323 c:\mingw\msys\1.0\local\include\unicode\uobject.h
+	"unicode/utypes.h"
+
+1382376322 c:\mingw\msys\1.0\local\include\unicode\unistr.h
+	"unicode/utypes.h"
+	"unicode/rep.h"
+	"unicode/std_string.h"
+	"unicode/stringpiece.h"
+	"unicode/bytestream.h"
+	"unicode/ucasemap.h"
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\rep.h
+	"unicode/uobject.h"
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\std_string.h
+	"unicode/utypes.h"
+	<string>
+
+1382376318 c:\mingw\msys\1.0\local\include\unicode\stringpiece.h
+	"unicode/utypes.h"
+	"unicode/uobject.h"
+	"unicode/std_string.h"
+
+1382376314 c:\mingw\msys\1.0\local\include\unicode\bytestream.h
+	"unicode/utypes.h"
+	"unicode/uobject.h"
+	"unicode/std_string.h"
+
+1382376319 c:\mingw\msys\1.0\local\include\unicode\ucasemap.h
+	"unicode/utypes.h"
+	"unicode/ustring.h"
+	"unicode/localpointer.h"
+
+1382376324 c:\mingw\msys\1.0\local\include\unicode\ustring.h
+	"unicode/utypes.h"
+	"unicode/putil.h"
+	"unicode/uiter.h"
+
+1382376317 c:\mingw\msys\1.0\local\include\unicode\putil.h
+	"unicode/utypes.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uiter.h
+	"unicode/utypes.h"
+
+1382376319 c:\mingw\msys\1.0\local\include\unicode\uchar.h
+	"unicode/utypes.h"
+
+1382376321 c:\mingw\msys\1.0\local\include\unicode\uloc.h
+	"unicode/utypes.h"
+	"unicode/uenum.h"
 

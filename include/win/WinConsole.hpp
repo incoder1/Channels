@@ -118,7 +118,7 @@ public:
 			setCharset(charSet_);
 		}
 	}
-	inline void setCharset(const Charset* charset) BOOST_NOEXCEPT {
+	inline void setCharset(const Charset* charset) BOOST_NOEXCEPT_OR_NOTHROW {
 		charSet_ = charset;
 		::SetConsoleCP(charset->id());
 		::SetConsoleOutputCP(charset->id());

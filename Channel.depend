@@ -16,7 +16,7 @@
 	<windows.h>
 	<stdint.h>
 
-1427738480 d:\cpp\channel\include\bytebuffer.hpp
+1429874593 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -5218,18 +5218,18 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1429213893 d:\cpp\channel\include\channels.hpp
+1429290978 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 	"errors.hpp"
 	"bytebuffer.hpp"
 
-1427370352 source:d:\cpp\channel\src\ibm_icu_conv.cpp
+1427373952 source:d:\cpp\channel\src\ibm_icu_conv.cpp
 	"prchdrs.h"
 	"ibm_icu_conv.hpp"
 
-1427373906 d:\cpp\channel\include\ibm_icu_conv.hpp
+1429887299 d:\cpp\channel\include\ibm_icu_conv.hpp
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
 	<boost/format.hpp>
@@ -7306,7 +7306,7 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1429209581 source:d:\cpp\channel\src\channels.cpp
+1429289521 source:d:\cpp\channel\src\channels.cpp
 	"prchdrs.h"
 	<channels.hpp>
 
@@ -21537,20 +21537,23 @@
 
 1414767002 d:\cpp\boost_1_57_0\boost
 
-1428915147 d:\cpp\channel\include\smallobject.hpp
+1429884037 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
+	<stdint.h>
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 
-1428691950 source:d:\cpp\channel\src\smallobject.cpp
+1429900590 source:d:\cpp\channel\src\smallobject.cpp
 	"prchdrs.h"
 	"smallobject.hpp"
 	<boost/make_shared.hpp>
 	<boost/pool/pool.hpp>
-	<boost/shared_ptr.hpp>
+	<boost/intrusive_ptr.hpp>
 	<boost/thread/once.hpp>
 	<boost/thread/mutex.hpp>
+	"win/memory.hpp"
+	"win/memory.hpp"
 
 1426013308 source:/home/atgdev/Channels/src/prchdrs.h
 	<channels_config.h>
@@ -25913,7 +25916,7 @@
 
 1420654543 /usr/include/bits/fcntl2.h
 
-1429206022 d:\cpp\channel\include\text.hpp
+1429798239 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<convert.hpp>
 	<channels.hpp>
@@ -26070,21 +26073,24 @@
 	"namedpipe.hpp"
 	"WinFile.hpp"
 
-1429210002 d:\cpp\channel\src\win\helpers.hpp
+1429292570 d:\cpp\channel\src\win\helpers.hpp
 	"errors.hpp"
 
-1429015665 d:\cpp\channel\include\namedpipe.hpp
+1429884264 d:\cpp\channel\include\namedpipe.hpp
+	<boost/shared_ptr.hpp>
+	<boost/unordered_map.hpp>
 	<boost/function.hpp>
 	"channels.hpp"
+	"smallobject.hpp"
 
-1429210026 d:\cpp\channel\include\win\winfile.hpp
+1429296079 d:\cpp\channel\include\win\winfile.hpp
 	"winver.h"
 	<windows.h>
-	<boost/make_shared.hpp>
+	<boost/scoped_ptr.hpp>
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1429210264 source:d:\cpp\channel\src\win\winpipe.cpp
+1429296279 source:d:\cpp\channel\src\win\winpipe.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	<boost/thread/scoped_thread.hpp>
@@ -26092,7 +26098,7 @@
 	"pipe.hpp"
 	"WinFile.hpp"
 
-1429209550 source:d:\cpp\channel\src\win\winfile.cpp
+1429801406 source:d:\cpp\channel\src\win\winfile.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	"WinFile.hpp"
@@ -26102,7 +26108,7 @@
 	"helpers.hpp"
 	"WinConsole.hpp"
 
-1429210016 d:\cpp\channel\include\win\winconsole.hpp
+1429802140 d:\cpp\channel\include\win\winconsole.hpp
 	"winver.h"
 	<windows.h>
 	<boost/noncopyable.hpp>
@@ -26113,7 +26119,7 @@
 	<text.hpp>
 	"smallobject.hpp"
 
-1429015658 source:d:\cpp\channel\src\namedpipe.cpp
+1429301015 source:d:\cpp\channel\src\namedpipe.cpp
 	"prchdrs.h"
 	"namedpipe.hpp"
 
@@ -26129,4 +26135,21 @@
 	<boost/atomic/atomic.hpp>
 	"channels.hpp"
 	"smallobject.hpp"
+
+1429296246 source:d:\cpp\channel\src\win\winselector.cpp
+	"prchdrs.h"
+	"helpers.hpp"
+	"WinSelector.hpp"
+
+1429296212 d:\cpp\channel\include\win\winselector.hpp
+	"channels.hpp"
+
+1429898505 d:\cpp\channel\include\win\memory.hpp
+	<windows.h>
+	<boost/atomic.hpp>
+	<boost/thread/once.hpp>
+
+1429899739 source:d:\cpp\channel\src\win\memory.cpp
+	"prchdrs.h"
+	"memory.hpp"
 

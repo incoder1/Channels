@@ -52,12 +52,5 @@ inline void validate_io(BOOL expression, const char* failMessage)  {
 	}
 }
 
-inline uint64_t file_seek(::HANDLE hFile,int64_t offset,DWORD whence) {
-	::LARGE_INTEGER li;
-	li.QuadPart = (LONGLONG)offset;
-	validate_io(::SetFilePointerEx(hFile, li, &li,whence), "Can not move file pointer");
-	return (uint64_t)li.QuadPart;
-}
-
 }
 #endif // HELPERS_HPP_INCLUDED

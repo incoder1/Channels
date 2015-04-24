@@ -98,17 +98,17 @@ private:
 };
 
 template<typename _char_t>
-class conv_reader :public basic_reader<_char_t> {
+class basic_cvt_reader :public basic_reader<_char_t> {
 public:
 	typedef typename basic_reader<_char_t>::string_t string_t;
-	conv_reader(SReadChannel src,SConverter conv) BOOST_NOEXCEPT_OR_NOTHROW:
+	basic_cvt_reader(SReadChannel src,SConverter cvt) BOOST_NOEXCEPT_OR_NOTHROW:
 		basic_reader<_char_t>(src),
-		conv_(conv)
+		cvtr_(cvt)
 	{}
 	std::size_t read(byte_buffer& dest) {
 		byte_buffer src = byte_buffer::heap_buffer(dest.capacity());
 		std::size_t result =  basic_reader<_char_t>::load(src);
-		return result ?  conv_->convert(src, dest) : result;
+		return result ?  cvtr_->convert(src, dest) : result;
 	}
 	string_t read(std::size_t max) {
 		string_t result(0,max);
@@ -117,12 +117,12 @@ public:
 		return result;
 	}
 private:
-	SConverter conv_;
+	SConverter cvtr_;
 };
 
 /**
  * ! \brief Writer temple, provides functionality for writing strings into write channel.
- * Strings can be converted from one character set into another
+ * Strings can be cvterted from one character set into another
  */
 template<typename _char_t, class _traits_t = std::char_traits<_char_t> >
 class basic_writer {
@@ -196,21 +196,21 @@ private:
 
 
 template<typename _char_t, class _traits_t = std::char_traits<_char_t> >
-class conv_writer:basic_writer<_char_t,_traits_t> {
+class basic_cvt_writer:basic_writer<_char_t,_traits_t> {
 public:
 	typedef std::basic_string<_char_t, _traits_t> string;
 
 	typedef boost::basic_format<_char_t, _traits_t, std::allocator<_char_t> > format;
 
 	/**
-	 * Constructs new writer to write converted string.
-	 * Note, use an empty converter in case when conversation is not needed
+	 * Constructs new writer to write cvterted string.
+	 * Note, use an empty cvterter in case when cvtersation is not needed
 	 * \param out smart pointer to the write channel
-	 * \param conv smart pointer ti the character converter
+	 * \param cvt smart pointer ti the character cvterter
 	 */
-	conv_writer(SWriteChannel out,SConverter conv) BOOST_NOEXCEPT_OR_NOTHROW:
+	basic_cvt_writer(SWriteChannel out,SConverter cvt) BOOST_NOEXCEPT_OR_NOTHROW:
 		basic_writer<_char_t, _traits_t>(out),
-		conv_(conv)
+		cvtr_(cvt)
 	{}
 
 	inline void write(_char_t* const v, std::size_t size) {
@@ -227,7 +227,7 @@ public:
 	}
 
 	/**
-	 * Writes STL string into write channel, with character conversation
+	 * Writes STL string into write channel, with character cvtersation
 	 */
 	inline void write(const string& str) {
 		write(byte_buffer::wrap_array(str.data(), str.length()));
@@ -242,8 +242,8 @@ public:
 	 */
 	inline void write(const byte_buffer& buff) {
 		byte_buffer raw(buff);
-		byte_buffer convBytes = conv_->convert(raw);
-		basic_writer<_char_t, _traits_t>::flush(convBytes);
+		byte_buffer cvtBytes = cvtr_->convert(raw);
+		basic_writer<_char_t, _traits_t>::flush(cvtBytes);
 	}
 
 	inline void writeln(const string& str) {
@@ -256,31 +256,31 @@ public:
 	}
 
 private:
-	SConverter conv_;
+	SConverter cvtr_;
 };
 
 typedef basic_reader<char> reader;
 typedef basic_reader<wchar_t> wreder;
-typedef conv_reader<char> cnv_reader;
-typedef conv_reader<wchar_t> cnv_wreader;
+typedef basic_cvt_reader<char> cvt_reader;
+typedef basic_cvt_reader<wchar_t> cvt_wreader;
 
 typedef basic_writer<char> writer;
 typedef basic_writer<wchar_t> wwriter;
-typedef conv_writer<char> cnv_writer;
-typedef conv_writer<wchar_t> cnv_wwriter;
+typedef basic_cvt_writer<char> cvt_writer;
+typedef basic_cvt_writer<wchar_t> cvt_wwriter;
 
 
 #ifndef BOOST_NO_CHAR16_T
 typedef basic_reader<char16_t> u16reader;
 typedef basic_writer<char16_t> u16writer;
-typedef conv_reader<char16_t> cnv_u16reader;
-typedef conv_writer<char16_t> cnv_u16writer;
+typedef basic_cvt_writer<char16_t> cvt_u16reader;
+typedef basic_cvt_writer<char16_t> cvt_u16writer;
 #endif
 #ifndef BOOST_NO_CHAR32_T
 typedef basic_reader<char32_t> u32reader;
 typedef basic_writer<char32_t> u32writer;
-typedef conv_reader<char32_t> cnv_u32reader;
-typedef conv_writer<char32_t> cnv_u32writer;
+typedef basic_cvt_writer<char32_t> cvt_u32reader;
+typedef basic_cvt_writer<char32_t> cvt_u32writer;
 #endif
 
 } // namespace io

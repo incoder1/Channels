@@ -37,8 +37,8 @@ public:
  * \param CharType - the byte type character representation. I.e. char, wchar_t, char8_t, char16_t etc.
  */
 class CHANNEL_PUBLIC ICUConverter:public object {
-	void fromUnicode(const byte_buffer& src,byte_buffer& dest) throw(std::runtime_error);
-	void intoUnicode(const byte_buffer& src,byte_buffer& dest) throw(std::runtime_error);
+	void fromUnicode(const byte_buffer& src,byte_buffer& dest);
+	void intoUnicode(const byte_buffer& src,byte_buffer& dest);
 	inline std::size_t calcBuffSize(const byte_buffer& src);
 public:
 	/**
@@ -47,7 +47,7 @@ public:
 	 * \param destCt destination char set
 	 * \throw charset_exception if conversation is not possible
 	 */
-	ICUConverter(const Charset *srcCt, const Charset *dstCt) throw(std::runtime_error);
+	ICUConverter(const Charset *srcCt, const Charset *dstCt);
 
 	/**
 	 * Frees resources allocated by converter
@@ -59,7 +59,7 @@ public:
 	 * \param src source characters in their bytes sequence representation
 	 *  \return heap byte buffer with converted characters
 	 */
-	byte_buffer convert(const byte_buffer& src) throw(std::bad_alloc,std::runtime_error);
+	byte_buffer convert(const byte_buffer& src);
 
 	/**
 	 * Converts character sequence from source character set into destination charter set
@@ -67,7 +67,7 @@ public:
 	 * \param dest destination characters in their character type representation
 	 * \return converted string length in bytes
 	 */
-	std::size_t convert(const byte_buffer& src, byte_buffer& dest) throw(std::runtime_error);
+	std::size_t convert(const byte_buffer& src, byte_buffer& dest);
 
 private:
 	const Charset* from_;
@@ -77,7 +77,7 @@ private:
 
 typedef boost::shared_ptr<ICUConverter> SConverter;
 
-SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to) throw(std::bad_alloc,std::runtime_error);
+SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to);
 
 inline SConverter make_converter(const char *from, const char* to) {
 	return make_converter(Charsets::forName(from),Charsets::forName(to));

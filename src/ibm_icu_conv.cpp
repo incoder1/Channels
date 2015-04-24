@@ -5,7 +5,10 @@ namespace io {
 
 
 inline void validate_create_conv(const UErrorCode& errCode, const std::string& chName) {
-	validate<std::runtime_error>(U_SUCCESS(errCode), "Can not build IBM ICU converter for converting "+chName);
+	if(U_FAILURE(errCode)) {
+	   std::string msg("Can not build IBM ICU converter for converting");
+	   boost::throw_exception(std::runtime_error(msg+chName));
+	}
 }
 
 static const std::size_t UTF16LE = 1200;
@@ -60,11 +63,13 @@ UErrorCode ICUEngine::fromUnicode(UChar* src, std::size_t srcLen, char* dst, std
 }
 
 //ICUConverter
-ICUConverter::ICUConverter(const Charset *from, const Charset* to) throw(std::runtime_error):
+ICUConverter::ICUConverter(const Charset *from, const Charset* to):
 	from_(from),
 	to_(to)
 {
-	validate<std::runtime_error>(!from_->equal(to_),"Source character set is equal destination, no conversation needed");
+	if(from_->equal(to_)) {
+		 boost::throw_exception(std::runtime_error("Source character set is equal destination, no conversation needed"));
+	}
 	UConverter* intoUnc = openConverter(from_);
 	UConverter* fromUnc = openConverter(to_);
 	engine_ = ICUEngine(intoUnc, fromUnc);
@@ -91,7 +96,7 @@ inline void validate_from_conv(UErrorCode errCode,const Charset* charset) {
 	}
 }
 
-void ICUConverter::intoUnicode(const byte_buffer& source,byte_buffer& dest) throw(std::runtime_error)
+void ICUConverter::intoUnicode(const byte_buffer& source,byte_buffer& dest)
 {
 	char *src = reinterpret_cast<char*>(source.position().ptr());
 	UChar *dst = reinterpret_cast<UChar*>(dest.position().ptr());
@@ -103,7 +108,7 @@ void ICUConverter::intoUnicode(const byte_buffer& source,byte_buffer& dest) thro
 	dest.move(0 != offset ? offset: dest.capacity() - 1);
 }
 
-void ICUConverter::fromUnicode(const byte_buffer& source,byte_buffer& dest) throw(std::runtime_error)
+void ICUConverter::fromUnicode(const byte_buffer& source,byte_buffer& dest)
 {
 	UChar *src = reinterpret_cast<UChar*>(source.position().ptr());
 	char *dst = reinterpret_cast<char*>(dest.position().ptr());
@@ -125,7 +130,7 @@ inline std::size_t ICUConverter::calcBuffSize(const byte_buffer& src) {
 	return result;
 }
 
-std::size_t ICUConverter::convert(const byte_buffer& src, byte_buffer& dest) throw(std::runtime_error)
+std::size_t ICUConverter::convert(const byte_buffer& src, byte_buffer& dest)
 {
 	if(notUTF16(from_)) {
 		intoUnicode(src, dest);
@@ -140,9 +145,10 @@ std::size_t ICUConverter::convert(const byte_buffer& src, byte_buffer& dest) thr
 		fromUnicode(unicodeBuff, dest);
 	}
 	dest.flip();
+	return dest.length();
 }
 
-byte_buffer ICUConverter::convert(const byte_buffer& src) throw(std::bad_alloc,std::runtime_error)
+byte_buffer ICUConverter::convert(const byte_buffer& src)
 {
 	std::size_t buffSize = calcBuffSize(src);
 	byte_buffer dest = byte_buffer::heap_buffer(buffSize);
@@ -150,7 +156,7 @@ byte_buffer ICUConverter::convert(const byte_buffer& src) throw(std::bad_alloc,s
 	return dest;
 }
 
-SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to) throw(std::bad_alloc,std::runtime_error) {
+SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to) {
 	return boost::make_shared<ICUConverter>(from,to);
 }
 

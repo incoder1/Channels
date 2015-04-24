@@ -28,14 +28,11 @@
 #include <pipe.hpp>
 #include <network.hpp>
 
-#include "win/WinAssynchFile.hpp"
-
 void charset_console_sample() throw(io::io_exception)
 {
 	io::Console con(true);
-	con.setTextColor();
 	io::SConverter conv = io::make_converter(io::Charsets::utf8(),con.charset());
-	io::cnv_writer out(con.out(),conv);
+	io::cvt_writer out(con.out(),conv);
 	out.writeln(boost::format("Hello! Привет! Χαιρετίσματα! %i") % 73);
 }
 
@@ -84,7 +81,7 @@ void file_sample() {
 	Console con(true);
 	wwriter out(con.out());
 	byte_buffer buff = byte_buffer::heap_buffer(128);
-	cnv_reader reader( in, make_converter(Charsets::utf8(),con.charset()) );
+	cvt_reader reader( in, make_converter(Charsets::utf8(),con.charset()) );
 	std::size_t converted = reader.read(buff);
 	while(converted > 0) {
 		out.flush(buff);
@@ -98,8 +95,6 @@ void asynch_file_read_routine(long err,std::size_t read,const io::byte_buffer& d
 }
 
 void asynch_file_sample() {
-	::HANDLE hFile = ::CreateFile();
- 	//SAsynhFileChannel in(new ::WinAsychFileChannel()):
 }
 
 void buffers_sample() {
@@ -163,12 +158,81 @@ void buffers_sample() {
 //
 //}
 
+class custom:public io::object
+{
+public:
+	explicit custom():
+		object()
+	{}
+	virtual ~custom() BOOST_NOEXCEPT_OR_NOTHROW
+	{
+	}
+};
+
+class custom1:public custom {
+public:
+	custom1():
+		custom()
+	{}
+private:
+	std::size_t data_;
+};
+
+class parent {
+protected:
+	parent()
+	{}
+public:
+	virtual ~parent() BOOST_NOEXCEPT_OR_NOTHROW = 0;
+};
+
+parent::~parent() BOOST_NOEXCEPT_OR_NOTHROW
+{
+}
+
+class normal:public parent {
+public:
+	explicit normal():
+		parent()
+	{}
+	virtual ~normal() BOOST_NOEXCEPT_OR_NOTHROW {
+	}
+};
+
+class normal1:public normal {
+public:
+	normal1(): normal() {
+	}
+private:
+	std::size_t data_;
+};
+
+void allocator_branchmark() {
+	std::cout<<sizeof(normal1)<<std::endl;
+	std::cout<<sizeof(custom1)<<std::endl;
+	for(int i=0; i < 10000; i++) {
+		std::list<custom*> v;
+		//std::list<normal*> v;
+		for(int i=0; i < 500; i++) {
+			v.push_back(new custom());
+			v.push_back(new custom1());
+			//v.push_back(new normal());
+			//v.push_back(new normal1());
+		}
+		for(auto it = v.begin(); it != v.end(); ++it) {
+			delete *it;
+		}
+		v.clear();
+	}
+}
+
 #ifndef _MSC_VER
 int main(int argc, const char** argv)
 #else
 int _tmain(int argc, TCHAR *argv[])
 #endif
 {
+	allocator_branchmark();
 	try {
 		//buffers_sample();
 		//charset_console_sample();

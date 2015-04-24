@@ -35,38 +35,4 @@ RandomAccessChannel::~RandomAccessChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {
 }
 
-// AsyncResult
-AsyncResult::AsyncResult()
-{}
-
-AsyncResult::~AsyncResult() BOOST_NOEXCEPT_OR_NOTHROW
-{}
-
-// AsynchReadChannel
-AsynchReadChannel::AsynchReadChannel()
-{
-}
-
-AsynchReadChannel::~AsynchReadChannel() BOOST_NOEXCEPT_OR_NOTHROW
-{}
-
-// AsynchWriteChannel
-AsynchWriteChannel::AsynchWriteChannel()
-{}
-
-AsynchWriteChannel::~AsynchWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW
-{
-}
-
-// AssynchReadWriteChannel
-AsynchReadWriteChannel::AsynchReadWriteChannel():
-	AsynchReadChannel(),
-	AsynchWriteChannel()
-{
-}
-
-AsynchReadWriteChannel::~AsynchReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW
-{
-}
-
 } // namespace io

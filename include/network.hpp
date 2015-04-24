@@ -18,7 +18,7 @@ namespace net {
 	namespace {
 
 	  template<class Socket>
-	  class basic_socket_channel:public virtual ReadChannel,public virtual WriteChannel, public virtual object {
+	  class basic_socket_channel:public virtual ReadWriteChannel, public virtual object {
 		public:
 			basic_socket_channel(boost::shared_ptr<Socket> socket) BOOST_NOEXCEPT_OR_NOTHROW:
 				ReadChannel(),WriteChannel(),object(),

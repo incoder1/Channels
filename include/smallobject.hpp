@@ -3,6 +3,8 @@
 
 #include <channels_config.h>
 
+#include <stdint.h>
+
 #include <stdexcept>
 #include <boost/shared_ptr.hpp>
 #include <boost/move/move.hpp>

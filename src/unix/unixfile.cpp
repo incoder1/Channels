@@ -72,14 +72,9 @@ std::size_t FileChannel::write(const byte_buffer& buffer)
 	return result;
 }
 
-static bool determ_endian() {
-	short num = 1;
-	return *(char *)&num == 1;
-}
-
-std::size_t FileChannel::seek(std::size_t offset, int whence)
+std::size_t FileChannel::seek(int64_t offset, int whence)
 {
-	off_t res = ::lseek(file_, offset, whence);
+	off_t res = ::lseek64(file_, offset, whence);
 	validate_io(static_cast<ssize_t>(res) > 0, "Move file pointer error");
 	return static_cast<std::size_t>(res);
 }

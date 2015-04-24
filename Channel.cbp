@@ -132,13 +132,11 @@
 		<Unit filename="include/pipe.hpp" />
 		<Unit filename="include/smallobject.hpp" />
 		<Unit filename="include/text.hpp" />
-		<Unit filename="include/unix/unixfile.hpp">
+		<Unit filename="include/unix/unixconsole.h">
 			<Option target="LinuxGCCDebug" />
 		</Unit>
-		<Unit filename="include/win/WinAsynchFile.hpp">
-			<Option target="DebugMinGW32" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="DebugMinGW32-ICU" />
+		<Unit filename="include/unix/unixfile.hpp">
+			<Option target="LinuxGCCDebug" />
 		</Unit>
 		<Unit filename="include/win/WinConsole.hpp">
 			<Option target="DebugMinGW32" />
@@ -146,6 +144,11 @@
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="include/win/WinFile.hpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+		</Unit>
+		<Unit filename="include/win/memory.hpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
@@ -179,13 +182,11 @@
 			<Option compiler="msvc10" use="0" buildCommand="$compiler /nologo $options $includes /c $file /Yc$objects_output_dir\prchrd.pch" />
 		</Unit>
 		<Unit filename="src/smallobject.cpp" />
-		<Unit filename="src/unix/unixfile.cpp">
+		<Unit filename="src/unix/unixconsole.cpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>
-		<Unit filename="src/win/WinAsynchFile.cpp">
-			<Option target="DebugMinGW32" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="DebugMinGW32-ICU" />
+		<Unit filename="src/unix/unixfile.cpp">
+			<Option target="LinuxGCCDebug" />
 		</Unit>
 		<Unit filename="src/win/WinConsole.cpp">
 			<Option target="DebugMinGW32" />
@@ -197,17 +198,17 @@
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
-		<Unit filename="src/win/WinNamedPipe.cpp">
-			<Option target="DebugMinGW32" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="DebugMinGW32-ICU" />
-		</Unit>
 		<Unit filename="src/win/WinPipe.cpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/win/helpers.hpp">
+			<Option target="DebugMinGW32" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+		</Unit>
+		<Unit filename="src/win/memory.cpp">
 			<Option target="DebugMinGW32" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
