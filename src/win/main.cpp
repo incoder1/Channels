@@ -1,7 +1,5 @@
 #include "prchdrs.h"
 
-#ifdef PLATFORM_WINDOWSS
-
 BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 {
 	switch (fdwReason) {
@@ -16,6 +14,6 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
 	}
 	return TRUE; // successful
 }
-#endif // PLATFORM_WINDOWS
+
 
 

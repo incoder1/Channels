@@ -37,11 +37,7 @@ public:
 	 * \throw never throws
 	 */
 	virtual std::size_t hash() const BOOST_NOEXCEPT_OR_NOTHROW;
-	/**
-	 * Logical compares this object with another by address. Default implementation compares pointers by value directly
-	 * \return whether objects are logical identical
-	 */
-	virtual bool equal(object* const obj) const;
+
 	/**
 	 * Ovverides system memory allocator to the sorted single segregate storage allocation.
 	 * If implementor size is lager then 128 bytes, default new will be used
@@ -50,6 +46,7 @@ public:
 	 * \throw std::bad_alloc if memory can not be allocated
 	 */
 	void* operator new(std::size_t size) throw(std::bad_alloc);
+
 	/**
 	 * Ovverides system memory deleter to the sorted single segregate storage deleter.
 	 * If implementor size is lager then 128 bytes, default delete will be used

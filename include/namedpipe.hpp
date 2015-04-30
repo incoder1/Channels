@@ -72,7 +72,7 @@ class Selector {
 public:
 	Selector():
 		port_(NULL) {
-		port_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE,NULL,NULL,0);
+		port_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE,INVALID_HANDLE_VALUE,NULL,0);
 	}
 	~Selector() BOOST_NOEXCEPT_OR_NOTHROW {
 		::CloseHandle(port_);

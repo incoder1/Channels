@@ -36,7 +36,8 @@ void charset_console_sample() throw(io::io_exception)
 	out.writeln(boost::format("Hello! Привет! Χαιρετίσματα! %i") % 73);
 }
 
-void pipe_write_routine(io::SWriteChannel sink) {
+void pipe_write_routine(io::SWriteChannel sink)
+{
 	io::wwriter pout(sink);
 	pout.write(L"Hello from pipe!\n");
 	pout.write(L"Привет из канала!\n");
@@ -61,7 +62,8 @@ void pipe_sample()
 /**
  * Writes wchar_t string into UTF-8 file
  */
-void file_sample() {
+void file_sample()
+{
 	using namespace io;
 	File file("result.txt");
 	if(file.exist()) {
@@ -90,14 +92,17 @@ void file_sample() {
 	}
 }
 
-void asynch_file_read_routine(long err,std::size_t read,const io::byte_buffer& data) {
+void asynch_file_read_routine(long err,std::size_t read,const io::byte_buffer& data)
+{
 
 }
 
-void asynch_file_sample() {
+void asynch_file_sample()
+{
 }
 
-void buffers_sample() {
+void buffers_sample()
+{
 	using namespace io;
 	const char* hello = "Hello ";
 	const char* world = "world!!!";
@@ -158,71 +163,53 @@ void buffers_sample() {
 //
 //}
 
-class custom:public io::object
-{
+class offspring:public io::object {
 public:
-	explicit custom():
-		object()
+offspring() BOOST_NOEXCEPT_OR_NOTHROW:
+	io::object()
 	{}
-	virtual ~custom() BOOST_NOEXCEPT_OR_NOTHROW
-	{
+	virtual ~offspring() BOOST_NOEXCEPT_OR_NOTHROW {
 	}
-};
-
-class custom1:public custom {
-public:
-	custom1():
-		custom()
-	{}
 private:
-	std::size_t data_;
+	uint16_t short_;
+	uint64_t longLong_;
 };
 
 class parent {
-protected:
-	parent()
-	{}
 public:
 	virtual ~parent() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
 
 parent::~parent() BOOST_NOEXCEPT_OR_NOTHROW
-{
-}
+{}
 
-class normal:public parent {
+class offspring1:public parent {
 public:
-	explicit normal():
+	offspring1():
 		parent()
 	{}
-	virtual ~normal() BOOST_NOEXCEPT_OR_NOTHROW {
+	virtual ~offspring1() BOOST_NOEXCEPT_OR_NOTHROW {
 	}
-};
-
-class normal1:public normal {
 public:
-	normal1(): normal() {
-	}
-private:
-	std::size_t data_;
+	uint16_t short_;
+	uint64_t longLong_;
 };
 
-void allocator_branchmark() {
-	std::cout<<sizeof(normal1)<<std::endl;
-	std::cout<<sizeof(custom1)<<std::endl;
-	for(int i=0; i < 10000; i++) {
-		std::list<custom*> v;
-		//std::list<normal*> v;
-		for(int i=0; i < 500; i++) {
-			v.push_back(new custom());
-			v.push_back(new custom1());
-			//v.push_back(new normal());
-			//v.push_back(new normal1());
+void performance()
+{
+	try {
+		for(int i=0; i < 10000; i++) {
+			offspring* obj[1000];
+			for(int i=0; i < 1000; i++) {
+				obj[i] = new offspring();
+			}
+			for(int i=0; i < 1000; i++) {
+				delete obj[i];
+			}
 		}
-		for(auto it = v.begin(); it != v.end(); ++it) {
-			delete *it;
-		}
-		v.clear();
+	} catch(std::exception& exc) {
+		std::cerr<<exc.what()<<std::endl;
+		std::terminate();
 	}
 }
 
@@ -232,8 +219,13 @@ int main(int argc, const char** argv)
 int _tmain(int argc, TCHAR *argv[])
 #endif
 {
-	allocator_branchmark();
 	try {
+		//performance();
+		boost::thread_group tp;
+		for(int i=0; i<2; i++) {
+			tp.create_thread(boost::function<void()>(performance));
+		}
+		tp.join_all();
 		//buffers_sample();
 		//charset_console_sample();
 		//pipe_sample();

@@ -7120,7 +7120,7 @@
 
 1365979818 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
 
-1428936094 source:d:\cpp\channel\src\iconv_conv.cpp
+1430306393 source:d:\cpp\channel\src\iconv_conv.cpp
 	"prchdrs.h"
 	"iconv_conv.hpp"
 
@@ -21537,21 +21537,21 @@
 
 1414767002 d:\cpp\boost_1_57_0\boost
 
-1429884037 d:\cpp\channel\include\smallobject.hpp
+1430406314 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
 	<stdint.h>
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 
-1429900590 source:d:\cpp\channel\src\smallobject.cpp
+1430411948 source:d:\cpp\channel\src\smallobject.cpp
 	"prchdrs.h"
 	"smallobject.hpp"
 	<boost/make_shared.hpp>
 	<boost/pool/pool.hpp>
-	<boost/intrusive_ptr.hpp>
-	<boost/thread/once.hpp>
 	<boost/thread/mutex.hpp>
+	<boost/thread/thread.hpp>
+	<boost/atomic.hpp>
 	"win/memory.hpp"
 	"win/memory.hpp"
 
@@ -26076,7 +26076,7 @@
 1429292570 d:\cpp\channel\src\win\helpers.hpp
 	"errors.hpp"
 
-1429884264 d:\cpp\channel\include\namedpipe.hpp
+1430406378 d:\cpp\channel\include\namedpipe.hpp
 	<boost/shared_ptr.hpp>
 	<boost/unordered_map.hpp>
 	<boost/function.hpp>
@@ -26144,12 +26144,24 @@
 1429296212 d:\cpp\channel\include\win\winselector.hpp
 	"channels.hpp"
 
-1429898505 d:\cpp\channel\include\win\memory.hpp
+1430405362 d:\cpp\channel\include\win\memory.hpp
 	<windows.h>
-	<boost/atomic.hpp>
-	<boost/thread/once.hpp>
+	<boost/scoped_ptr.hpp>
+	<boost/thread/mutex.hpp>
 
-1429899739 source:d:\cpp\channel\src\win\memory.cpp
+1430405305 source:d:\cpp\channel\src\win\memory.cpp
 	"prchdrs.h"
 	"memory.hpp"
+	<boost/pool/singleton_pool.hpp>
+
+1430404570 source:d:\cpp\channel\src\win\main.cpp
+	"prchdrs.h"
+
+1404966970 d:\cpp\boost_1_57_0\boost\pool\singleton_pool.hpp
+	<boost/pool/poolfwd.hpp>
+	<boost/pool/pool.hpp>
+	<boost/pool/detail/guard.hpp>
+	<boost/type_traits/aligned_storage.hpp>
+
+1404966970 d:\cpp\boost_1_57_0\boost\pool\detail\guard.hpp
 

@@ -5,10 +5,10 @@
 		<Option title="Channel" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="DebugMinGW32">
+			<Target title="DebugGCCWin">
 				<Option platforms="Windows;" />
-				<Option output="bin/DebugMinWG32/Channel" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/DebugMinGW32/" />
+				<Option output="bin/DebugGCCWin/Channel" imp_lib="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).a" def_file="$(TARGET_OUTPUT_DIR)$(TARGET_OUTPUT_BASENAME).def" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/DebugGCCWin/" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
@@ -123,7 +123,7 @@
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="include/iconv_conv.hpp">
-			<Option target="DebugMinGW32" />
+			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="LinuxGCCDebug" />
 		</Unit>
@@ -139,22 +139,22 @@
 			<Option target="LinuxGCCDebug" />
 		</Unit>
 		<Unit filename="include/win/WinConsole.hpp">
-			<Option target="DebugMinGW32" />
+			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="include/win/WinFile.hpp">
-			<Option target="DebugMinGW32" />
+			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="include/win/memory.hpp">
-			<Option target="DebugMinGW32" />
+			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="include/win/winver.h">
-			<Option target="DebugMinGW32" />
+			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
@@ -165,11 +165,10 @@
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/iconv_conv.cpp">
-			<Option target="DebugMinGW32" />
+			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="LinuxGCCDebug" />
 		</Unit>
-		<Unit filename="src/main.cpp" />
 		<Unit filename="src/namedpipe.cpp" />
 		<Unit filename="src/pipe.cpp" />
 		<Unit filename="src/prchdrs.cpp">
@@ -189,27 +188,32 @@
 			<Option target="LinuxGCCDebug" />
 		</Unit>
 		<Unit filename="src/win/WinConsole.cpp">
-			<Option target="DebugMinGW32" />
+			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/win/WinFile.cpp">
-			<Option target="DebugMinGW32" />
+			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/win/WinPipe.cpp">
-			<Option target="DebugMinGW32" />
+			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/win/helpers.hpp">
-			<Option target="DebugMinGW32" />
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+		</Unit>
+		<Unit filename="src/win/main.cpp">
+			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>
 		<Unit filename="src/win/memory.cpp">
-			<Option target="DebugMinGW32" />
+			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 		</Unit>

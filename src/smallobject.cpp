@@ -3,9 +3,9 @@
 
 #include <boost/make_shared.hpp>
 #include <boost/pool/pool.hpp>
-#include <boost/intrusive_ptr.hpp>
-#include <boost/thread/once.hpp>
 #include <boost/thread/mutex.hpp>
+#include <boost/thread/thread.hpp>
+#include <boost/atomic.hpp>
 
 #ifdef PLATFORM_WINDOWS
 #	include "win/memory.hpp"
@@ -20,61 +20,88 @@ typedef detail::private_heap_block_allocator block_allocator;
 typedef boost::default_user_allocator_new_delete block_allocator;
 #endif // PLATFROM_WINDOWS
 
-// Small Object object_allocator
-
-class object_allocator {
+// synchronized pool
+class synch_pool:private boost::noncopyable
+{
 public:
-	static inline void* allocate(std::size_t size) throw (std::bad_alloc) {
-		return instance()->malloc(size);
+	explicit synch_pool(const std::size_t size):
+		locked_(false),
+		pool_(size)
+	{}
+	void* malloc() {
+		bool locked;
+		do {
+			locked = false;
+		} while(!locked_.compare_exchange_strong(locked,true));
+		void *result = pool_.malloc();
+		locked_ = false;
+		return result;
 	}
-	static inline void release(void *ptr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
-		instance()->free(ptr,size);
+	void free(void * const ptr) {
+		bool locked;
+		do {
+			locked = false;
+		} while(!locked_.compare_exchange_strong(locked,true));
+		return pool_.free(ptr);
+		locked_ = false;
 	}
 private:
-	typedef typename boost::pool<block_allocator> pool_t;
+	boost::atomics::atomic_bool locked_;
+	boost::pool<block_allocator> pool_;
+};
+
+// Small Object object_allocator
+class object_allocator:private boost::noncopyable {
+public:
+
+	static void* allocate(std::size_t size) throw (std::bad_alloc) {
+		return ((object_allocator*)instance())->malloc(size);
+	}
+
+	static void release(void *ptr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
+		((object_allocator*)instance())->free(ptr,size);
+	}
+
+	~object_allocator() BOOST_NOEXCEPT_OR_NOTHROW
+	{
+		for(std::size_t i = 0; i < MAX_SIZE; i++) {
+			delete pools_[i];
+		}
+	}
+
+private:
+	typedef synch_pool pool_t;
 	static const std::size_t MAX_SIZE = 128;
 	object_allocator() BOOST_NOEXCEPT_OR_NOTHROW
 	{
-		 std::fill(pools_.begin(), pools_.end(), static_cast<pool_t*>(NULL));
-	}
-	~object_allocator() BOOST_NOEXCEPT_OR_NOTHROW {
-		std::for_each(pools_.begin(), pools_.end(), object_allocator::free_pool);
-	}
-	static void free_pool(pool_t* pool) {
-		if(NULL != pool) {
-			delete pool;
+		for(std::size_t i = 0; i < MAX_SIZE; i++) {
+			pools_[i] = new pool_t(i+1);
 		}
 	}
-	static object_allocator* const instance() throw(std::bad_alloc) {
-		boost::call_once(&object_allocator::initilize,_once);
-		return _instance;
-	}
-	static void initilize() throw(std::bad_alloc) {
-		_instance = new object_allocator();
-		#ifdef PLATFORM_WINDOWS
-			// prevent destroying this singleton before private heap singleton
-			block_allocator::instance();
-		#endif // PLATFORM_WINDOWS
-		std::atexit(&object_allocator::utilize);
-	}
-	static void utilize() BOOST_NOEXCEPT_OR_NOTHROW {
+
+	static void release() BOOST_NOEXCEPT_OR_NOTHROW {
 		delete _instance;
 	}
-	inline pool_t* get(const ptrdiff_t size) {
-		return pools_[size - 1];
+
+	static volatile object_allocator* volatile instance() {
+		if(NULL == _instance) {
+			boost::unique_lock<boost::mutex> lock(_mutex);
+			if(NULL == _instance) {
+				_instance = new volatile object_allocator();
+				#ifdef PLATFORM_WINDOWS
+					block_allocator::instance();
+				#endif
+				std::atexit(&object_allocator::release);
+			}
+		}
+		return _instance;
 	}
-	void* malloc(std::size_t size) throw(std::bad_alloc) {
+
+
+	void* malloc(std::size_t size) {
 		void * result = NULL;
 		if( (size-1) < MAX_SIZE) {
-			pool_t* pool = get(size);
-			if(NULL == pool) {
-				boost::unique_lock<boost::mutex> lock(mutex_);
-				pool = get(size);
-				if(NULL == pool) {
-					pool = new pool_t(size);
-					pools_[size - 1] = pool;
-				}
-			}
+			pool_t* pool = pools_[size - 1];
 			result = pool->malloc();
 			if(NULL == result) {
 				boost::throw_exception(std::bad_alloc());
@@ -84,22 +111,22 @@ private:
 		}
 		return result;
 	}
+
 	void free(void *ptr, std::size_t size) {
 		if(size-1 >= MAX_SIZE) {
 			delete [] static_cast<uint8_t*>(ptr);
 		} else {
-			get(size)->free(ptr);
+			pools_[size - 1]->free(ptr);
 		}
 	}
 private:
-	static object_allocator* _instance;
-	static boost::once_flag _once;
-	boost::mutex mutex_;
-	boost::array<pool_t*,MAX_SIZE> pools_;
+	static boost::mutex _mutex;
+	static volatile object_allocator* volatile _instance;
+	pool_t* pools_[MAX_SIZE];
 };
 
-object_allocator* object_allocator::_instance = NULL;
-boost::once_flag object_allocator::_once = BOOST_ONCE_INIT;
+boost::mutex object_allocator::_mutex;
+volatile object_allocator* volatile object_allocator::_instance;
 
 // object
 object::object() BOOST_NOEXCEPT_OR_NOTHROW
@@ -112,11 +139,6 @@ object::~object() BOOST_NOEXCEPT_OR_NOTHROW
 std::size_t object::hash() const BOOST_NOEXCEPT_OR_NOTHROW
 {
 	return reinterpret_cast<std::size_t>(this);
-}
-
-bool object::equal(object* const obj) const
-{
-	return this == obj;
 }
 
 void* object::operator new(std::size_t size) throw(std::bad_alloc)

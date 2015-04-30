@@ -57,7 +57,6 @@ std::size_t IconvConverter::convert(const byte_buffer& src, byte_buffer& dest) t
 	std::size_t iconvValue = ::iconv(conv_.get(), &itptr, &srclen, &dstptr, &avail);
 	if( static_cast<std::size_t>(-1) == iconvValue) {
 		switch (errno) {
-			/* See "man 3 iconv" for an explanation. */
 		case EILSEQ:
 			boost::throw_exception(std::runtime_error("Invalid multi-byte sequence"));
 		case EINVAL:

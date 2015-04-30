@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1429901109 source:d:\cpp\channel\textdemo\main.cpp
+1430412150 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -5288,10 +5288,10 @@
 
 1310273157 d:\cpp\boost_1_54_0\boost\exception\detail\clone_current_exception.hpp
 
-1428659451 d:\cpp\channel\include\file.hpp
+1430324533 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"win/WinFile.hpp"
-	"unixfile.hpp"
+	"unix/unixfile.hpp"
 
 1427375721 d:\cpp\channel\include\windowsfile.hpp
 	<boost/make_shared.hpp>
@@ -16816,7 +16816,7 @@
 	<channels.hpp>
 	<boost/format.hpp>
 
-1429884037 d:\cpp\channel\include\smallobject.hpp
+1430406314 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
 	<stdint.h>
 	<stdexcept>
@@ -17438,4 +17438,10 @@
 1382376321 c:\mingw\msys\1.0\local\include\unicode\uloc.h
 	"unicode/utypes.h"
 	"unicode/uenum.h"
+
+1429795104 d:\cpp\channel\include\unix\unixfile.hpp
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	"abstractfile.hpp"
 
