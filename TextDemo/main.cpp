@@ -165,8 +165,8 @@ void buffers_sample()
 
 class offspring:public io::object {
 public:
-offspring() BOOST_NOEXCEPT_OR_NOTHROW:
-	io::object()
+	offspring():
+		io::object()
 	{}
 	virtual ~offspring() BOOST_NOEXCEPT_OR_NOTHROW {
 	}

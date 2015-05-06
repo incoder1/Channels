@@ -142,6 +142,7 @@ public:
 	virtual uint64_t fromEnd(uint64_t offset)  = 0;
 
 	virtual std::size_t read(byte_buffer& buffer) = 0;
+
 	virtual std::size_t write(const byte_buffer& buffer) = 0;
 
 	/**

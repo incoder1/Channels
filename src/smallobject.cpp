@@ -25,28 +25,19 @@ class synch_pool:private boost::noncopyable
 {
 public:
 	explicit synch_pool(const std::size_t size):
-		locked_(false),
 		pool_(size)
-	{}
-	void* malloc() {
-		bool locked;
-		do {
-			locked = false;
-		} while(!locked_.compare_exchange_strong(locked,true));
-		void *result = pool_.malloc();
-		locked_ = false;
-		return result;
+	{
 	}
-	void free(void * const ptr) {
-		bool locked;
-		do {
-			locked = false;
-		} while(!locked_.compare_exchange_strong(locked,true));
-		return pool_.free(ptr);
-		locked_ = false;
+	inline void* malloc() {
+		boost::unique_lock<boost::mutex> lock(mutex_);
+		return pool_.malloc();
+	}
+	inline void free(void * const ptr) {
+		boost::unique_lock<boost::mutex> lock(mutex_);
+		pool_.free(ptr);
 	}
 private:
-	boost::atomics::atomic_bool locked_;
+	boost::mutex mutex_;
 	boost::pool<block_allocator> pool_;
 };
 
@@ -55,11 +46,11 @@ class object_allocator:private boost::noncopyable {
 public:
 
 	static void* allocate(std::size_t size) throw (std::bad_alloc) {
-		return ((object_allocator*)instance())->malloc(size);
+		return const_cast<object_allocator*>(instance())->malloc(size);
 	}
 
 	static void release(void *ptr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
-		((object_allocator*)instance())->free(ptr,size);
+		const_cast<object_allocator*>(instance())->free(ptr,size);
 	}
 
 	~object_allocator() BOOST_NOEXCEPT_OR_NOTHROW
@@ -101,8 +92,7 @@ private:
 	void* malloc(std::size_t size) {
 		void * result = NULL;
 		if( (size-1) < MAX_SIZE) {
-			pool_t* pool = pools_[size - 1];
-			result = pool->malloc();
+			result = pools_[size - 1]->malloc();
 			if(NULL == result) {
 				boost::throw_exception(std::bad_alloc());
 			}

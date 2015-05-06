@@ -5218,7 +5218,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1429290978 d:\cpp\channel\include\channels.hpp
+1430836791 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -21537,14 +21537,14 @@
 
 1414767002 d:\cpp\boost_1_57_0\boost
 
-1430406314 d:\cpp\channel\include\smallobject.hpp
+1430836486 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
 	<stdint.h>
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 
-1430411948 source:d:\cpp\channel\src\smallobject.cpp
+1430846683 source:d:\cpp\channel\src\smallobject.cpp
 	"prchdrs.h"
 	"smallobject.hpp"
 	<boost/make_shared.hpp>
@@ -26144,12 +26144,12 @@
 1429296212 d:\cpp\channel\include\win\winselector.hpp
 	"channels.hpp"
 
-1430405362 d:\cpp\channel\include\win\memory.hpp
+1430908595 d:\cpp\channel\include\win\memory.hpp
 	<windows.h>
 	<boost/scoped_ptr.hpp>
 	<boost/thread/mutex.hpp>
 
-1430405305 source:d:\cpp\channel\src\win\memory.cpp
+1430908584 source:d:\cpp\channel\src\win\memory.cpp
 	"prchdrs.h"
 	"memory.hpp"
 	<boost/pool/singleton_pool.hpp>
