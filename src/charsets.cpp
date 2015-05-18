@@ -3,7 +3,6 @@
 namespace io {
 
 // Charset
-
 Charset::Charset(std::size_t id, const char* name, const std::size_t charSize, bool isUnicode) BOOST_NOEXCEPT_OR_NOTHROW:
 id_(id),
     name_(name),
@@ -33,11 +32,7 @@ bool Charset::isUnicode() const BOOST_NOEXCEPT_OR_NOTHROW
 
 bool Charset::equal(const Charset* oth) const BOOST_NOEXCEPT_OR_NOTHROW
 {
-	bool result = false;
-	if(NULL != oth) {
-		result = id_ == (oth->id_);
-	}
-	return result;
+	return oth == this ? true : NULL != oth && id_ == (oth->id_);
 }
 
 // Charset constants
@@ -90,11 +85,24 @@ DECLARE_CHARSET(CP_1258,1258,"CP1258",sizeof(char),false)
 
 #undef DECLARE_CHARSET // DECLARE_CHARSET
 
+boost::mutex Charsets::_mutex;
+volatile Charsets* volatile Charsets::_instance = NULL;
 
-const Charsets* Charsets::instance() BOOST_NOEXCEPT_OR_NOTHROW {
-	// tread safety is not needed, and will be auto-provided in case of C++ 11
-	static Charsets factory;
-	return &factory;
+void Charsets::release() BOOST_NOEXCEPT_OR_NOTHROW
+{
+	delete _instance;
+}
+
+
+volatile Charsets* volatile Charsets::instance() {
+	if(NULL == _instance) {
+		boost::unique_lock<boost::mutex> lock(_mutex);
+		if(NULL == _instance) {
+			_instance = new volatile Charsets();
+			std::atexit(release);
+		}
+	}
+	return _instance;
 }
 
 Charsets::Charsets() BOOST_NOEXCEPT_OR_NOTHROW
@@ -165,11 +173,11 @@ const Charset* Charsets::find(std::size_t id) const BOOST_NOEXCEPT_OR_NOTHROW
 }
 
 const Charset* Charsets::forName(const char* name) BOOST_NOEXCEPT_OR_NOTHROW {
-		return instance()->find(name);
+		return const_cast<Charsets*>(instance())->find(name);
 }
 
 const Charset* Charsets::forId(std::size_t id) BOOST_NOEXCEPT_OR_NOTHROW {
-	return instance()->find(id);
+	return const_cast<Charsets*>(instance())->find(id);
 }
 
 const Charset* Charsets::utf16le() BOOST_NOEXCEPT_OR_NOTHROW {

@@ -8,7 +8,7 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1429124974 d:\cpp\channel\include\channels_config.h
+1431947599 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
@@ -7124,7 +7124,7 @@
 	"prchdrs.h"
 	"iconv_conv.hpp"
 
-1428936082 d:\cpp\channel\include\iconv_conv.hpp
+1431518105 d:\cpp\channel\include\iconv_conv.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
@@ -21537,23 +21537,20 @@
 
 1414767002 d:\cpp\boost_1_57_0\boost
 
-1430836486 d:\cpp\channel\include\smallobject.hpp
-	<channels_config.h>
+1431966976 d:\cpp\channel\include\smallobject.hpp
+	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
-	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 
-1430846683 source:d:\cpp\channel\src\smallobject.cpp
+1431966954 source:d:\cpp\channel\src\smallobject.cpp
 	"prchdrs.h"
 	"smallobject.hpp"
-	<boost/make_shared.hpp>
+	"system.hpp"
+	<boost/atomic/atomic.hpp>
 	<boost/pool/pool.hpp>
-	<boost/thread/mutex.hpp>
 	<boost/thread/thread.hpp>
-	<boost/atomic.hpp>
-	"win/memory.hpp"
-	"win/memory.hpp"
+	<boost/thread/mutex.hpp>
 
 1426013308 source:/home/atgdev/Channels/src/prchdrs.h
 	<channels_config.h>
@@ -25916,17 +25913,18 @@
 
 1420654543 /usr/include/bits/fcntl2.h
 
-1429798239 d:\cpp\channel\include\text.hpp
+1431100626 d:\cpp\channel\include\text.hpp
 	<stdexcept>
+	<boost/format.hpp>
 	<convert.hpp>
 	<channels.hpp>
-	<boost/format.hpp>
 
-1429204273 d:\cpp\channel\include\charsets.hpp
+1431095402 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
+	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
 
-1429204266 source:d:\cpp\channel\src\charsets.cpp
+1431095543 source:d:\cpp\channel\src\charsets.cpp
 	"charsets.hpp"
 
 1427229068 d:\cpp\channel\include\errors.hpp
@@ -26144,15 +26142,13 @@
 1429296212 d:\cpp\channel\include\win\winselector.hpp
 	"channels.hpp"
 
-1430908595 d:\cpp\channel\include\win\memory.hpp
+1431627436 d:\cpp\channel\include\win\memory.hpp
+	<boost/noncopyable.hpp>
 	<windows.h>
-	<boost/scoped_ptr.hpp>
-	<boost/thread/mutex.hpp>
 
-1430908584 source:d:\cpp\channel\src\win\memory.cpp
+1431628015 source:d:\cpp\channel\src\win\memory.cpp
 	"prchdrs.h"
 	"memory.hpp"
-	<boost/pool/singleton_pool.hpp>
 
 1430404570 source:d:\cpp\channel\src\win\main.cpp
 	"prchdrs.h"
@@ -26164,4 +26160,12 @@
 	<boost/type_traits/aligned_storage.hpp>
 
 1404966970 d:\cpp\boost_1_57_0\boost\pool\detail\guard.hpp
+
+1431949012 source:d:\cpp\channel\src\win\system.cpp
+	"prchdrs.h"
+	<Windows.h>
+	"system.hpp"
+
+1431949035 d:\cpp\channel\include\system.hpp
+	"channels_config.h"
 

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1430907377 source:d:\cpp\channel\textdemo\main.cpp
+1431966813 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -15,7 +15,7 @@
 	"channels_config.h"
 	"win/WinConsole.hpp"
 
-1429124974 d:\cpp\channel\include\channels_config.h
+1431947599 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
@@ -13095,7 +13095,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1429296724 d:\cpp\channel\include\network.hpp
+1431094845 d:\cpp\channel\include\network.hpp
 	<smallobject.hpp>
 	<channels.hpp>
 	<winsock2.h>
@@ -16810,11 +16810,11 @@
 	<boost/asio/detail/push_options.hpp>
 	<boost/asio/detail/pop_options.hpp>
 
-1429798239 d:\cpp\channel\include\text.hpp
+1431100626 d:\cpp\channel\include\text.hpp
 	<stdexcept>
+	<boost/format.hpp>
 	<convert.hpp>
 	<channels.hpp>
-	<boost/format.hpp>
 
 1430836486 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
@@ -16823,11 +16823,12 @@
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 
-1429204273 d:\cpp\channel\include\charsets.hpp
+1431095402 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
+	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
 
-1428936082 d:\cpp\channel\include\iconv_conv.hpp
+1431518105 d:\cpp\channel\include\iconv_conv.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>

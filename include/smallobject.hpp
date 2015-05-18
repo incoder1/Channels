@@ -1,12 +1,9 @@
 #ifndef __IO_SMALLOBJECT_HPP_INCLUDED__
 #define __IO_SMALLOBJECT_HPP_INCLUDED__
 
-#include <channels_config.h>
-
+#include "channels_config.h"
 #include <stdint.h>
-
 #include <stdexcept>
-#include <boost/shared_ptr.hpp>
 #include <boost/move/move.hpp>
 
 namespace io {

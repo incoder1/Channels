@@ -2,6 +2,7 @@
 #define __IO_CHARSETS_HPP_INCLUDED__
 
 #include <channels_config.h>
+#include <boost/thread/mutex.hpp>
 #include <boost/unordered_map.hpp>
 
 namespace io {
@@ -11,11 +12,6 @@ namespace io {
  */
 class CHANNEL_PUBLIC Charset {
 BOOST_MOVABLE_BUT_NOT_COPYABLE(Charset)
-private:
-	const std::size_t id_;
-	const char* name_;
-	const std::size_t charSize_;
-	bool unicode_;
 public:
 	/**
 	 * Constructs character set
@@ -70,6 +66,12 @@ public:
 	 * \return whether charsets are equal. If {@code oth} is {@code nullptr} return false
 	 */
 	bool equal(const Charset* oth) const BOOST_NOEXCEPT_OR_NOTHROW;
+
+private:
+	const std::size_t id_;
+	const char* name_;
+	const std::size_t charSize_;
+	bool unicode_;
 };
 
 /**
@@ -81,8 +83,8 @@ private:
 	Charsets() BOOST_NOEXCEPT_OR_NOTHROW;
 	const Charset* find(const char* name) const BOOST_NOEXCEPT_OR_NOTHROW;
 	const Charset* find(std::size_t id) const BOOST_NOEXCEPT_OR_NOTHROW;
-	static const Charsets* instance() BOOST_NOEXCEPT_OR_NOTHROW;
-private:
+	static volatile Charsets* volatile instance();
+	static void release() BOOST_NOEXCEPT_OR_NOTHROW;
 	inline void insert(const std::string& name, const Charset* ptr);
 public:
 	/**
@@ -118,6 +120,8 @@ public:
 
 private:
 	ctmap_t nameMap_;
+	static boost::mutex _mutex;
+	static volatile Charsets* volatile _instance;
 };
 
 

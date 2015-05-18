@@ -14,10 +14,7 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-std=c++11" />
 					<Add option="-g" />
-					<Add option="-fexceptions" />
-					<Add option="-fno-rtti" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add option="-DDEBUG" />
@@ -42,11 +39,8 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-fexpensive-optimizations" />
+					<Add option="-O3" />
 					<Add option="-Winline" />
-					<Add option="-fexceptions" />
-					<Add option="-fno-rtti" />
-					<Add option="-std=gnu++11" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add directory="C:/MinGW/msys/1.0/include" />
@@ -72,8 +66,6 @@
 				<Compiler>
 					<Add option="-std=c++11" />
 					<Add option="-g" />
-					<Add option="-fexceptions" />
-					<Add option="-fno-rtti" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_IBM_ICU" />
 					<Add directory="C:/MinGW/msys/1.0/include" />
@@ -98,15 +90,44 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-fexceptions" />
-					<Add option="-fno-rtti" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 				</Compiler>
 			</Target>
+			<Target title="DebugGCCWinStatic">
+				<Option platforms="Windows;" />
+				<Option output="bin/DebugGCCWinStatic/Channel" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="obj/DebugGCCWinStatic/" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-pg" />
+					<Add option="-g" />
+					<Add option="-DCHANNEL_STATIC_LIB" />
+					<Add option="-DCONV_ENGINE_ICONV" />
+					<Add option="-DDEBUG" />
+					<Add directory="C:/MinGW/msys/1.0/include" />
+					<Add directory="include/win" />
+				</Compiler>
+				<Linker>
+					<Add option="-pg -lgmon" />
+					<Add library="iconv.dll" />
+					<Add library="Ws2_32" />
+					<Add library="boost_system-mt-d.dll" />
+					<Add library="boost_thread-mt-d.dll" />
+					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/lib64" />
+					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=gnu++11" />
+			<Add option="-fexceptions" />
+			<Add option="-fno-rtti" />
 			<Add directory="include" />
 			<Add directory="D:/cpp/boost_1_57_0" />
 		</Compiler>
@@ -126,6 +147,7 @@
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="LinuxGCCDebug" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="include/namedpipe.hpp" />
 		<Unit filename="include/network.hpp" />
@@ -142,21 +164,25 @@
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="include/win/WinFile.hpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="include/win/memory.hpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="include/win/winver.h">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="src/bytebuffer.cpp" />
 		<Unit filename="src/channels.cpp" />
@@ -168,6 +194,7 @@
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="LinuxGCCDebug" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="src/namedpipe.cpp" />
 		<Unit filename="src/pipe.cpp" />
@@ -191,31 +218,37 @@
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="src/win/WinFile.cpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="src/win/WinPipe.cpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="src/win/helpers.hpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="src/win/main.cpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="src/win/memory.cpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="test.txt">
 			<Option target="&lt;{~None~}&gt;" />

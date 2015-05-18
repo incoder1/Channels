@@ -4,10 +4,12 @@ namespace xml {
 
 // Event
 Event::Event(EvenType type) BOOST_NOEXCEPT_OR_NOTHROW:
-		io::object(),
 		type_(type)
 {}
 
+Event::~Event() BOOST_NOEXCEPT_OR_NOTHROW
+{
+}
 
 // DocumentEvent
 DocumentEvent::DocumentEvent(const std::string& version, const std::string& encoding, bool standalone) BOOST_NOEXCEPT_OR_NOTHROW:

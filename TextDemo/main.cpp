@@ -163,54 +163,49 @@ void buffers_sample()
 //
 //}
 
-class offspring:public io::object {
+class A:public io::object {
 public:
-	offspring():
+	A() BOOST_NOEXCEPT_OR_NOTHROW:
 		io::object()
 	{}
-	virtual ~offspring() BOOST_NOEXCEPT_OR_NOTHROW {
-	}
-private:
-	uint16_t short_;
-	uint64_t longLong_;
+	~A() BOOST_NOEXCEPT_OR_NOTHROW {}
 };
 
-class parent {
+class P {
 public:
-	virtual ~parent() BOOST_NOEXCEPT_OR_NOTHROW = 0;
+	P() BOOST_NOEXCEPT_OR_NOTHROW {}
+	virtual ~P() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
 
-parent::~parent() BOOST_NOEXCEPT_OR_NOTHROW
+P::~P() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
-class offspring1:public parent {
+class B:public P {
 public:
-	offspring1():
-		parent()
+	B() BOOST_NOEXCEPT_OR_NOTHROW:
+		P()
 	{}
-	virtual ~offspring1() BOOST_NOEXCEPT_OR_NOTHROW {
-	}
-public:
-	uint16_t short_;
-	uint64_t longLong_;
+	virtual ~B() BOOST_NOEXCEPT_OR_NOTHROW
+	{}
 };
 
-void performance()
-{
-	try {
-		for(int i=0; i < 10000; i++) {
-			offspring* obj[1000];
-			for(int i=0; i < 1000; i++) {
-				obj[i] = new offspring();
-			}
-			for(int i=0; i < 1000; i++) {
-				delete obj[i];
-			}
-		}
-	} catch(std::exception& exc) {
-		std::cerr<<exc.what()<<std::endl;
-		std::terminate();
+void routine() {
+	B** arr = new B*[10000];
+	for(int i=0; i < 10000; i++) {
+		arr[i] =  new B();
 	}
+	for(int i=0; i < 10000; i++) {
+		delete arr[i];
+	}
+	delete arr;
+}
+
+void small_object_bm() {
+	boost::thread_group th;
+	for(int i=0; i < 2; i++) {
+		th.create_thread(routine);
+	}
+	th.join_all();
 }
 
 #ifndef _MSC_VER
@@ -220,12 +215,7 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	try {
-		//performance();
-		boost::thread_group tp;
-		for(int i=0; i<2; i++) {
-			tp.create_thread(boost::function<void()>(performance));
-		}
-		tp.join_all();
+		small_object_bm();
 		//buffers_sample();
 		//charset_console_sample();
 		//pipe_sample();

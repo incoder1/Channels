@@ -2,11 +2,11 @@
 #define __IO_TEXT_HPP_INCLUDED__
 
 #include <stdexcept>
-#include <convert.hpp>
-#include <channels.hpp>
 
 #include <boost/format.hpp>
 
+#include <convert.hpp>
+#include <channels.hpp>
 
 namespace io {
 

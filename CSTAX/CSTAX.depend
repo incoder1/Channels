@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1427882238 source:d:\cpp\channel\cstax\main.cpp
+1431005229 source:d:\cpp\channel\cstax\main.cpp
 	<cstax.hpp>
 	<file.hpp>
 	<iostream>
@@ -20,7 +20,7 @@
 1382616958 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1427826292 d:\cpp\channel\include\buffers.hpp
+1429213095 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -1910,14 +1910,15 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1428656378 d:\cpp\channel\include\channels_config.h
+1429124974 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
 	<win/winver.h>
 	<windows.h>
+	<stdint.h>
 
-1427738480 d:\cpp\channel\include\bytebuffer.hpp
+1429874593 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -5224,7 +5225,7 @@
 
 1310273157 d:\cpp\boost_1_54_0\boost\exception\detail\clone_current_exception.hpp
 
-1428935986 d:\cpp\channel\include\channels.hpp
+1430836791 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -5256,11 +5257,11 @@
 1383594446 d:\cpp\channel\cstax\xmlsource.hpp
 	<readwrite.hpp>
 
-1428935892 d:\cpp\channel\include\text.hpp
+1431100626 d:\cpp\channel\include\text.hpp
 	<stdexcept>
+	<boost/format.hpp>
 	<convert.hpp>
 	<channels.hpp>
-	<boost/format.hpp>
 
 1414330602 d:\cpp\boost_1_57_0\boost\config.hpp
 	<boost/config/user.hpp>
@@ -9079,12 +9080,12 @@
 	<boost/functional/hash_fwd.hpp>
 	<boost/unordered/detail/fwd.hpp>
 
-1427474812 d:\cpp\channel\cstax\include\xmlsource.hpp
+1431094907 d:\cpp\channel\cstax\include\xmlsource.hpp
 	<text.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
 
-1427474787 source:d:\cpp\channel\cstax\src\xmlsource.cpp
+1431094902 source:d:\cpp\channel\cstax\src\xmlsource.cpp
 	"xmlsource.hpp"
 	<console.hpp>
 
@@ -9109,10 +9110,9 @@
 	"xmlsource.hpp"
 	"xmlgrammar.hpp"
 
-1427882164 d:\cpp\channel\cstax\include\event.hpp
+1431095231 d:\cpp\channel\cstax\include\event.hpp
 	<boost/shared_ptr.hpp>
 	<boost/flyweight.hpp>
-	<smallobject.hpp>
 	"element.hpp"
 
 1427463296 d:\cpp\channel\cstax\include\element.hpp
@@ -9122,17 +9122,17 @@
 	<streamreader.hpp>
 	<iostream>
 
-1428659451 d:\cpp\channel\include\file.hpp
+1430324533 d:\cpp\channel\include\file.hpp
 	"channels_config.h"
 	"win/WinFile.hpp"
-	"unixfile.hpp"
+	"unix/unixfile.hpp"
 
 1427379321 d:\cpp\channel\include\windowsfile.hpp
 	<boost/make_shared.hpp>
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1428934994 d:\cpp\channel\include\abstractfile.hpp
+1429195616 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1424707636 d:\cpp\channel\include\smallobjectpool.hpp
@@ -9173,7 +9173,7 @@
 	<boost/config.hpp>
 	<boost/thread/mutex.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\mutex.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\mutex.hpp
 	<boost/thread/detail/platform.hpp>
 	<boost/thread/win32/mutex.hpp>
 	<boost/thread/pthread/mutex.hpp>
@@ -9186,7 +9186,7 @@
 1414330602 d:\cpp\boost_1_57_0\boost\config\requires_threads.hpp
 	<boost/config.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\win32\mutex.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\win32\mutex.hpp
 	<boost/thread/win32/basic_timed_mutex.hpp>
 	<boost/thread/exceptions.hpp>
 	<boost/thread/lock_types.hpp>
@@ -9194,7 +9194,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\win32\basic_timed_mutex.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\win32\basic_timed_mutex.hpp
 	<boost/assert.hpp>
 	<boost/thread/win32/thread_primitives.hpp>
 	<boost/thread/win32/interlocked_read.hpp>
@@ -9255,18 +9255,18 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\thread_time.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\thread_time.hpp
 	<boost/date_time/time_clock.hpp>
 	<boost/date_time/microsec_time_clock.hpp>
 	<boost/date_time/posix_time/posix_time_types.hpp>
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\time_clock.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\time_clock.hpp
 	"boost/date_time/c_time.hpp"
 	"boost/shared_ptr.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\c_time.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\c_time.hpp
 	<ctime>
 	<string>
 	<stdexcept>
@@ -9275,7 +9275,7 @@
 	<sys/time.h>
 	<time.h>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\compiler_config.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\compiler_config.hpp
 	<cstdlib>
 	<boost/config.hpp>
 	<boost/detail/workaround.hpp>
@@ -9284,11 +9284,11 @@
 	<locale>
 	<boost/config/auto_link.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\locale_config.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\locale_config.hpp
 	"boost/config.hpp"
 	"boost/detail/workaround.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\microsec_time_clock.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\microsec_time_clock.hpp
 	<boost/cstdint.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/detail/workaround.hpp>
@@ -9297,14 +9297,14 @@
 	<boost/date_time/time_clock.hpp>
 	<boost/date_time/filetime_functions.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\filetime_functions.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\filetime_functions.hpp
 	<boost/date_time/compiler_config.hpp>
 	<windows.h>
 	<boost/cstdint.hpp>
 	<boost/date_time/time.hpp>
 	<boost/date_time/date_defs.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\time.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\time.hpp
 	<string>
 	<boost/operators.hpp>
 	<boost/date_time/time_defs.hpp>
@@ -9315,13 +9315,13 @@
 	<boost/iterator.hpp>
 	<boost/detail/workaround.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\time_defs.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\time_defs.hpp
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\special_defs.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\special_defs.hpp
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\date_defs.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\date_defs.hpp
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\posix_time\posix_time_types.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\posix_time\posix_time_types.hpp
 	"boost/date_time/time_clock.hpp"
 	"boost/date_time/microsec_time_clock.hpp"
 	"boost/date_time/posix_time/ptime.hpp"
@@ -9332,17 +9332,17 @@
 	"boost/date_time/time_iterator.hpp"
 	"boost/date_time/dst_rules.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\posix_time\ptime.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\posix_time\ptime.hpp
 	"boost/date_time/posix_time/posix_time_system.hpp"
 	"boost/date_time/time.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\posix_time\posix_time_system.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\posix_time\posix_time_system.hpp
 	"boost/date_time/posix_time/posix_time_config.hpp"
 	"boost/date_time/time_system_split.hpp"
 	"boost/date_time/time_system_counted.hpp"
 	"boost/date_time/compiler_config.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\posix_time\posix_time_config.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\posix_time\posix_time_config.hpp
 	<cstdlib>
 	<boost/limits.hpp>
 	<boost/cstdint.hpp>
@@ -9353,7 +9353,7 @@
 	<boost/date_time/wrapping_int.hpp>
 	<boost/date_time/compiler_config.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\time_duration.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\time_duration.hpp
 	<boost/cstdint.hpp>
 	<boost/operators.hpp>
 	<boost/static_assert.hpp>
@@ -9361,20 +9361,20 @@
 	<boost/date_time/special_defs.hpp>
 	<boost/date_time/compiler_config.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\time_resolution_traits.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\time_resolution_traits.hpp
 	<boost/cstdint.hpp>
 	<boost/date_time/time_defs.hpp>
 	<boost/date_time/int_adapter.hpp>
 	<boost/date_time/compiler_config.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\int_adapter.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\int_adapter.hpp
 	"boost/config.hpp"
 	"boost/limits.hpp"
 	"boost/date_time/special_defs.hpp"
 	"boost/date_time/locale_config.hpp"
 	<ostream>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\gregorian_types.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\gregorian_types.hpp
 	"boost/date_time/date.hpp"
 	"boost/date_time/period.hpp"
 	"boost/date_time/gregorian/greg_calendar.hpp"
@@ -9386,17 +9386,17 @@
 	"boost/date_time/date_iterator.hpp"
 	"boost/date_time/adjust_functors.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\date.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\date.hpp
 	<boost/operators.hpp>
 	<boost/date_time/year_month_day.hpp>
 	<boost/date_time/special_defs.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\year_month_day.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\year_month_day.hpp
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\period.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\period.hpp
 	"boost/operators.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_calendar.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_calendar.hpp
 	<boost/cstdint.hpp>
 	<boost/date_time/gregorian/greg_weekday.hpp>
 	<boost/date_time/gregorian/greg_day_of_year.hpp>
@@ -9404,14 +9404,14 @@
 	<boost/date_time/gregorian/greg_ymd.hpp>
 	<boost/date_time/int_adapter.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_weekday.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_weekday.hpp
 	"boost/date_time/constrained_value.hpp"
 	"boost/date_time/date_defs.hpp"
 	"boost/date_time/compiler_config.hpp"
 	<stdexcept>
 	<string>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\constrained_value.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\constrained_value.hpp
 	<exception>
 	<stdexcept>
 	<boost/config.hpp>
@@ -9419,34 +9419,34 @@
 	<boost/mpl/if.hpp>
 	<boost/type_traits/is_base_of.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_day_of_year.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_day_of_year.hpp
 	"boost/date_time/constrained_value.hpp"
 	<stdexcept>
 	<string>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian_calendar.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian_calendar.hpp
 	"boost/date_time/gregorian_calendar.ipp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian_calendar.ipp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian_calendar.ipp
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_ymd.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_ymd.hpp
 	"boost/date_time/year_month_day.hpp"
 	"boost/date_time/special_defs.hpp"
 	"boost/date_time/gregorian/greg_day.hpp"
 	"boost/date_time/gregorian/greg_year.hpp"
 	"boost/date_time/gregorian/greg_month.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_day.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_day.hpp
 	"boost/date_time/constrained_value.hpp"
 	<stdexcept>
 	<string>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_year.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_year.hpp
 	"boost/date_time/constrained_value.hpp"
 	<stdexcept>
 	<string>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_month.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_month.hpp
 	"boost/date_time/constrained_value.hpp"
 	"boost/date_time/date_defs.hpp"
 	"boost/shared_ptr.hpp"
@@ -9457,84 +9457,84 @@
 	<algorithm>
 	<cctype>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_duration.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_duration.hpp
 	<boost/date_time/date_duration.hpp>
 	<boost/date_time/int_adapter.hpp>
 	<boost/date_time/special_defs.hpp>
 	<boost/date_time/date_duration_types.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\date_duration.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\date_duration.hpp
 	<boost/operators.hpp>
 	<boost/date_time/special_defs.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\date_duration_types.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\date_duration_types.hpp
 	<boost/date_time/int_adapter.hpp>
 	<boost/date_time/special_defs.hpp>
 	<boost/date_time/date_duration.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_duration_types.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_duration_types.hpp
 	<boost/date_time/gregorian/greg_date.hpp>
 	<boost/date_time/int_adapter.hpp>
 	<boost/date_time/adjust_functors.hpp>
 	<boost/date_time/date_duration_types.hpp>
 	<boost/date_time/gregorian/greg_duration.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_date.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\greg_date.hpp
 	<boost/throw_exception.hpp>
 	<boost/date_time/date.hpp>
 	<boost/date_time/special_defs.hpp>
 	<boost/date_time/gregorian/greg_calendar.hpp>
 	<boost/date_time/gregorian/greg_duration.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\adjust_functors.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\adjust_functors.hpp
 	"boost/date_time/date.hpp"
 	"boost/date_time/wrapping_int.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\wrapping_int.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\wrapping_int.hpp
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\date_generators.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\date_generators.hpp
 	<stdexcept>
 	<sstream>
 	<boost/throw_exception.hpp>
 	<boost/date_time/date.hpp>
 	<boost/date_time/compiler_config.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\date_clock_device.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\date_clock_device.hpp
 	"boost/date_time/c_time.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\date_iterator.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\date_iterator.hpp
 	<iterator>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\time_system_split.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\time_system_split.hpp
 	<string>
 	"boost/date_time/compiler_config.hpp"
 	"boost/date_time/special_defs.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\time_system_counted.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\time_system_counted.hpp
 	"boost/date_time/time_defs.hpp"
 	<string>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\posix_time\date_duration_operators.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\posix_time\date_duration_operators.hpp
 	"boost/date_time/gregorian/greg_duration_types.hpp"
 	"boost/date_time/posix_time/ptime.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\posix_time\posix_time_duration.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\posix_time\posix_time_duration.hpp
 	"boost/date_time/posix_time/posix_time_config.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\posix_time\time_period.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\posix_time\time_period.hpp
 	"boost/date_time/period.hpp"
 	"boost/date_time/posix_time/posix_time_duration.hpp"
 	"boost/date_time/posix_time/ptime.hpp"
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\time_iterator.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\time_iterator.hpp
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\dst_rules.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\dst_rules.hpp
 	"boost/date_time/date_generators.hpp"
 	"boost/date_time/period.hpp"
 	"boost/date_time/date_defs.hpp"
 	<stdexcept>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\xtime.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\xtime.hpp
 	<boost/thread/detail/config.hpp>
 	<boost/cstdint.hpp>
 	<boost/thread/thread_time.hpp>
@@ -9542,7 +9542,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\posix_time\conversion.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\posix_time\conversion.hpp
 	<cstring>
 	<boost/date_time/posix_time/ptime.hpp>
 	<boost/date_time/posix_time/posix_time_duration.hpp>
@@ -9551,7 +9551,7 @@
 	<boost/date_time/time_resolution_traits.hpp>
 	<boost/date_time/gregorian/conversion.hpp>
 
-1399685787 d:\cpp\boost_1_57_0\boost\date_time\gregorian\conversion.hpp
+1399689387 d:\cpp\boost_1_57_0\boost\date_time\gregorian\conversion.hpp
 	<cstring>
 	<string>
 	<stdexcept>
@@ -9560,7 +9560,7 @@
 	<boost/date_time/special_defs.hpp>
 	<boost/date_time/gregorian/gregorian_types.hpp>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\system_clocks.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\system_clocks.hpp
 	<boost/chrono/config.hpp>
 	<boost/chrono/duration.hpp>
 	<boost/chrono/time_point.hpp>
@@ -9571,13 +9571,13 @@
 	<boost/config/abi_suffix.hpp>
 	<boost/chrono/detail/inlined/chrono.hpp>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\config.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\config.hpp
 	<boost/config.hpp>
 	<boost/predef.h>
 	<time.h>
 	<boost/config/auto_link.hpp>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\duration.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\duration.hpp
 	<boost/chrono/config.hpp>
 	<boost/chrono/detail/static_assert.hpp>
 	<climits>
@@ -9597,7 +9597,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\detail\static_assert.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\detail\static_assert.hpp
 	<boost/chrono/config.hpp>
 	<boost/static_assert.hpp>
 	<boost/mpl/assert.hpp>
@@ -9618,7 +9618,7 @@
 	<boost/mpl/aux_/include_preprocessed.hpp>
 	<boost/mpl/aux_/logical_op.hpp>
 
-1404046978 d:\cpp\boost_1_57_0\boost\ratio\ratio.hpp
+1404050578 d:\cpp\boost_1_57_0\boost\ratio\ratio.hpp
 	<boost/ratio/config.hpp>
 	<boost/ratio/detail/mpl/abs.hpp>
 	<boost/ratio/detail/mpl/sign.hpp>
@@ -9636,28 +9636,28 @@
 	<boost/rational.hpp>
 	<boost/ratio/mpl/rational_c_tag.hpp>
 
-1404046978 d:\cpp\boost_1_57_0\boost\ratio\config.hpp
+1404050578 d:\cpp\boost_1_57_0\boost\ratio\config.hpp
 	<boost/config.hpp>
 	<boost/cstdint.hpp>
 	<boost/static_assert.hpp>
 	<boost/mpl/assert.hpp>
 	<boost/mpl/bool.hpp>
 
-1404046978 d:\cpp\boost_1_57_0\boost\ratio\detail\mpl\abs.hpp
+1404050578 d:\cpp\boost_1_57_0\boost\ratio\detail\mpl\abs.hpp
 	<boost/mpl/integral_c.hpp>
 	<boost/mpl/aux_/na_spec.hpp>
 	<boost/mpl/aux_/lambda_support.hpp>
 	<boost/mpl/aux_/config/integral.hpp>
 	<boost/mpl/aux_/config/static_constant.hpp>
 
-1404046978 d:\cpp\boost_1_57_0\boost\ratio\detail\mpl\sign.hpp
+1404050578 d:\cpp\boost_1_57_0\boost\ratio\detail\mpl\sign.hpp
 	<boost/mpl/integral_c.hpp>
 	<boost/mpl/aux_/na_spec.hpp>
 	<boost/mpl/aux_/lambda_support.hpp>
 	<boost/mpl/aux_/config/integral.hpp>
 	<boost/mpl/aux_/config/static_constant.hpp>
 
-1404046978 d:\cpp\boost_1_57_0\boost\ratio\detail\mpl\gcd.hpp
+1404050578 d:\cpp\boost_1_57_0\boost\ratio\detail\mpl\gcd.hpp
 	<boost/mpl/integral_c.hpp>
 	<boost/ratio/detail/mpl/abs.hpp>
 	<boost/mpl/aux_/largest_int.hpp>
@@ -9674,11 +9674,11 @@
 	<boost/mpl/aux_/config/integral.hpp>
 	<boost/config.hpp>
 
-1404936751 d:\cpp\boost_1_57_0\boost\mpl\aux_\config\dependent_nttp.hpp
+1404940351 d:\cpp\boost_1_57_0\boost\mpl\aux_\config\dependent_nttp.hpp
 	<boost/mpl/aux_/config/gcc.hpp>
 	<boost/mpl/aux_/config/workaround.hpp>
 
-1404046978 d:\cpp\boost_1_57_0\boost\ratio\detail\mpl\lcm.hpp
+1404050578 d:\cpp\boost_1_57_0\boost\ratio\detail\mpl\lcm.hpp
 	<boost/mpl/integral_c.hpp>
 	<boost/ratio/detail/mpl/abs.hpp>
 	<boost/mpl/aux_/largest_int.hpp>
@@ -9689,10 +9689,10 @@
 	<boost/mpl/aux_/config/dependent_nttp.hpp>
 	<boost/cstdint.hpp>
 
-1404046978 d:\cpp\boost_1_57_0\boost\ratio\ratio_fwd.hpp
+1404050578 d:\cpp\boost_1_57_0\boost\ratio\ratio_fwd.hpp
 	<boost/ratio/config.hpp>
 
-1404046978 d:\cpp\boost_1_57_0\boost\ratio\detail\overflow_helpers.hpp
+1404050578 d:\cpp\boost_1_57_0\boost\ratio\detail\overflow_helpers.hpp
 	<boost/ratio/config.hpp>
 	<boost/ratio/detail/mpl/abs.hpp>
 	<boost/ratio/detail/mpl/sign.hpp>
@@ -9704,7 +9704,7 @@
 	<boost/core/enable_if.hpp>
 	<boost/integer_traits.hpp>
 
-1377328666 d:\cpp\boost_1_57_0\boost\rational.hpp
+1377332266 d:\cpp\boost_1_57_0\boost\rational.hpp
 	<iostream>
 	<ios>
 	<stdexcept>
@@ -9731,20 +9731,20 @@
 	<boost/type_traits/is_pointer.hpp>
 	<boost/detail/workaround.hpp>
 
-1414668953 d:\cpp\boost_1_57_0\boost\math\common_factor_rt.hpp
+1414672553 d:\cpp\boost_1_57_0\boost\math\common_factor_rt.hpp
 	<boost/math_fwd.hpp>
 	<boost/config.hpp>
 	<boost/limits.hpp>
 	<climits>
 	<boost/detail/workaround.hpp>
 
-1414668953 d:\cpp\boost_1_57_0\boost\math_fwd.hpp
+1414672553 d:\cpp\boost_1_57_0\boost\math_fwd.hpp
 	<boost/cstdint.hpp>
 
-1404046978 d:\cpp\boost_1_57_0\boost\ratio\mpl\rational_c_tag.hpp
+1404050578 d:\cpp\boost_1_57_0\boost\ratio\mpl\rational_c_tag.hpp
 	<boost/mpl/int.hpp>
 
-1414666041 d:\cpp\boost_1_57_0\boost\type_traits\common_type.hpp
+1414669641 d:\cpp\boost_1_57_0\boost\type_traits\common_type.hpp
 	<boost/config.hpp>
 	<boost/typeof/typeof.hpp>
 	<boost/mpl/assert.hpp>
@@ -9756,7 +9756,7 @@
 	<boost/utility/declval.hpp>
 	<boost/type_traits/add_rvalue_reference.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\typeof.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\typeof.hpp
 	<boost/typeof/dmc/typeof_impl.hpp>
 	<boost/typeof/msvc/typeof_impl.hpp>
 	<boost/typeof/msvc/typeof_impl.hpp>
@@ -9772,12 +9772,12 @@
 	<boost/typeof/message.hpp>
 	<boost/typeof/native.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\dmc\typeof_impl.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\dmc\typeof_impl.hpp
 	<boost/config.hpp>
 	<boost/detail/workaround.hpp>
 	<boost/mpl/int.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\msvc\typeof_impl.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\msvc\typeof_impl.hpp
 	<boost/config.hpp>
 	<boost/detail/workaround.hpp>
 	<boost/mpl/int.hpp>
@@ -9785,11 +9785,11 @@
 	<boost/utility/enable_if.hpp>
 	<typeinfo>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\unsupported.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\unsupported.hpp
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\message.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\message.hpp
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\typeof_impl.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\typeof_impl.hpp
 	<boost/mpl/size_t.hpp>
 	<boost/preprocessor/repetition/enum.hpp>
 	<boost/typeof/encode_decode.hpp>
@@ -9797,7 +9797,7 @@
 	<boost/type_traits/is_function.hpp>
 	<boost/utility/enable_if.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\encode_decode.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\encode_decode.hpp
 	<boost/mpl/deref.hpp>
 	<boost/mpl/next.hpp>
 	<boost/typeof/message.hpp>
@@ -9828,7 +9828,7 @@
 1404940351 d:\cpp\boost_1_57_0\boost\mpl\aux_\common_name_wknd.hpp
 	<boost/mpl/aux_/config/workaround.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\vector.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\vector.hpp
 	<boost/mpl/int.hpp>
 	<boost/preprocessor/iteration/self.hpp>
 	<boost/typeof/vector50.hpp>
@@ -9846,22 +9846,22 @@
 	<boost/preprocessor/control/expr_iif.hpp>
 	<boost/preprocessor/logical/not.hpp>
 
-1413149349 d:\cpp\boost_1_57_0\boost\preprocessor\iteration\self.hpp
+1413152949 d:\cpp\boost_1_57_0\boost\preprocessor\iteration\self.hpp
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\vector50.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\vector50.hpp
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\vector100.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\vector100.hpp
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\vector150.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\vector150.hpp
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\vector200.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\vector200.hpp
 
-1413149349 d:\cpp\boost_1_57_0\boost\preprocessor\repeat_from_to.hpp
+1413152949 d:\cpp\boost_1_57_0\boost\preprocessor\repeat_from_to.hpp
 	<boost/preprocessor/repetition/repeat_from_to.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\type_encoding.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\type_encoding.hpp
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\template_encoding.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\template_encoding.hpp
 	<boost/preprocessor/cat.hpp>
 	<boost/preprocessor/repetition/enum_trailing.hpp>
 	<boost/preprocessor/control/iif.hpp>
@@ -9891,41 +9891,41 @@
 	<boost/preprocessor/tuple/elem.hpp>
 	<boost/preprocessor/tuple/rem.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\int_encoding.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\int_encoding.hpp
 	<boost/mpl/if.hpp>
 	<boost/mpl/size_t.hpp>
 	<boost/config.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\type_template_param.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\type_template_param.hpp
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\integral_template_param.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\integral_template_param.hpp
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\template_template_param.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\template_template_param.hpp
 	<boost/preprocessor/logical/or.hpp>
 	<boost/preprocessor/seq/fold_left.hpp>
 	<boost/preprocessor/seq/enum.hpp>
 
-1413149349 d:\cpp\boost_1_57_0\boost\preprocessor\logical\or.hpp
+1413152949 d:\cpp\boost_1_57_0\boost\preprocessor\logical\or.hpp
 	<boost/preprocessor/config/config.hpp>
 	<boost/preprocessor/logical/bool.hpp>
 	<boost/preprocessor/logical/bitor.hpp>
 
-1413149349 d:\cpp\boost_1_57_0\boost\preprocessor\logical\bitor.hpp
+1413152949 d:\cpp\boost_1_57_0\boost\preprocessor\logical\bitor.hpp
 	<boost/preprocessor/config/config.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\modifiers.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\modifiers.hpp
 	<boost/typeof/encode_decode.hpp>
 	<boost/preprocessor/facilities/identity.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\pointers_data_members.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\pointers_data_members.hpp
 	<boost/typeof/encode_decode_params.hpp>
 	<boost/typeof/encode_decode.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\encode_decode_params.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\encode_decode_params.hpp
 	<boost/preprocessor/cat.hpp>
 	<boost/preprocessor/repetition/repeat.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\register_functions.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\register_functions.hpp
 	<boost/preprocessor/repetition/enum.hpp>
 	<boost/preprocessor/repetition/enum_params.hpp>
 	<boost/preprocessor/repetition/enum_trailing_params.hpp>
@@ -9936,17 +9936,17 @@
 	<boost/preprocessor/arithmetic/add.hpp>
 	<boost/preprocessor/iteration/iterate.hpp>
 
-1413149349 d:\cpp\boost_1_57_0\boost\preprocessor\if.hpp
+1413152949 d:\cpp\boost_1_57_0\boost\preprocessor\if.hpp
 	<boost/preprocessor/control/if.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\register_fundamental.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\register_fundamental.hpp
 	<boost/typeof/typeof.hpp>
 
-1318162084 d:\cpp\boost_1_57_0\boost\typeof\native.hpp
+1318165684 d:\cpp\boost_1_57_0\boost\typeof\native.hpp
 	<boost/type_traits/is_function.hpp>
 	<boost/utility/enable_if.hpp>
 
-1414666041 d:\cpp\boost_1_57_0\boost\type_traits\detail\common_type_imp.hpp
+1414669641 d:\cpp\boost_1_57_0\boost\type_traits\detail\common_type_imp.hpp
 	<cstddef>
 	<boost/mpl/assert.hpp>
 	<boost/mpl/at.hpp>
@@ -11068,29 +11068,29 @@
 	<boost/type_traits/detail/type_trait_def.hpp>
 	<boost/type_traits/detail/type_trait_undef.hpp>
 
-1414666041 d:\cpp\boost_1_57_0\boost\type_traits\is_floating_point.hpp
+1414669641 d:\cpp\boost_1_57_0\boost\type_traits\is_floating_point.hpp
 	<boost/type_traits/detail/bool_trait_def.hpp>
 	<boost/type_traits/detail/bool_trait_undef.hpp>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\detail\is_evenly_divisible_by.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\detail\is_evenly_divisible_by.hpp
 	<boost/chrono/config.hpp>
 	<boost/mpl/logical.hpp>
 	<boost/ratio/detail/overflow_helpers.hpp>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\time_point.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\time_point.hpp
 	<boost/chrono/duration.hpp>
 	<iostream>
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\detail\system.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\detail\system.hpp
 	<boost/version.hpp>
 	<boost/system/error_code.hpp>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\clock_string.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\clock_string.hpp
 	<string>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\detail\inlined\chrono.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\detail\inlined\chrono.hpp
 	<boost/version.hpp>
 	<boost/chrono/chrono.hpp>
 	<boost/system/system_error.hpp>
@@ -11100,47 +11100,47 @@
 	<boost/chrono/detail/inlined/mac/chrono.hpp>
 	<boost/chrono/detail/inlined/posix/chrono.hpp>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\chrono.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\chrono.hpp
 	<boost/chrono/duration.hpp>
 	<boost/chrono/time_point.hpp>
 	<boost/chrono/system_clocks.hpp>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\detail\inlined\win\chrono.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\detail\inlined\win\chrono.hpp
 	<boost/detail/winapi/time.hpp>
 	<boost/detail/winapi/timers.hpp>
 	<boost/detail/winapi/GetLastError.hpp>
 
-1412178051 d:\cpp\boost_1_57_0\boost\detail\winapi\time.hpp
+1412181651 d:\cpp\boost_1_57_0\boost\detail\winapi\time.hpp
 	<boost/detail/winapi/basic_types.hpp>
 	<boost/predef.h>
 
-1412178051 d:\cpp\boost_1_57_0\boost\detail\winapi\basic_types.hpp
+1412181651 d:\cpp\boost_1_57_0\boost\detail\winapi\basic_types.hpp
 	<cstdarg>
 	<boost/cstdint.hpp>
 	<boost/detail/winapi/config.hpp>
 	<windows.h>
 	<winerror.h>
 
-1412178051 d:\cpp\boost_1_57_0\boost\detail\winapi\config.hpp
+1412181651 d:\cpp\boost_1_57_0\boost\detail\winapi\config.hpp
 	<boost/config.hpp>
 
-1412178051 d:\cpp\boost_1_57_0\boost\detail\winapi\timers.hpp
+1412181651 d:\cpp\boost_1_57_0\boost\detail\winapi\timers.hpp
 	<boost/detail/winapi/basic_types.hpp>
 
-1412178051 d:\cpp\boost_1_57_0\boost\detail\winapi\getlasterror.hpp
+1412181651 d:\cpp\boost_1_57_0\boost\detail\winapi\getlasterror.hpp
 	<boost/detail/winapi/basic_types.hpp>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\detail\inlined\mac\chrono.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\detail\inlined\mac\chrono.hpp
 	<sys/time.h>
 	<mach/mach_time.h>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\detail\inlined\posix\chrono.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\detail\inlined\posix\chrono.hpp
 	<time.h>
 
-1411218507 d:\cpp\boost_1_57_0\boost\chrono\ceil.hpp
+1411222107 d:\cpp\boost_1_57_0\boost\chrono\ceil.hpp
 	<boost/chrono/duration.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\lock_types.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\lock_types.hpp
 	<boost/thread/detail/config.hpp>
 	<boost/thread/detail/move.hpp>
 	<boost/thread/exceptions.hpp>
@@ -11199,11 +11199,11 @@
 1414169006 d:\cpp\boost_1_57_0\boost\thread\detail\delete.hpp
 	<boost/config.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\lock_options.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\lock_options.hpp
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\lockable_traits.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\lockable_traits.hpp
 	<boost/thread/detail/config.hpp>
 	<boost/assert.hpp>
 	<boost/detail/workaround.hpp>
@@ -11211,12 +11211,12 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\is_locked_by_this_thread.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\is_locked_by_this_thread.hpp
 	<boost/thread/detail/config.hpp>
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\pthread\mutex.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\pthread\mutex.hpp
 	<boost/thread/detail/config.hpp>
 	<pthread.h>
 	<boost/throw_exception.hpp>
@@ -11235,10 +11235,10 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1408729807 d:\cpp\boost_1_57_0\boost\core\ignore_unused.hpp
+1408733407 d:\cpp\boost_1_57_0\boost\core\ignore_unused.hpp
 	<boost/config.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\pthread\timespec.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\pthread\timespec.hpp
 	<boost/thread/detail/config.hpp>
 	<boost/thread/thread_time.hpp>
 	<boost/date_time/posix_time/conversion.hpp>
@@ -16300,8 +16300,9 @@
 1427732061 source:d:\cpp\channel\cstax\src\xmlgrammar.cpp
 	"xmlgrammar.hpp"
 
-1428915147 d:\cpp\channel\include\smallobject.hpp
+1430836486 d:\cpp\channel\include\smallobject.hpp
 	<channels_config.h>
+	<stdint.h>
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -16316,11 +16317,12 @@
 	"charsets.hpp"
 	"smallobject.hpp"
 
-1427468545 d:\cpp\channel\include\charsets.hpp
+1431095402 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
+	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
 
-1427373906 d:\cpp\channel\include\ibm_icu_conv.hpp
+1429887299 d:\cpp\channel\include\ibm_icu_conv.hpp
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
 	<boost/format.hpp>
@@ -16535,7 +16537,7 @@
 	<Objbase.h>
 	<Mlang.h>
 
-1427826570 source:d:\cpp\channel\cstax\src\event.cpp
+1431095205 source:d:\cpp\channel\cstax\src\event.cpp
 	"event.hpp"
 
 1427739486 d:\cpp\channel\cstax\include\xmlgrammar.hpp
@@ -17618,14 +17620,17 @@
 	<boost/flyweight/holder_tag.hpp>
 	<boost/mpl/aux_/lambda_support.hpp>
 
-1428935953 d:\cpp\channel\include\win\winver.h
+1429210778 d:\cpp\channel\include\win\winver.h
 
-1428935907 d:\cpp\channel\include\win\winfile.hpp
-	<boost/make_shared.hpp>
+1429296079 d:\cpp\channel\include\win\winfile.hpp
+	"winver.h"
+	<windows.h>
+	<boost/scoped_ptr.hpp>
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1428940001 d:\cpp\channel\include\win\winconsole.hpp
+1429802140 d:\cpp\channel\include\win\winconsole.hpp
+	"winver.h"
 	<windows.h>
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
@@ -17634,4 +17639,22 @@
 	<tchar.h>
 	<text.hpp>
 	"smallobject.hpp"
+
+1408654112 d:\cpp\boost_1_57_0\boost\scoped_ptr.hpp
+	<boost/smart_ptr/scoped_ptr.hpp>
+
+1408654112 d:\cpp\boost_1_57_0\boost\smart_ptr\scoped_ptr.hpp
+	<boost/config.hpp>
+	<boost/assert.hpp>
+	<boost/checked_delete.hpp>
+	<boost/smart_ptr/detail/sp_nullptr_t.hpp>
+	<boost/detail/workaround.hpp>
+	<memory>
+	<boost/smart_ptr/detail/operator_bool.hpp>
+
+1429795104 d:\cpp\channel\include\unix\unixfile.hpp
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	"abstractfile.hpp"
 

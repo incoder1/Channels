@@ -7,7 +7,7 @@
 
 namespace xml {
 
-class Source:public io::object {
+class Source {
 protected:
 	Source() BOOST_NOEXCEPT_OR_NOTHROW;
 public:

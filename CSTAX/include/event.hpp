@@ -5,8 +5,6 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/flyweight.hpp>
 
-// io
-#include <smallobject.hpp>
 // self
 #include "element.hpp"
 
@@ -28,13 +26,14 @@ enum EvenType {
 class Event;
 typedef boost::shared_ptr<Event> SEvent;
 
-class Event:public virtual io::object {
+class Event {
 protected:
 	explicit Event(EvenType type) BOOST_NOEXCEPT_OR_NOTHROW;
 public:
 	EvenType type() const {
 		return type_.get();
 	}
+	virtual ~Event() BOOST_NOEXCEPT_OR_NOTHROW;
 private:
 	boost::flyweights::flyweight<EvenType> type_;
 };

@@ -23,7 +23,7 @@
 					<Add library="Ws2_32" />
 					<Add library="boost_system-mt-d.dll" />
 					<Add library="boost_thread-mt-d.dll" />
-					<Add directory="../bin/DebugMinWG32" />
+					<Add directory="../bin/DebugGCCWin" />
 					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
 				</Linker>
 			</Target>

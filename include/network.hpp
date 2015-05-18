@@ -30,7 +30,7 @@ namespace net {
 				if( (error != boost::asio::error::eof) && error) {
 					boost::throw_exception(io_exception("Read socket error "+error.message()));
 				} else if(error == boost::asio::error::eof) {
-					return -1;
+					return 0;
 				}
 				buffer.move(result);
 				return result;
@@ -38,7 +38,7 @@ namespace net {
 			virtual std::size_t write(const byte_buffer& buffer)  {
 				boost::system::error_code error;
 				std::size_t result = socket_->write_some(asio_buffer(buffer), boost::ref(error));
-				if( (error != boost::asio::error::eof) && error) {
+				if(error) {
 					boost::throw_exception(io_exception("Write socket error "+error.message()));
 				}
 				return result;

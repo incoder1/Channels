@@ -12,8 +12,7 @@ inline bool need_more_data(const byte_buffer& buff) {
 }
 
 // Source
-Source::Source() BOOST_NOEXCEPT_OR_NOTHROW:
-	io::object()
+Source::Source() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
 Source::~Source() BOOST_NOEXCEPT_OR_NOTHROW {

@@ -4,15 +4,17 @@
 
 namespace xml {
 
-const uint8_t LEFTB = '<';
-const uint8_t RIGHTB = '>';
-const uint8_t QE = '?';
-const uint8_t QT = '"';
-const uint8_t EQ = '=';
-const uint8_t SPACE = ' ';
-const uint8_t TAB = '\t';
-const uint8_t SCORE = '-';
-const uint8_t SLASH = '/';
+enum token: uint8_t {
+   LEFTB = '<',
+   RIGHTB = '>',
+   QE = '?',
+   QT = '"',
+   EQ = '=',
+   SPACE = ' ',
+   TAB = '\t',
+   SCORE = '-',
+   SLASH = '/'
+};
 
 namespace rxp = boost::xpressive;
 

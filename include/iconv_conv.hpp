@@ -21,7 +21,16 @@ namespace io {
  */
 class CHANNEL_PUBLIC IconvConverter:public object {
 public:
+	/**
+	* Construct new ICONV converting engine based converter
+	* \param from source character set convert from
+	* \param to destination character set convert to
+	*/
 	IconvConverter(const Charset* from, const Charset* to);
+
+	/**
+	 * Closes converting engine with all associated resources
+	 */
 	virtual ~IconvConverter() BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**

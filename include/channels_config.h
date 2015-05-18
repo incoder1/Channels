@@ -44,6 +44,8 @@
 // MSVC and MinGW Windows DLL
 #	ifdef CHANNEL_BUILD_DLL
 #		define CHANNEL_PUBLIC __declspec(dllexport)
+#	elif defined(CHANNEL_STATIC_LIB)
+#		define CHANNEL_PUBLIC
 #	else
 #		define CHANNEL_PUBLIC __declspec(dllimport)
 #	endif
