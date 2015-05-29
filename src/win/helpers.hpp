@@ -6,12 +6,7 @@
 namespace io {
 
 inline void* vpos(const byte_buffer& buff) {
-	return static_cast<void*>(buff.position().ptr());
-}
-
-template<typename R>
-inline R vpos(const byte_buffer& buff) {
-	return reinterpret_cast<R>(buff.position().ptr());
+	return reinterpret_cast<void*>(buff.begin().ptr());
 }
 
 /// Helper function used to throw char set error when expression

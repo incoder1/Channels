@@ -110,6 +110,14 @@ public:
 	 * \return new buffer capacity
 	 */
 	byte_buffer resize(std::size_t capacity) throw(std::bad_alloc);
+
+	/**
+	 * Creates full copy of this buffer, with deep copying of the underlying data.
+	 * Cloned buffer will use an dynamic heap block of memory
+	 * \return deep copy of this buffer
+	 * \throw std::bad_alloc in case of system memory error
+	 */
+	byte_buffer clone() throw(std::bad_alloc);
 };
 
 

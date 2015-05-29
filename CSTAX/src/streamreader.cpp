@@ -4,17 +4,19 @@
 
 namespace xml {
 
-enum token: uint8_t {
-   LEFTB = '<',
-   RIGHTB = '>',
-   QE = '?',
-   QT = '"',
-   EQ = '=',
-   SPACE = ' ',
-   TAB = '\t',
-   SCORE = '-',
-   SLASH = '/'
-};
+typedef uint8_t token_t;
+
+#define DECLARE_TOKEN(NAME,VAL) static const token_t NAME = VAL;
+DECLARE_TOKEN(LEFTB,'<');
+DECLARE_TOKEN(RIGHTB,'>');
+DECLARE_TOKEN(QE,'?');
+DECLARE_TOKEN(QT,'"');
+DECLARE_TOKEN(EQ,'=');
+DECLARE_TOKEN(SPACE,' ');
+DECLARE_TOKEN(TAB,'\t');
+DECLARE_TOKEN(SCORE,'-');
+DECLARE_TOKEN(SLASH,'/');
+#undef DECLARE_TOKEN
 
 namespace rxp = boost::xpressive;
 
@@ -64,17 +66,15 @@ StreamReader::StreamReader(SSource xmlSource):
 
 SEvent StreamReader::next() throw(xml_stream_error)
 {
-	Event* currentEvent = NULL;
-	if(!nextEvent_) {
-		if(!hasNext()) {
-			boost::throw_exception(xml_stream_error("end of XML stream reached"));
-		}
+	if(nextEvent_ == NULL && !hasNext() ) {
+		boost::throw_exception(xml_stream_error("End of XML stream, no more data"));
 	}
-	std::swap(currentEvent,nextEvent_);
+	Event* currentEvent = nextEvent_;
 	return SEvent(currentEvent);
 }
 
-bool StreamReader::hasNext() throw(xml_stream_error) {
+bool StreamReader::hasNext() throw(xml_stream_error)
+{
 	nextEvent_ = parseNext();
 	return nextEvent_ != NULL;
 }
@@ -83,11 +83,13 @@ Event* StreamReader::parseNext() throw(xml_stream_error)
 {
 	Event* result = NULL;
 	io::byte_buffer tag = getFullTagDecl();
-	char* tagText = reinterpret_cast<char*>(tag.position().ptr());
-	if(matches_expr(tagText, grm::start_doc_exp() ) ) {
-		result = tagParsers_[START_DOCUMENT](tagText);
-	} else if(matches_expr(tagText, grm::processing_instruction_exp()) ) {
-		result = tagParsers_[PROCESSING_INSTRUCTION](tagText);
+	if(!tag.empty()) {
+		char* tagText = reinterpret_cast<char*>(tag.position().ptr());
+		if(matches_expr(tagText, grm::start_doc_exp() ) ) {
+			result = tagParsers_[START_DOCUMENT](tagText);
+		} else if(matches_expr(tagText, grm::processing_instruction_exp()) ) {
+			result = tagParsers_[PROCESSING_INSTRUCTION](tagText);
+		}
 	}
 	return result;
 }
@@ -95,20 +97,23 @@ Event* StreamReader::parseNext() throw(xml_stream_error)
 io::byte_buffer StreamReader::getFullTagDecl() throw(xml_stream_error)
 {
 	readBuffer_.clear();
-	if(src_->hasNext()) {
-		uint8_t nextByte;
-		do {
-			nextByte = src_->nextByte();
-			if(!src_->hasNext()) {
-				boost::throw_exception(xml_stream_error("invalid xml structure"));
-			} else {
-				// make buffer grow exponential
-				if(readBuffer_.full()) {
-					readBuffer_ = readBuffer_.resize(readBuffer_.capacity() << 1);
-				}
-				readBuffer_.put(nextByte);
+	if(!src_->end()) {
+		uint8_t nextByte = src_->nextByte();
+		while(nextByte != RIGHTB) {
+			if(src_->end()) {
+				readBuffer_.put(0);
+				readBuffer_.flip();
+				std::cout<<reinterpret_cast<char*>(readBuffer_.position().ptr());
+				std::cout<<"Endl"<<std::endl;
+				boost::throw_exception(xml_stream_error("parse error tag is unbalanced"));
 			}
-		} while(nextByte != RIGHTB);
+			nextByte = src_->nextByte();
+			// make buffer grow exponential
+			if(readBuffer_.full()) {
+				readBuffer_ = readBuffer_.resize(readBuffer_.capacity() << 1);
+			}
+			readBuffer_.put(nextByte);
+		}
 	}
 	readBuffer_.put(0);
 	readBuffer_.flip();

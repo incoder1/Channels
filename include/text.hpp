@@ -227,7 +227,7 @@ public:
 	}
 
 	/**
-	 * Writes STL string into write channel, with character cvtersation
+	 * Writes STL string into write channel, with character conversation
 	 */
 	inline void write(const string& str) {
 		write(byte_buffer::wrap_array(str.data(), str.length()));

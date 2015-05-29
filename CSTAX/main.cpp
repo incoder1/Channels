@@ -17,12 +17,12 @@ int main(int argc,const char **argv)
 		return -1;
 	}
 	using namespace xml;
-	SSource source = make_source(file.openForRead(),io::Charsets::forName("UCS-2"),128);
+	SSource source = make_source(file.openForRead(),256);
 	StreamReader reader(source);
-	//while(reader.hasNext()) {
+	while(reader.hasNext()) {
 		SEvent event = reader.next();
 		auto dev = up_cast<SDocumentEvent>(event);
 		std::cout<<"Version: "<<dev->version()<<" Encoding: "<<dev->encoding()<<" Standalone:"<<dev->standalone()<<std::endl;
-	//}
+	}
 	return 0;
 }

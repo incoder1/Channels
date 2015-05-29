@@ -112,14 +112,21 @@ protected:
 	      last_(position_+1),
 	      end_(end)
 	{}
-	void resize(T* data, T* const endp)
-	{
+	void resize(T* data, T* const endp) {
 		T* thisData = data_.get();
 		position_ = data + (position_ - thisData);
 		last_ = data + (last_ - thisData);
 		std::copy(thisData,end_,data);
 		end_ = endp;
 		data_.reset(data);
+	}
+	void clone(basic_buffer& buff) {
+		std::copy(data_.get(),end_,buff.data_.get());
+		typedef typename iterator::difference_type diff_t;
+		diff_t pos = position_ - data_.get();
+		diff_t last = last_ - data_.get();
+		buff.position_ = buff.data_.get() + pos;
+		buff.last_ = buff.data_.get() + last;
 	}
 public:
 	typedef buffer_iterator<T> iterator;
@@ -290,7 +297,6 @@ private:
 	T* last_;
 	T* end_;
 };
-
 
 } // namespace io
 

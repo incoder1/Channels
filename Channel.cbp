@@ -153,12 +153,24 @@
 		<Unit filename="include/network.hpp" />
 		<Unit filename="include/pipe.hpp" />
 		<Unit filename="include/smallobject.hpp" />
+		<Unit filename="include/system.hpp">
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
+		</Unit>
 		<Unit filename="include/text.hpp" />
 		<Unit filename="include/unix/unixconsole.h">
 			<Option target="LinuxGCCDebug" />
 		</Unit>
 		<Unit filename="include/unix/unixfile.hpp">
 			<Option target="LinuxGCCDebug" />
+		</Unit>
+		<Unit filename="include/win/WinAssynchChannel.hpp">
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="include/win/WinConsole.hpp">
 			<Option target="DebugGCCWin" />
@@ -167,12 +179,6 @@
 			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="include/win/WinFile.hpp">
-			<Option target="DebugGCCWin" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="DebugMinGW32-ICU" />
-			<Option target="DebugGCCWinStatic" />
-		</Unit>
-		<Unit filename="include/win/memory.hpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
@@ -214,6 +220,12 @@
 		<Unit filename="src/unix/unixfile.cpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>
+		<Unit filename="src/win/WinAssynchChannel.cpp">
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
+		</Unit>
 		<Unit filename="src/win/WinConsole.cpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
@@ -244,7 +256,7 @@
 			<Option target="DebugMinGW32-ICU" />
 			<Option target="DebugGCCWinStatic" />
 		</Unit>
-		<Unit filename="src/win/memory.cpp">
+		<Unit filename="src/win/system.cpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />

@@ -145,6 +145,7 @@ private:
 	SWriteChannel cech_;
 };
 
+
 } // namespace io
 
 #endif // WINDOWS_CONSOLE_HPP_INCLUDED

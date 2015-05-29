@@ -16,7 +16,7 @@
 	<windows.h>
 	<stdint.h>
 
-1429874593 d:\cpp\channel\include\bytebuffer.hpp
+1432821642 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1350,7 +1350,7 @@
 1090718969 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1429213095 d:\cpp\channel\include\buffers.hpp
+1432814861 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5218,7 +5218,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1430836791 d:\cpp\channel\include\channels.hpp
+1432313314 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -7776,7 +7776,7 @@
 1236010936 d:\cpp\boost_1_54_0\boost\weak_ptr.hpp
 	<boost/smart_ptr/weak_ptr.hpp>
 
-1427826313 source:d:\cpp\channel\src\bytebuffer.cpp
+1432814736 source:d:\cpp\channel\src\bytebuffer.cpp
 	"prchdrs.h"
 	"bytebuffer.hpp"
 
@@ -25913,7 +25913,7 @@
 
 1420654543 /usr/include/bits/fcntl2.h
 
-1431100626 d:\cpp\channel\include\text.hpp
+1432555711 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<boost/format.hpp>
 	<convert.hpp>
@@ -26071,10 +26071,10 @@
 	"namedpipe.hpp"
 	"WinFile.hpp"
 
-1429292570 d:\cpp\channel\src\win\helpers.hpp
+1432047107 d:\cpp\channel\src\win\helpers.hpp
 	"errors.hpp"
 
-1430406378 d:\cpp\channel\include\namedpipe.hpp
+1432560156 d:\cpp\channel\include\namedpipe.hpp
 	<boost/shared_ptr.hpp>
 	<boost/unordered_map.hpp>
 	<boost/function.hpp>
@@ -26096,7 +26096,7 @@
 	"pipe.hpp"
 	"WinFile.hpp"
 
-1429801406 source:d:\cpp\channel\src\win\winfile.cpp
+1432557563 source:d:\cpp\channel\src\win\winfile.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	"WinFile.hpp"
@@ -26106,7 +26106,7 @@
 	"helpers.hpp"
 	"WinConsole.hpp"
 
-1429802140 d:\cpp\channel\include\win\winconsole.hpp
+1432556106 d:\cpp\channel\include\win\winconsole.hpp
 	"winver.h"
 	<windows.h>
 	<boost/noncopyable.hpp>
@@ -26168,4 +26168,15 @@
 
 1431949035 d:\cpp\channel\include\system.hpp
 	"channels_config.h"
+
+1432815896 source:d:\cpp\channel\src\win\winassynchchannel.cpp
+	"prchdrs.h"
+	"WinAssynchChannel.hpp"
+	"helpers.hpp"
+
+1432822028 d:\cpp\channel\include\win\winassynchchannel.hpp
+	"channels.hpp"
+	<windows.h>
+	<boost/noncopyable.hpp>
+	<boost/unordered_map.hpp>
 

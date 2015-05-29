@@ -28,6 +28,8 @@
 #include <pipe.hpp>
 #include <network.hpp>
 
+#include <win/WinAssynchChannel.hpp>
+
 void charset_console_sample() throw(io::io_exception)
 {
 	io::Console con(true);
@@ -92,13 +94,10 @@ void file_sample()
 	}
 }
 
-void asynch_file_read_routine(long err,std::size_t read,const io::byte_buffer& data)
-{
-
-}
-
 void asynch_file_sample()
 {
+	io::Selector selector;
+	io::SAsynchDevice device = io::AsynchDevice::file("asynch.txt");
 }
 
 void buffers_sample()
@@ -116,6 +115,9 @@ void buffers_sample()
 	result.put(wrapDeepCopy);
 	result.put(deepCopy);
 	result.flip();
+
+	result = result.clone();
+
 	Console con(false);
 	con.setCharset(Charsets::utf8());
 	writer out(con.out());
@@ -163,51 +165,6 @@ void buffers_sample()
 //
 //}
 
-class A:public io::object {
-public:
-	A() BOOST_NOEXCEPT_OR_NOTHROW:
-		io::object()
-	{}
-	~A() BOOST_NOEXCEPT_OR_NOTHROW {}
-};
-
-class P {
-public:
-	P() BOOST_NOEXCEPT_OR_NOTHROW {}
-	virtual ~P() BOOST_NOEXCEPT_OR_NOTHROW = 0;
-};
-
-P::~P() BOOST_NOEXCEPT_OR_NOTHROW
-{}
-
-class B:public P {
-public:
-	B() BOOST_NOEXCEPT_OR_NOTHROW:
-		P()
-	{}
-	virtual ~B() BOOST_NOEXCEPT_OR_NOTHROW
-	{}
-};
-
-void routine() {
-	B** arr = new B*[10000];
-	for(int i=0; i < 10000; i++) {
-		arr[i] =  new B();
-	}
-	for(int i=0; i < 10000; i++) {
-		delete arr[i];
-	}
-	delete arr;
-}
-
-void small_object_bm() {
-	boost::thread_group th;
-	for(int i=0; i < 2; i++) {
-		th.create_thread(routine);
-	}
-	th.join_all();
-}
-
 #ifndef _MSC_VER
 int main(int argc, const char** argv)
 #else
@@ -215,11 +172,11 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	try {
-		small_object_bm();
-		//buffers_sample();
+		buffers_sample();
 		//charset_console_sample();
 		//pipe_sample();
 		//file_sample();
+		//asynch_file_sample();
 		//network_client_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;

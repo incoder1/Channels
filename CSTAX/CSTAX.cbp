@@ -15,6 +15,7 @@
 				<Compiler>
 					<Add option="-pg" />
 					<Add option="-g" />
+					<Add option="-fexceptions" />
 					<Add option="-std=gnu++11" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 				</Compiler>

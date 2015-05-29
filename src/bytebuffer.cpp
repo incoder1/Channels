@@ -52,4 +52,10 @@ byte_buffer byte_buffer::resize(std::size_t capacity) throw(std::bad_alloc) {
 	return *this;
 }
 
+byte_buffer byte_buffer::clone() throw(std::bad_alloc) {
+	byte_buffer result = byte_buffer::heap_buffer(capacity());
+	basic_buffer<uint8_t>::clone(result);
+	return result;
+}
+
 } //namaspace io

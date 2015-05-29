@@ -8,7 +8,7 @@ using namespace io;
 
 // helpers
 inline bool need_more_data(const byte_buffer& buff) {
-	return buff.empty() || (buff.position()+1 == buff.end());
+	return buff.empty() || buff.full();
 }
 
 // Source
@@ -40,11 +40,9 @@ std::size_t SimpleSource::readMore() {
 	return result;
 }
 
-bool SimpleSource::hasNext()
+bool SimpleSource::end()
 {
-	bool result = need_more_data(buff_);
-	result = result ? readMore() > 0 : !result;
-	return result;
+	return need_more_data(buff_) ? readMore() > 0 : false;
 }
 
 uint8_t SimpleSource::nextByte() {
@@ -76,10 +74,8 @@ std::size_t ConvertingSource::readMore() {
 	return result;
 }
 
-bool ConvertingSource::hasNext() {
-	bool result = need_more_data(convBuff_);
-	result = result ? readMore() > 0 : !result;
-	return result;
+bool ConvertingSource::end() {
+	return need_more_data(convBuff_) ? readMore() > 0 : false;
 }
 
 uint8_t ConvertingSource::nextByte() {

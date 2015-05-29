@@ -169,7 +169,7 @@ inline void transfer(const SReadChannel& src,const SWriteChannel& dst, byte_buff
 {
 	while(src->read(buffer) > 0) {
 		buffer.flip();
-		while(!buffer.empty()) {
+		while(!buffer.full()) {
 			buffer.move(dst->write(buffer));
 		}
 		buffer.clear();

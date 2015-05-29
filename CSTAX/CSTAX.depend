@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1431005229 source:d:\cpp\channel\cstax\main.cpp
+1432137076 source:d:\cpp\channel\cstax\main.cpp
 	<cstax.hpp>
 	<file.hpp>
 	<iostream>
@@ -1910,7 +1910,7 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1429124974 d:\cpp\channel\include\channels_config.h
+1431947599 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
@@ -9080,12 +9080,12 @@
 	<boost/functional/hash_fwd.hpp>
 	<boost/unordered/detail/fwd.hpp>
 
-1431094907 d:\cpp\channel\cstax\include\xmlsource.hpp
+1432136171 d:\cpp\channel\cstax\include\xmlsource.hpp
 	<text.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
 
-1431094902 source:d:\cpp\channel\cstax\src\xmlsource.cpp
+1432136301 source:d:\cpp\channel\cstax\src\xmlsource.cpp
 	"xmlsource.hpp"
 	<console.hpp>
 
@@ -9118,7 +9118,7 @@
 1427463296 d:\cpp\channel\cstax\include\element.hpp
 	<boost/move/move.hpp>
 
-1427827365 source:d:\cpp\channel\cstax\src\streamreader.cpp
+1432136968 source:d:\cpp\channel\cstax\src\streamreader.cpp
 	<streamreader.hpp>
 	<iostream>
 
@@ -16300,14 +16300,13 @@
 1427732061 source:d:\cpp\channel\cstax\src\xmlgrammar.cpp
 	"xmlgrammar.hpp"
 
-1430836486 d:\cpp\channel\include\smallobject.hpp
-	<channels_config.h>
+1431966976 d:\cpp\channel\include\smallobject.hpp
+	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
-	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 
-1428936082 d:\cpp\channel\include\iconv_conv.hpp
+1431518105 d:\cpp\channel\include\iconv_conv.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1431966813 source:d:\cpp\channel\textdemo\main.cpp
+1432815964 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -8,6 +8,7 @@
 	<file.hpp>
 	<pipe.hpp>
 	<network.hpp>
+	<win/WinAssynchChannel.hpp>
 
 1379004752 d:\cpp\channel\textdemo\winver.h
 
@@ -1423,14 +1424,14 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1429874593 d:\cpp\channel\include\bytebuffer.hpp
+1432821642 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
 	"channels_config.h"
 	"buffers.hpp"
 
-1429213095 d:\cpp\channel\include\buffers.hpp
+1432814861 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5301,7 +5302,7 @@
 1429195616 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1430836791 d:\cpp\channel\include\channels.hpp
+1432313314 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -16810,17 +16811,16 @@
 	<boost/asio/detail/push_options.hpp>
 	<boost/asio/detail/pop_options.hpp>
 
-1431100626 d:\cpp\channel\include\text.hpp
+1432555711 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<boost/format.hpp>
 	<convert.hpp>
 	<channels.hpp>
 
-1430836486 d:\cpp\channel\include\smallobject.hpp
-	<channels_config.h>
+1431966976 d:\cpp\channel\include\smallobject.hpp
+	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
-	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 
 1431095402 d:\cpp\channel\include\charsets.hpp
@@ -17292,7 +17292,7 @@
 
 1429210778 d:\cpp\channel\include\win\winver.h
 
-1429802140 d:\cpp\channel\include\win\winconsole.hpp
+1432556106 d:\cpp\channel\include\win\winconsole.hpp
 	"winver.h"
 	<windows.h>
 	<boost/noncopyable.hpp>
@@ -17445,4 +17445,10 @@
 	<sys/stat.h>
 	<fcntl.h>
 	"abstractfile.hpp"
+
+1432822028 d:\cpp\channel\include\win\winassynchchannel.hpp
+	"channels.hpp"
+	<windows.h>
+	<boost/noncopyable.hpp>
+	<boost/unordered_map.hpp>
 
