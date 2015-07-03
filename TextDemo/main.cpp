@@ -96,8 +96,15 @@ void file_sample()
 
 void asynch_file_sample()
 {
-	io::Selector selector;
-	io::SAsynchDevice device = io::AsynchDevice::file("asynch.txt");
+	using namespace io;
+	HANDLE hFile = CreateFile(L"atest.txt", GENERIC_READ | GENERIC_WRITE | FILE_FLAG_OVERLAPPED , 0, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, 0);
+	::SetFilePointer(hFile,12,NULL,FILE_CURRENT);
+	SAsynchChannel channel(new WinAsynchChannel(hFile));
+	SAsynhDispatcher dsp = create_dispatcher();
+	dsp->bind(channel);
+	channel->send(byte_buffer::wrap_array("Test string!",12),0);
+	CopletitionEvent ev = dsp->nextEvent();
+	//io::SAsynchDevice device = io::AsynchDevice::file("asynch.txt");
 }
 
 void buffers_sample()
@@ -106,12 +113,18 @@ void buffers_sample()
 	const char* hello = "Hello ";
 	const char* world = "world!!!";
 
-	byte_buffer result = byte_buffer::heap_buffer(15);
+	byte_buffer result = byte_buffer::heap_buffer(14);
 
 	const byte_buffer wrap = byte_buffer::wrap_array(hello, 6); //not wrap the 0 ending
-	byte_buffer deepCopy = byte_buffer::copy_array(world, 9); // copy 0 also
-	byte_buffer wrapDeepCopy(wrap);
+	byte_buffer deepCopy = byte_buffer::copy_array(world, 8); // copy 0 also
 
+	// resize and add 0-ro sting ending
+	deepCopy = deepCopy.resize(9);
+	deepCopy.move(8);
+	deepCopy.put(0);
+	deepCopy.flip(); // flips the buffer
+
+	byte_buffer wrapDeepCopy(wrap);
 	result.put(wrapDeepCopy);
 	result.put(deepCopy);
 	result.flip();
@@ -172,8 +185,8 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	try {
-		buffers_sample();
-		//charset_console_sample();
+		//buffers_sample();
+		charset_console_sample();
 		//pipe_sample();
 		//file_sample();
 		//asynch_file_sample();

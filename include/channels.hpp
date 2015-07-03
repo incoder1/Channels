@@ -158,6 +158,43 @@ public:
  */
 DECLARE_PTR_T(RandomAccessChannel);
 
+enum EventType {
+	SEND, RECEIVE
+};
+
+typedef boost::function<void(EventType,std::size_t,const byte_buffer&)> copletition_handler;
+
+/**
+ * ! \brief Asynchronous channel
+ */
+class AsynchChannel {
+BOOST_MOVABLE_BUT_NOT_COPYABLE(AsynchChannel)
+protected:
+	AsynchChannel(const copletition_handler& handler);
+	BOOST_FORCEINLINE void handle(std::size_t transfered,const byte_buffer& buff) const;
+public:
+	virtual void send(const byte_buffer& buff,int64_t offset) const = 0;
+	virtual void receive(byte_buffer& buffer,int64_t offset) const = 0;
+	virtual ~AsynchChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
+private:
+	copletition_handler handler_;
+};
+
+DECLARE_PTR_T(AsynchChannel);
+
+class AsynhDispatcher
+{
+	BOOST_MOVABLE_BUT_NOT_COPYABLE(AsynhDispatcher)
+protected:
+	AsynhDispatcher();
+public:
+	virtual ~AsynhDispatcher() BOOST_NOEXCEPT_OR_NOTHROW = 0;
+	virtual void bind(SAsynchChannel channel) = 0;
+};
+
+DECLARE_PTR_T(AsynhDispatcher);
+
+SAsynhDispatcher CHANNEL_PUBLIC create_dispatcher();
 
 /**
 * Transfers data from source read channel to the destination write channel using a memory buffer

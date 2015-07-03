@@ -12,7 +12,9 @@
 
 namespace io {
 
-
+/**
+ * ! \brief a functional object (functor) type to be used by client to write some data into pipe
+ */
 typedef boost::function<void(SWriteChannel)> PipeSinkRoutine;
 
 /**
@@ -31,9 +33,20 @@ typedef boost::function<void(SWriteChannel)> PipeSinkRoutine;
 class CHANNEL_PUBLIC Pipe:public object {
 protected:
 	Pipe(PipeSinkRoutine routine) BOOST_NOEXCEPT_OR_NOTHROW;
+	/**
+	 * Call the client write routine, implementor must create and start the thread for this propose
+	 * \param channel an initialized sink write channel
+	 */
 	void call_sink_routine(const SWriteChannel& channel) const;
 public:
+	/**
+	 * Returns reference on source read channel
+	 */
 	virtual SReadChannel source() const = 0;
+	/**
+	 * Destroy pipe and closes all associates system resources
+	 * \throw never throw
+	 */
 	virtual ~Pipe() BOOST_NOEXCEPT_OR_NOTHROW;
 private:
 	PipeSinkRoutine sinkRoutine_;
@@ -41,7 +54,13 @@ private:
 
 typedef boost::shared_ptr<Pipe> SPipe;
 
-SPipe CHANNEL_PUBLIC create_pipe(std::size_t buffer_size, PipeSinkRoutine sink) ;
+/**
+ * Creates and initialize the Pipe. Sink functor will be used as the routine for the new thread
+ * \param buffer_size - the RAM buffer size in bytes
+ * \param sink, a functional object which is used for writing data to the sink write channel
+ * \return smart reference on Pipe
+ */
+SPipe CHANNEL_PUBLIC create_pipe(std::size_t buffer_size, PipeSinkRoutine sink);
 
 } // namespace io
 

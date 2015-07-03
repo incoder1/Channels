@@ -3,9 +3,9 @@
 #include "system.hpp"
 
 #include <boost/atomic/atomic.hpp>
+#include <boost/thread/mutex.hpp>
 #include <boost/pool/pool.hpp>
 #include <boost/thread/thread.hpp>
-#include <boost/thread/mutex.hpp>
 
 namespace io {
 
@@ -13,34 +13,37 @@ typedef boost::default_user_allocator_malloc_free block_allocator;
 
 namespace detail {
 
+// Spinlock
 class Spinlock:private boost::noncopyable {
 private:
-  static const uint8_t MAX_SPIN  = 8;
-  typedef enum {Locked, Unlocked} LockState;
+  static const uint8_t MAX_SPIN;
+  typedef enum {LOCKED, UNLOCKED} LockState;
 public:
-  explicit Spinlock() : state_(Unlocked)
+  explicit Spinlock() BOOST_NOEXCEPT_OR_NOTHROW:
+	state_(UNLOCKED)
   {}
   void lock()
   {
   	uint8_t spinCount = 0;
-    while (state_.exchange(Locked, boost::memory_order_acquire) == Locked) {
+    while (state_.exchange(LOCKED, boost::memory_order_acquire) == LOCKED) {
       if(++spinCount == MAX_SPIN) {
 		  spinCount = 0;
 		  boost::this_thread::yield();
       }
     }
   }
-  void unlock()
+  BOOST_FORCEINLINE void unlock()
   {
-    state_.store(Unlocked, boost::memory_order_release);
+    state_.store(UNLOCKED, boost::memory_order_release);
   }
 private:
 	boost::atomic<LockState> state_;
 };
 
+const uint8_t Spinlock::MAX_SPIN = 8;
+
 // synchronized pool
 class synch_pool:public boost::noncopyable {
-private:
 public:
 	explicit synch_pool(const std::size_t size):
 		spinlock_(),

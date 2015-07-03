@@ -35,4 +35,23 @@ RandomAccessChannel::~RandomAccessChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {
 }
 
+//AsynchChannel
+AsynchChannel::AsynchChannel(const copletition_handler& handler)
+	handler_(handler)
+{}
+
+AsynchChannel::~AsynchChannel() BOOST_NOEXCEPT_OR_NOTHROW
+{}
+
+BOOST_FORCEINLINE void AsynchChannel::handle(std::size_t transfered,const byte_buffer& buff) const {
+	handler_(transfered,buff);
+}
+
+//AsynhDispatcher
+AsynhDispatcher::AsynhDispatcher()
+{}
+
+AsynhDispatcher::~AsynhDispatcher() BOOST_NOEXCEPT_OR_NOTHROW
+{}
+
 } // namespace io

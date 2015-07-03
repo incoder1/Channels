@@ -21,7 +21,8 @@ namespace net {
 	  class basic_socket_channel:public virtual ReadWriteChannel, public virtual object {
 		public:
 			basic_socket_channel(boost::shared_ptr<Socket> socket) BOOST_NOEXCEPT_OR_NOTHROW:
-				ReadChannel(),WriteChannel(),object(),
+				ReadWriteChannel(),
+				object(),
 				socket_(socket)
 			{}
 			virtual std::size_t read(byte_buffer& buffer)  {

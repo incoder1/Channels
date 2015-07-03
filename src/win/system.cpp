@@ -25,4 +25,18 @@ unsigned long CHANNEL_PUBLIC available_logical_cpus() BOOST_NOEXCEPT_OR_NOTHROW
 	return sysinfo.dwNumberOfProcessors;
 }
 
+const char* CHANNEL_PUBLIC get_temp_dir() BOOST_NOEXCEPT_OR_NOTHROW
+{
+	static char result[MAX_PATH+1];
+	::GetTempPathA(MAX_PATH+1,result);
+	return result;
+}
+
+const char* CHANNEL_PUBLIC generate_temp_file_name(const char* prefix) BOOST_NOEXCEPT_OR_NOTHROW
+{
+	static char result[MAX_PATH+1];
+	::GetTempFileNameA(get_temp_dir(),prefix,0,result);
+	return result;
+}
+
 } // namespace sys

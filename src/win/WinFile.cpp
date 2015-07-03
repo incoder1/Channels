@@ -49,21 +49,21 @@ bool File::exist() const BOOST_NOEXCEPT_OR_NOTHROW
 
 SReadChannel File::openForRead()
 {
-	HANDLE hFile = ::CreateFile(path_, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	::HANDLE hFile = ::CreateFile(path_, GENERIC_READ, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	validate_file_handle(hFile);
 	return SReadChannel(new WinChannel(hFile, GENERIC_READ));
 }
 
 SWriteChannel  File::openForWrite()
 {
-	HANDLE hFile = ::CreateFile(path_, GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	::HANDLE hFile = ::CreateFile(path_, GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	validate_file_handle(hFile);
 	return SWriteChannel(new WinChannel(hFile, GENERIC_WRITE));
 }
 
 SRandomAccessChannel File::openForReadWrite()
 {
-	HANDLE hFile = ::CreateFile(path_, GENERIC_READ | GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	::HANDLE hFile = ::CreateFile(path_, GENERIC_READ | GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	validate_file_handle(hFile);
 	return SRandomAccessChannel(new WinChannel(hFile, GENERIC_READ | GENERIC_WRITE));
 }

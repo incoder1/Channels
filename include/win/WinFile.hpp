@@ -4,8 +4,6 @@
 #include "winver.h"
 #include <windows.h>
 
-#include <boost/scoped_ptr.hpp>
-
 #include "abstractfile.hpp"
 #include "smallobject.hpp"
 
@@ -31,21 +29,7 @@ public:
 private:
 	::HANDLE id_;
 	::DWORD desiredAccess_;
-	boost::scoped_ptr<::OVERLAPPED> overlapped_;
 };
-
-inline const char* get_temp_dir()
-{
-	static char result[MAX_PATH+1];
-	::GetTempPathA(MAX_PATH+1,result);
-	return result;
-}
-
-inline const char* generate_temp_file_name(const char* prefix) {
-	static char result[MAX_PATH+1];
-	::GetTempFileNameA(get_temp_dir(),prefix,0,result);
-	return result;
-}
 
 } // namespace io
 

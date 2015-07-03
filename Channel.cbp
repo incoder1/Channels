@@ -153,12 +153,7 @@
 		<Unit filename="include/network.hpp" />
 		<Unit filename="include/pipe.hpp" />
 		<Unit filename="include/smallobject.hpp" />
-		<Unit filename="include/system.hpp">
-			<Option target="DebugGCCWin" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="DebugMinGW32-ICU" />
-			<Option target="DebugGCCWinStatic" />
-		</Unit>
+		<Unit filename="include/system.hpp" />
 		<Unit filename="include/text.hpp" />
 		<Unit filename="include/unix/unixconsole.h">
 			<Option target="LinuxGCCDebug" />

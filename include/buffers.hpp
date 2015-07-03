@@ -215,7 +215,7 @@ public:
 	}
 
 	/**
-	 * Inserts a single element into last buffer, increases if success the position.
+	 * Put a single element into current buffer position, if success increases the position.
 	 * \param t element to be inserted into current buffer position
 	 * \return 1 if element was put, 0 if no more space left
 	 */
@@ -226,7 +226,12 @@ public:
 		}
 		return move(pos);
 	}
-
+	/**
+	* Put continues sequence of elements starting by first and limited by last iterator
+	* into current buffer position.
+	* \param first first element of sequence
+	* \param last last element of sequence
+	*/
 	iterator put(iterator& first, iterator& last) {
 		iterator dest = position();
 		iterator border =  ( (last - first) < remain() ) ? last : first + remain();
@@ -240,7 +245,8 @@ public:
 
 
 	/**
-	 * Sets current buffer position into array begin,
+	 * Sets current buffer position into underlying array begin and leave last element
+	 * in it current position.
 	 * Use this method when you need read data from the buffer
 	 */
 	void flip() {
@@ -256,16 +262,24 @@ public:
 		last_ = position_;
 	}
 
+	/**
+	 * Checks whether this buffer have no elements
+	 * \return whether this buffer is empty
+	 */
 	bool empty() const {
 		return (last_ == position_-1);
 	}
 
+	/**
+	 * Checks where this buffer can't not be used to insert more elements i.e. last == end
+	 * \return whether this buffer is full
+	 */
 	bool full() const {
 		return last_ == end_;
 	}
 
 	/**
-	 * Count of filled elements
+	 * Count this buffer elements
 	 * \return buffer length
 	 */
 	std::ptrdiff_t length() const {
@@ -273,7 +287,7 @@ public:
 	}
 
 	/**
-	 * This buffer capacity
+	 * Returns buffer capacity
 	 * \return buffer capacity
 	 */
 	std::ptrdiff_t capacity() const {

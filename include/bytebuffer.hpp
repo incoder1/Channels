@@ -122,16 +122,16 @@ public:
 
 
 namespace detail {
-	class fake_free {
+	class free {
 	public:
-		inline void operator()(uint8_t *)
+		BOOST_FORCEINLINE void operator()(uint8_t *)
 		{}
 	};
 } // namespace detail
 
 template<typename ElementType>
 byte_buffer byte_buffer::wrap_array(ElementType* const arr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
-	boost::shared_array<uint8_t> data((uint8_t*)arr, detail::fake_free());
+	boost::shared_array<uint8_t> data((uint8_t*)arr, detail::free());
 	ElementType *endp = arr + size;
 	byte_buffer result(data,(uint8_t*)endp);
 	result.move(result.end());

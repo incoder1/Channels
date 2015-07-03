@@ -24,7 +24,7 @@ public:
 	virtual std::size_t fromBegin(uint64_t offset) ;
 	virtual std::size_t fromEnd(uint64_t offset) ;
 private:
-	std::size_t seek(int64_t,int) ;
+	std::size_t seek(int64_t offset, int whence);
 private:
 	int file_;
 };
