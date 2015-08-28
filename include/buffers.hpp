@@ -19,15 +19,19 @@ namespace io {
  * Random access iterator, STL compatible
  */
 template<typename T>
-class buffer_iterator: public std::iterator<std::bidirectional_iterator_tag, std::ptrdiff_t> {
+class buffer_iterator: public std::iterator<std::random_access_iterator_tag, std::ptrdiff_t> {
 private:
 	mutable T* position_;
 public:
 
-	typedef std::bidirectional_iterator_tag iterator_category;
+	typedef std::random_access_iterator_tag iterator_category;
 	typedef T  value_type;
 	typedef T&  reference;
 	typedef T*  pointer;
+
+	buffer_iterator():
+		position_(NULL)
+	{}
 
 	buffer_iterator(T* const position) BOOST_NOEXCEPT_OR_NOTHROW:
 		position_(position)
@@ -38,9 +42,23 @@ public:
 		return *this;
 	}
 
-	inline const buffer_iterator& operator--() const {
+	inline buffer_iterator operator--() const {
 		--position_;
 		return *this;
+	}
+
+	inline buffer_iterator operator+=(difference_type c) const {
+		position_ += c;
+		return *this;
+	}
+
+	inline buffer_iterator operator-=(difference_type c) const {
+		position_ -= c;
+		return *this;
+	}
+
+	reference operator[](std::size_t offset) const {
+		return position_[offset];
 	}
 
 	reference operator*() const {
@@ -109,7 +127,7 @@ protected:
 	basic_buffer(boost::shared_array<T> data, T* const end) BOOST_NOEXCEPT_OR_NOTHROW:
 		  data_(data),
 	      position_(data_.get()),
-	      last_(position_+1),
+	      last_(position_),
 	      end_(end)
 	{}
 	void resize(T* data, T* const endp) {
@@ -122,7 +140,6 @@ protected:
 	}
 	void clone(basic_buffer& buff) {
 		std::copy(data_.get(),end_,buff.data_.get());
-		typedef typename iterator::difference_type diff_t;
 		diff_t pos = position_ - data_.get();
 		diff_t last = last_ - data_.get();
 		buff.position_ = buff.data_.get() + pos;
@@ -267,7 +284,7 @@ public:
 	 * \return whether this buffer is empty
 	 */
 	bool empty() const {
-		return (last_ == position_-1);
+		return last_ == position_;
 	}
 
 	/**

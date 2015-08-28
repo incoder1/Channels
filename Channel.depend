@@ -1350,7 +1350,7 @@
 1090718969 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1434379527 d:\cpp\channel\include\buffers.hpp
+1440177983 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5218,7 +5218,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1435245936 d:\cpp\channel\include\channels.hpp
+1436199795 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -5564,7 +5564,7 @@
 	<pipe.hpp>
 	<WindowsFile.hpp>
 
-1434388552 d:\cpp\channel\include\pipe.hpp
+1440177871 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -7120,7 +7120,7 @@
 
 1365979818 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
 
-1430306393 source:d:\cpp\channel\src\iconv_conv.cpp
+1440003897 source:d:\cpp\channel\src\iconv_conv.cpp
 	"prchdrs.h"
 	"iconv_conv.hpp"
 
@@ -7306,7 +7306,7 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1435231614 source:d:\cpp\channel\src\channels.cpp
+1436199803 source:d:\cpp\channel\src\channels.cpp
 	"prchdrs.h"
 	<channels.hpp>
 
@@ -7315,7 +7315,7 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1429195616 d:\cpp\channel\include\abstractfile.hpp
+1438791637 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1426012957 d:\cpp\channel\include\unixfile.hpp
@@ -21543,7 +21543,7 @@
 	<stdexcept>
 	<boost/move/move.hpp>
 
-1435246824 source:d:\cpp\channel\src\smallobject.cpp
+1435750189 source:d:\cpp\channel\src\smallobject.cpp
 	"prchdrs.h"
 	"smallobject.hpp"
 	"system.hpp"
@@ -25919,7 +25919,7 @@
 	<convert.hpp>
 	<channels.hpp>
 
-1431095402 d:\cpp\channel\include\charsets.hpp
+1438791109 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
 	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
@@ -26087,7 +26087,7 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1429296279 source:d:\cpp\channel\src\win\winpipe.cpp
+1436189362 source:d:\cpp\channel\src\win\winpipe.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	<boost/thread/scoped_thread.hpp>
@@ -26160,23 +26160,25 @@
 
 1404966970 d:\cpp\boost_1_57_0\boost\pool\detail\guard.hpp
 
-1434561727 source:d:\cpp\channel\src\win\system.cpp
+1439568308 source:d:\cpp\channel\src\win\system.cpp
 	"prchdrs.h"
-	<Windows.h>
 	"system.hpp"
+	<Windows.h>
 
 1434561705 d:\cpp\channel\include\system.hpp
 	"channels_config.h"
 
-1435257763 source:d:\cpp\channel\src\win\winassynchchannel.cpp
+1438791191 source:d:\cpp\channel\src\win\winassynchchannel.cpp
 	"prchdrs.h"
 	"WinAssynchChannel.hpp"
 	"helpers.hpp"
 	"system.hpp"
 
-1435246056 d:\cpp\channel\include\win\winassynchchannel.hpp
+1436200639 d:\cpp\channel\include\win\winassynchchannel.hpp
 	"channels.hpp"
+	<boost/bind.hpp>
 	<boost/noncopyable.hpp>
+	<boost/scoped_ptr.hpp>
 	<boost/thread/executors/basic_thread_pool.hpp>
 	<boost/thread/future.hpp>
 	<boost/thread/thread.hpp>

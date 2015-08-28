@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1435246990 source:d:\cpp\channel\textdemo\main.cpp
+1440086644 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -1431,7 +1431,7 @@
 	"channels_config.h"
 	"buffers.hpp"
 
-1434379527 d:\cpp\channel\include\buffers.hpp
+1440089044 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5299,10 +5299,10 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1429195616 d:\cpp\channel\include\abstractfile.hpp
+1438791637 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1435245936 d:\cpp\channel\include\channels.hpp
+1436199795 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -16823,7 +16823,7 @@
 	<stdexcept>
 	<boost/move/move.hpp>
 
-1431095402 d:\cpp\channel\include\charsets.hpp
+1438791109 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
 	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
@@ -17445,9 +17445,11 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1435246056 d:\cpp\channel\include\win\winassynchchannel.hpp
+1436200639 d:\cpp\channel\include\win\winassynchchannel.hpp
 	"channels.hpp"
+	<boost/bind.hpp>
 	<boost/noncopyable.hpp>
+	<boost/scoped_ptr.hpp>
 	<boost/thread/executors/basic_thread_pool.hpp>
 	<boost/thread/future.hpp>
 	<boost/thread/thread.hpp>

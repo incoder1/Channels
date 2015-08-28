@@ -1,11 +1,11 @@
 #include "prchdrs.h"
 #include "helpers.hpp"
 
-#include  <boost/thread/scoped_thread.hpp>
-#include  <boost/make_shared.hpp>
+#include <boost/thread/scoped_thread.hpp>
+#include <boost/make_shared.hpp>
 
-#include  "pipe.hpp"
-#include  "WinFile.hpp"
+#include "pipe.hpp"
+#include "WinFile.hpp"
 
 namespace io {
 

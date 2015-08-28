@@ -29,7 +29,7 @@ public:
 	/**
 	 * Constructs character set
 	 * \param id
-	 *			the unique code page identifier (Win32 API identifier)
+	 *			the unique code page identifier (Win API identifier)
 	 * \param name
 	 *			the unique name of character set (libiconv/posix name)
 	 *	\param charSize
@@ -38,7 +38,7 @@ public:
 	Charset(std::size_t id, const char* name, const std::size_t charSize) BOOST_NOEXCEPT_OR_NOTHROW;
 
 	/**
-	 * Returns code page identifier (the value is the same as Win32 API code page)
+	 * Returns code page identifier (the value is the same as Win API code page)
 	 * \return code page identifier
 	 */
 	std::size_t id() const BOOST_NOEXCEPT_OR_NOTHROW;

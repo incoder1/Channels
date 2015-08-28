@@ -61,7 +61,7 @@ class ProcessingInstructionEvent:public Event {
 public:
 	ProcessingInstructionEvent(const std::string& type, const std::string& href) BOOST_NOEXCEPT_OR_NOTHROW;
 	~ProcessingInstructionEvent() BOOST_NOEXCEPT_OR_NOTHROW;
-	inline const std::string type() const {
+	inline const std::string instType() const {
 		return type_.get();
 	}
 	inline const std::string href() const {
@@ -97,7 +97,9 @@ private:
 typedef boost::shared_ptr<DocumentEvent> SDocumentEvent;
 typedef boost::shared_ptr<ProcessingInstructionEvent> SProcessingInstructionEvent;
 //typedef boost::shared_ptr<ElementEvent> SElementEvent;
+
 namespace detail {
+
 	template<class detail_ptr>
 	class up_cast
 	{

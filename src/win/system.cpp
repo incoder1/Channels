@@ -1,6 +1,8 @@
 #include "prchdrs.h"
-#include <Windows.h>
+
 #include "system.hpp"
+
+#include <Windows.h>
 
 namespace sys {
 

@@ -36,15 +36,22 @@ RandomAccessChannel::~RandomAccessChannel() BOOST_NOEXCEPT_OR_NOTHROW
 }
 
 //AsynchChannel
-AsynchChannel::AsynchChannel(const copletition_handler& handler)
-	handler_(handler)
+AsynchChannel::AsynchChannel(const completion_handler_f& recvHnd,const completion_handler_f& sendHnd):
+	recvHandler_(recvHnd),
+	sendHandler_(sendHnd)
 {}
 
 AsynchChannel::~AsynchChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
-BOOST_FORCEINLINE void AsynchChannel::handle(std::size_t transfered,const byte_buffer& buff) const {
-	handler_(transfered,buff);
+void AsynchChannel::handleReceive(std::size_t transfered,const byte_buffer& buff) const
+{
+	recvHandler_(transfered,buff);
+}
+
+void AsynchChannel::handleSend(std::size_t transfered,const byte_buffer& buff) const
+{
+	sendHandler_(transfered,buff);
 }
 
 //AsynhDispatcher

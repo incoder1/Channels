@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1432137076 source:d:\cpp\channel\cstax\main.cpp
+1440090271 source:d:\cpp\channel\cstax\main.cpp
 	<cstax.hpp>
 	<file.hpp>
 	<iostream>
@@ -20,7 +20,7 @@
 1382616958 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1429213095 d:\cpp\channel\include\buffers.hpp
+1440089044 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -1918,7 +1918,7 @@
 	<windows.h>
 	<stdint.h>
 
-1429874593 d:\cpp\channel\include\bytebuffer.hpp
+1434384403 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -5225,7 +5225,7 @@
 
 1310273157 d:\cpp\boost_1_54_0\boost\exception\detail\clone_current_exception.hpp
 
-1430836791 d:\cpp\channel\include\channels.hpp
+1436199795 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -5257,7 +5257,7 @@
 1383594446 d:\cpp\channel\cstax\xmlsource.hpp
 	<readwrite.hpp>
 
-1431100626 d:\cpp\channel\include\text.hpp
+1432919464 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<boost/format.hpp>
 	<convert.hpp>
@@ -9080,12 +9080,12 @@
 	<boost/functional/hash_fwd.hpp>
 	<boost/unordered/detail/fwd.hpp>
 
-1432136171 d:\cpp\channel\cstax\include\xmlsource.hpp
+1440085110 d:\cpp\channel\cstax\include\xmlsource.hpp
 	<text.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
 
-1432136301 source:d:\cpp\channel\cstax\src\xmlsource.cpp
+1440089374 source:d:\cpp\channel\cstax\src\xmlsource.cpp
 	"xmlsource.hpp"
 	<console.hpp>
 
@@ -9103,14 +9103,15 @@
 	<boost/smart_ptr/detail/shared_count.hpp>
 	<boost/smart_ptr/shared_ptr.hpp>
 
-1427827375 d:\cpp\channel\cstax\include\streamreader.hpp
+1440168671 d:\cpp\channel\cstax\include\streamreader.hpp
 	<stdexcept>
+	<vector>
 	<boost/core/ref.hpp>
 	"event.hpp"
 	"xmlsource.hpp"
 	"xmlgrammar.hpp"
 
-1431095231 d:\cpp\channel\cstax\include\event.hpp
+1440090188 d:\cpp\channel\cstax\include\event.hpp
 	<boost/shared_ptr.hpp>
 	<boost/flyweight.hpp>
 	"element.hpp"
@@ -9118,7 +9119,7 @@
 1427463296 d:\cpp\channel\cstax\include\element.hpp
 	<boost/move/move.hpp>
 
-1432136968 source:d:\cpp\channel\cstax\src\streamreader.cpp
+1440169774 source:d:\cpp\channel\cstax\src\streamreader.cpp
 	<streamreader.hpp>
 	<iostream>
 
@@ -9132,7 +9133,7 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1429195616 d:\cpp\channel\include\abstractfile.hpp
+1438791637 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1424707636 d:\cpp\channel\include\smallobjectpool.hpp
@@ -16316,7 +16317,7 @@
 	"charsets.hpp"
 	"smallobject.hpp"
 
-1431095402 d:\cpp\channel\include\charsets.hpp
+1438791109 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
 	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
@@ -17621,14 +17622,13 @@
 
 1429210778 d:\cpp\channel\include\win\winver.h
 
-1429296079 d:\cpp\channel\include\win\winfile.hpp
+1434561740 d:\cpp\channel\include\win\winfile.hpp
 	"winver.h"
 	<windows.h>
-	<boost/scoped_ptr.hpp>
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1429802140 d:\cpp\channel\include\win\winconsole.hpp
+1432919464 d:\cpp\channel\include\win\winconsole.hpp
 	"winver.h"
 	<windows.h>
 	<boost/noncopyable.hpp>
@@ -17651,7 +17651,7 @@
 	<memory>
 	<boost/smart_ptr/detail/operator_bool.hpp>
 
-1429795104 d:\cpp\channel\include\unix\unixfile.hpp
+1434375537 d:\cpp\channel\include\unix\unixfile.hpp
 	<sys/types.h>
 	<sys/stat.h>
 	<fcntl.h>

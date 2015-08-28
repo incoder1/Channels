@@ -5,9 +5,6 @@
 
 namespace io {
 
-const char* get_temp_dir();
-const char* generate_temp_file_name(const char* prefix);
-
 /**
  * ! \brief Abstraction for representing file. File system only, no sockets, devices etc.
 */

@@ -70,8 +70,8 @@ std::size_t IconvConverter::convert(const byte_buffer& src, byte_buffer& dest) t
 	// calc size of char buffer, and move it
 	if(avail > 0) {
 		dest.clear();
-		ptrdiff_t offset = (uint8_t*)dstptr - dest.position().ptr();
-		dest.move((std::size_t)offset);
+		ptrdiff_t offset = reinterpret_cast<uint8_t*>(dstptr) - dest.position().ptr();
+		dest.move(static_cast<std::size_t>(offset));
 	} else {
 		dest.move(dest.end());
 	}

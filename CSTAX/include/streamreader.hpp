@@ -2,6 +2,7 @@
 #define STREAMREADER_HPP_INCUDED
 
 #include <stdexcept>
+#include <vector>
 
 #include <boost/core/ref.hpp>
 
@@ -18,20 +19,20 @@ public:
 	{}
 };
 
-typedef boost::function<Event*(char*)> tag_parser_f;
+typedef boost::function<Event*(char*)> predicate;
 
 class StreamReader {
 public:
 	StreamReader(SSource source);
-	SEvent next() throw(xml_stream_error);
-	bool hasNext() throw(xml_stream_error);
-	std::string getElementText() throw(xml_stream_error);
+	SEvent next();
+	bool hasNext();
+	std::string getElementText();
 private:
-	Event* parseNext() throw(xml_stream_error);
-	io::byte_buffer getFullTagDecl() throw(xml_stream_error);
+	Event* parseNext();
+	io::byte_buffer getFullTagDecl();
 private:
 	SSource src_;
-	boost::unordered_map<EvenType,tag_parser_f> tagParsers_;
+	std::vector<predicate> predicates_;
 	Event* nextEvent_;
 	io::byte_buffer readBuffer_;
 };

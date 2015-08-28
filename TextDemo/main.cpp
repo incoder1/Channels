@@ -75,13 +75,13 @@ void file_sample()
 	}
 	file.create();
 	{
-		auto fileChannel = file.openForWrite();
+		SWriteChannel fileChannel = file.openForWrite();
 		writer out(fileChannel);
 		uint8_t BOM[3] = {0xEF,0xBB,0xBF};
 		out.flush(BOM, 3);
 		out.write("Hello!\nПривет!\nΧαιρετίσματα!\nこんにちは!\n您好!");
 	}
-	auto in = file.openForRead();
+	SReadChannel in = file.openForRead();
 	Console con(true);
 	wwriter out(con.out());
 	byte_buffer buff = byte_buffer::heap_buffer(128);
@@ -94,17 +94,28 @@ void file_sample()
 	}
 }
 
+void handle_asynch_io(std::size_t transfered,const io::byte_buffer& buffer) {
+	std::cout<<"Transfered="<<transfered<<std::endl;
+}
+
 void asynch_file_sample()
 {
 	using namespace io;
+	File file("atest.txt");
+	if(file.exist()) {
+		if(!file.remove()) {
+			boost::throw_exception(io_exception("Can not delete result.txt"));
+		}
+	}
+
 	HANDLE hFile = CreateFile(L"atest.txt", GENERIC_READ | GENERIC_WRITE | FILE_FLAG_OVERLAPPED , 0, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, 0);
+
 	::SetFilePointer(hFile,12,NULL,FILE_CURRENT);
-	SAsynchChannel channel(new WinAsynchChannel(hFile));
-	SAsynhDispatcher dsp = create_dispatcher();
+	SAsynchChannel channel(new WinAsynchChannel(hFile,io::completion_handler_f(handle_asynch_io),io::completion_handler_f(handle_asynch_io)));
+	SAsynhDispatcher dsp = create_dispatcher(2);
+	dsp->start();
 	dsp->bind(channel);
 	channel->send(byte_buffer::wrap_array("Test string!",12),0);
-	CopletitionEvent ev = dsp->nextEvent();
-	//io::SAsynchDevice device = io::AsynchDevice::file("asynch.txt");
 }
 
 void buffers_sample()
@@ -185,8 +196,8 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	try {
-		//buffers_sample();
-		charset_console_sample();
+		buffers_sample();
+		//charset_console_sample();
 		//pipe_sample();
 		//file_sample();
 		//asynch_file_sample();

@@ -149,7 +149,6 @@
 			<Option target="LinuxGCCDebug" />
 			<Option target="DebugGCCWinStatic" />
 		</Unit>
-		<Unit filename="include/namedpipe.hpp" />
 		<Unit filename="include/network.hpp" />
 		<Unit filename="include/pipe.hpp" />
 		<Unit filename="include/smallobject.hpp" />
@@ -197,7 +196,6 @@
 			<Option target="LinuxGCCDebug" />
 			<Option target="DebugGCCWinStatic" />
 		</Unit>
-		<Unit filename="src/namedpipe.cpp" />
 		<Unit filename="src/pipe.cpp" />
 		<Unit filename="src/prchdrs.cpp">
 			<Option weight="1" />
@@ -256,9 +254,6 @@
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
 			<Option target="DebugGCCWinStatic" />
-		</Unit>
-		<Unit filename="test.txt">
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Extensions>
 			<code_completion />

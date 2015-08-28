@@ -62,6 +62,7 @@ typedef boost::shared_ptr<Pipe> SPipe;
  */
 SPipe CHANNEL_PUBLIC create_pipe(std::size_t buffer_size, PipeSinkRoutine sink);
 
+
 } // namespace io
 
 #endif // CHANNEL_PIPE_HPP_INCLUDED

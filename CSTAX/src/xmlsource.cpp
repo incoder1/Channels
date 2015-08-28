@@ -6,11 +6,6 @@ namespace xml {
 
 using namespace io;
 
-// helpers
-inline bool need_more_data(const byte_buffer& buff) {
-	return buff.empty() || buff.full();
-}
-
 // Source
 Source::Source() BOOST_NOEXCEPT_OR_NOTHROW
 {}
@@ -24,7 +19,6 @@ SimpleSource::SimpleSource(io::SReadChannel data,const io::byte_buffer& readBuf)
 	src_(data),
 	buff_(readBuf)
 {
-	buff_.clear();
 }
 
 SimpleSource::~SimpleSource() BOOST_NOEXCEPT_OR_NOTHROW
@@ -40,9 +34,13 @@ std::size_t SimpleSource::readMore() {
 	return result;
 }
 
-bool SimpleSource::end()
+bool SimpleSource::hasNext()
 {
-	return need_more_data(buff_) ? readMore() > 0 : false;
+	bool result = !buff_.empty() && !buff_.full();
+	if(!result) {
+		result = readMore() > 0;
+	}
+	return result;
 }
 
 uint8_t SimpleSource::nextByte() {
@@ -74,8 +72,12 @@ std::size_t ConvertingSource::readMore() {
 	return result;
 }
 
-bool ConvertingSource::end() {
-	return need_more_data(convBuff_) ? readMore() > 0 : false;
+bool ConvertingSource::hasNext() {
+	bool result = !convBuff_.empty() || !convBuff_.full();
+	if(!result) {
+		result = readMore() > 0;
+	}
+	return result;
 }
 
 uint8_t ConvertingSource::nextByte() {

@@ -5,6 +5,11 @@
 
 namespace io {
 
+typedef bool EventType;
+
+const EventType SEND = true;
+const EventType RECV = false;
+
 struct overlapped:public ::OVERLAPPED
 {
 public:
@@ -35,11 +40,13 @@ static inline overlapped* create_overlaped(EventType type,const byte_buffer& buf
 }
 
 // AsynchChannel
-WinAsynchChannel::WinAsynchChannel(::HANDLE handle):
-	AsynchChannel(),
+WinAsynchChannel::WinAsynchChannel(::HANDLE handle,const completion_handler_f& recvHnd,const completion_handler_f& sndHnd):
+	AsynchChannel(recvHnd,sndHnd),
 	object(),
 	handle_(handle)
-{}
+{
+	validate<io_exception>(handle_ != INVALID_HANDLE_VALUE,"Invalid handle provided");
+}
 
 void WinAsynchChannel::send(const byte_buffer& buffer,int64_t pos) const
 {
@@ -49,9 +56,10 @@ void WinAsynchChannel::send(const byte_buffer& buffer,int64_t pos) const
 
 void WinAsynchChannel::receive(byte_buffer& buffer,int64_t pos) const
 {
-	overlapped* ovpd = create_overlaped(RECEIVE,buffer,pos);
-	validate_io(::ReadFile(handle_,vpos(buffer),buffer.length(),NULL,ovpd),"Asynchronous receiving failed ");
+	overlapped* ovpd = create_overlaped(RECV,buffer,pos);
+	validate_io(::ReadFile(handle_,vpos(buffer),buffer.length(),NULL,ovpd),"Asynchronous receiving failed");
 }
+
 
 WinAsynchChannel::~WinAsynchChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {
@@ -59,47 +67,61 @@ WinAsynchChannel::~WinAsynchChannel() BOOST_NOEXCEPT_OR_NOTHROW
 }
 
 // WinAsynhDispatcher
-WinAsynhDispatcher::WinAsynhDispatcher():
+WinAsynhDispatcher::WinAsynhDispatcher(std::size_t maxThreads):
 	AsynhDispatcher(),
 	object(),
+	maxThreads_(maxThreads),
 	port_(NULL)
 {
-	port_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE,NULL,0,0);
+	port_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE,NULL,0,maxThreads_);
 	validate_io(port_ != NULL,"Can not create asynchronous dispatcher");
 }
 
 WinAsynhDispatcher::~WinAsynhDispatcher() BOOST_NOEXCEPT_OR_NOTHROW
 {
+	pool_.join_all();
 	::CloseHandle(port_);
 }
 
 void WinAsynhDispatcher::bind(SAsynchChannel channel)
 {
-	ULONG_PTR key = reinterpret_cast<ULONG_PTR>(channel.get());
 	SWinAsynchChannel ch = boost::reinterpret_pointer_cast<WinAsynchChannel>(channel);
 	keys_.push_back(ch);
-	::HANDLE result = ::CreateIoCompletionPort(ch->descriptor(),port_,key,0);
+	ULONG_PTR key = reinterpret_cast<ULONG_PTR>(channel.get());
+	::HANDLE result = ::CreateIoCompletionPort(ch->descriptor(),port_,key,maxThreads_);
 	validate_io(result != port_,"Can not bind channel");
 }
 
-CopletitionEvent WinAsynhDispatcher::nextEvent()
+void WinAsynhDispatcher::routine()
 {
-	ULONG_PTR key;
+	WinAsynchChannel *channel;
 	DWORD transfered = 0;
 	::LPOVERLAPPED overlpd;
-	validate_io(::GetQueuedCompletionStatus(port_,&transfered,&key,&overlpd,INFINITY),"Dispatcher error");
-	overlapped *ovpd = reinterpret_cast<overlapped*>(overlpd);
+//	do {
+//		validate_io(::GetQueuedCompletionStatus(port_,&transfered,(PULONG_PTR)&channel,&overlpd,INFINITY),"Dispatcher error");
+//	} while(overlpd->event != SEND);
+	boost::scoped_ptr<overlapped> ovpd(reinterpret_cast<overlapped*>(overlpd));
+
 	byte_buffer buff = ovpd->buffer;
 	buff.move(transfered);
-	EventType type = ovpd->type;
-	AsynchChannel *ch = reinterpret_cast<WinAsynchChannel*>(key);
-	delete ovpd;
-	return CopletitionEvent(type,ch,buff);
+
+	if(ovpd->type) {
+		channel->handleSend(transfered,buff);
+	} else {
+		channel->handleReceive(transfered,buff);
+	}
 }
 
-SAsynhDispatcher CHANNEL_PUBLIC create_dispatcher()
+void WinAsynhDispatcher::start()
 {
-	return SAsynhDispatcher(new WinAsynhDispatcher());
+	for(std::size_t i=0; i<maxThreads_; i++) {
+		pool_.create_thread(boost::bind(&WinAsynhDispatcher::routine,this));
+	}
+}
+
+SAsynhDispatcher CHANNEL_PUBLIC create_dispatcher(std::size_t maxThreads)
+{
+	return SAsynhDispatcher(new WinAsynhDispatcher(maxThreads));
 }
 
 } // namespace io
