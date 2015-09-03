@@ -152,7 +152,7 @@ Charsets::Charsets() BOOST_NOEXCEPT_OR_NOTHROW
 	insert("KOI8-RU",&KOI8_RU);
 }
 
-inline void Charsets::insert(const std::string& name, const Charset* ptr) {
+BOOST_FORCEINLINE void Charsets::insert(const std::string& name, const Charset* ptr) {
 	nameMap_.insert(std::make_pair(name,ptr));
 }
 

@@ -22,7 +22,7 @@ public:
   explicit Spinlock() BOOST_NOEXCEPT_OR_NOTHROW:
 	state_(UNLOCKED)
   {}
-  void lock()
+  inline void lock() BOOST_NOEXCEPT_OR_NOTHROW
   {
   	uint8_t spinCount = 0;
     while (state_.exchange(LOCKED, boost::memory_order_acquire) == LOCKED) {
@@ -32,7 +32,7 @@ public:
       }
     }
   }
-  BOOST_FORCEINLINE void unlock()
+  BOOST_FORCEINLINE void unlock() BOOST_NOEXCEPT_OR_NOTHROW
   {
     state_.store(UNLOCKED, boost::memory_order_release);
   }
@@ -43,9 +43,9 @@ private:
 const uint8_t Spinlock::MAX_SPIN = 8;
 
 // synchronized pool
-class synch_pool:public boost::noncopyable {
+class SynchPool:public boost::noncopyable {
 public:
-	explicit synch_pool(const std::size_t size):
+	explicit SynchPool(const std::size_t size):
 		spinlock_(),
 		pool_(size)
 	{}
@@ -65,77 +65,85 @@ private:
 	boost::pool<block_allocator> pool_;
 };
 
-// Small Object object_allocator
-class object_allocator:private boost::noncopyable {
+// Small Object ObjectAllocator
+class ObjectAllocator:private boost::noncopyable {
 public:
 
-	static inline void* allocate(std::size_t size) throw (std::bad_alloc) {
-		return const_cast<object_allocator*>(instance())->malloc(size);
+	static BOOST_FORCEINLINE void* allocate(std::size_t size) throw (std::bad_alloc) {
+		return instance()->malloc(size);
 	}
 
-	static inline void release(void *ptr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
-		const_cast<object_allocator*>(instance())->free(ptr,size);
+	static BOOST_FORCEINLINE void release(void *ptr, std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
+		instance()->free(ptr,size);
 	}
 
-	~object_allocator() BOOST_NOEXCEPT_OR_NOTHROW {
+	~ObjectAllocator() BOOST_NOEXCEPT_OR_NOTHROW {
 		for(std::size_t i = 0; i < MAX_SIZE; i++) {
 			delete pools_[i];
 		}
 	}
 
 private:
-	typedef synch_pool pool_t;
+	typedef SynchPool pool_t;
 	static const std::size_t MAX_SIZE = 128;
 
-	object_allocator() BOOST_NOEXCEPT_OR_NOTHROW {
+	ObjectAllocator() BOOST_NOEXCEPT_OR_NOTHROW {
 		for(std::size_t i = 0; i < MAX_SIZE; i++) {
 			pools_[i] = new pool_t(i+1);
 		}
 	}
 
 	static void release() BOOST_NOEXCEPT_OR_NOTHROW {
-		delete _instance;
+		delete _instance.load(boost::memory_order_consume);
+		_instance.store(NULL, boost::memory_order_release);
 	}
 
-	static volatile object_allocator* volatile instance() {
-		if(NULL == _instance) {
-			boost::unique_lock<boost::mutex> lock(_mutex);
-			if(NULL == _instance) {
-				_instance = new volatile object_allocator();
-				std::atexit(&object_allocator::release);
+	static ObjectAllocator* instance() {
+		ObjectAllocator * tmp = _instance.load(boost::memory_order_consume);
+		if (!tmp) {
+			boost::mutex::scoped_lock guard(_mutex);
+			tmp = _instance.load(boost::memory_order_consume);
+			if (!tmp) {
+				tmp = new ObjectAllocator();
+				_instance.store(tmp, boost::memory_order_release);
+				std::atexit(&ObjectAllocator::release);
 			}
 		}
-		return _instance;
+		return tmp;
+	}
+
+	BOOST_FORCEINLINE pool_t* pool(std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
+		return pools_[size - 1];
 	}
 
 	void* malloc BOOST_PREVENT_MACRO_SUBSTITUTION(std::size_t size) {
 		void * result = NULL;
 		if( (size-1) < MAX_SIZE) {
-			result = pools_[size - 1]->malloc();
+			result = pool(size)->malloc();
 			if(NULL == result) {
 				boost::throw_exception(std::bad_alloc());
 			}
 		} else {
-			result = static_cast<void*>(new uint8_t[size]);
+			result = static_cast<void*>(block_allocator::malloc(size));
 		}
 		return result;
 	}
 
 	void free BOOST_PREVENT_MACRO_SUBSTITUTION(void *ptr, std::size_t size) {
 		if(size-1 >= MAX_SIZE) {
-			delete [] static_cast<uint8_t*>(ptr);
+			block_allocator::free(static_cast<char*>(ptr));
 		} else {
-			pools_[size - 1]->free(ptr);
+			pool(size)->free(ptr);
 		}
 	}
 private:
 	static boost::mutex _mutex;
-	static volatile object_allocator* volatile _instance;
+	static boost::atomic<ObjectAllocator*> _instance;
 	pool_t* pools_[MAX_SIZE];
 };
 
-boost::mutex object_allocator::_mutex;
-volatile object_allocator* volatile object_allocator::_instance = NULL;
+boost::mutex ObjectAllocator::_mutex;
+boost::atomic<ObjectAllocator*> ObjectAllocator::_instance(NULL);
 
 } // namespace detail
 
@@ -154,11 +162,11 @@ std::size_t object::hash() const BOOST_NOEXCEPT_OR_NOTHROW
 
 void* object::operator new(std::size_t size) throw(std::bad_alloc)
 {
-	return detail::object_allocator::allocate(size);
+	return detail::ObjectAllocator::allocate(size);
 }
 
 void object::operator delete(void *ptr,std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
-	detail::object_allocator::release(ptr,size);
+	detail::ObjectAllocator::release(ptr,size);
 }
 
 } // namespace io

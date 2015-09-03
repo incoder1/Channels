@@ -105,9 +105,11 @@ public:
 	iterator put(const_iterator& first,const_iterator& last);
 
 	/**
-	 * Calloc memory for the underlying memory block, and change end pointer
-	 * Can be used for grow or truncating byte buffer
-	 * \return new buffer capacity
+	 * Reallocates memory for this buffer, and change the end pointer
+	 * If this buffer was constructed by wrapping some stack array,
+	 * data will be deep copied to the new heap memory block
+	 * Can be used for growing or truncating buffer
+	 * \return this buffer with specified capacity
 	 */
 	byte_buffer resize(std::size_t capacity) throw(std::bad_alloc);
 

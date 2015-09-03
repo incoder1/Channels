@@ -1,18 +1,13 @@
 #ifndef WINDOWS_CONSOLE_HPP_INCLUDED
 #define WINDOWS_CONSOLE_HPP_INCLUDED
 
-#include "winver.h"
-#include <windows.h>
-
 #include <boost/noncopyable.hpp>
 #include <boost/config.hpp>
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
 
-#include <tchar.h>
-#include <text.hpp>
-
-#include "smallobject.hpp"
+#include "../smallobject.hpp"
+#include "../text.hpp"
 
 #if  defined(__MINGW32__) && !defined(_WIN64)
 // MinGW64 have this structure in windows.h

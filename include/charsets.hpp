@@ -85,7 +85,7 @@ private:
 	const Charset* find(std::size_t id) const BOOST_NOEXCEPT_OR_NOTHROW;
 	static volatile Charsets* volatile instance();
 	static void release() BOOST_NOEXCEPT_OR_NOTHROW;
-	inline void insert(const std::string& name, const Charset* ptr);
+	BOOST_FORCEINLINE void insert(const std::string& name, const Charset* ptr);
 public:
 	/**
 	 * Obtains a reference on character set by it string name representation

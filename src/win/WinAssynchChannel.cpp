@@ -3,125 +3,99 @@
 #include "helpers.hpp"
 #include "system.hpp"
 
+#ifndef ERROR_ABANDONED_WAIT_0
+#	define ERROR_ABANDONED_WAIT_0 0x2DF
+#endif // ERROR_ABANDONED_WAIT_0
+
 namespace io {
 
-typedef bool EventType;
-
-const EventType SEND = true;
-const EventType RECV = false;
-
-struct overlapped:public ::OVERLAPPED
+WinSelector::WinSelector(uint32_t maxThreads):
+	port_(NULL),
+	maxThreads_(maxThreads)
 {
-public:
-	overlapped(EventType t,const byte_buffer& buff):
-		type(t),
-		buffer(buff)
-	{
-		Internal = 0;
-		InternalHigh = 0;
-		Offset = 0;
-		OffsetHigh = 0;
-		Pointer = NULL;
-		hEvent = NULL;
+	port_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, port_, NULL, maxThreads_);
+	validate_io(NULL != port_, "System error, can't create selector");
+	if(0 == maxThreads_) {
+		maxThreads_ = sys::available_logical_cpus();
 	}
-public:
-	EventType type;
-	byte_buffer buffer;
-};
-
-static inline overlapped* create_overlaped(EventType type,const byte_buffer& buff,int64_t pos) {
-	overlapped *result = new overlapped(type,buff);
-	::LARGE_INTEGER li;
-	li.QuadPart = pos;
-	result->OffsetHigh = li.HighPart;
-	result->Offset = li.LowPart;
-	result->type = type;
-	return result;
 }
 
-// AsynchChannel
-WinAsynchChannel::WinAsynchChannel(::HANDLE handle,const completion_handler_f& recvHnd,const completion_handler_f& sndHnd):
-	AsynchChannel(recvHnd,sndHnd),
+void WinSelector::bind(::HANDLE handle, ULONG_PTR key) const
+{
+	::HANDLE res = ::CreateIoCompletionPort(
+					handle,
+					port_,
+					key,
+					maxThreads_);
+	validate_io(res == port_, "System error, can not bind device");
+}
+
+WinSelector::~WinSelector() BOOST_NOEXCEPT_OR_NOTHROW
+{
+	::CloseHandle(port_);
+}
+
+void WinSelector::listen_routine(::HANDLE port) {
+	detail::Overlapped *overlapped;
+	WinAsynchChannel const *channel;
+	DWORD transfered;
+	for(;;) {
+		BOOLEAN status = ::GetQueuedCompletionStatus(
+				port,
+				&transfered,
+				reinterpret_cast<PULONG_PTR>(&channel),
+				(reinterpret_cast<LPOVERLAPPED*>(&overlapped)),
+				INFINITY);
+		if(!status) {
+			DWORD lastError = ::GetLastError();
+			if(lastError != ERROR_ABANDONED_WAIT_0) {
+				boost::throw_exception(std::runtime_error("System error"+last_error_str(::GetLastError())));
+			} else {
+				// should not happens
+				break;
+			}
+			if(overlapped->operation == detail::SEND) {
+				channel->handleSendDone(transfered,overlapped->buffer);
+			}
+			delete overlapped;
+		}
+	}
+}
+
+
+void WinSelector::start() {
+	std::vector<boost::thread> pool(maxThreads_);
+	for(uint32_t i=0; i < maxThreads_; i++) {
+		pool.push_back(boost::thread(boost::bind(&WinSelector::listen_routine, port_)));
+	}
+}
+
+WinAsynchChannel::WinAsynchChannel(const WinSelector* selector,::HANDLE handle,const completition_handler_f& sendHandler):
+	AsynchChannel(sendHandler),
 	object(),
 	handle_(handle)
 {
-	validate<io_exception>(handle_ != INVALID_HANDLE_VALUE,"Invalid handle provided");
+	selector->bind(handle,reinterpret_cast<ULONG_PTR>(this));
 }
 
-void WinAsynchChannel::send(const byte_buffer& buffer,int64_t pos) const
+void WinAsynchChannel::handleSendDone(std::size_t transfered, byte_buffer& buf) const
 {
-	overlapped* ovpd = create_overlaped(SEND,buffer,pos);
-	validate_io(::WriteFile(handle_, vpos(buffer), buffer.length(), NULL, ovpd),"Asynchronous sending failed");
+	boost::system::error_code ec(::GetLastError(), boost::system::generic_category());
+	buf.move(transfered);
+	handleSend(ec,transfered,buf);
 }
-
-void WinAsynchChannel::receive(byte_buffer& buffer,int64_t pos) const
-{
-	overlapped* ovpd = create_overlaped(RECV,buffer,pos);
-	validate_io(::ReadFile(handle_,vpos(buffer),buffer.length(),NULL,ovpd),"Asynchronous receiving failed");
-}
-
 
 WinAsynchChannel::~WinAsynchChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {
 	::CloseHandle(handle_);
 }
 
-// WinAsynhDispatcher
-WinAsynhDispatcher::WinAsynhDispatcher(std::size_t maxThreads):
-	AsynhDispatcher(),
-	object(),
-	maxThreads_(maxThreads),
-	port_(NULL)
+void WinAsynchChannel::send(uint64_t offset,const byte_buffer& buffer)
 {
-	port_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE,NULL,0,maxThreads_);
-	validate_io(port_ != NULL,"Can not create asynchronous dispatcher");
+	detail::Overlapped *overlapped = new detail::Overlapped(detail::SEND,offset,buffer);
+	::WriteFile(handle_, vpos(buffer), buffer.length(), NULL, overlapped);
 }
 
-WinAsynhDispatcher::~WinAsynhDispatcher() BOOST_NOEXCEPT_OR_NOTHROW
-{
-	pool_.join_all();
-	::CloseHandle(port_);
-}
-
-void WinAsynhDispatcher::bind(SAsynchChannel channel)
-{
-	SWinAsynchChannel ch = boost::reinterpret_pointer_cast<WinAsynchChannel>(channel);
-	keys_.push_back(ch);
-	ULONG_PTR key = reinterpret_cast<ULONG_PTR>(channel.get());
-	::HANDLE result = ::CreateIoCompletionPort(ch->descriptor(),port_,key,maxThreads_);
-	validate_io(result != port_,"Can not bind channel");
-}
-
-void WinAsynhDispatcher::routine()
-{
-	WinAsynchChannel *channel;
-	DWORD transfered = 0;
-	::LPOVERLAPPED overlpd;
-//	do {
-//		validate_io(::GetQueuedCompletionStatus(port_,&transfered,(PULONG_PTR)&channel,&overlpd,INFINITY),"Dispatcher error");
-//	} while(overlpd->event != SEND);
-	boost::scoped_ptr<overlapped> ovpd(reinterpret_cast<overlapped*>(overlpd));
-
-	byte_buffer buff = ovpd->buffer;
-	buff.move(transfered);
-
-	if(ovpd->type) {
-		channel->handleSend(transfered,buff);
-	} else {
-		channel->handleReceive(transfered,buff);
-	}
-}
-
-void WinAsynhDispatcher::start()
-{
-	for(std::size_t i=0; i<maxThreads_; i++) {
-		pool_.create_thread(boost::bind(&WinAsynhDispatcher::routine,this));
-	}
-}
-
-SAsynhDispatcher CHANNEL_PUBLIC create_dispatcher(std::size_t maxThreads)
-{
-	return SAsynhDispatcher(new WinAsynhDispatcher(maxThreads));
-}
+// Selector
 
 } // namespace io

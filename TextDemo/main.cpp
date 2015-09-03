@@ -28,7 +28,8 @@
 #include <pipe.hpp>
 #include <network.hpp>
 
-#include <win/WinAssynchChannel.hpp>
+
+#include <win\WinAssynchChannel.hpp>
 
 void charset_console_sample() throw(io::io_exception)
 {
@@ -94,29 +95,43 @@ void file_sample()
 	}
 }
 
-void handle_asynch_io(std::size_t transfered,const io::byte_buffer& buffer) {
+void handle_asynch_io(const boost::system::error_code& ec, std::size_t transfered,const io::byte_buffer& buffer) {
 	std::cout<<"Transfered="<<transfered<<std::endl;
 }
 
-void asynch_file_sample()
+static std::string last_error_str(DWORD lastError)
 {
-	using namespace io;
-	File file("atest.txt");
+	std::string result;
+	LPVOID lpMsgBuf;
+	static DWORD flags = FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS;
+	DWORD bufLen = ::FormatMessageA(flags,NULL,lastError,
+	                   MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+	                   (LPSTR) &lpMsgBuf, 0, NULL );
+	if (bufLen) {
+		LPCSTR lpMsgStr = (LPCSTR)lpMsgBuf;
+		result.append(lpMsgStr, lpMsgStr+bufLen);
+		::LocalFree(lpMsgBuf);
+	}
+	return result;
+}
+
+void asynh_file_sample() {
+	io::WinSelector selector(0);
+	io::File file("assynh_text.txt");
 	if(file.exist()) {
 		if(!file.remove()) {
-			boost::throw_exception(io_exception("Can not delete result.txt"));
+			boost::throw_exception(io::io_exception("Can not delete assynh_text.txt"));
 		}
 	}
-
-	HANDLE hFile = CreateFile(L"atest.txt", GENERIC_READ | GENERIC_WRITE | FILE_FLAG_OVERLAPPED , 0, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, 0);
-
-	::SetFilePointer(hFile,12,NULL,FILE_CURRENT);
-	SAsynchChannel channel(new WinAsynchChannel(hFile,io::completion_handler_f(handle_asynch_io),io::completion_handler_f(handle_asynch_io)));
-	SAsynhDispatcher dsp = create_dispatcher(2);
-	dsp->start();
-	dsp->bind(channel);
-	channel->send(byte_buffer::wrap_array("Test string!",12),0);
+	::HANDLE hFile = ::CreateFile(L"assynh_text.txt", GENERIC_READ | GENERIC_WRITE , 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, 0);
+	if(INVALID_HANDLE_VALUE == hFile) {
+		boost::throw_exception(std::runtime_error(last_error_str(::GetLastError())));
+	}
+	io::WinAsynchChannel winAsynchChannel(&selector,hFile,io::completition_handler_f(handle_asynch_io));
+	selector.start();
+	winAsynchChannel.send(0,io::byte_buffer::wrap_array("Hello world!",12));
 }
+
 
 void buffers_sample()
 {
@@ -148,46 +163,42 @@ void buffers_sample()
 	out.write(boost::format("Buffer Length: %i\nBuffer Value: %s\n") % result.length() % result.position().ptr() );
 }
 
-//void network_client_sample() {
-//
-//	using namespace boost::asio;
-//
-//	io::SConverter conv = io::new_converter("UTF-8","UTF-16LE");
-//
-//	io::Console con(true);
-//
-//	io_service service;
-//	ip::tcp::resolver resolver(service);
-//	ip::tcp::resolver::query query("www.google.com", "80");
-//	ip::tcp::resolver::iterator iter = resolver.resolve(query);
-//	boost::asio::ip::tcp::endpoint ep = *iter;
-//	service.run();
-//
-//	boost::shared_ptr<ip::tcp::socket> sock(new ip::tcp::socket(service) );
-//	sock->open(ep.protocol());
-//	sock->connect(ep);
-//	std::cout<<"Connecting to:"<< ep.address().to_string() << ":" << ep.port() << "/" << ep.protocol().family() << std::endl;
-//
-//	io::net::STCPSocketCahnnel netCh( new io::net::TCPSocketChannel(sock) );
-//
-//	const char* REQ = "HEAD / HTTP/1.1\r\nHost:www.google.com\r\nAccept: */*\r\nUser-Agent:Channels C++ IO library\r\nAccept-Charset:ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\nPragma: no-cache\n\rCache-Control: no-cache\n\rConnection: close\r\n\r\n";
-//	std::cout<<"REQUEST:"<<REQ<<std::endl<<std::endl;
-//	netCh->write(io::byte_buffer::wrap_str(REQ));
-//
-//	// Character conversation from UTF-8 to console, in case of windows - UTF16-LE
-//	auto readb = io::byte_buffer::heap_buffer(128);
-//	auto convb = io::byte_buffer::heap_buffer(256);
-//	while(netCh->read(readb) > 0) {
-//		readb.flip();
-//		conv->convert(readb,convb);
-//		convb.flip();
-//		// write to console
-//		con.outChanell()->write(convb);
-//		convb.clear();
-//		readb.clear();
-//	}
-//
-//}
+void network_client_sample() {
+
+	using namespace boost::asio;
+
+	io::Console con(false);
+	con.setCharset(io::Charsets::utf8());
+	io::writer out(con.out());
+
+	io_service service;
+	ip::tcp::resolver resolver(service);
+	ip::tcp::resolver::query query("www.google.com", "80");
+	ip::tcp::resolver::iterator iter = resolver.resolve(query);
+	boost::asio::ip::tcp::endpoint ep = *iter;
+
+	service.run();
+
+	boost::shared_ptr<ip::tcp::socket> socket = boost::make_shared<ip::tcp::socket>(service);
+	socket->open(ep.protocol());
+	socket->connect(ep);
+	out.writeln(boost::format("Connecting to: %s %i / %i") % ep.address().to_string() % ep.port() % ep.protocol().family());
+	io::net::STCPSocketChannel socketChannel( new io::net::TCPSocketChannel(socket) );
+
+	const char* REQ = "HEAD / HTTP/1.1\r\nHost:www.google.com\r\nAccept: */*\r\nUser-Agent:Channels C++ IO library\r\nAccept-Charset:ISO-8859-1,utf-8;q=0.7,*;q=0.7\r\nPragma: no-cache\n\rCache-Control: no-cache\n\rConnection: close\r\n\r\n";
+	out.writeln(boost::format("HTTP request: %s \n") % REQ);
+	io::writer request(socketChannel);
+	request.write(REQ);
+
+	out.writeln("HTTP response:");
+	io::byte_buffer buffer = io::byte_buffer::heap_buffer(128);
+	if(socketChannel->read(buffer) > 0) {
+		buffer.flip();
+		out.flush(buffer);
+		buffer.clear();
+	}
+
+}
 
 #ifndef _MSC_VER
 int main(int argc, const char** argv)
@@ -196,10 +207,11 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	try {
-		buffers_sample();
+		//buffers_sample();
 		//charset_console_sample();
 		//pipe_sample();
 		//file_sample();
+		asynh_file_sample();
 		//asynch_file_sample();
 		//network_client_sample();
 	} catch(std::exception &e) {

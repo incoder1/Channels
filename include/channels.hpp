@@ -8,10 +8,6 @@
 #include "errors.hpp"
 #include "bytebuffer.hpp"
 
-#ifndef DECLARE_PTR_T
-#	define DECLARE_PTR_T(TYPE) typedef boost::shared_ptr<TYPE> S##TYPE
-#endif // DECLARE_SPTR_T
-
 namespace io {
 
 /**
@@ -26,6 +22,7 @@ protected:
 	 */
 	ReadChannel();
 public:
+
 	/**
 	 * Reads data into byte buffer starting on current buffer position,
 	 *	maximum bytes read is limited by buffer available.
@@ -34,6 +31,7 @@ public:
 	 * \return count of bytes read
 	 */
 	virtual std::size_t read(byte_buffer& buffer) = 0;
+
 	/**
 	 * Pure virtual interface destructor, never throws
 	 */
@@ -85,7 +83,7 @@ DECLARE_PTR_T(WriteChannel);
  * Implementor must build on source which allows reading and writing at the same time,
  * like file or named pipe for example
  */
-class ReadWriteChannel:public virtual ReadChannel,public virtual WriteChannel {
+class CHANNEL_PUBLIC ReadWriteChannel:public virtual ReadChannel,public virtual WriteChannel {
 	BOOST_MOVABLE_BUT_NOT_COPYABLE(ReadWriteChannel)
 protected:
 	ReadWriteChannel();
@@ -141,10 +139,6 @@ public:
 	 */
 	virtual uint64_t fromEnd(uint64_t offset)  = 0;
 
-	virtual std::size_t read(byte_buffer& buffer) = 0;
-
-	virtual std::size_t write(const byte_buffer& buffer) = 0;
-
 	/**
 	 * Pure virtual interface destructor, never throws
 	 */
@@ -158,42 +152,22 @@ public:
  */
 DECLARE_PTR_T(RandomAccessChannel);
 
-typedef boost::function<void(std::size_t,const byte_buffer&)> completion_handler_f;
 
-/**
- * ! \brief Asynchronous channel
- */
-class AsynchChannel {
-BOOST_MOVABLE_BUT_NOT_COPYABLE(AsynchChannel)
+typedef boost::function<void(const boost::system::error_code&,std::size_t,byte_buffer&)> completition_handler_f;
+
+class CHANNEL_PUBLIC AsynchChannel {
+	BOOST_MOVABLE_BUT_NOT_COPYABLE(AsynchChannel)
 protected:
-	AsynchChannel(const completion_handler_f& receiveHandler,const completion_handler_f& sendHandler);
-	void handleReceive(std::size_t transfered,const byte_buffer& buff) const;
-	void handleSend(std::size_t transfered,const byte_buffer& buff) const;
+	AsynchChannel(const completition_handler_f& sendHandler);
+	void handleSend(const boost::system::error_code& code,std::size_t transfered,byte_buffer& buffer) const;
 public:
+	virtual void send(uint64_t offset,const byte_buffer& buffer) = 0;
 	virtual ~AsynchChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
-	virtual void send(const byte_buffer& buff,int64_t offset) const = 0;
-	virtual void receive(byte_buffer& buffer,int64_t offset) const = 0;
 private:
-	completion_handler_f recvHandler_;
-	completion_handler_f sendHandler_;
+	completition_handler_f sendHandler_;
 };
 
 DECLARE_PTR_T(AsynchChannel);
-
-class AsynhDispatcher
-{
-	BOOST_MOVABLE_BUT_NOT_COPYABLE(AsynhDispatcher)
-protected:
-	AsynhDispatcher();
-public:
-	virtual ~AsynhDispatcher() BOOST_NOEXCEPT_OR_NOTHROW = 0;
-	virtual void bind(SAsynchChannel channel) = 0;
-	virtual void start() = 0;
-};
-
-DECLARE_PTR_T(AsynhDispatcher);
-
-SAsynhDispatcher CHANNEL_PUBLIC create_dispatcher(std::size_t maxThreads);
 
 /**
 * Transfers data from source read channel to the destination write channel using a memory buffer

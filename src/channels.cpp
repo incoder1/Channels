@@ -35,30 +35,17 @@ RandomAccessChannel::~RandomAccessChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {
 }
 
-//AsynchChannel
-AsynchChannel::AsynchChannel(const completion_handler_f& recvHnd,const completion_handler_f& sendHnd):
-	recvHandler_(recvHnd),
-	sendHandler_(sendHnd)
+// AsynchChannel
+AsynchChannel::AsynchChannel(const completition_handler_f& sendHandler):
+	sendHandler_(sendHandler)
 {}
 
 AsynchChannel::~AsynchChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
-void AsynchChannel::handleReceive(std::size_t transfered,const byte_buffer& buff) const
+void AsynchChannel::handleSend(const boost::system::error_code& code,std::size_t transfered,byte_buffer& buffer) const
 {
-	recvHandler_(transfered,buff);
+	sendHandler_(code,transfered,buffer);
 }
-
-void AsynchChannel::handleSend(std::size_t transfered,const byte_buffer& buff) const
-{
-	sendHandler_(transfered,buff);
-}
-
-//AsynhDispatcher
-AsynhDispatcher::AsynhDispatcher()
-{}
-
-AsynhDispatcher::~AsynhDispatcher() BOOST_NOEXCEPT_OR_NOTHROW
-{}
 
 } // namespace io

@@ -38,7 +38,7 @@
 
 // Shared lib / DLL special keywords if any
 #ifdef PLATFORM_WINDOWS
-#	include <win/winver.h>
+#	include "win/winver.h"
 #	include <windows.h>
 
 // MSVC and MinGW Windows DLL
@@ -56,17 +56,16 @@
 #endif
 
 // Whether exception handling is disabled.
-#if !defined(CHANNELS_NO_EXCEPTIONS)
-# if defined(BOOST_ASIO_HAS_BOOST_CONFIG) && defined(BOOST_NO_EXCEPTIONS)
+#ifndef CHANNELS_NO_EXCEPTIONS
+# ifdef BOOST_NO_EXCEPTIONS
 #  define CHANNELS_NO_EXCEPTIONS 1
-# endif // !defined(BOOST_NO_EXCEPTIONS)
-#endif // !defined(CHANNELS_NO_EXCEPTIONS)
+# endif // BOOST_NO_EXCEPTIONS)
+#endif // CHANNELS_NO_EXCEPTIONS
 
-// Macros for endians
 #include <stdint.h>
 
-#ifndef IS_BIG_ENDIAN
-#	define IS_BIG_ENDIAN (1 == 0x1000)
-#endif
+#ifndef DECLARE_PTR_T
+#	define DECLARE_PTR_T(TYPE) typedef boost::shared_ptr<TYPE> S##TYPE
+#endif // DECLARE_SPTR_T
 
 #endif // CHANNELS_CONFIG_H_INCLUDED

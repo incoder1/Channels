@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1440086644 source:d:\cpp\channel\textdemo\main.cpp
+1441306264 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -8,7 +8,7 @@
 	<file.hpp>
 	<pipe.hpp>
 	<network.hpp>
-	<win/WinAssynchChannel.hpp>
+	<win\WinAssynchChannel.hpp>
 
 1379004752 d:\cpp\channel\textdemo\winver.h
 
@@ -16,11 +16,11 @@
 	"channels_config.h"
 	"win/WinConsole.hpp"
 
-1431947599 d:\cpp\channel\include\channels_config.h
+1441212511 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
-	<win/winver.h>
+	"win/winver.h"
 	<windows.h>
 	<stdint.h>
 
@@ -1424,14 +1424,14 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1434384403 d:\cpp\channel\include\bytebuffer.hpp
+1441192453 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
 	"channels_config.h"
 	"buffers.hpp"
 
-1440089044 d:\cpp\channel\include\buffers.hpp
+1440177983 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5299,10 +5299,10 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1438791637 d:\cpp\channel\include\abstractfile.hpp
+1441224459 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1436199795 d:\cpp\channel\include\channels.hpp
+1441223503 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -6314,7 +6314,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1434388552 d:\cpp\channel\include\pipe.hpp
+1441117283 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -12665,7 +12665,7 @@
 	<functional>
 	<boost/pool/poolfwd.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\once.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\once.hpp
 	<boost/thread/detail/config.hpp>
 	<boost/thread/detail/platform.hpp>
 	<boost/thread/win32/once.hpp>
@@ -12674,7 +12674,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\win32\once.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\win32\once.hpp
 	<cstring>
 	<cstddef>
 	<boost/assert.hpp>
@@ -12701,7 +12701,7 @@
 	<boost/type_traits/remove_reference.hpp>
 	<functional>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\pthread\once.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\pthread\once.hpp
 	<boost/thread/detail/config.hpp>
 	<boost/thread/detail/move.hpp>
 	<boost/thread/detail/invoke.hpp>
@@ -12716,7 +12716,7 @@
 	<csignal>
 	<boost/config/abi_suffix.hpp>
 
-1414165406 d:\cpp\boost_1_57_0\boost\thread\pthread\once_atomic.hpp
+1414169006 d:\cpp\boost_1_57_0\boost\thread\pthread\once_atomic.hpp
 	<boost/thread/detail/config.hpp>
 	<boost/cstdint.hpp>
 	<boost/thread/detail/move.hpp>
@@ -13096,9 +13096,9 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1434560570 d:\cpp\channel\include\network.hpp
-	<smallobject.hpp>
-	<channels.hpp>
+1441197268 d:\cpp\channel\include\network.hpp
+	"smallobject.hpp"
+	"channels.hpp"
 	<winsock2.h>
 	<boost/asio.hpp>
 
@@ -16817,18 +16817,18 @@
 	<convert.hpp>
 	<channels.hpp>
 
-1431966976 d:\cpp\channel\include\smallobject.hpp
+1441118466 d:\cpp\channel\include\smallobject.hpp
 	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
 	<boost/move/move.hpp>
 
-1438791109 d:\cpp\channel\include\charsets.hpp
+1441189960 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
 	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
 
-1431518105 d:\cpp\channel\include\iconv_conv.hpp
+1441117283 d:\cpp\channel\include\iconv_conv.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
@@ -16850,7 +16850,7 @@
 	<time.h>
 	<wchar.h>
 
-1429887299 d:\cpp\channel\include\ibm_icu_conv.hpp
+1441117283 d:\cpp\channel\include\ibm_icu_conv.hpp
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
 	<boost/format.hpp>
@@ -17292,22 +17292,17 @@
 
 1429210778 d:\cpp\channel\include\win\winver.h
 
-1432919464 d:\cpp\channel\include\win\winconsole.hpp
-	"winver.h"
-	<windows.h>
+1441209675 d:\cpp\channel\include\win\winconsole.hpp
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<boost/function.hpp>
 	<boost/bind.hpp>
-	<tchar.h>
-	<text.hpp>
-	"smallobject.hpp"
+	"../smallobject.hpp"
+	"../text.hpp"
 
-1434561740 d:\cpp\channel\include\win\winfile.hpp
-	"winver.h"
-	<windows.h>
+1441223853 d:\cpp\channel\include\win\winfile.hpp
 	"abstractfile.hpp"
-	"smallobject.hpp"
+	"WinChannel.hpp"
 
 1382376325 c:\mingw\msys\1.0\local\include\unicode\utypes.h
 	"unicode/umachine.h"
@@ -17445,17 +17440,9 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1436200639 d:\cpp\channel\include\win\winassynchchannel.hpp
+1441223281 d:\cpp\channel\include\win\winassynchchannel.hpp
 	"channels.hpp"
-	<boost/bind.hpp>
-	<boost/noncopyable.hpp>
-	<boost/scoped_ptr.hpp>
-	<boost/thread/executors/basic_thread_pool.hpp>
-	<boost/thread/future.hpp>
-	<boost/thread/thread.hpp>
-	<boost/unordered_map.hpp>
-	<vector>
-	<windows.h>
+	<boost/thread.hpp>
 
 1414169006 d:\cpp\boost_1_57_0\boost\thread\executors\basic_thread_pool.hpp
 	<boost/thread/detail/config.hpp>
@@ -18160,4 +18147,92 @@
 1414169006 d:\cpp\boost_1_57_0\boost\detail\atomic_undef_macros.hpp
 
 1414169006 d:\cpp\boost_1_57_0\boost\detail\atomic_redef_macros.hpp
+
+1441209902 d:\cpp\channel\include\win\winchannel.hpp
+	"channels.hpp"
+
+1414169006 d:\cpp\boost_1_57_0\boost\thread.hpp
+	<boost/thread/thread.hpp>
+	<boost/thread/condition_variable.hpp>
+	<boost/thread/exceptions.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/thread/once.hpp>
+	<boost/thread/recursive_mutex.hpp>
+	<boost/thread/tss.hpp>
+	<boost/thread/thread_time.hpp>
+	<boost/thread/locks.hpp>
+	<boost/thread/shared_mutex.hpp>
+	<boost/thread/barrier.hpp>
+	<boost/thread/future.hpp>
+
+1414169006 d:\cpp\boost_1_57_0\boost\thread\recursive_mutex.hpp
+	<boost/thread/detail/platform.hpp>
+	<boost/thread/win32/recursive_mutex.hpp>
+	<boost/thread/pthread/recursive_mutex.hpp>
+	<boost/thread/lockable_traits.hpp>
+
+1414169006 d:\cpp\boost_1_57_0\boost\thread\win32\recursive_mutex.hpp
+	<boost/thread/win32/basic_recursive_mutex.hpp>
+	<boost/thread/exceptions.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1414169006 d:\cpp\boost_1_57_0\boost\thread\win32\basic_recursive_mutex.hpp
+	<boost/thread/win32/thread_primitives.hpp>
+	<boost/thread/win32/basic_timed_mutex.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/chrono/ceil.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1414169006 d:\cpp\boost_1_57_0\boost\thread\pthread\recursive_mutex.hpp
+	<pthread.h>
+	<boost/throw_exception.hpp>
+	<boost/thread/exceptions.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/thread/thread_time.hpp>
+	<boost/assert.hpp>
+	<unistd.h>
+	<boost/date_time/posix_time/conversion.hpp>
+	<errno.h>
+	<boost/thread/pthread/timespec.hpp>
+	<boost/thread/pthread/pthread_mutex_scoped_lock.hpp>
+	<boost/chrono/system_clocks.hpp>
+	<boost/chrono/ceil.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1414169006 d:\cpp\boost_1_57_0\boost\thread\tss.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/thread/detail/thread_heap_alloc.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
+
+1414169006 d:\cpp\boost_1_57_0\boost\thread\locks.hpp
+	<boost/thread/lock_algorithms.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/thread/lock_guard.hpp>
+	<boost/thread/lockable_traits.hpp>
+	<boost/thread/lock_options.hpp>
+
+1414169006 d:\cpp\boost_1_57_0\boost\thread\barrier.hpp
+	<boost/thread/detail/config.hpp>
+	<boost/thread/detail/delete.hpp>
+	<boost/throw_exception.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/thread/lock_types.hpp>
+	<boost/thread/condition_variable.hpp>
+	<string>
+	<stdexcept>
+	<boost/thread/detail/nullary_function.hpp>
+	<boost/type_traits/is_same.hpp>
+	<boost/type_traits/is_void.hpp>
+	<boost/core/enable_if.hpp>
+	<boost/utility/result_of.hpp>
+	<boost/config/abi_prefix.hpp>
+	<boost/config/abi_suffix.hpp>
 

@@ -1,8 +1,8 @@
 #ifndef CHANNELS_NETWORK_HPP_INCLUDED
 #define CHANNELS_NETWORK_HPP_INCLUDED
 
-#include <smallobject.hpp>
-#include <channels.hpp>
+#include "smallobject.hpp"
+#include "channels.hpp"
 
 #if  defined(__MINGW32__) && !defined(__MINGW64__)
 #	include <winsock2.h>
@@ -15,8 +15,6 @@ namespace io {
 
 namespace net {
 
-	namespace {
-
 	  template<class Socket>
 	  class basic_socket_channel:public virtual ReadWriteChannel, public virtual object {
 		public:
@@ -25,7 +23,7 @@ namespace net {
 				object(),
 				socket_(socket)
 			{}
-			virtual std::size_t read(byte_buffer& buffer)  {
+			virtual std::size_t read(byte_buffer& buffer) {
 				boost::system::error_code error;
 				size_t result = socket_->read_some(asio_buffer(buffer), boost::ref(error));
 				if( (error != boost::asio::error::eof) && error) {
@@ -44,7 +42,7 @@ namespace net {
 				}
 				return result;
 			}
-			virtual ~basic_socket_channel() {
+			virtual ~basic_socket_channel() BOOST_NOEXCEPT_OR_NOTHROW {
 				socket_->shutdown(Socket::shutdown_receive);
 				socket_->close();
 			}
@@ -59,17 +57,15 @@ namespace net {
 			boost::shared_ptr<Socket> socket_;
 	  };
 
-	}
-
-	typedef basic_socket_channel<
+	typedef net::basic_socket_channel<
 		boost::asio::basic_stream_socket<boost::asio::ip::tcp>
 	> TCPSocketChannel;
 
-	typedef basic_socket_channel<
+	typedef net::basic_socket_channel<
 		boost::asio::basic_datagram_socket<boost::asio::ip::udp>
 	> UDPSocketChannel;
 
-	typedef boost::shared_ptr<TCPSocketChannel> STCPSocketCahnnel;
+	typedef boost::shared_ptr<TCPSocketChannel> STCPSocketChannel;
 	typedef boost::shared_ptr<UDPSocketChannel> SUDPSocketChannel;
 
 } // namespace net

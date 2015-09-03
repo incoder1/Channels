@@ -16,39 +16,41 @@ public:
 	 * \note ANSI/ASCII 8-bytes peer character paths (file name) only supported in this version
 	 */
 	explicit File(const char* path) BOOST_NOEXCEPT_OR_NOTHROW;
+
 	/**
 	 * Creates a new file
 	 * \return whether successful
 	 */
 	bool create() const BOOST_NOEXCEPT_OR_NOTHROW;
+
 	/**
 	 * Deletes file
 	 * \return whether successful
 	 */
 	bool remove() const BOOST_NOEXCEPT_OR_NOTHROW;
+
 	/**
 	 * Returns file exist sate
 	 * \return whether file with this path exist
 	 */
 	bool exist() const BOOST_NOEXCEPT_OR_NOTHROW;
+
 	/**
 	 * Open blocking read file channel
 	 * \return reference smart pointer on reading file channel
 	 * \throw io_exception in case of failure
 	 */
 	SReadChannel openForRead();
+
 	/**
 	 * Open blocking write file channel
 	 * \return reference smart pointer on writing file channel
 	 * \throw io_exception in case of failure
 	 */
 	SWriteChannel openForWrite();
-	/**
-	 * Open blocking read-write file channel
-	 * \return reference smart pointer on read-write file channel
-	 * \throw io_exception in case of failure
-	 */
+
 	SRandomAccessChannel openForReadWrite();
+
 private:
 	const char* path_;
 };

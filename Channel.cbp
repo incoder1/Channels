@@ -14,6 +14,7 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
@@ -40,7 +41,6 @@
 				<Option createStaticLib="1" />
 				<Compiler>
 					<Add option="-O3" />
-					<Add option="-Winline" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add directory="C:/MinGW/msys/1.0/include" />
@@ -166,6 +166,12 @@
 			<Option target="DebugMinGW32-ICU" />
 			<Option target="DebugGCCWinStatic" />
 		</Unit>
+		<Unit filename="include/win/WinChannel.hpp">
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
+		</Unit>
 		<Unit filename="include/win/WinConsole.hpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
@@ -214,6 +220,12 @@
 			<Option target="LinuxGCCDebug" />
 		</Unit>
 		<Unit filename="src/win/WinAssynchChannel.cpp">
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
+		</Unit>
+		<Unit filename="src/win/WinChannel.cpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
