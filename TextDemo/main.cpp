@@ -19,7 +19,7 @@
 #	define HAS_CPP11
 #endif // __cplusplus
 
-// Only to handle exception if any
+// Only to handle exception if anyassynch_experemental
 #include <iostream>
 
 #include <console.hpp>
@@ -27,9 +27,6 @@
 #include <file.hpp>
 #include <pipe.hpp>
 #include <network.hpp>
-
-
-#include <win\WinAssynchChannel.hpp>
 
 void charset_console_sample() throw(io::io_exception)
 {

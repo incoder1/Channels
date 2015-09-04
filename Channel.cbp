@@ -149,6 +149,7 @@
 			<Option target="LinuxGCCDebug" />
 			<Option target="DebugGCCWinStatic" />
 		</Unit>
+		<Unit filename="include/namedpipe.hpp" />
 		<Unit filename="include/network.hpp" />
 		<Unit filename="include/pipe.hpp" />
 		<Unit filename="include/smallobject.hpp" />
@@ -160,11 +161,8 @@
 		<Unit filename="include/unix/unixfile.hpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>
-		<Unit filename="include/win/WinAssynchChannel.hpp">
-			<Option target="DebugGCCWin" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="DebugMinGW32-ICU" />
-			<Option target="DebugGCCWinStatic" />
+		<Unit filename="include/unix/unixpipe.cpp">
+			<Option target="LinuxGCCDebug" />
 		</Unit>
 		<Unit filename="include/win/WinChannel.hpp">
 			<Option target="DebugGCCWin" />
@@ -219,6 +217,9 @@
 		<Unit filename="src/unix/unixfile.cpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>
+		<Unit filename="src/unix/unixpipe.cpp">
+			<Option target="LinuxGCCDebug" />
+		</Unit>
 		<Unit filename="src/win/WinChannel.cpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
@@ -232,6 +233,12 @@
 			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="src/win/WinFile.cpp">
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
+		</Unit>
+		<Unit filename="src/win/WinNamedPipe.cpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />

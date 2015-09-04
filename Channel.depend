@@ -8,7 +8,7 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1441212511 d:\cpp\channel\include\channels_config.h
+1441382538 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
@@ -16,7 +16,7 @@
 	<windows.h>
 	<stdint.h>
 
-1441192453 d:\cpp\channel\include\bytebuffer.hpp
+1441382455 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -1350,7 +1350,7 @@
 1090718969 d:\cpp\boost_1_54_0\boost\function\function10.hpp
 	<boost/function/detail/maybe_include.hpp>
 
-1440177983 d:\cpp\channel\include\buffers.hpp
+1441382455 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5218,7 +5218,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1441223503 d:\cpp\channel\include\channels.hpp
+1441382728 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -5564,7 +5564,7 @@
 	<pipe.hpp>
 	<WindowsFile.hpp>
 
-1441117283 d:\cpp\channel\include\pipe.hpp
+1441382455 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -7120,7 +7120,7 @@
 
 1365979818 d:\cpp\boost_1_54_0\boost\detail\atomic_redef_macros.hpp
 
-1441117284 source:d:\cpp\channel\src\iconv_conv.cpp
+1441382455 source:d:\cpp\channel\src\iconv_conv.cpp
 	"prchdrs.h"
 	"iconv_conv.hpp"
 
@@ -7306,7 +7306,7 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1441223676 source:d:\cpp\channel\src\channels.cpp
+1441382829 source:d:\cpp\channel\src\channels.cpp
 	"prchdrs.h"
 	<channels.hpp>
 
@@ -7315,7 +7315,7 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1441224459 d:\cpp\channel\include\abstractfile.hpp
+1441382455 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1426012957 d:\cpp\channel\include\unixfile.hpp
@@ -21537,13 +21537,13 @@
 
 1414767002 d:\cpp\boost_1_57_0\boost
 
-1441118466 d:\cpp\channel\include\smallobject.hpp
+1441382538 d:\cpp\channel\include\smallobject.hpp
 	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
 	<boost/move/move.hpp>
 
-1441189791 source:d:\cpp\channel\src\smallobject.cpp
+1441382538 source:d:\cpp\channel\src\smallobject.cpp
 	"prchdrs.h"
 	"smallobject.hpp"
 	"system.hpp"
@@ -25919,12 +25919,12 @@
 	<convert.hpp>
 	<channels.hpp>
 
-1441189960 d:\cpp\channel\include\charsets.hpp
+1441382455 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
 	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
 
-1441189967 source:d:\cpp\channel\src\charsets.cpp
+1441382455 source:d:\cpp\channel\src\charsets.cpp
 	"charsets.hpp"
 
 1427229068 d:\cpp\channel\include\errors.hpp
@@ -26081,11 +26081,11 @@
 	"channels.hpp"
 	"smallobject.hpp"
 
-1441223853 d:\cpp\channel\include\win\winfile.hpp
+1441382455 d:\cpp\channel\include\win\winfile.hpp
 	"abstractfile.hpp"
 	"WinChannel.hpp"
 
-1436189362 source:d:\cpp\channel\src\win\winpipe.cpp
+1441382455 source:d:\cpp\channel\src\win\winpipe.cpp
 	"prchdrs.h"
 	"helpers.hpp"
 	<boost/thread/scoped_thread.hpp>
@@ -26093,7 +26093,7 @@
 	"pipe.hpp"
 	"WinFile.hpp"
 
-1441212217 source:d:\cpp\channel\src\win\winfile.cpp
+1441382455 source:d:\cpp\channel\src\win\winfile.cpp
 	"prchdrs.h"
 	"WinFile.hpp"
 	"helpers.hpp"
@@ -26103,7 +26103,7 @@
 	"helpers.hpp"
 	"WinConsole.hpp"
 
-1441209675 d:\cpp\channel\include\win\winconsole.hpp
+1441382455 d:\cpp\channel\include\win\winconsole.hpp
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<boost/function.hpp>
@@ -26155,12 +26155,12 @@
 
 1404966970 d:\cpp\boost_1_57_0\boost\pool\detail\guard.hpp
 
-1439568308 source:d:\cpp\channel\src\win\system.cpp
+1441382455 source:d:\cpp\channel\src\win\system.cpp
 	"prchdrs.h"
 	"system.hpp"
 	<Windows.h>
 
-1434561705 d:\cpp\channel\include\system.hpp
+1441382455 d:\cpp\channel\include\system.hpp
 	"channels_config.h"
 
 1441306320 source:d:\cpp\channel\src\win\winassynchchannel.cpp
@@ -26860,10 +26860,10 @@
 
 1414169006 d:\cpp\boost_1_57_0\boost\detail\atomic_redef_macros.hpp
 
-1441209902 d:\cpp\channel\include\win\winchannel.hpp
+1441382455 d:\cpp\channel\include\win\winchannel.hpp
 	"channels.hpp"
 
-1441209909 source:d:\cpp\channel\src\win\winchannel.cpp
+1441382455 source:d:\cpp\channel\src\win\winchannel.cpp
 	"prchdrs.h"
 	"WinChannel.hpp"
 	"helpers.hpp"

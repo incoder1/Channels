@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1441306264 source:d:\cpp\channel\textdemo\main.cpp
+1441382850 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -8,7 +8,6 @@
 	<file.hpp>
 	<pipe.hpp>
 	<network.hpp>
-	<win\WinAssynchChannel.hpp>
 
 1379004752 d:\cpp\channel\textdemo\winver.h
 
@@ -16,7 +15,7 @@
 	"channels_config.h"
 	"win/WinConsole.hpp"
 
-1441212511 d:\cpp\channel\include\channels_config.h
+1441382538 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
@@ -1424,14 +1423,14 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1441192453 d:\cpp\channel\include\bytebuffer.hpp
+1441382455 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
 	"channels_config.h"
 	"buffers.hpp"
 
-1440177983 d:\cpp\channel\include\buffers.hpp
+1441382455 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5299,10 +5298,10 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1441224459 d:\cpp\channel\include\abstractfile.hpp
+1441382455 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1441223503 d:\cpp\channel\include\channels.hpp
+1441382728 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -6314,7 +6313,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1441117283 d:\cpp\channel\include\pipe.hpp
+1441382455 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -13096,7 +13095,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1441197268 d:\cpp\channel\include\network.hpp
+1441382925 d:\cpp\channel\include\network.hpp
 	"smallobject.hpp"
 	"channels.hpp"
 	<winsock2.h>
@@ -16817,13 +16816,13 @@
 	<convert.hpp>
 	<channels.hpp>
 
-1441118466 d:\cpp\channel\include\smallobject.hpp
+1441382538 d:\cpp\channel\include\smallobject.hpp
 	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
 	<boost/move/move.hpp>
 
-1441189960 d:\cpp\channel\include\charsets.hpp
+1441382455 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
 	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
@@ -17292,7 +17291,7 @@
 
 1429210778 d:\cpp\channel\include\win\winver.h
 
-1441209675 d:\cpp\channel\include\win\winconsole.hpp
+1441382455 d:\cpp\channel\include\win\winconsole.hpp
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<boost/function.hpp>
@@ -17300,7 +17299,7 @@
 	"../smallobject.hpp"
 	"../text.hpp"
 
-1441223853 d:\cpp\channel\include\win\winfile.hpp
+1441382455 d:\cpp\channel\include\win\winfile.hpp
 	"abstractfile.hpp"
 	"WinChannel.hpp"
 
@@ -17434,7 +17433,7 @@
 	"unicode/utypes.h"
 	"unicode/uenum.h"
 
-1434375537 d:\cpp\channel\include\unix\unixfile.hpp
+1441382455 d:\cpp\channel\include\unix\unixfile.hpp
 	<sys/types.h>
 	<sys/stat.h>
 	<fcntl.h>
@@ -18148,7 +18147,7 @@
 
 1414169006 d:\cpp\boost_1_57_0\boost\detail\atomic_redef_macros.hpp
 
-1441209902 d:\cpp\channel\include\win\winchannel.hpp
+1441382455 d:\cpp\channel\include\win\winchannel.hpp
 	"channels.hpp"
 
 1414169006 d:\cpp\boost_1_57_0\boost\thread.hpp

@@ -17,7 +17,7 @@ ConsoleCahannel::~ConsoleCahannel() BOOST_NOEXCEPT_OR_NOTHROW
 
 std::size_t ConsoleCahannel::read(byte_buffer& buffer)
 {
-	::ssize_t result = ::read(fd_, vpos(buffer), buffer.capacity());
+	ssize_t result = ::read(fd_, vpos(buffer), buffer.capacity());
 	validate_io(result, "Read console error");
 	buffer.move(static_cast<std::size_t>(result));
 	return static_cast<std::size_t>(result);

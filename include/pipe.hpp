@@ -52,7 +52,7 @@ private:
 	PipeSinkRoutine sinkRoutine_;
 };
 
-typedef boost::shared_ptr<Pipe> SPipe;
+DECLARE_PTR_T(Pipe);
 
 /**
  * Creates and initialize the Pipe. Sink functor will be used as the routine for the new thread
