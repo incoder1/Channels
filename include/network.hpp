@@ -65,8 +65,8 @@ namespace net {
 		boost::asio::basic_datagram_socket<boost::asio::ip::udp>
 	> UDPSocketChannel;
 
-	typedef boost::shared_ptr<TCPSocketChannel> STCPSocketChannel;
-	typedef boost::shared_ptr<UDPSocketChannel> SUDPSocketChannel;
+	DECLARE_PTR_T(TCPSocketChannel);
+	DECLARE_PTR_T(UDPSocketChannel);
 
 } // namespace net
 

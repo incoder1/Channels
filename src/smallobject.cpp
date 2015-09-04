@@ -169,4 +169,5 @@ void object::operator delete(void *ptr,std::size_t size) BOOST_NOEXCEPT_OR_NOTHR
 	detail::ObjectAllocator::release(ptr,size);
 }
 
+
 } // namespace io

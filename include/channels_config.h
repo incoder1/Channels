@@ -64,8 +64,5 @@
 
 #include <stdint.h>
 
-#ifndef DECLARE_PTR_T
-#	define DECLARE_PTR_T(TYPE) typedef boost::shared_ptr<TYPE> S##TYPE
-#endif // DECLARE_SPTR_T
 
 #endif // CHANNELS_CONFIG_H_INCLUDED

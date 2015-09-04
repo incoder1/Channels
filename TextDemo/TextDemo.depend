@@ -16,7 +16,7 @@
 	"channels_config.h"
 	"win/WinConsole.hpp"
 
-1441212511 d:\cpp\channel\include\channels_config.h
+1441374268 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
@@ -5302,10 +5302,10 @@
 1441224459 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1441223503 d:\cpp\channel\include\channels.hpp
+1441374309 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
-	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
+	"smallobject.hpp"
 	"errors.hpp"
 	"bytebuffer.hpp"
 
@@ -13096,7 +13096,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1441197268 d:\cpp\channel\include\network.hpp
+1441378148 d:\cpp\channel\include\network.hpp
 	"smallobject.hpp"
 	"channels.hpp"
 	<winsock2.h>
@@ -16817,11 +16817,12 @@
 	<convert.hpp>
 	<channels.hpp>
 
-1441118466 d:\cpp\channel\include\smallobject.hpp
+1441380384 d:\cpp\channel\include\smallobject.hpp
 	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
-	<boost/move/move.hpp>
+	<boost/atomic.hpp>
+	<boost/shared_ptr.hpp>
 
 1441189960 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
@@ -17440,9 +17441,11 @@
 	<fcntl.h>
 	"abstractfile.hpp"
 
-1441223281 d:\cpp\channel\include\win\winassynchchannel.hpp
+1441380824 d:\cpp\channel\include\win\winassynchchannel.hpp
 	"channels.hpp"
-	<boost/thread.hpp>
+	<boost/thread/thread.hpp>
+	<boost/enable_shared_from_this.hpp>
+	<boost/bind.hpp>
 
 1414169006 d:\cpp\boost_1_57_0\boost\thread\executors\basic_thread_pool.hpp
 	<boost/thread/detail/config.hpp>

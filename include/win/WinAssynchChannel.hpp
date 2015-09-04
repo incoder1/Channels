@@ -3,7 +3,8 @@
 
 #include "channels.hpp"
 
-#include <boost/thread.hpp>
+#include <boost/bind.hpp>
+#include <boost/thread/thread.hpp>
 
 namespace io {
 
@@ -46,7 +47,7 @@ public:
 	void bind(::HANDLE handle,ULONG_PTR key) const;
 private:
 	::HANDLE port_;
-	boost::thread::sempahore
+	boost::thread_group pool_;
 	uint32_t maxThreads_;
 };
 
@@ -55,7 +56,7 @@ public:
 	explicit WinAsynchChannel(const WinSelector* selector,::HANDLE handle,const completition_handler_f& sendHandler);
 	virtual ~WinAsynchChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual void send(uint64_t offset,const byte_buffer& buffer);
-	void handleSendDone(std::size_t transfered, byte_buffer& buff) const;
+	void handleSendDone(DWORD lastError,std::size_t transfered, byte_buffer& buff) const;
 private:
 	::HANDLE handle_;
 };

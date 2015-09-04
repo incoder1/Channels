@@ -118,16 +118,16 @@ static std::string last_error_str(DWORD lastError)
 void asynh_file_sample() {
 	io::WinSelector selector(0);
 	io::File file("assynh_text.txt");
-	if(file.exist()) {
-		if(!file.remove()) {
-			boost::throw_exception(io::io_exception("Can not delete assynh_text.txt"));
-		}
+	if(!file.exist()) {
+		std::cout<<"No file to asynchronous copying "
+		return;
 	}
-	::HANDLE hFile = ::CreateFile(L"assynh_text.txt", GENERIC_READ | GENERIC_WRITE , 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, 0);
+	::HANDLE hFile = ::CreateFile(L"assynh_text.txt", GENERIC_READ | GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, 0);
 	if(INVALID_HANDLE_VALUE == hFile) {
 		boost::throw_exception(std::runtime_error(last_error_str(::GetLastError())));
 	}
-	io::WinAsynchChannel winAsynchChannel(&selector,hFile,io::completition_handler_f(handle_asynch_io));
+	io::WinAsynchChannel read(&selector,hFile,io::completition_handler_f(handle_asynch_io));
+	io::WinAsynchChannel write(&selector,hFile,io::completition_handler_f());
 	selector.start();
 	winAsynchChannel.send(0,io::byte_buffer::wrap_array("Hello world!",12));
 }

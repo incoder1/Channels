@@ -2,9 +2,12 @@
 #define __IO_SMALLOBJECT_HPP_INCLUDED__
 
 #include "channels_config.h"
+
 #include <stdint.h>
 #include <stdexcept>
-#include <boost/move/move.hpp>
+
+#include <boost/atomic.hpp>
+#include <boost/shared_ptr.hpp>
 
 namespace io {
 
@@ -21,6 +24,7 @@ protected:
 	 * \throw never throws
 	 */
 	object() BOOST_NOEXCEPT_OR_NOTHROW;
+
 public:
 	/**
 	 * Pure-virtual destructor, implementor must provide an not't throwing destructor
@@ -53,6 +57,11 @@ public:
 	 */
 	void operator delete(void *ptr,std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW;
 };
+
+
+#ifndef DECLARE_PTR_T
+#	define DECLARE_PTR_T(TYPE) typedef boost::shared_ptr<TYPE> S##TYPE
+#endif // DECLARE_SPTR_T
 
 } // namespace io
 

@@ -8,7 +8,7 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1441212511 d:\cpp\channel\include\channels_config.h
+1441374268 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
@@ -5218,10 +5218,10 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1441223503 d:\cpp\channel\include\channels.hpp
+1441374309 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
-	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
+	"smallobject.hpp"
 	"errors.hpp"
 	"bytebuffer.hpp"
 
@@ -21537,13 +21537,14 @@
 
 1414767002 d:\cpp\boost_1_57_0\boost
 
-1441118466 d:\cpp\channel\include\smallobject.hpp
+1441380384 d:\cpp\channel\include\smallobject.hpp
 	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
-	<boost/move/move.hpp>
+	<boost/atomic.hpp>
+	<boost/shared_ptr.hpp>
 
-1441189791 source:d:\cpp\channel\src\smallobject.cpp
+1441380445 source:d:\cpp\channel\src\smallobject.cpp
 	"prchdrs.h"
 	"smallobject.hpp"
 	"system.hpp"
@@ -26155,23 +26156,25 @@
 
 1404966970 d:\cpp\boost_1_57_0\boost\pool\detail\guard.hpp
 
-1439568308 source:d:\cpp\channel\src\win\system.cpp
+1441369324 source:d:\cpp\channel\src\win\system.cpp
 	"prchdrs.h"
 	"system.hpp"
 	<Windows.h>
 
-1434561705 d:\cpp\channel\include\system.hpp
+1441369330 d:\cpp\channel\include\system.hpp
 	"channels_config.h"
 
-1441306320 source:d:\cpp\channel\src\win\winassynchchannel.cpp
+1441379660 source:d:\cpp\channel\src\win\winassynchchannel.cpp
 	"prchdrs.h"
 	"WinAssynchChannel.hpp"
 	"helpers.hpp"
 	"system.hpp"
 
-1441223281 d:\cpp\channel\include\win\winassynchchannel.hpp
+1441380824 d:\cpp\channel\include\win\winassynchchannel.hpp
 	"channels.hpp"
-	<boost/thread.hpp>
+	<boost/thread/thread.hpp>
+	<boost/enable_shared_from_this.hpp>
+	<boost/bind.hpp>
 
 1414169006 d:\cpp\boost_1_57_0\boost\thread\executors\basic_thread_pool.hpp
 	<boost/thread/detail/config.hpp>

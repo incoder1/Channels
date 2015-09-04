@@ -13,7 +13,7 @@ WinSelector::WinSelector(uint32_t maxThreads):
 	port_(NULL),
 	maxThreads_(maxThreads)
 {
-	port_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, port_, NULL, maxThreads_);
+	port_ = ::CreateIoCompletionPort(INVALID_HANDLE_VALUE, port_, 0, maxThreads_);
 	validate_io(NULL != port_, "System error, can't create selector");
 	if(0 == maxThreads_) {
 		maxThreads_ = sys::available_logical_cpus();
@@ -32,6 +32,14 @@ void WinSelector::bind(::HANDLE handle, ULONG_PTR key) const
 
 WinSelector::~WinSelector() BOOST_NOEXCEPT_OR_NOTHROW
 {
+	for(uint32_t i=0; i < maxThreads_; i++) {
+		uint8_t fk[1];
+		detail::Overlapped *overlapped = new detail::Overlapped(detail::SEND,0,byte_buffer::wrap_array(fk,1));
+		overlapped->hEvent = (HANDLE)-1;
+		// notify handler threads to stop
+		::PostQueuedCompletionStatus(port_, 0, NULL, overlapped);
+	}
+	pool_.join_all();
 	::CloseHandle(port_);
 }
 
@@ -46,16 +54,15 @@ void WinSelector::listen_routine(::HANDLE port) {
 				reinterpret_cast<PULONG_PTR>(&channel),
 				(reinterpret_cast<LPOVERLAPPED*>(&overlapped)),
 				INFINITY);
-		if(!status) {
-			DWORD lastError = ::GetLastError();
-			if(lastError != ERROR_ABANDONED_WAIT_0) {
-				boost::throw_exception(std::runtime_error("System error"+last_error_str(::GetLastError())));
-			} else {
-				// should not happens
+		if(status) {
+			if(overlapped->hEvent == (::HANDLE)-1) {
 				break;
 			}
-			if(overlapped->operation == detail::SEND) {
-				channel->handleSendDone(transfered,overlapped->buffer);
+			DWORD lastError = ::GetLastError();
+			if(lastError != ERROR_ABANDONED_WAIT_0) {
+				if(overlapped->operation == detail::SEND) {
+					channel->handleSendDone(lastError,transfered,overlapped->buffer);
+				}
 			}
 			delete overlapped;
 		}
@@ -64,9 +71,8 @@ void WinSelector::listen_routine(::HANDLE port) {
 
 
 void WinSelector::start() {
-	std::vector<boost::thread> pool(maxThreads_);
 	for(uint32_t i=0; i < maxThreads_; i++) {
-		pool.push_back(boost::thread(boost::bind(&WinSelector::listen_routine, port_)));
+		pool_.create_thread(boost::bind(&WinSelector::listen_routine, port_));
 	}
 }
 
@@ -78,9 +84,9 @@ WinAsynchChannel::WinAsynchChannel(const WinSelector* selector,::HANDLE handle,c
 	selector->bind(handle,reinterpret_cast<ULONG_PTR>(this));
 }
 
-void WinAsynchChannel::handleSendDone(std::size_t transfered, byte_buffer& buf) const
+void WinAsynchChannel::handleSendDone(::DWORD lastError,std::size_t transfered, byte_buffer& buf) const
 {
-	boost::system::error_code ec(::GetLastError(), boost::system::generic_category());
+	boost::system::error_code ec(lastError, boost::system::generic_category());
 	buf.move(transfered);
 	handleSend(ec,transfered,buf);
 }
