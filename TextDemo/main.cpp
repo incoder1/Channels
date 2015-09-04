@@ -95,42 +95,6 @@ void file_sample()
 	}
 }
 
-void handle_asynch_io(const boost::system::error_code& ec, std::size_t transfered,const io::byte_buffer& buffer) {
-	std::cout<<"Transfered="<<transfered<<std::endl;
-}
-
-static std::string last_error_str(DWORD lastError)
-{
-	std::string result;
-	LPVOID lpMsgBuf;
-	static DWORD flags = FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS;
-	DWORD bufLen = ::FormatMessageA(flags,NULL,lastError,
-	                   MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-	                   (LPSTR) &lpMsgBuf, 0, NULL );
-	if (bufLen) {
-		LPCSTR lpMsgStr = (LPCSTR)lpMsgBuf;
-		result.append(lpMsgStr, lpMsgStr+bufLen);
-		::LocalFree(lpMsgBuf);
-	}
-	return result;
-}
-
-void asynh_file_sample() {
-	io::WinSelector selector(0);
-	io::File file("assynh_text.txt");
-	if(file.exist()) {
-		if(!file.remove()) {
-			boost::throw_exception(io::io_exception("Can not delete assynh_text.txt"));
-		}
-	}
-	::HANDLE hFile = ::CreateFile(L"assynh_text.txt", GENERIC_READ | GENERIC_WRITE , 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, 0);
-	if(INVALID_HANDLE_VALUE == hFile) {
-		boost::throw_exception(std::runtime_error(last_error_str(::GetLastError())));
-	}
-	io::WinAsynchChannel winAsynchChannel(&selector,hFile,io::completition_handler_f(handle_asynch_io));
-	selector.start();
-	winAsynchChannel.send(0,io::byte_buffer::wrap_array("Hello world!",12));
-}
 
 
 void buffers_sample()
@@ -211,9 +175,8 @@ int _tmain(int argc, TCHAR *argv[])
 		//charset_console_sample();
 		//pipe_sample();
 		//file_sample();
-		asynh_file_sample();
 		//asynch_file_sample();
-		//network_client_sample();
+		network_client_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}

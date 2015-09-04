@@ -14,7 +14,7 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
-					<Add option="-std=c++11" />
+					<Add option="-std=c++0x" />
 					<Add option="-g" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
@@ -218,12 +218,6 @@
 		</Unit>
 		<Unit filename="src/unix/unixfile.cpp">
 			<Option target="LinuxGCCDebug" />
-		</Unit>
-		<Unit filename="src/win/WinAssynchChannel.cpp">
-			<Option target="DebugGCCWin" />
-			<Option target="ReleaseMinGW32" />
-			<Option target="DebugMinGW32-ICU" />
-			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="src/win/WinChannel.cpp">
 			<Option target="DebugGCCWin" />

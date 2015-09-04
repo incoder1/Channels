@@ -152,23 +152,6 @@ public:
  */
 DECLARE_PTR_T(RandomAccessChannel);
 
-
-typedef boost::function<void(const boost::system::error_code&,std::size_t,byte_buffer&)> completition_handler_f;
-
-class CHANNEL_PUBLIC AsynchChannel {
-	BOOST_MOVABLE_BUT_NOT_COPYABLE(AsynchChannel)
-protected:
-	AsynchChannel(const completition_handler_f& sendHandler);
-	void handleSend(const boost::system::error_code& code,std::size_t transfered,byte_buffer& buffer) const;
-public:
-	virtual void send(uint64_t offset,const byte_buffer& buffer) = 0;
-	virtual ~AsynchChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
-private:
-	completition_handler_f sendHandler_;
-};
-
-DECLARE_PTR_T(AsynchChannel);
-
 /**
 * Transfers data from source read channel to the destination write channel using a memory buffer
 * \param src source channel
