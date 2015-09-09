@@ -17,23 +17,15 @@ namespace io {
 			return result;
 		}
 
-		class NamedPipeServerChannel:public WinChannel
-		{
-			public:
-				NamedPipeServerChannel(::HANDLE hPipe):
-					WinChannel(hPipe,0)
-				{
-					validate<std::runtime_error>(::ConnectNamedPipe(hPipe,NULL),"Can't listen clients");
-				}
-		};
 
-
-		inline NamedPipeServerChannel* create_named_pipe(const char* name, DWORD openMode,std::size_t bufferSize,uint8_t maxInstances)
+		inline WinChannel* create_named_pipe(const char* name, DWORD openMode,std::size_t bufferSize,uint8_t maxInstances)
 		{
 			std::string pipeName = prepare_name(name);
-			::HANDLE hPipe = ::CreateNamedPipeA(pipeName.c_str(), openMode | FILE_FLAG_FIRST_PIPE_INSTANCE, PIPE_TYPE_BYTE | PIPE_WAIT, maxInstances, bufferSize, bufferSize, 0, NULL);
+			DWORD createMode = openMode | FILE_FLAG_FIRST_PIPE_INSTANCE;
+			::HANDLE hPipe = ::CreateNamedPipeA(pipeName.c_str(), createMode, PIPE_TYPE_BYTE | PIPE_WAIT, maxInstances, bufferSize, bufferSize, 0, NULL);
 			validate<std::runtime_error>(INVALID_HANDLE_VALUE != hPipe, "Can not create pipe");
-			return new NamedPipeServerChannel(hPipe);
+			validate<std::runtime_error>(::ConnectNamedPipe(hPipe,NULL),"Can't listen clients");
+			return new WinChannel(hPipe, createMode );
 		}
 
 		inline WinChannel* connect_named_pipe(const char* name, DWORD connectMode) {
@@ -53,7 +45,7 @@ namespace io {
 			return SReadWriteChannel(connect_named_pipe(name,GENERIC_READ | GENERIC_WRITE));
 		}
 
-	}
+	} // namespace ipc
 
-}
+} // nemesapce io
 

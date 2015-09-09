@@ -12,7 +12,7 @@ WinChannel::WinChannel(::HANDLE id, ::DWORD desiredAccess) BOOST_NOEXCEPT_OR_NOT
 	desiredAccess_(desiredAccess)
 {}
 
-WinChannel::~WinChannel()
+WinChannel::~WinChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {
 	::FlushFileBuffers(id_);
 	::CloseHandle(id_);

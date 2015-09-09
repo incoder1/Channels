@@ -5218,7 +5218,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1441382728 d:\cpp\channel\include\channels.hpp
+1441810444 d:\cpp\channel\include\channels.hpp
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
@@ -5564,7 +5564,7 @@
 	<pipe.hpp>
 	<WindowsFile.hpp>
 
-1441382455 d:\cpp\channel\include\pipe.hpp
+1441396233 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -21537,10 +21537,11 @@
 
 1414767002 d:\cpp\boost_1_57_0\boost
 
-1441382538 d:\cpp\channel\include\smallobject.hpp
+1441806602 d:\cpp\channel\include\smallobject.hpp
 	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
+	<boost/atomic/atomic.hpp>
 	<boost/move/move.hpp>
 
 1441382538 source:d:\cpp\channel\src\smallobject.cpp
@@ -26065,21 +26066,17 @@
 	"pipe.hpp"
 	"WindowsFile.hpp"
 
-1429029646 source:d:\cpp\channel\src\win\winnamedpipe.cpp
+1441723782 source:d:\cpp\channel\src\win\winnamedpipe.cpp
 	"prchdrs.h"
-	"helpers.hpp"
+	"WinChannel.hpp"
 	"namedpipe.hpp"
-	"WinFile.hpp"
+	"helpers.hpp"
 
 1432919464 d:\cpp\channel\src\win\helpers.hpp
 	"errors.hpp"
 
-1432919464 d:\cpp\channel\include\namedpipe.hpp
-	<boost/shared_ptr.hpp>
-	<boost/unordered_map.hpp>
-	<boost/function.hpp>
+1441395038 d:\cpp\channel\include\namedpipe.hpp
 	"channels.hpp"
-	"smallobject.hpp"
 
 1441382455 d:\cpp\channel\include\win\winfile.hpp
 	"abstractfile.hpp"
@@ -26863,7 +26860,7 @@
 1441382455 d:\cpp\channel\include\win\winchannel.hpp
 	"channels.hpp"
 
-1441382455 source:d:\cpp\channel\src\win\winchannel.cpp
+1441642591 source:d:\cpp\channel\src\win\winchannel.cpp
 	"prchdrs.h"
 	"WinChannel.hpp"
 	"helpers.hpp"

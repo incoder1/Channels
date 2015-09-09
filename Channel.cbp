@@ -161,9 +161,6 @@
 		<Unit filename="include/unix/unixfile.hpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>
-		<Unit filename="include/unix/unixpipe.cpp">
-			<Option target="LinuxGCCDebug" />
-		</Unit>
 		<Unit filename="include/win/WinChannel.hpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />

@@ -2,9 +2,13 @@
 #define __IO_SMALLOBJECT_HPP_INCLUDED__
 
 #include "channels_config.h"
+
 #include <stdint.h>
 #include <stdexcept>
+
+#include <boost/atomic/atomic.hpp>
 #include <boost/move/move.hpp>
+
 
 namespace io {
 

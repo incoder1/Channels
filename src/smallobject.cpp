@@ -2,7 +2,6 @@
 #include "smallobject.hpp"
 #include "system.hpp"
 
-#include <boost/atomic/atomic.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/pool/pool.hpp>
 #include <boost/thread/thread.hpp>

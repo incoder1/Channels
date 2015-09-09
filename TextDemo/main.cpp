@@ -105,7 +105,7 @@ void buffers_sample()
 	const byte_buffer wrap = byte_buffer::wrap_array(hello, 6); //not wrap the 0 ending
 	byte_buffer deepCopy = byte_buffer::copy_array(world, 8); // copy 0 also
 
-	// resize and add 0-ro sting ending
+	// resize and add 0-ro string ending
 	deepCopy = deepCopy.resize(9);
 	deepCopy.move(8);
 	deepCopy.put(0);

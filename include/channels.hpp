@@ -18,7 +18,6 @@ class CHANNEL_PUBLIC ReadChannel {
 protected:
 	/**
 	 * Default constructor, to be called by implementor
-	 * Never trows
 	 */
 	ReadChannel();
 public:
@@ -88,8 +87,6 @@ class CHANNEL_PUBLIC ReadWriteChannel:public virtual ReadChannel,public virtual 
 protected:
 	ReadWriteChannel();
 public:
-	virtual std::size_t read(byte_buffer& buffer) = 0;
-	virtual std::size_t write(const byte_buffer& buffer) = 0;
 	virtual ~ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
 
