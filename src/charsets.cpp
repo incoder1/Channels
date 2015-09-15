@@ -86,23 +86,26 @@ DECLARE_CHARSET(CP_1258,1258,"CP1258",sizeof(char),false)
 #undef DECLARE_CHARSET // DECLARE_CHARSET
 
 boost::mutex Charsets::_mutex;
-volatile Charsets* volatile Charsets::_instance = NULL;
+boost::atomic<Charsets*> Charsets::_instance(NULL);
 
 void Charsets::release() BOOST_NOEXCEPT_OR_NOTHROW
 {
-	delete _instance;
+	delete _instance.load(boost::memory_order_consume);
+	_instance.store(NULL, boost::memory_order_release);
 }
 
-
-volatile Charsets* volatile Charsets::instance() {
-	if(NULL == _instance) {
-		boost::unique_lock<boost::mutex> lock(_mutex);
-		if(NULL == _instance) {
-			_instance = new volatile Charsets();
-			std::atexit(release);
+Charsets*  Charsets::instance() {
+	Charsets *tmp = _instance.load(boost::memory_order_consume);
+	if (!tmp) {
+		boost::mutex::scoped_lock guard(_mutex);
+		tmp = _instance.load(boost::memory_order_consume);
+		if (!tmp) {
+			tmp = new Charsets();
+			_instance.store(tmp, boost::memory_order_release);
+			std::atexit(&Charsets::release);
 		}
 	}
-	return _instance;
+	return tmp;
 }
 
 Charsets::Charsets() BOOST_NOEXCEPT_OR_NOTHROW

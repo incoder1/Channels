@@ -132,6 +132,7 @@
 			<Add directory="D:/cpp/boost_1_57_0" />
 		</Compiler>
 		<Unit filename="include/abstractfile.hpp" />
+		<Unit filename="include/asynchronous.hpp" />
 		<Unit filename="include/buffers.hpp" />
 		<Unit filename="include/bytebuffer.hpp" />
 		<Unit filename="include/channels.hpp" />
@@ -185,6 +186,7 @@
 			<Option target="DebugMinGW32-ICU" />
 			<Option target="DebugGCCWinStatic" />
 		</Unit>
+		<Unit filename="src/asynchronous.cpp" />
 		<Unit filename="src/bytebuffer.cpp" />
 		<Unit filename="src/channels.cpp" />
 		<Unit filename="src/charsets.cpp" />

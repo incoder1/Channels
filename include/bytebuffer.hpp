@@ -16,6 +16,7 @@ namespace io {
  */
 class CHANNEL_PUBLIC byte_buffer:public basic_buffer<uint8_t> {
 private:
+	typedef basic_buffer<uint8_t> base_type;
 	byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp) BOOST_NOEXCEPT_OR_NOTHROW;
 public:
 	typedef basic_buffer<uint8_t>::iterator iterator;

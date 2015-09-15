@@ -1,25 +1,25 @@
 #ifndef __CHANNELS_HPP_INCLUDED__
 #define __CHANNELS_HPP_INCLUDED__
 
-#include <boost/function.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/move/move.hpp>
 
 #include "errors.hpp"
 #include "bytebuffer.hpp"
+#include "smallobject.hpp"
 
 namespace io {
 
 /**
  * ! \brief Channel which allow reading raw bytes from a source
  */
-class CHANNEL_PUBLIC ReadChannel {
+class CHANNEL_PUBLIC ReadChannel:virtual public object {
 	BOOST_MOVABLE_BUT_NOT_COPYABLE(ReadChannel)
 protected:
 	/**
 	 * Default constructor, to be called by implementor
 	 */
-	ReadChannel();
+	ReadChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 public:
 
 	/**
@@ -47,14 +47,14 @@ DECLARE_PTR_T(ReadChannel);
 /**
  * Channel with allow writing raw bytes into a source
  */
-class CHANNEL_PUBLIC WriteChannel {
+class CHANNEL_PUBLIC WriteChannel:virtual public object {
 	BOOST_MOVABLE_BUT_NOT_COPYABLE(WriteChannel)
 protected:
 	/**
 	* Default constructor to be called by implementor
 	* Never throws
 	*/
-	WriteChannel();
+	WriteChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 public:
 	/**
 	 * Writes buffer date starting from current buffer position, ending current buffer limit.
@@ -82,10 +82,10 @@ DECLARE_PTR_T(WriteChannel);
  * Implementor must build on source which allows reading and writing at the same time,
  * like file or named pipe for example
  */
-class CHANNEL_PUBLIC ReadWriteChannel:public virtual ReadChannel,public virtual WriteChannel {
+class CHANNEL_PUBLIC ReadWriteChannel:public ReadChannel,public WriteChannel {
 	BOOST_MOVABLE_BUT_NOT_COPYABLE(ReadWriteChannel)
 protected:
-	ReadWriteChannel();
+	ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 public:
 	virtual ~ReadWriteChannel() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 };
@@ -101,11 +101,7 @@ DECLARE_PTR_T(ReadWriteChannel);
 class CHANNEL_PUBLIC RandomAccessChannel:public ReadWriteChannel {
 	BOOST_MOVABLE_BUT_NOT_COPYABLE(RandomAccessChannel)
 protected:
-	/**
-	* Default constructor to be called by implementor
-	* Never throws
-	*/
-	RandomAccessChannel();
+	RandomAccessChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 public:
 	/**
 	* Returns current channel position

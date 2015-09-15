@@ -7,7 +7,6 @@ namespace io {
 // WinChannel
 WinChannel::WinChannel(::HANDLE id, ::DWORD desiredAccess) BOOST_NOEXCEPT_OR_NOTHROW:
 	RandomAccessChannel(),
-	object(),
 	id_(id),
 	desiredAccess_(desiredAccess)
 {}

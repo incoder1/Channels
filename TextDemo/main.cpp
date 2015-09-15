@@ -169,11 +169,11 @@ int _tmain(int argc, TCHAR *argv[])
 {
 	try {
 		//buffers_sample();
-		//charset_console_sample();
+		charset_console_sample();
 		//pipe_sample();
 		//file_sample();
 		//asynch_file_sample();
-		network_client_sample();
+		//network_client_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}

@@ -11,7 +11,7 @@ byte_buffer::byte_buffer(boost::shared_array<uint8_t> data, uint8_t* const endp)
 
 byte_buffer::iterator byte_buffer::put(uint8_t e)
 {
-	return basic_buffer<uint8_t>::put(e);
+	return base_type::put(e);
 }
 
 byte_buffer::iterator byte_buffer::put(const byte_buffer& buff)
@@ -30,12 +30,12 @@ byte_buffer::iterator byte_buffer::put(uint8_t* const first, uint8_t* const last
 
 byte_buffer::iterator byte_buffer::put(iterator& first, iterator& last)
 {
-	return basic_buffer<uint8_t>::put(first, last);
+	return base_type::put(first, last);
 }
 
 byte_buffer::iterator byte_buffer::put(const_iterator& first,const_iterator& last)
 {
-	return  basic_buffer<uint8_t>::put(first, last);
+	return  base_type::put(first, last);
 }
 
 byte_buffer byte_buffer::heap_buffer(const std::size_t capacity) throw(std::bad_alloc)
@@ -48,13 +48,13 @@ byte_buffer byte_buffer::heap_buffer(const std::size_t capacity) throw(std::bad_
 
 byte_buffer byte_buffer::resize(std::size_t capacity) throw(std::bad_alloc) {
 	uint8_t* start = new uint8_t[capacity];
-	basic_buffer<uint8_t>::resize(start,start+capacity);
+	base_type::resize(start,start+capacity);
 	return *this;
 }
 
 byte_buffer byte_buffer::clone() throw(std::bad_alloc) {
 	byte_buffer result = byte_buffer::heap_buffer(capacity());
-	basic_buffer<uint8_t>::clone(result);
+	base_type::clone(result);
 	return result;
 }
 

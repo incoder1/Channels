@@ -157,7 +157,7 @@ byte_buffer ICUConverter::convert(const byte_buffer& src)
 }
 
 SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to) {
-	return boost::make_shared<ICUConverter>(from,to);
+	return SConverter(new ICUConverter(from,to));
 }
 
 

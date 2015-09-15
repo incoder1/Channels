@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1441382850 source:d:\cpp\channel\textdemo\main.cpp
+1442342227 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -15,7 +15,7 @@
 	"channels_config.h"
 	"win/WinConsole.hpp"
 
-1441382538 d:\cpp\channel\include\channels_config.h
+1442336566 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
@@ -5301,12 +5301,12 @@
 1441382455 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
-1441382728 d:\cpp\channel\include\channels.hpp
-	<boost/function.hpp>
+1442339100 d:\cpp\channel\include\channels.hpp
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 	"errors.hpp"
 	"bytebuffer.hpp"
+	"smallobject.hpp"
 
 1424707636 d:\cpp\channel\include\smallobjectpool.hpp
 	<channels_config.h>
@@ -6313,7 +6313,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1441396233 d:\cpp\channel\include\pipe.hpp
+1441813572 d:\cpp\channel\include\pipe.hpp
 	<boost/thread/thread.hpp>
 	<boost/function.hpp>
 	<boost/shared_ptr.hpp>
@@ -13095,7 +13095,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1441382925 d:\cpp\channel\include\network.hpp
+1442338546 d:\cpp\channel\include\network.hpp
 	"smallobject.hpp"
 	"channels.hpp"
 	<winsock2.h>
@@ -16816,10 +16816,12 @@
 	<convert.hpp>
 	<channels.hpp>
 
-1441382538 d:\cpp\channel\include\smallobject.hpp
+1442339156 d:\cpp\channel\include\smallobject.hpp
 	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
+	<boost/atomic/atomic.hpp>
+	<boost/intrusive_ptr.hpp>
 	<boost/move/move.hpp>
 
 1441382455 d:\cpp\channel\include\charsets.hpp
@@ -16827,7 +16829,7 @@
 	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
 
-1441117283 d:\cpp\channel\include\iconv_conv.hpp
+1442337501 d:\cpp\channel\include\iconv_conv.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
@@ -16849,7 +16851,7 @@
 	<time.h>
 	<wchar.h>
 
-1441117283 d:\cpp\channel\include\ibm_icu_conv.hpp
+1442337345 d:\cpp\channel\include\ibm_icu_conv.hpp
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
 	<boost/format.hpp>
@@ -17291,7 +17293,7 @@
 
 1429210778 d:\cpp\channel\include\win\winver.h
 
-1441382455 d:\cpp\channel\include\win\winconsole.hpp
+1442337268 d:\cpp\channel\include\win\winconsole.hpp
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<boost/function.hpp>
@@ -18147,7 +18149,7 @@
 
 1414169006 d:\cpp\boost_1_57_0\boost\detail\atomic_redef_macros.hpp
 
-1441382455 d:\cpp\channel\include\win\winchannel.hpp
+1442337219 d:\cpp\channel\include\win\winchannel.hpp
 	"channels.hpp"
 
 1414169006 d:\cpp\boost_1_57_0\boost\thread.hpp

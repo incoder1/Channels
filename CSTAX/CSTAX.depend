@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1440090271 source:d:\cpp\channel\cstax\main.cpp
+1441382454 source:d:\cpp\channel\cstax\main.cpp
 	<cstax.hpp>
 	<file.hpp>
 	<iostream>
@@ -20,7 +20,7 @@
 1382616958 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1440177983 d:\cpp\channel\include\buffers.hpp
+1441382455 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -1910,15 +1910,15 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1431947599 d:\cpp\channel\include\channels_config.h
+1442336566 d:\cpp\channel\include\channels_config.h
 	<boost/config.hpp>
 	<boost/move/move.hpp>
 	<unistd.h>
-	<win/winver.h>
+	"win/winver.h"
 	<windows.h>
 	<stdint.h>
 
-1434384403 d:\cpp\channel\include\bytebuffer.hpp
+1441382455 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -5225,12 +5225,12 @@
 
 1310273157 d:\cpp\boost_1_54_0\boost\exception\detail\clone_current_exception.hpp
 
-1441117283 d:\cpp\channel\include\channels.hpp
-	<boost/function.hpp>
+1442339100 d:\cpp\channel\include\channels.hpp
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 	"errors.hpp"
 	"bytebuffer.hpp"
+	"smallobject.hpp"
 
 1221733859 d:\cpp\boost_1_54_0\boost\unordered_set.hpp
 	<boost/unordered/unordered_set.hpp>
@@ -9080,12 +9080,12 @@
 	<boost/functional/hash_fwd.hpp>
 	<boost/unordered/detail/fwd.hpp>
 
-1440085110 d:\cpp\channel\cstax\include\xmlsource.hpp
+1441382454 d:\cpp\channel\cstax\include\xmlsource.hpp
 	<text.hpp>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
 
-1440089374 source:d:\cpp\channel\cstax\src\xmlsource.cpp
+1441382455 source:d:\cpp\channel\cstax\src\xmlsource.cpp
 	"xmlsource.hpp"
 	<console.hpp>
 
@@ -9103,7 +9103,7 @@
 	<boost/smart_ptr/detail/shared_count.hpp>
 	<boost/smart_ptr/shared_ptr.hpp>
 
-1440168671 d:\cpp\channel\cstax\include\streamreader.hpp
+1441382454 d:\cpp\channel\cstax\include\streamreader.hpp
 	<stdexcept>
 	<vector>
 	<boost/core/ref.hpp>
@@ -9119,7 +9119,7 @@
 1427463296 d:\cpp\channel\cstax\include\element.hpp
 	<boost/move/move.hpp>
 
-1440169774 source:d:\cpp\channel\cstax\src\streamreader.cpp
+1441382454 source:d:\cpp\channel\cstax\src\streamreader.cpp
 	<streamreader.hpp>
 	<iostream>
 
@@ -9133,7 +9133,7 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1438791637 d:\cpp\channel\include\abstractfile.hpp
+1441382455 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 
 1424707636 d:\cpp\channel\include\smallobjectpool.hpp
@@ -16301,13 +16301,15 @@
 1427732061 source:d:\cpp\channel\cstax\src\xmlgrammar.cpp
 	"xmlgrammar.hpp"
 
-1441118466 d:\cpp\channel\include\smallobject.hpp
+1442339156 d:\cpp\channel\include\smallobject.hpp
 	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
+	<boost/atomic/atomic.hpp>
+	<boost/intrusive_ptr.hpp>
 	<boost/move/move.hpp>
 
-1441117283 d:\cpp\channel\include\iconv_conv.hpp
+1442337501 d:\cpp\channel\include\iconv_conv.hpp
 	<stdexcept>
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
@@ -16317,12 +16319,12 @@
 	"charsets.hpp"
 	"smallobject.hpp"
 
-1438791109 d:\cpp\channel\include\charsets.hpp
+1441382455 d:\cpp\channel\include\charsets.hpp
 	<channels_config.h>
 	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
 
-1441117283 d:\cpp\channel\include\ibm_icu_conv.hpp
+1442337345 d:\cpp\channel\include\ibm_icu_conv.hpp
 	<boost/shared_ptr.hpp>
 	<boost/make_shared.hpp>
 	<boost/format.hpp>
@@ -17622,22 +17624,17 @@
 
 1429210778 d:\cpp\channel\include\win\winver.h
 
-1441117283 d:\cpp\channel\include\win\winfile.hpp
-	"winver.h"
-	<windows.h>
+1441382455 d:\cpp\channel\include\win\winfile.hpp
 	"abstractfile.hpp"
-	"smallobject.hpp"
+	"WinChannel.hpp"
 
-1441117283 d:\cpp\channel\include\win\winconsole.hpp
-	"winver.h"
-	<windows.h>
+1442337268 d:\cpp\channel\include\win\winconsole.hpp
 	<boost/noncopyable.hpp>
 	<boost/config.hpp>
 	<boost/function.hpp>
 	<boost/bind.hpp>
-	<tchar.h>
-	<text.hpp>
-	"smallobject.hpp"
+	"../smallobject.hpp"
+	"../text.hpp"
 
 1408654112 d:\cpp\boost_1_57_0\boost\scoped_ptr.hpp
 	<boost/smart_ptr/scoped_ptr.hpp>
@@ -17651,9 +17648,12 @@
 	<memory>
 	<boost/smart_ptr/detail/operator_bool.hpp>
 
-1434375537 d:\cpp\channel\include\unix\unixfile.hpp
+1441382455 d:\cpp\channel\include\unix\unixfile.hpp
 	<sys/types.h>
 	<sys/stat.h>
 	<fcntl.h>
 	"abstractfile.hpp"
+
+1442337219 d:\cpp\channel\include\win\winchannel.hpp
+	"channels.hpp"
 

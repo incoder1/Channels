@@ -7,8 +7,8 @@
 #include <stdexcept>
 
 #include <boost/atomic/atomic.hpp>
+#include <boost/intrusive_ptr.hpp>
 #include <boost/move/move.hpp>
-
 
 namespace io {
 
@@ -33,13 +33,6 @@ public:
 	virtual ~object() BOOST_NOEXCEPT_OR_NOTHROW = 0;
 
 	/**
-	 * Returns hash of object, original function returns \code this pointer value.
-	 * \return object hash
-	 * \throw never throws
-	 */
-	virtual std::size_t hash() const BOOST_NOEXCEPT_OR_NOTHROW;
-
-	/**
 	 * Ovverides system memory allocator to the sorted single segregate storage allocation.
 	 * If implementor size is lager then 128 bytes, default new will be used
 	 * \param size the size of implementor in bytes
@@ -56,7 +49,23 @@ public:
 	 * \throw never throws
 	 */
 	void operator delete(void *ptr,std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW;
+
+private:
+	boost::atomics::atomic_size_t refCount_;
+
+	friend void CHANNEL_PUBLIC intrusive_ptr_add_ref(object *obj);
+	friend void CHANNEL_PUBLIC intrusive_ptr_release(object *obj);
 };
+
+void CHANNEL_PUBLIC intrusive_ptr_add_ref(object* obj);
+
+void CHANNEL_PUBLIC intrusive_ptr_release(object* expr);
+
+
+#ifndef DECLARE_PTR_T
+#	define DECLARE_PTR_T(TYPE) typedef boost::intrusive_ptr<TYPE> S##TYPE
+#endif // DECLARE_SPTR_T
+
 
 } // namespace io
 

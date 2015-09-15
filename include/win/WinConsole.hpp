@@ -22,7 +22,7 @@ typedef struct _CONSOLE_READCONSOLE_CONTROL {
 
 namespace io {
 
-class CHANNEL_PUBLIC ConsoleReadChannel:public virtual ReadChannel, public virtual object
+class CHANNEL_PUBLIC ConsoleReadChannel:public virtual ReadChannel
 {
 	private:
        typedef boost::function<BOOL(HANDLE,LPVOID,DWORD,LPDWORD,PCONSOLE_READCONSOLE_CONTROL)> readf_t;
@@ -36,7 +36,7 @@ class CHANNEL_PUBLIC ConsoleReadChannel:public virtual ReadChannel, public virtu
 		std::size_t charSize_;
 };
 
-class CHANNEL_PUBLIC ConsoleWriteChannel:public virtual WriteChannel, public virtual object {
+class CHANNEL_PUBLIC ConsoleWriteChannel:public WriteChannel {
 private:
 	typedef boost::function<BOOL(HANDLE,const void*,DWORD,PDWORD,PVOID)> writef_t;
 public:

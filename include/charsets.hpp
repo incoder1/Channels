@@ -1,7 +1,9 @@
 #ifndef __IO_CHARSETS_HPP_INCLUDED__
 #define __IO_CHARSETS_HPP_INCLUDED__
 
-#include <channels_config.h>
+#include "channels_config.h"
+
+#include <boost/atomic.hpp>
 #include <boost/thread/mutex.hpp>
 #include <boost/unordered_map.hpp>
 
@@ -83,7 +85,7 @@ private:
 	Charsets() BOOST_NOEXCEPT_OR_NOTHROW;
 	const Charset* find(const char* name) const BOOST_NOEXCEPT_OR_NOTHROW;
 	const Charset* find(std::size_t id) const BOOST_NOEXCEPT_OR_NOTHROW;
-	static volatile Charsets* volatile instance();
+	static Charsets* instance();
 	static void release() BOOST_NOEXCEPT_OR_NOTHROW;
 	BOOST_FORCEINLINE void insert(const std::string& name, const Charset* ptr);
 public:
@@ -121,7 +123,7 @@ public:
 private:
 	ctmap_t nameMap_;
 	static boost::mutex _mutex;
-	static volatile Charsets* volatile _instance;
+	static boost::atomic<Charsets*> _instance;
 };
 
 

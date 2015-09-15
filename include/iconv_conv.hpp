@@ -56,7 +56,7 @@ private:
 	const Charset* to_;
 };
 
-typedef boost::shared_ptr<IconvConverter> SConverter;
+typedef boost::intrusive_ptr<IconvConverter> SConverter;
 
 SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to);
 

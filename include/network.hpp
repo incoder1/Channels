@@ -16,11 +16,9 @@ namespace io {
 namespace net {
 
 	  template<class Socket>
-	  class basic_socket_channel:public virtual ReadWriteChannel, public virtual object {
+	  class basic_socket_channel:public ReadWriteChannel {
 		public:
 			basic_socket_channel(boost::shared_ptr<Socket> socket) BOOST_NOEXCEPT_OR_NOTHROW:
-				ReadWriteChannel(),
-				object(),
 				socket_(socket)
 			{}
 			virtual std::size_t read(byte_buffer& buffer) {

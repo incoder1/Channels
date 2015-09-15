@@ -147,17 +147,13 @@ boost::atomic<ObjectAllocator*> ObjectAllocator::_instance(NULL);
 } // namespace detail
 
 // object
-object::object() BOOST_NOEXCEPT_OR_NOTHROW
+object::object() BOOST_NOEXCEPT_OR_NOTHROW:
+	refCount_(0)
 {}
 
 
 object::~object() BOOST_NOEXCEPT_OR_NOTHROW
 {}
-
-std::size_t object::hash() const BOOST_NOEXCEPT_OR_NOTHROW
-{
-	return reinterpret_cast<std::size_t>(this);
-}
 
 void* object::operator new(std::size_t size) throw(std::bad_alloc)
 {
@@ -166,6 +162,17 @@ void* object::operator new(std::size_t size) throw(std::bad_alloc)
 
 void object::operator delete(void *ptr,std::size_t size) BOOST_NOEXCEPT_OR_NOTHROW {
 	detail::ObjectAllocator::release(ptr,size);
+}
+
+void CHANNEL_PUBLIC intrusive_ptr_add_ref(object* obj) {
+	obj->refCount_.fetch_add(1, boost::memory_order_relaxed);
+}
+
+void CHANNEL_PUBLIC intrusive_ptr_release(object* obj) {
+   if (obj->refCount_.fetch_sub(1, boost::memory_order_release) == 1) {
+      boost::atomic_thread_fence(boost::memory_order_acquire);
+      delete obj;
+   }
 }
 
 } // namespace io

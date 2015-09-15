@@ -75,7 +75,7 @@ private:
 	ICUEngine engine_;
 };
 
-typedef boost::shared_ptr<ICUConverter> SConverter;
+DECLARE_PTR_T(Converter);
 
 SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to);
 

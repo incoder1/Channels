@@ -13,7 +13,7 @@ namespace io {
  * backward compatibility issues.
  * See network.hpp instead.
  */
-class CHANNEL_PUBLIC WinChannel:public virtual RandomAccessChannel,public virtual object {
+class CHANNEL_PUBLIC WinChannel:public virtual RandomAccessChannel {
 private:
 	inline uint64_t seek(int64_t offset, DWORD whence);
 public:

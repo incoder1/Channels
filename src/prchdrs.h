@@ -9,7 +9,6 @@
 #endif // PLATFORM_WINDOWS
 
 #include "errors.hpp"
-#include "smallobject.hpp"
 #include "bytebuffer.hpp"
 #include "channels.hpp"
 

@@ -81,7 +81,7 @@ std::size_t IconvConverter::convert(const byte_buffer& src, byte_buffer& dest) t
 
 SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to)
 {
-	return boost::make_shared<IconvConverter>(from, to);
+	return SConverter(new IconvConverter(from, to));
 }
 
 } // namespace io
