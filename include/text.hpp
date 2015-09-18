@@ -88,6 +88,9 @@ public:
 		dest.flip();
 		return result;
 	}
+	inline std::size_t read(byte_buffer& dest) {
+		return load(dest);
+	}
 	string_t read(std::size_t max) {
 		string_t result(0,max);
 		load(byte_buffer::wrap_array(result.data(),max));

@@ -24,10 +24,10 @@ namespace net {
 			virtual std::size_t read(byte_buffer& buffer) {
 				boost::system::error_code error;
 				size_t result = socket_->read_some(asio_buffer(buffer), boost::ref(error));
-				if( (error != boost::asio::error::eof) && error) {
-					boost::throw_exception(io_exception("Read socket error "+error.message()));
-				} else if(error == boost::asio::error::eof) {
+				if(error == boost::asio::error::eof) {
 					return 0;
+				} else if(error) {
+					boost::throw_exception(io_exception("Read socket error "+error.message()));
 				}
 				buffer.move(result);
 				return result;

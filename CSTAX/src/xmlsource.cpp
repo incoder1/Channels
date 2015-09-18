@@ -10,20 +10,18 @@ using namespace io;
 Source::Source() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
-Source::~Source() BOOST_NOEXCEPT_OR_NOTHROW {
-}
+Source::~Source() BOOST_NOEXCEPT_OR_NOTHROW
+{}
 
 // SimpleSource
 SimpleSource::SimpleSource(io::SReadChannel data,const io::byte_buffer& readBuf) BOOST_NOEXCEPT_OR_NOTHROW:
-	Source(),
 	src_(data),
 	buff_(readBuf)
 {
 }
 
 SimpleSource::~SimpleSource() BOOST_NOEXCEPT_OR_NOTHROW
-{
-}
+{}
 
 std::size_t SimpleSource::readMore() {
 	buff_.clear();
@@ -59,8 +57,7 @@ ConvertingSource::ConvertingSource(io::SReadChannel data,io::SConverter converte
 }
 
 ConvertingSource::~ConvertingSource() BOOST_NOEXCEPT_OR_NOTHROW
-{
-}
+{}
 
 
 std::size_t ConvertingSource::readMore() {
@@ -86,6 +83,5 @@ uint8_t ConvertingSource::nextByte() {
 	convBuff_.move(++pos);
 	return result;
 }
-
 
 } // namespace xml

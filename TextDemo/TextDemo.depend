@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1442342227 source:d:\cpp\channel\textdemo\main.cpp
+1442605038 source:d:\cpp\channel\textdemo\main.cpp
 	<tchar.h>
 	"winver.h"
 	<iostream>
@@ -1423,14 +1423,14 @@
 	"ibm_icu_conv.hpp"
 	"msmlang_conv.hpp"
 
-1441382455 d:\cpp\channel\include\bytebuffer.hpp
+1442343025 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
 	"channels_config.h"
 	"buffers.hpp"
 
-1441382455 d:\cpp\channel\include\buffers.hpp
+1442342773 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -5298,10 +5298,11 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1441382455 d:\cpp\channel\include\abstractfile.hpp
+1442602243 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
+	"asynchronous.hpp"
 
-1442339100 d:\cpp\channel\include\channels.hpp
+1442345194 d:\cpp\channel\include\channels.hpp
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 	"errors.hpp"
@@ -13095,7 +13096,7 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1442338546 d:\cpp\channel\include\network.hpp
+1442605259 d:\cpp\channel\include\network.hpp
 	"smallobject.hpp"
 	"channels.hpp"
 	<winsock2.h>
@@ -16810,7 +16811,7 @@
 	<boost/asio/detail/push_options.hpp>
 	<boost/asio/detail/pop_options.hpp>
 
-1432919464 d:\cpp\channel\include\text.hpp
+1442590442 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<boost/format.hpp>
 	<convert.hpp>
@@ -16824,8 +16825,9 @@
 	<boost/intrusive_ptr.hpp>
 	<boost/move/move.hpp>
 
-1441382455 d:\cpp\channel\include\charsets.hpp
-	<channels_config.h>
+1442343379 d:\cpp\channel\include\charsets.hpp
+	"channels_config.h"
+	<boost/atomic.hpp>
 	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
 
@@ -17301,9 +17303,10 @@
 	"../smallobject.hpp"
 	"../text.hpp"
 
-1441382455 d:\cpp\channel\include\win\winfile.hpp
+1442600523 d:\cpp\channel\include\win\winfile.hpp
 	"abstractfile.hpp"
 	"WinChannel.hpp"
+	"WinAsynchronousHandleChannel.hpp"
 
 1382376325 c:\mingw\msys\1.0\local\include\unicode\utypes.h
 	"unicode/umachine.h"
@@ -18236,4 +18239,15 @@
 	<boost/utility/result_of.hpp>
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
+
+1442602498 d:\cpp\channel\include\asynchronous.hpp
+	"smallobject.hpp"
+	"errors.hpp"
+	"bytebuffer.hpp"
+	<boost/bind.hpp>
+	<boost/asio.hpp>
+	<boost/function.hpp>
+
+1442602520 d:\cpp\channel\include\win\winasynchronoushandlechannel.hpp
+	"asynchronous.hpp"
 

@@ -5218,7 +5218,7 @@
 1385120924 d:\cpp\channel\include\datachannel.hpp
 	<channels.hpp>
 
-1442339100 d:\cpp\channel\include\channels.hpp
+1442345194 d:\cpp\channel\include\channels.hpp
 	<boost/shared_ptr.hpp>
 	<boost/move/move.hpp>
 	"errors.hpp"
@@ -7315,8 +7315,9 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1441382455 d:\cpp\channel\include\abstractfile.hpp
+1442602243 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
+	"asynchronous.hpp"
 
 1426012957 d:\cpp\channel\include\unixfile.hpp
 	<sys/types.h>
@@ -21543,7 +21544,7 @@
 	<boost/intrusive_ptr.hpp>
 	<boost/move/move.hpp>
 
-1442339168 source:d:\cpp\channel\src\smallobject.cpp
+1442343793 source:d:\cpp\channel\src\smallobject.cpp
 	"prchdrs.h"
 	"smallobject.hpp"
 	"system.hpp"
@@ -25912,7 +25913,7 @@
 
 1420654543 /usr/include/bits/fcntl2.h
 
-1432919464 d:\cpp\channel\include\text.hpp
+1442590442 d:\cpp\channel\include\text.hpp
 	<stdexcept>
 	<boost/format.hpp>
 	<convert.hpp>
@@ -26077,9 +26078,10 @@
 1441813572 d:\cpp\channel\include\namedpipe.hpp
 	"channels.hpp"
 
-1441382455 d:\cpp\channel\include\win\winfile.hpp
+1442600523 d:\cpp\channel\include\win\winfile.hpp
 	"abstractfile.hpp"
 	"WinChannel.hpp"
+	"WinAsynchronousHandleChannel.hpp"
 
 1441382455 source:d:\cpp\channel\src\win\winpipe.cpp
 	"prchdrs.h"
@@ -26089,7 +26091,7 @@
 	"pipe.hpp"
 	"WinFile.hpp"
 
-1441382455 source:d:\cpp\channel\src\win\winfile.cpp
+1442602203 source:d:\cpp\channel\src\win\winfile.cpp
 	"prchdrs.h"
 	"WinFile.hpp"
 	"helpers.hpp"
@@ -26949,13 +26951,23 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1441895863 source:d:\cpp\channel\src\asynchronous.cpp
+1442600684 source:d:\cpp\channel\src\asynchronous.cpp
 	"prchdrs.h"
 	"asynchronous.hpp"
 
-1441981995 d:\cpp\channel\include\asynchronous.hpp
+1442602498 d:\cpp\channel\include\asynchronous.hpp
+	"smallobject.hpp"
 	"errors.hpp"
 	"bytebuffer.hpp"
-	<boost/function.hpp>
+	<boost/bind.hpp>
 	<boost/asio.hpp>
+	<boost/function.hpp>
+
+1442602520 d:\cpp\channel\include\win\winasynchronoushandlechannel.hpp
+	"asynchronous.hpp"
+
+1442602648 source:d:\cpp\channel\src\win\winasynchronoushandlechannel.cpp
+	"prchdrs.h"
+	"WinAsynchronousHandleChannel.hpp"
+	"helpers.hpp"
 

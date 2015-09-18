@@ -2,6 +2,7 @@
 #define ABSTRACTFILE_HPP_INCLUDED
 
 #include "channels.hpp"
+#include "asynchronous.hpp"
 
 namespace io {
 
@@ -37,19 +38,30 @@ public:
 
 	/**
 	 * Open blocking read file channel
-	 * \return reference smart pointer on reading file channel
+	 * \return smart pointer on reading file channel
 	 * \throw io_exception in case of failure
 	 */
 	SReadChannel openForRead();
 
 	/**
 	 * Open blocking write file channel
-	 * \return reference smart pointer on writing file channel
+	 * \return smart pointer on writing file channel
 	 * \throw io_exception in case of failure
 	 */
 	SWriteChannel openForWrite();
 
+	/**
+	 * Open blocking mode file channel for the read/write operations with random access
+	 * \return smart pointer on random access file channel
+	 */
 	SRandomAccessChannel openForReadWrite();
+
+	/**
+	 * Open file for the asynchronous non-blocking full access
+	 * \param ios reference on constructed boost asio io_service
+	 * \return smart pointer asynchronous channel
+	 */
+	SAsynchronousChannel openAsynchronous(boost::asio::io_service& ios);
 
 private:
 	const char* path_;

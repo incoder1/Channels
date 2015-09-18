@@ -3,6 +3,7 @@
 
 namespace io {
 
+// Asynchronous Channel
 AsynchronousChannel::AsynchronousChannel()
 {
 }

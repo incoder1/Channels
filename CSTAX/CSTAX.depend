@@ -20,7 +20,7 @@
 1382616958 d:\cpp\channel\include\charbuffers.hpp
 	"buffers.hpp"
 
-1441382455 d:\cpp\channel\include\buffers.hpp
+1442342773 d:\cpp\channel\include\buffers.hpp
 	<stdint.h>
 	<cstddef>
 	<algorithm>
@@ -1918,7 +1918,7 @@
 	<windows.h>
 	<stdint.h>
 
-1441382455 d:\cpp\channel\include\bytebuffer.hpp
+1442343025 d:\cpp\channel\include\bytebuffer.hpp
 	<stdint.h>
 	<vector>
 	<boost/function.hpp>
@@ -9080,12 +9080,11 @@
 	<boost/functional/hash_fwd.hpp>
 	<boost/unordered/detail/fwd.hpp>
 
-1441382454 d:\cpp\channel\cstax\include\xmlsource.hpp
+1442344116 d:\cpp\channel\cstax\include\xmlsource.hpp
+	<smallobject.hpp>
 	<text.hpp>
-	<boost/shared_ptr.hpp>
-	<boost/make_shared.hpp>
 
-1441382455 source:d:\cpp\channel\cstax\src\xmlsource.cpp
+1442344176 source:d:\cpp\channel\cstax\src\xmlsource.cpp
 	"xmlsource.hpp"
 	<console.hpp>
 
@@ -16319,8 +16318,9 @@
 	"charsets.hpp"
 	"smallobject.hpp"
 
-1441382455 d:\cpp\channel\include\charsets.hpp
-	<channels_config.h>
+1442343379 d:\cpp\channel\include\charsets.hpp
+	"channels_config.h"
+	<boost/atomic.hpp>
 	<boost/thread/mutex.hpp>
 	<boost/unordered_map.hpp>
 

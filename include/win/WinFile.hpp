@@ -3,5 +3,6 @@
 
 #include "abstractfile.hpp"
 #include "WinChannel.hpp"
+#include "WinAsynchronousHandleChannel.hpp"
 
 #endif // WINDOWSFILE_HPP_INCLUDED

@@ -68,6 +68,12 @@ SRandomAccessChannel File::openForReadWrite()
 	return SRandomAccessChannel(new WinChannel(hFile, GENERIC_READ | GENERIC_WRITE));
 }
 
+SAsynchronousChannel File::openAsynchronous(boost::asio::io_service& ios) {
+	::HANDLE hFile = ::CreateFile(path_, GENERIC_READ | GENERIC_WRITE , 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_OVERLAPPED, 0);
+	validate_file_handle(hFile);
+	return SAsynchronousChannel(new WinAsynchronousHandleChannel(ios,hFile));
+}
+
 
 } // namespace io
 

@@ -92,6 +92,36 @@ void file_sample()
 	}
 }
 
+void async_write_done(io::SAsynchronousChannel ch,const io::error_code& err,std::size_t written, io::byte_buffer& buff) {
+	if(err) {
+		std::cout<<"IO error"<<err<<std::endl;
+	} else {
+		std::cout<<written<<" bytes written"<<std::endl;
+	}
+}
+
+void async_file_sample() {
+	using namespace io;
+	File file("asynch_result.txt");
+	if(file.exist()) {
+		if(!file.remove()) {
+			boost::throw_exception(io_exception("Can not delete result.txt"));
+		}
+	}
+	file.create();
+
+	boost::asio::io_service ios;
+	boost::thread t(boost::bind(&boost::asio::io_service::run, &ios));
+	//ios.run();
+
+	SAsynchronousChannel ch = file.openAsynchronous(ios);
+
+	const char *msg = "Hello!\nПривет!\nΧαιρετίσματα!\nこんにちは!\n您好!";
+	byte_buffer buff = byte_buffer::copy_array(msg, std::char_traits<char>::length(msg)-1);
+	ch->send(0, buff, boost::move(asynh_handler_f(async_write_done)) );
+	t.join();
+}
+
 
 
 void buffers_sample()
@@ -169,7 +199,8 @@ int _tmain(int argc, TCHAR *argv[])
 {
 	try {
 		//buffers_sample();
-		charset_console_sample();
+		//charset_console_sample();
+		async_file_sample();
 		//pipe_sample();
 		//file_sample();
 		//asynch_file_sample();

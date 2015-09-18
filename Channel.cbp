@@ -138,6 +138,7 @@
 		<Unit filename="include/channels.hpp" />
 		<Unit filename="include/channels_config.h" />
 		<Unit filename="include/charsets.hpp" />
+		<Unit filename="include/compat.hpp" />
 		<Unit filename="include/console.hpp" />
 		<Unit filename="include/convert.hpp" />
 		<Unit filename="include/file.hpp" />
@@ -161,6 +162,12 @@
 		</Unit>
 		<Unit filename="include/unix/unixfile.hpp">
 			<Option target="LinuxGCCDebug" />
+		</Unit>
+		<Unit filename="include/win/WinAsynchronousHandleChannel.hpp">
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="include/win/WinChannel.hpp">
 			<Option target="DebugGCCWin" />
@@ -218,6 +225,12 @@
 		</Unit>
 		<Unit filename="src/unix/unixpipe.cpp">
 			<Option target="LinuxGCCDebug" />
+		</Unit>
+		<Unit filename="src/win/WinAsynchronousHandleChannel.cpp">
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="src/win/WinChannel.cpp">
 			<Option target="DebugGCCWin" />

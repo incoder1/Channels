@@ -1,13 +1,12 @@
 #ifndef XMLSOURCE_HPP_INCLUDED
 #define XMLSOURCE_HPP_INCLUDED
 
+#include <smallobject.hpp>
 #include <text.hpp>
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
 
 namespace xml {
 
-class Source {
+class Source:public virtual io::object {
 protected:
 	Source() BOOST_NOEXCEPT_OR_NOTHROW;
 public:
@@ -47,7 +46,7 @@ class ConvertingSource:public SimpleSource
 		io::byte_buffer convBuff_;
 };
 
-typedef boost::shared_ptr<Source> SSource;
+DECLARE_PTR_T(Source);
 
 inline SSource make_source(io::SReadChannel data,std::size_t readBufferSize)
 {

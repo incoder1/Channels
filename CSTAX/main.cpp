@@ -1,7 +1,5 @@
 #include <cstax.hpp>
 #include <file.hpp>
-
-#include <iostream>
 #include <console.hpp>
 
 int main(int argc,const char **argv)
@@ -13,7 +11,8 @@ int main(int argc,const char **argv)
 
 	io::File file("test.xml");
 	if(!file.exist()) {
-		std::cerr<<"no input file"<<std::endl;
+		io::writer err(console.err());
+		err.writeln("no input file");
 		return -1;
 	}
 	using namespace xml;
@@ -24,12 +23,12 @@ int main(int argc,const char **argv)
 		switch(event->type()) {
 			case START_DOCUMENT: {
 				auto dev = up_cast<SDocumentEvent>(event);
-				std::cout<<"Version: "<<dev->version()<<" Encoding: "<<dev->encoding()<<" Standalone:"<<dev->standalone()<<std::endl;
+				out.writeln(boost::format("Version:%s Encoding:%s Standalone:%i") % dev->version() % dev->encoding() % dev->standalone());
 			}
 			break;
 		case PROCESSING_INSTRUCTION: {
 			auto piev = up_cast<SProcessingInstructionEvent>(event);
-			std::cout<<"Type: "<<piev->instType()<<" Href: "<<piev->href()<<std::endl;
+			out.writeln(boost::format("Type:%s Href:%s") % piev->instType() % piev->href());
 			}
 			break;
 		}
