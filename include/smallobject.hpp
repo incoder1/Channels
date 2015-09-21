@@ -61,9 +61,17 @@ void CHANNEL_PUBLIC intrusive_ptr_add_ref(object* obj);
 
 void CHANNEL_PUBLIC intrusive_ptr_release(object* expr);
 
+namespace detail {
+
+template <class _object_type, template<class> class _smart_ptr_t = boost::intrusive_ptr >
+struct smart_ptr_type {
+	typedef _smart_ptr_t<_object_type> smart_ptr_t;
+};
+
+} // namespace detail
 
 #ifndef DECLARE_PTR_T
-#	define DECLARE_PTR_T(TYPE) typedef boost::intrusive_ptr<TYPE> S##TYPE
+#	define DECLARE_PTR_T(TYPE) typedef detail::smart_ptr_type<TYPE>::smart_ptr_t S##TYPE
 #endif // DECLARE_SPTR_T
 
 

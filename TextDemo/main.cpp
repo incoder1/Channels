@@ -23,17 +23,18 @@
 #include <iostream>
 
 #include <console.hpp>
-#include <text.hpp>
 #include <file.hpp>
-#include <pipe.hpp>
 #include <network.hpp>
+#include <pipe.hpp>
+#include <system.hpp>
+#include <text.hpp>
 
 void charset_console_sample() throw(io::io_exception)
 {
 	io::Console con(true);
 	io::SConverter conv = io::make_converter(io::Charsets::utf8(),con.charset());
 	io::cvt_writer out(con.out(),conv);
-	out.writeln(boost::format("Hello! Привет! Χαιρετίσματα! %i") % 73);
+	out.writeln(io::cvt_writer::format("Hello! Привет! Χαιρετίσματα! %i") % 73);
 }
 
 void pipe_write_routine(io::SWriteChannel sink)
@@ -92,11 +93,30 @@ void file_sample()
 	}
 }
 
-void async_write_done(io::SAsynchronousChannel ch,const io::error_code& err,std::size_t written, io::byte_buffer& buff) {
-	if(err) {
-		std::cout<<"IO error"<<err<<std::endl;
+void async_read_done(io::SAsyncChannel ch,const io::error_code& err,std::size_t read, io::byte_buffer& buff)
+{
+	io::Console con(false);
+	con.setCharset(io::Charsets::utf8());
+	if(!err) {
+		buff.flip();
+		io::writer out(con.out());
+		out.flush(buff);
 	} else {
-		std::cout<<written<<" bytes written"<<std::endl;
+		io::writer lerr(con.err());
+		lerr.writeln(err.message());
+	}
+}
+
+void async_write_done(io::SAsyncChannel ch,const io::error_code& err,std::size_t written, io::byte_buffer& buff) {
+	io::Console con(false);
+	con.setCharset(io::Charsets::utf8());
+	if(!err) {
+		io::writer linfo(con.out());
+		linfo.writeln(boost::format("%i bytes written") % written);
+		ch->receive(0, written, io::AsyncChannel::handler_f(async_read_done) );
+	} else {
+		io::writer lerr(con.err());
+		lerr.writeln(err.message());
 	}
 }
 
@@ -111,15 +131,18 @@ void async_file_sample() {
 	file.create();
 
 	boost::asio::io_service ios;
-	boost::thread t(boost::bind(&boost::asio::io_service::run, &ios));
-	//ios.run();
+    //boost::asio::io_service::work work(ios);
 
-	SAsynchronousChannel ch = file.openAsynchronous(ios);
+	SAsyncChannel ch = file.openAsynchronous(ios);
 
-	const char *msg = "Hello!\nПривет!\nΧαιρετίσματα!\nこんにちは!\n您好!";
-	byte_buffer buff = byte_buffer::copy_array(msg, std::char_traits<char>::length(msg)-1);
-	ch->send(0, buff, boost::move(asynh_handler_f(async_write_done)) );
-	t.join();
+	char msg[75] = "   Hello!\nПривет!\nΧαιρετίσματα!\nこんにちは!\n您好!";
+
+	msg[0]=0xEF; msg[1]=0xBB; msg[2] = 0xBF;
+	byte_buffer buff = byte_buffer::copy_array(msg,74);
+	ch->send(0, buff, AsyncChannel::handler_f(async_write_done) );
+
+	boost::thread listenThread(boost::bind(&boost::asio::io_service::run, &ios));
+	listenThread.join();
 }
 
 

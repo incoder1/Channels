@@ -7315,7 +7315,7 @@
 	"abstractfile.hpp"
 	"smallobject.hpp"
 
-1442602243 d:\cpp\channel\include\abstractfile.hpp
+1442857447 d:\cpp\channel\include\abstractfile.hpp
 	"channels.hpp"
 	"asynchronous.hpp"
 
@@ -21536,7 +21536,7 @@
 
 1414767002 d:\cpp\boost_1_57_0\boost
 
-1442339156 d:\cpp\channel\include\smallobject.hpp
+1442848338 d:\cpp\channel\include\smallobject.hpp
 	"channels_config.h"
 	<stdint.h>
 	<stdexcept>
@@ -26091,7 +26091,7 @@
 	"pipe.hpp"
 	"WinFile.hpp"
 
-1442602203 source:d:\cpp\channel\src\win\winfile.cpp
+1442854649 source:d:\cpp\channel\src\win\winfile.cpp
 	"prchdrs.h"
 	"WinFile.hpp"
 	"helpers.hpp"
@@ -26951,22 +26951,23 @@
 	<boost/config/abi_prefix.hpp>
 	<boost/config/abi_suffix.hpp>
 
-1442600684 source:d:\cpp\channel\src\asynchronous.cpp
+1442857333 source:d:\cpp\channel\src\asynchronous.cpp
 	"prchdrs.h"
 	"asynchronous.hpp"
 
-1442602498 d:\cpp\channel\include\asynchronous.hpp
+1442857311 d:\cpp\channel\include\asynchronous.hpp
 	"smallobject.hpp"
 	"errors.hpp"
 	"bytebuffer.hpp"
+	<boost/move/move.hpp>
 	<boost/bind.hpp>
 	<boost/asio.hpp>
 	<boost/function.hpp>
 
-1442602520 d:\cpp\channel\include\win\winasynchronoushandlechannel.hpp
+1442857177 d:\cpp\channel\include\win\winasynchronoushandlechannel.hpp
 	"asynchronous.hpp"
 
-1442602648 source:d:\cpp\channel\src\win\winasynchronoushandlechannel.cpp
+1442857437 source:d:\cpp\channel\src\win\winasynchronoushandlechannel.cpp
 	"prchdrs.h"
 	"WinAsynchronousHandleChannel.hpp"
 	"helpers.hpp"

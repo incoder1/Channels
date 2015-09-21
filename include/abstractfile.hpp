@@ -61,7 +61,7 @@ public:
 	 * \param ios reference on constructed boost asio io_service
 	 * \return smart pointer asynchronous channel
 	 */
-	SAsynchronousChannel openAsynchronous(boost::asio::io_service& ios);
+	SAsyncChannel openAsynchronous(boost::asio::io_service& ios);
 
 private:
 	const char* path_;

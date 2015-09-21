@@ -3,12 +3,12 @@
 
 namespace io {
 
-// Asynchronous Channel
-AsynchronousChannel::AsynchronousChannel()
+// AsyncChannel
+AsyncChannel::AsyncChannel()
 {
 }
 
-AsynchronousChannel::~AsynchronousChannel() BOOST_NOEXCEPT_OR_NOTHROW
+AsyncChannel::~AsyncChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {}
 
 } // namesapce io
