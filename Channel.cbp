@@ -14,6 +14,7 @@
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>
+					<Add option="-Wnon-virtual-dtor" />
 					<Add option="-std=c++0x" />
 					<Add option="-g" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
@@ -89,10 +90,21 @@
 				<Option compiler="gcc" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
+				<Option projectCompilerOptionsRelation="1" />
 				<Compiler>
+					<Add option="-Wnon-virtual-dtor" />
+					<Add option="-std=c++11" />
+					<Add option="-pg" />
+					<Add option="-g" />
+					<Add option="-fexceptions" />
+					<Add option="-fPIC" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
+					<Add directory="include/unix" />
 				</Compiler>
+				<Linker>
+					<Add option="-pg" />
+				</Linker>
 			</Target>
 			<Target title="DebugGCCWinStatic">
 				<Option platforms="Windows;" />
@@ -157,7 +169,10 @@
 		<Unit filename="include/smallobject.hpp" />
 		<Unit filename="include/system.hpp" />
 		<Unit filename="include/text.hpp" />
-		<Unit filename="include/unix/unixconsole.h">
+		<Unit filename="include/unix/unixasynchronousdevicechannel.hpp">
+			<Option target="LinuxGCCDebug" />
+		</Unit>
+		<Unit filename="include/unix/unixconsole.hpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>
 		<Unit filename="include/unix/unixfile.hpp">
@@ -217,6 +232,12 @@
 			<Option compiler="msvc10" use="0" buildCommand="$compiler /nologo $options $includes /c $file /Yc$objects_output_dir\prchrd.pch" />
 		</Unit>
 		<Unit filename="src/smallobject.cpp" />
+		<Unit filename="src/unix/helpers.hpp">
+			<Option target="LinuxGCCDebug" />
+		</Unit>
+		<Unit filename="src/unix/unixasynchronousdevicechannel.cpp">
+			<Option target="LinuxGCCDebug" />
+		</Unit>
 		<Unit filename="src/unix/unixconsole.cpp">
 			<Option target="LinuxGCCDebug" />
 		</Unit>

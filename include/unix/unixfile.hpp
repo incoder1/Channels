@@ -6,15 +6,16 @@
 #include <fcntl.h>
 
 #include "abstractfile.hpp"
+#include "unixasynchronousdevicechannel.hpp"
 
 namespace io {
 
 /**
  * ! \brief Unix depended blocking file Channel implementation.
  */
-class CHANNEL_PUBLIC FileChannel:public virtual ReadWriteChannel, public virtual object {
+class CHANNEL_PUBLIC FileChannel:public RandomAccessChannel {
 public:
-	FileChannel(int file) BOOST_NOEXCEPT_OR_NOTHROW;
+	FileChannel(int file);
 	virtual ~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW;
 	virtual std::size_t read(byte_buffer& buffer) ;
 	virtual std::size_t write(const byte_buffer& buffer) ;

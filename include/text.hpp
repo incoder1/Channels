@@ -10,12 +10,11 @@
 
 namespace io {
 
-
-#ifdef PLATFORM_WINDOWS
-
 template<typename _char_t>
 struct endl
 {};
+
+#ifdef PLATFORM_WINDOWS
 
 template<>
 struct endl<char> {
@@ -46,6 +45,7 @@ struct endl<char32_t> {
 };
 #	endif // HAS_CHAR32_T
 #else
+
 template<>
 struct endl<char> {
 	static const char* id() {

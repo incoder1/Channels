@@ -1,12 +1,11 @@
 #include "prchdrs.h"
-#include "unixpipe.hpp"
+#include "pipe.hpp"
 #include "unixfile.hpp"
 #include "helpers.hpp"
 
 namespace io {
 
-class UnixPipe:public Pipe
-{
+class UnixPipe: public Pipe {
 	public:
 		UnixPipe(PipeSinkRoutine routine,int sink,int source);
 		virtual SReadChannel source() const;

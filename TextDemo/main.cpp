@@ -1,19 +1,22 @@
 // In case of Microsoft VC recode this file using UTF-16LE
 // to enable Unicode string literals in cl
-#ifndef UNICODE
-#	define UNICODE
-#endif
-#ifndef _UNICODE
-#	define _UNICODE
-#endif
-
-#if _MSC_VER
-#	include <tchar.h>
-#endif
 
 #ifdef _WIN32
 #	include "winver.h"
+#   ifndef UNICODE
+#	    define UNICODE
+#   endif
+#   ifndef _UNICODE
+#	    define _UNICODE
+#   endif
+#	include <tchar.h>
+#else
+# define TEXT(str) str
 #endif // _WIN32
+
+#ifdef BOOST_NO_EXCEPTIONS
+# undef BOOST_NO_EXCEPTIONS
+#endif
 
 #if __cplusplus >= 201103L
 #	define HAS_CPP11
@@ -29,21 +32,29 @@
 #include <system.hpp>
 #include <text.hpp>
 
-void charset_console_sample() throw(io::io_exception)
+void charset_console_sample()
 {
 	io::Console con(true);
+#ifdef PLATFORM_WINDOWS
 	io::SConverter conv = io::make_converter(io::Charsets::utf8(),con.charset());
 	io::cvt_writer out(con.out(),conv);
-	out.writeln(io::cvt_writer::format("Hello! Привет! Χαιρετίσματα! %i") % 73);
+#else
+    io::writer out(con.out());
+#endif
+    out.writeln(io::cvt_writer::format("Hello! Привет! Χαιρετίσματα! %i") % 73);
 }
 
 void pipe_write_routine(io::SWriteChannel sink)
 {
+#ifdef UNICODE
 	io::wwriter pout(sink);
-	pout.write(L"Hello from pipe!\n");
-	pout.write(L"Привет из канала!\n");
-	pout.write(L"Χαιρετίσματα από το κανάλι!\n");
-	pout.write(L"Grüße aus dem Kanal!\n");
+#else
+    io::writer pout(sink);
+#endif // UNICODE
+	pout.write(TEXT("Hello from pipe!\n"));
+	pout.write(TEXT("Привет из канала!\n"));
+	pout.write(TEXT("Χαιρετίσματα από το κανάλι!\n"));
+	pout.write(TEXT("Grüße aus dem Kanal!\n"));
 }
 
 
@@ -72,7 +83,9 @@ void file_sample()
 			boost::throw_exception(io_exception("Can not delete result.txt"));
 		}
 	}
-	file.create();
+	if(!file.create()) {
+        boost::throw_exception(io_exception("Can not create file"));
+	}
 	{
 		SWriteChannel fileChannel = file.openForWrite();
 		writer out(fileChannel);
@@ -223,9 +236,9 @@ int _tmain(int argc, TCHAR *argv[])
 	try {
 		//buffers_sample();
 		//charset_console_sample();
-		async_file_sample();
+		//async_file_sample();
 		//pipe_sample();
-		//file_sample();
+		file_sample();
 		//asynch_file_sample();
 		//network_client_sample();
 	} catch(std::exception &e) {

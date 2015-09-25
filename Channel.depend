@@ -26972,3 +26972,184 @@
 	"WinAsynchronousHandleChannel.hpp"
 	"helpers.hpp"
 
+1443110332 source:/home/developer/cpp/Channels/src/prchdrs.h
+	"channels_config.h"
+	"winver.h"
+	"errors.hpp"
+	"bytebuffer.hpp"
+	"channels.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/channels_config.h
+	<boost/config.hpp>
+	<boost/move/move.hpp>
+	<unistd.h>
+	"win/winver.h"
+	<windows.h>
+	<stdint.h>
+
+1443110332 /home/developer/cpp/Channels/include/win/winver.h
+
+1443110332 /home/developer/cpp/Channels/include/errors.hpp
+	<channels_config.h>
+	<stdexcept>
+	<string>
+	<boost/config.hpp>
+	<boost/system/error_code.hpp>
+
+1443110332 /home/developer/cpp/Channels/include/bytebuffer.hpp
+	<stdint.h>
+	<vector>
+	<boost/function.hpp>
+	"channels_config.h"
+	"buffers.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/buffers.hpp
+	<stdint.h>
+	<cstddef>
+	<algorithm>
+	<boost/limits.hpp>
+	<boost/utility.hpp>
+	<boost/shared_array.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/function.hpp>
+	<boost/array.hpp>
+
+1443110332 /home/developer/cpp/Channels/include/channels.hpp
+	<boost/shared_ptr.hpp>
+	<boost/move/move.hpp>
+	"errors.hpp"
+	"bytebuffer.hpp"
+	"smallobject.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/smallobject.hpp
+	"channels_config.h"
+	<stdint.h>
+	<stdexcept>
+	<boost/atomic/atomic.hpp>
+	<boost/intrusive_ptr.hpp>
+	<boost/move/move.hpp>
+
+1443110332 source:/home/developer/cpp/Channels/src/prchdrs.cpp
+	"prchdrs.h"
+
+1443110332 /home/developer/cpp/Channels/src/prchdrs.h
+	"channels_config.h"
+	"winver.h"
+	"errors.hpp"
+	"bytebuffer.hpp"
+	"channels.hpp"
+
+1443110332 source:/home/developer/cpp/Channels/src/asynchronous.cpp
+	"prchdrs.h"
+	"asynchronous.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/asynchronous.hpp
+	"smallobject.hpp"
+	"errors.hpp"
+	"bytebuffer.hpp"
+	<boost/move/move.hpp>
+	<boost/bind.hpp>
+	<boost/asio.hpp>
+	<boost/function.hpp>
+
+1443110332 source:/home/developer/cpp/Channels/src/bytebuffer.cpp
+	"prchdrs.h"
+	"bytebuffer.hpp"
+
+1443110332 source:/home/developer/cpp/Channels/src/channels.cpp
+	"prchdrs.h"
+	<channels.hpp>
+
+1443110332 source:/home/developer/cpp/Channels/src/charsets.cpp
+	"charsets.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/charsets.hpp
+	"channels_config.h"
+	<boost/atomic.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/unordered_map.hpp>
+
+1443110332 source:/home/developer/cpp/Channels/src/iconv_conv.cpp
+	"prchdrs.h"
+	"iconv_conv.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/iconv_conv.hpp
+	<stdexcept>
+	<boost/shared_ptr.hpp>
+	<boost/make_shared.hpp>
+	<cerrno>
+	<iconv.h>
+	"bytebuffer.hpp"
+	"charsets.hpp"
+	"smallobject.hpp"
+
+1443110332 source:/home/developer/cpp/Channels/src/pipe.cpp
+	"prchdrs.h"
+	<pipe.hpp>
+
+1443110332 /home/developer/cpp/Channels/include/pipe.hpp
+	<boost/thread/thread.hpp>
+	<boost/function.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/bind.hpp>
+	"channels.hpp"
+
+1443110332 source:/home/developer/cpp/Channels/src/smallobject.cpp
+	"prchdrs.h"
+	"smallobject.hpp"
+	"system.hpp"
+	<boost/thread/mutex.hpp>
+	<boost/pool/pool.hpp>
+	<boost/thread/thread.hpp>
+
+1443110332 /home/developer/cpp/Channels/include/system.hpp
+	"channels_config.h"
+
+1443180437 source:/home/developer/cpp/Channels/src/unix/unixconsole.cpp
+	"prchdrs.h"
+	"unixconsole.hpp"
+	"helpers.hpp"
+
+1443113026 /home/developer/cpp/Channels/include/unix/unixconsole.h
+	<cstdio>
+	"channels.hpp"
+
+1443183004 /home/developer/cpp/Channels/src/unix/helpers.hpp
+	"errors.hpp"
+
+1443177521 source:/home/developer/cpp/Channels/src/unix/unixfile.cpp
+	"prchdrs.h"
+	"unixfile.hpp"
+	"helpers.hpp"
+
+1443183590 /home/developer/cpp/Channels/include/unix/unixfile.hpp
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	"abstractfile.hpp"
+	"unixasynchronousdevicechannel.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/abstractfile.hpp
+	"channels.hpp"
+	"asynchronous.hpp"
+
+1443172966 source:/home/developer/cpp/Channels/src/unix/unixpipe.cpp
+	"prchdrs.h"
+	"pipe.hpp"
+	"unixfile.hpp"
+	"helpers.hpp"
+
+1443181623 /home/developer/cpp/Channels/include/unix/unixconsole.hpp
+	<langinfo.h>
+	<locale.h>
+	<cstdlib>
+	"channels.hpp"
+	"charsets.hpp"
+
+1443177501 source:/home/developer/cpp/Channels/src/unix/unixasynchronousdevicechannel.cpp
+	"prchdrs.h"
+	"unixasynchronousdevicechannel.hpp"
+
+1443177472 /home/developer/cpp/Channels/include/unix/unixasynchronousdevicechannel.hpp
+	"asynchronous.hpp"
+

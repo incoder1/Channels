@@ -12,12 +12,16 @@ File::File(const char* path) BOOST_NOEXCEPT_OR_NOTHROW:
 
 bool File::create() const BOOST_NOEXCEPT_OR_NOTHROW
 {
-	return -1 != ::creat(path_, O_CREAT);
+	int fd = ::creat(path_, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP );
+	if(fd) {
+        fd = ::close(fd);
+	}
+	return fd == 0;
 }
 
 bool File::remove() const BOOST_NOEXCEPT_OR_NOTHROW
 {
-	return -1 != ::remove(path_);
+	return ::remove(path_) >= 0;
 }
 
 bool File::exist() const BOOST_NOEXCEPT_OR_NOTHROW
@@ -28,14 +32,14 @@ bool File::exist() const BOOST_NOEXCEPT_OR_NOTHROW
 
 SReadChannel File::openForRead()
 {
-	int fd = ::open(path_, O_APPEND | O_SYNC, O_RDONLY);
+	int fd = ::open(path_, O_EXCL | O_APPEND | O_SYNC | O_LARGEFILE, O_RDONLY);
 	validate_io(fd, "Can not open file");
 	return SReadChannel(new FileChannel(fd));
 }
 
 SWriteChannel File::openForWrite()
 {
-	int fd = ::open(path_, O_APPEND | O_SYNC, O_WRONLY);
+	int fd = ::open(path_, O_EXCL | O_APPEND | O_SYNC | O_LARGEFILE, O_WRONLY);
 	validate_io(fd, "Can not open file");
 	return SWriteChannel(new FileChannel(fd));
 }
@@ -47,14 +51,23 @@ SRandomAccessChannel File::openForReadWrite()
 	return SRandomAccessChannel(new FileChannel(fd));
 }
 
+
+SAsyncChannel File::openAsynchronous(boost::asio::io_service& ios) {
+    int fd = ::open(path_, O_DIRECT | O_NONBLOCK, O_RDWR);
+    validate_io(fd, "Can not open file for asynchronous io");
+	return SAsyncChannel(new UnixAsynchronousDeviceChannel(ios, fd));
+}
+
 // FileChannel
-FileChannel::FileChannel(int file) BOOST_NOEXCEPT_OR_NOTHROW:
+FileChannel::FileChannel(int file):
 	file_(file)
-{}
+{
+    assert(file);
+}
 
 FileChannel::~FileChannel() BOOST_NOEXCEPT_OR_NOTHROW
 {
-	assert(::close(file_));
+	assert(0 == ::close(file_));
 }
 
 std::size_t FileChannel::read(byte_buffer& buffer)

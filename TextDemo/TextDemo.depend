@@ -18256,3 +18256,182 @@
 1441382455 d:\cpp\channel\include\system.hpp
 	"channels_config.h"
 
+1443183990 source:/home/developer/cpp/Channels/TextDemo/main.cpp
+	"winver.h"
+	<tchar.h>
+	<iostream>
+	<console.hpp>
+	<file.hpp>
+	<network.hpp>
+	<pipe.hpp>
+	<system.hpp>
+	<text.hpp>
+
+1443110332 /home/developer/cpp/Channels/TextDemo/winver.h
+
+1443178087 /home/developer/cpp/Channels/include/console.hpp
+	"channels_config.h"
+	"win/WinConsole.hpp"
+	"unix/unixconsole.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/channels_config.h
+	<boost/config.hpp>
+	<boost/move/move.hpp>
+	<unistd.h>
+	"win/winver.h"
+	<windows.h>
+	<stdint.h>
+
+1443110332 /home/developer/cpp/Channels/include/win/winver.h
+
+1443110332 /home/developer/cpp/Channels/include/win/WinConsole.hpp
+	<boost/noncopyable.hpp>
+	<boost/config.hpp>
+	<boost/function.hpp>
+	<boost/bind.hpp>
+	"../smallobject.hpp"
+	"../text.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/smallobject.hpp
+	"channels_config.h"
+	<stdint.h>
+	<stdexcept>
+	<boost/atomic/atomic.hpp>
+	<boost/intrusive_ptr.hpp>
+	<boost/move/move.hpp>
+
+1443178021 /home/developer/cpp/Channels/include/text.hpp
+	<stdexcept>
+	<boost/format.hpp>
+	<convert.hpp>
+	<channels.hpp>
+
+1443110332 /home/developer/cpp/Channels/include/convert.hpp
+	"iconv_conv.hpp"
+	"ibm_icu_conv.hpp"
+	"msmlang_conv.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/iconv_conv.hpp
+	<stdexcept>
+	<boost/shared_ptr.hpp>
+	<boost/make_shared.hpp>
+	<cerrno>
+	<iconv.h>
+	"bytebuffer.hpp"
+	"charsets.hpp"
+	"smallobject.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/bytebuffer.hpp
+	<stdint.h>
+	<vector>
+	<boost/function.hpp>
+	"channels_config.h"
+	"buffers.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/buffers.hpp
+	<stdint.h>
+	<cstddef>
+	<algorithm>
+	<boost/limits.hpp>
+	<boost/utility.hpp>
+	<boost/shared_array.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/function.hpp>
+	<boost/array.hpp>
+
+1443110332 /home/developer/cpp/Channels/include/charsets.hpp
+	"channels_config.h"
+	<boost/atomic.hpp>
+	<boost/thread/mutex.hpp>
+	<boost/unordered_map.hpp>
+
+1443110332 /home/developer/cpp/Channels/include/ibm_icu_conv.hpp
+	<boost/shared_ptr.hpp>
+	<boost/make_shared.hpp>
+	<boost/format.hpp>
+	<unicode/utypes.h>
+	<unicode/ucnv.h>
+	<unicode/ustring.h>
+	<unicode/uchar.h>
+	<unicode/uloc.h>
+	<unicode/unistr.h>
+	"charsets.hpp"
+	"bytebuffer.hpp"
+	"smallobject.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/channels.hpp
+	<boost/shared_ptr.hpp>
+	<boost/move/move.hpp>
+	"errors.hpp"
+	"bytebuffer.hpp"
+	"smallobject.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/errors.hpp
+	<channels_config.h>
+	<stdexcept>
+	<string>
+	<boost/config.hpp>
+	<boost/system/error_code.hpp>
+
+1443181623 /home/developer/cpp/Channels/include/unix/unixconsole.hpp
+	<langinfo.h>
+	<locale.h>
+	<cstdlib>
+	"channels.hpp"
+	"charsets.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/file.hpp
+	"channels_config.h"
+	"win/WinFile.hpp"
+	"unix/unixfile.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/win/WinFile.hpp
+	"abstractfile.hpp"
+	"WinChannel.hpp"
+	"WinAsynchronousHandleChannel.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/abstractfile.hpp
+	"channels.hpp"
+	"asynchronous.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/asynchronous.hpp
+	"smallobject.hpp"
+	"errors.hpp"
+	"bytebuffer.hpp"
+	<boost/move/move.hpp>
+	<boost/bind.hpp>
+	<boost/asio.hpp>
+	<boost/function.hpp>
+
+1443110332 /home/developer/cpp/Channels/include/win/WinChannel.hpp
+	"channels.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/win/WinAsynchronousHandleChannel.hpp
+	"asynchronous.hpp"
+
+1443183590 /home/developer/cpp/Channels/include/unix/unixfile.hpp
+	<sys/types.h>
+	<sys/stat.h>
+	<fcntl.h>
+	"abstractfile.hpp"
+	"unixasynchronousdevicechannel.hpp"
+
+1443177472 /home/developer/cpp/Channels/include/unix/unixasynchronousdevicechannel.hpp
+	"asynchronous.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/network.hpp
+	"smallobject.hpp"
+	"channels.hpp"
+	<winsock2.h>
+	<boost/asio.hpp>
+
+1443110332 /home/developer/cpp/Channels/include/pipe.hpp
+	<boost/thread/thread.hpp>
+	<boost/function.hpp>
+	<boost/shared_ptr.hpp>
+	<boost/bind.hpp>
+	"channels.hpp"
+
+1443110332 /home/developer/cpp/Channels/include/system.hpp
+	"channels_config.h"
+

@@ -175,6 +175,32 @@
 					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/lib64" />
 				</Linker>
 			</Target>
+			<Target title="LinuxDebug">
+				<Option platforms="Unix;" />
+				<Option output="bin/LinuxDebug/TextDemo" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/LinuxDebug/" />
+				<Option additional_output="../bin/ReleaseMSVC10-ICU/Channel.lib;" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectCompilerOptionsRelation="1" />
+				<Compiler>
+					<Add option="-Winline" />
+					<Add option="-Wunreachable-code" />
+					<Add option="-std=c++11" />
+					<Add option="-pg" />
+					<Add option="-g" />
+					<Add option="-fexceptions" />
+					<Add option="-DCONV_ENGINE_ICONV" />
+					<Add option="-DDEBUG" />
+				</Compiler>
+				<Linker>
+					<Add option="-pg" />
+					<Add library="boost_thread" />
+					<Add library="boost_system" />
+					<Add library="pthread" />
+					<Add directory="../bin/LinuxGCCDebug" />
+				</Linker>
+			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -186,7 +212,14 @@
 			<Add library="Channel" />
 		</Linker>
 		<Unit filename="main.cpp" />
-		<Unit filename="winver.h" />
+		<Unit filename="winver.h">
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="MLangConv" />
+			<Option target="ReleaseMSVC64-ICU" />
+			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<envvars />
