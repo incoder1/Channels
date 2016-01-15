@@ -12,11 +12,12 @@ File::File(const char* path) BOOST_NOEXCEPT_OR_NOTHROW:
 
 bool File::create() const BOOST_NOEXCEPT_OR_NOTHROW
 {
-	int fd = ::creat(path_, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP );
-	if(fd) {
+	int fd = ::creat(path_, S_IRUSR |S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH );
+	bool result = fd != 0;
+	if(result) {
         fd = ::close(fd);
 	}
-	return fd == 0;
+	return result;
 }
 
 bool File::remove() const BOOST_NOEXCEPT_OR_NOTHROW
@@ -32,21 +33,21 @@ bool File::exist() const BOOST_NOEXCEPT_OR_NOTHROW
 
 SReadChannel File::openForRead()
 {
-	int fd = ::open(path_, O_EXCL | O_APPEND | O_SYNC | O_LARGEFILE, O_RDONLY);
+	int fd = ::open(path_, O_RSYNC | O_LARGEFILE | O_RDONLY);
 	validate_io(fd, "Can not open file");
 	return SReadChannel(new FileChannel(fd));
 }
 
 SWriteChannel File::openForWrite()
 {
-	int fd = ::open(path_, O_EXCL | O_APPEND | O_SYNC | O_LARGEFILE, O_WRONLY);
+	int fd = ::open(path_, O_APPEND | O_DSYNC | O_LARGEFILE | O_WRONLY);
 	validate_io(fd, "Can not open file");
 	return SWriteChannel(new FileChannel(fd));
 }
 
 SRandomAccessChannel File::openForReadWrite()
 {
-	int fd = ::open(path_, O_APPEND | O_SYNC, O_RDWR);
+	int fd = ::open(path_, O_APPEND | O_SYNC | O_LARGEFILE, O_RDWR);
 	validate_io(fd, "Can not open file");
 	return SRandomAccessChannel(new FileChannel(fd));
 }

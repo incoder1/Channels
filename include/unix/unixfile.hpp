@@ -1,6 +1,7 @@
 #ifndef CHANNELS_UNIXFILE_HPP_INCLUDED
 #define CHANNELS_UNIXFILE_HPP_INCLUDED
 
+#include <cstddef>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>

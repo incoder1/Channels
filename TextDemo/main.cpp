@@ -32,6 +32,7 @@
 #include <system.hpp>
 #include <text.hpp>
 
+
 void charset_console_sample()
 {
 	io::Console con(true);
@@ -95,15 +96,20 @@ void file_sample()
 	}
 	SReadChannel in = file.openForRead();
 	Console con(true);
-	wwriter out(con.out());
-	byte_buffer buff = byte_buffer::heap_buffer(128);
-	cvt_reader reader( in, make_converter(Charsets::utf8(),con.charset()) );
-	std::size_t converted = reader.read(buff);
-	while(converted > 0) {
-		out.flush(buff);
-		buff.clear();
-		converted = reader.read(buff);
-	}
+	#ifdef PLATFORM_WINDOWS
+        wwriter out(con.out());
+        byte_buffer buff = byte_buffer::heap_buffer(128);
+        cvt_reader reader( in, make_converter(Charsets::utf8(),con.charset()) );
+        std::size_t converted = reader.read(buff);
+        while(converted > 0) {
+            out.flush(buff);
+            buff.clear();
+            converted = reader.read(buff);
+        }
+	#else
+        byte_buffer buff = byte_buffer::heap_buffer(128);
+        transfer( in, con.out(), buff);
+	#endif // PLATFORM_WINDOWS
 }
 
 void async_read_done(io::SAsyncChannel ch,const io::error_code& err,std::size_t read, io::byte_buffer& buff)
@@ -234,13 +240,12 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	try {
-		//buffers_sample();
-		//charset_console_sample();
-		//async_file_sample();
-		//pipe_sample();
+		buffers_sample();
+		charset_console_sample();
+		pipe_sample();
 		file_sample();
-		//asynch_file_sample();
-		//network_client_sample();
+		//async_file_sample();
+		network_client_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}
