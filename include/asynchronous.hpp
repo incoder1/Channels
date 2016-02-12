@@ -21,7 +21,7 @@ template<class _async_channel_t>
 class basic_async_handler {
 	BOOST_COPYABLE_AND_MOVABLE(asynh_handler_f<_async_channel_t>);
 public:
-	typedef typename detail::smart_ptr_type<_async_channel_t>::smart_ptr_t s_async_channel_t;
+	typedef typename smart_ptr_type<_async_channel_t>::smart_ptr_t s_async_channel_t;
 	typedef typename boost::function<void(s_async_channel_t,const error_code&,std::size_t,byte_buffer&)> functor_t;
 	typedef typename functor_t::result_type result_type;
 	basic_async_handler(BOOST_COPY_ASSIGN_REF(functor_t) f) BOOST_NOEXCEPT_OR_NOTHROW:

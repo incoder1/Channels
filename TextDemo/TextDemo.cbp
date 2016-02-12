@@ -23,17 +23,18 @@
 					<Add option="-std=gnu++11" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add option="-DDEBUG" />
-					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/include" />
-					<Add directory="D:/cpp/boost_1_57_0" />
+					<Add directory="C:/MinGW/msys64/usr/include" />
+					<Add directory="D:/cpp/boost_1_60_0" />
 				</Compiler>
 				<Linker>
 					<Add option="-pg -lgmon" />
+					<Add library="iconv.dll" />
 					<Add library="Ws2_32" />
 					<Add library="boost_thread-mt-d.dll" />
 					<Add library="boost_system-mt-d.dll" />
 					<Add directory="../bin/DebugGCCWin" />
-					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
-					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/lib64" />
+					<Add directory="C:/MinGW/msys64/usr/lib" />
+					<Add directory="D:/cpp/boost_1_60_0/stage/gcc64/lib" />
 				</Linker>
 			</Target>
 			<Target title="ReleaseMinGW32">

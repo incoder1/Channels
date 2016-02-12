@@ -4,7 +4,7 @@ namespace io {
 
 // Charset
 Charset::Charset(std::size_t id, const char* name, const std::size_t charSize, bool isUnicode) BOOST_NOEXCEPT_OR_NOTHROW:
-id_(id),
+	id_(id),
     name_(name),
     charSize_(charSize),
     unicode_(isUnicode)

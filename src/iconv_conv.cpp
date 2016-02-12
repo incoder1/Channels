@@ -3,6 +3,8 @@
 
 namespace io {
 
+namespace iconv {
+
 // helpers
 inline void validate_conversion(bool condition, const std::string& name)
 {
@@ -23,7 +25,9 @@ IconvConverter::IconvConverter(const Charset* from, const Charset* to):
 	to_(to)
 {
 	validate_conversion(!from_->equal(to_),"Source character set is equal destination, no conversation needed");
-	::iconv_t descrpt = ::iconv_open(to_->name(),from_->name());
+	const char* to_name = to_->name();
+	const char* from_name = to_->name();
+	::iconv_t descrpt = ::iconv_open(to_name,from_name);
 	validate_conversion(descrpt != (::iconv_t)(-1), "Can not construct iconv engine instance");
 	conv_.reset(descrpt,::iconv_close);
 }
@@ -79,9 +83,6 @@ std::size_t IconvConverter::convert(const byte_buffer& src, byte_buffer& dest) t
 	return dest.length();
 }
 
-SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to)
-{
-	return SConverter(new IconvConverter(from, to));
-}
+} //namespace iconv
 
 } // namespace io

@@ -20,16 +20,17 @@
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
 					<Add option="-DDEBUG" />
-					<Add directory="C:/MinGW/msys/1.0/include" />
+					<Add directory="C:/MinGW/msys64/usr/include" />
 					<Add directory="include/win" />
+					<Add directory="D:/cpp/boost_1_60_0" />
 				</Compiler>
 				<Linker>
 					<Add library="iconv.dll" />
 					<Add library="Ws2_32" />
 					<Add library="boost_system-mt-d.dll" />
 					<Add library="boost_thread-mt-d.dll" />
-					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/lib64" />
-					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
+					<Add directory="D:/cpp/boost_1_60_0/stage/gcc64/lib" />
+					<Add directory="C:/MinGW/msys64/usr/lib" />
 				</Linker>
 			</Target>
 			<Target title="ReleaseMinGW32">
@@ -44,8 +45,9 @@
 					<Add option="-O3" />
 					<Add option="-DCHANNEL_BUILD_DLL" />
 					<Add option="-DCONV_ENGINE_ICONV" />
-					<Add directory="C:/MinGW/msys/1.0/include" />
+					<Add directory="C:/MinGW/msys64/usr/include" />
 					<Add directory="include/win" />
+					<Add directory="D:/cpp/boost_1_60_0" />
 				</Compiler>
 				<Linker>
 					<Add library="iconv.dll" />
@@ -54,6 +56,8 @@
 					<Add library="boost_thread-mt.dll" />
 					<Add directory="D:/cpp/boost_1_57_0/stage/gcc-x86_64/lib" />
 					<Add directory="C:/MinGW/msys/1.0/opt/windows_64/lib64" />
+					<Add directory="D:/cpp/boost_1_60_0/stage/gcc64/lib" />
+					<Add directory="C:/MinGW/msys64/usr/lib" />
 				</Linker>
 			</Target>
 			<Target title="DebugMinGW32-ICU">
@@ -123,6 +127,7 @@
 					<Add option="-DDEBUG" />
 					<Add directory="C:/MinGW/msys/1.0/include" />
 					<Add directory="include/win" />
+					<Add directory="D:/cpp/boost_1_60_0" />
 				</Compiler>
 				<Linker>
 					<Add option="-pg -lgmon" />
@@ -141,7 +146,6 @@
 			<Add option="-fexceptions" />
 			<Add option="-fno-rtti" />
 			<Add directory="include" />
-			<Add directory="D:/cpp/boost_1_57_0" />
 		</Compiler>
 		<Unit filename="include/abstractfile.hpp" />
 		<Unit filename="include/asynchronous.hpp" />
@@ -164,9 +168,11 @@
 			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="include/namedpipe.hpp" />
+		<Unit filename="include/nb_forward_list.hpp" />
 		<Unit filename="include/network.hpp" />
 		<Unit filename="include/pipe.hpp" />
 		<Unit filename="include/smallobject.hpp" />
+		<Unit filename="include/spinlock.hpp" />
 		<Unit filename="include/system.hpp" />
 		<Unit filename="include/text.hpp" />
 		<Unit filename="include/unix/unixasynchronousdevicechannel.hpp">
@@ -197,6 +203,12 @@
 			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="include/win/WinFile.hpp">
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
+		</Unit>
+		<Unit filename="include/win/heapallocator.hpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />
@@ -278,6 +290,12 @@
 			<Option target="DebugGCCWinStatic" />
 		</Unit>
 		<Unit filename="src/win/WinPipe.cpp">
+			<Option target="DebugGCCWin" />
+			<Option target="ReleaseMinGW32" />
+			<Option target="DebugMinGW32-ICU" />
+			<Option target="DebugGCCWinStatic" />
+		</Unit>
+		<Unit filename="src/win/heapallocator.cpp">
 			<Option target="DebugGCCWin" />
 			<Option target="ReleaseMinGW32" />
 			<Option target="DebugMinGW32-ICU" />

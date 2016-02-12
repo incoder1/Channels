@@ -14,7 +14,7 @@
 
 namespace io {
 
-
+namespace iconv {
 /**
  * ! \brief Converts string representing in byte sequence from one code page (charset)
  *  to the another.
@@ -56,9 +56,16 @@ private:
 	const Charset* to_;
 };
 
-typedef boost::intrusive_ptr<IconvConverter> SConverter;
+} // namesapace iconv
 
-SConverter CHANNEL_PUBLIC make_converter(const Charset* from, const Charset* to);
+typedef iconv::IconvConverter Converter;
+
+DECLARE_PTR_T(Converter);
+
+inline SConverter  make_converter(const Charset* from, const Charset* to)
+{
+	return SConverter(new Converter(from, to));
+}
 
 inline SConverter make_converter(const char *from, const char* to) {
 	return make_converter(Charsets::forName(from),Charsets::forName(to));

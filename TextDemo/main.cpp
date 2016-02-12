@@ -36,13 +36,8 @@
 void charset_console_sample()
 {
 	io::Console con(true);
-#ifdef PLATFORM_WINDOWS
-	io::SConverter conv = io::make_converter(io::Charsets::utf8(),con.charset());
-	io::cvt_writer out(con.out(),conv);
-#else
-    io::writer out(con.out());
-#endif
-    out.writeln(io::cvt_writer::format("Hello! Привет! Χαιρετίσματα! %i") % 73);
+    io::wwriter out(con.out());
+    out.writeln(io::wwriter::format(L"Hello! Привет! Χαιρετίσματα! %i") % 73);
 }
 
 void pipe_write_routine(io::SWriteChannel sink)
@@ -240,12 +235,12 @@ int _tmain(int argc, TCHAR *argv[])
 #endif
 {
 	try {
-		buffers_sample();
+		//buffers_sample();
 		charset_console_sample();
-		pipe_sample();
-		file_sample();
+		//pipe_sample();
+		//file_sample();
 		//async_file_sample();
-		network_client_sample();
+		//network_client_sample();
 	} catch(std::exception &e) {
 		std::cerr<<e.what()<<std::endl;
 	}
